@@ -94,6 +94,13 @@
   --max-content: 72rem;
   --max-prose: 42rem;
   --header-h: 3.5rem;
+
+  /* Transaction rail gutters (Hero Recovery A1)
+   * Full panel ~9.5rem + pl-5 ≈ 11rem; spine during pin ≈ 3.25rem
+   * Content must clear active rail + 8px: use --txn-content-gutter at xl+ */
+  --txn-rail-full: 11.5rem;
+  --txn-rail-spine: 3.25rem;
+  --txn-content-gutter: 4.25rem;
 }
 
 /* Semantic aliases for dark (default site chrome) */
@@ -118,8 +125,12 @@
   --fg-muted: var(--color-archive-ink-muted);
   --fg-subtle: color-mix(in oklab, var(--color-archive-ink) 55%, transparent);
   --border: var(--color-border-paper);
-  --accent: var(--color-institution);
-  --accent-fg: var(--color-porcelain);
-  background-color: var(--bg);
-  color: var(--fg);
+}
+
+/* When cinematic pin is active, content gutter matches spine width */
+html[data-txn-rail="spine"] {
+  --txn-content-gutter: 4.25rem;
+}
+html[data-txn-rail="full"] {
+  --txn-content-gutter: 12.25rem;
 }

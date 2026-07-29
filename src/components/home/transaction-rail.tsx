@@ -5,12 +5,15 @@ import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 /**
  * Sticky scroll progress for the homepage "controlled transaction".
- * Desktop XL: left rail. Mobile: top compact progress.
+ * During pinned cinematic (#intent in view): collapse to icon/progress spine.
+ * After pin: fuller labeled form. Mobile: top compact progress.
  */
 export function TransactionRail() {
   const reduced = useReducedMotion();
   const [activeId, setActiveId] = useState(TRANSACTION_BEATS[0]!.id);
   const [progress, setProgress] = useState(0);
+  /** Spine while Intent pin occupies viewport; full after release */
+  const [spineMode, setSpineMode] = useState(true);
 
   useEffect(() => {
     const sections = TRANSACTION_BEATS.map((b) => {
@@ -60,6 +63,38 @@ export function TransactionRail() {
     };
   }, []);
 
+  // Pin occupancy → spine while any part of #intent remains on screen
+  useEffect(() => {
+    const pin = document.getElementById("intent");
+    if (!pin) {
+      setSpineMode(false);
+      document.documentElement.dataset.txnRail = "full";
+      return;
+    }
+
+    const update = () => {
+      const rect = pin.getBoundingClientRect();
+      // Spine for entire pin track lifetime (sticky + scroll-through)
+      const pinOnScreen = rect.bottom > 48 && rect.top < window.innerHeight;
+      setSpineMode(pinOnScreen);
+      document.documentElement.dataset.txnRail = pinOnScreen ? "spine" : "full";
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    const io = new IntersectionObserver(update, {
+      threshold: [0, 0.01, 0.1, 0.5, 1],
+    });
+    io.observe(pin);
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      delete document.documentElement.dataset.txnRail;
+    };
+  }, []);
+
   const activeIndex = Math.max(
     0,
     TRANSACTION_BEATS.findIndex((b) => b.id === activeId),
@@ -68,7 +103,6 @@ export function TransactionRail() {
 
   return (
     <>
-      {/* Mobile / tablet top progress */}
       <div className="sticky top-14 z-40 border-b border-border bg-void/90 backdrop-blur-md xl:hidden">
         <div className="mx-auto flex max-w-[72rem] items-center gap-3 px-4 py-2 sm:px-6">
           <span className="font-mono text-[10px] tabular-nums text-porcelain-subtle">
@@ -96,20 +130,37 @@ export function TransactionRail() {
         </div>
       </div>
 
-      {/* Desktop left rail (xl+) */}
       <nav
-        className="pointer-events-none fixed left-0 top-1/2 z-40 hidden -translate-y-1/2 pl-3 xl:block xl:pl-5"
+        className="pointer-events-none fixed left-0 top-1/2 z-40 hidden -translate-y-1/2 pl-2 xl:block xl:pl-3"
         aria-label="Transaction progress"
+        data-rail-mode={spineMode ? "spine" : "full"}
       >
-        <div className="pointer-events-auto w-[9.5rem] rounded-xl border border-border bg-carbon/90 p-2.5 shadow-[0_12px_40px_-20px_rgba(0,0,0,0.8)] backdrop-blur-md">
-          <p className="mb-2 px-1 font-mono text-[9px] uppercase tracking-[0.14em] text-porcelain-subtle">
-            Controlled txn
-          </p>
+        <div
+          className={cn(
+            "pointer-events-auto rounded-xl border border-border bg-carbon/90 shadow-[0_12px_40px_-20px_rgba(0,0,0,0.8)] backdrop-blur-md",
+            !reduced && "transition-[width,padding] duration-200 ease-out",
+            spineMode ? "w-11 p-1.5" : "w-[9.5rem] p-2.5",
+          )}
+        >
+          {!spineMode ? (
+            <p className="mb-2 px-1 font-mono text-[9px] uppercase tracking-[0.14em] text-porcelain-subtle">
+              Controlled txn
+            </p>
+          ) : (
+            <p className="sr-only">Controlled transaction progress</p>
+          )}
           <ol className="relative space-y-0.5">
-            <div
-              className="absolute bottom-2 left-[15px] top-2 w-px bg-border"
-              aria-hidden
-            />
+            {!spineMode ? (
+              <div
+                className="absolute bottom-2 left-[15px] top-2 w-px bg-border"
+                aria-hidden
+              />
+            ) : (
+              <div
+                className="absolute bottom-1 left-1/2 top-1 w-px -translate-x-1/2 bg-border"
+                aria-hidden
+              />
+            )}
             {TRANSACTION_BEATS.map((beat, i) => {
               const isActive = beat.id === activeId;
               const isDone = i < activeIndex;
@@ -117,17 +168,25 @@ export function TransactionRail() {
                 <li key={beat.id} className="relative">
                   <a
                     href={beat.href}
+                    title={`${beat.label} — ${beat.gateMetaphor}`}
                     className={cn(
-                      "flex items-start gap-2 rounded-md px-1.5 py-1.5 transition-colors",
+                      "flex items-start rounded-md transition-colors",
+                      spineMode
+                        ? "justify-center px-0 py-1.5"
+                        : "gap-2 px-1.5 py-1.5",
                       isActive
                         ? "bg-institution/15 text-porcelain"
                         : "text-porcelain-subtle hover:bg-slate/50 hover:text-porcelain-muted",
                     )}
                     aria-current={isActive ? "step" : undefined}
+                    aria-label={`${beat.label}: ${beat.gateMetaphor}`}
                   >
                     <span
                       className={cn(
-                        "relative z-[1] mt-0.5 flex size-3.5 shrink-0 items-center justify-center rounded-full border text-[8px] font-mono",
+                        "relative z-[1] flex shrink-0 items-center justify-center rounded-full border font-mono",
+                        spineMode
+                          ? "size-4 text-[8px]"
+                          : "mt-0.5 size-3.5 text-[8px]",
                         isActive &&
                           "border-institution bg-institution text-porcelain",
                         isDone &&
@@ -141,33 +200,46 @@ export function TransactionRail() {
                     >
                       {isDone && !isActive ? "✓" : ""}
                     </span>
-                    <span className="min-w-0">
-                      <span className="block truncate text-[11px] font-medium leading-tight">
-                        {beat.label}
+                    {!spineMode ? (
+                      <span className="min-w-0">
+                        <span className="block truncate text-[11px] font-medium leading-tight">
+                          {beat.label}
+                        </span>
+                        <span className="block truncate font-mono text-[9px] text-porcelain-subtle">
+                          {beat.gateMetaphor}
+                        </span>
                       </span>
-                      <span className="block truncate font-mono text-[9px] text-porcelain-subtle">
-                        {beat.gateMetaphor}
-                      </span>
-                    </span>
+                    ) : null}
                   </a>
                 </li>
               );
             })}
           </ol>
-          <div className="mt-2 border-t border-border pt-2">
-            <div className="h-0.5 overflow-hidden rounded-full bg-slate">
-              <div
-                className={cn(
-                  "h-full bg-institution",
-                  !reduced && "transition-[width] duration-150 ease-out",
-                )}
-                style={{ width: `${progress * 100}%` }}
-              />
+          {!spineMode ? (
+            <div className="mt-2 border-t border-border pt-2">
+              <div className="h-0.5 overflow-hidden rounded-full bg-slate">
+                <div
+                  className={cn(
+                    "h-full bg-institution",
+                    !reduced && "transition-[width] duration-150 ease-out",
+                  )}
+                  style={{ width: `${progress * 100}%` }}
+                />
+              </div>
+              <p className="mt-1.5 px-0.5 font-mono text-[9px] tabular-nums text-porcelain-subtle">
+                {Math.round(progress * 100)}% page
+              </p>
             </div>
-            <p className="mt-1.5 px-0.5 font-mono text-[9px] tabular-nums text-porcelain-subtle">
-              {Math.round(progress * 100)}% page
-            </p>
-          </div>
+          ) : (
+            <div className="mt-1.5 px-0.5">
+              <div className="mx-auto h-8 w-0.5 overflow-hidden rounded-full bg-slate">
+                <div
+                  className="w-full bg-institution"
+                  style={{ height: `${progress * 100}%` }}
+                />
+              </div>
+            </div>
+          )}
         </div>
       </nav>
     </>

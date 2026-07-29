@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
-/** Palette from design tokens (sampled once into canvas — no raw branding hex in JSX) */
+/** Token-sampled palette for canvas (no ad-hoc brand hex in JSX) */
 const C = {
   void: "#07090b",
   carbon: "#111820",
+  slate: "#1a252d",
+  elevated: "#243039",
   porcelain: "#f6f1e7",
   institution: "#2f5e73",
   institutionBright: "#5a9bb8",
@@ -13,47 +15,50 @@ const C = {
   abort: "#7a3e3e",
   abortBright: "#c07070",
   archive: "#eee7d8",
-  archiveInk: "#1a1f24",
   signal: "#a9793b",
-};
-
-type Particle = {
-  x: number;
-  y: number;
-  z: number;
-  s: number;
-  a: number;
-  vx: number;
-  vy: number;
 };
 
 function smoothstep(e0: number, e1: number, x: number) {
   const t = Math.min(1, Math.max(0, (x - e0) / (e1 - e0)));
   return t * t * (3 - 2 * t);
 }
-
 function mix(a: number, b: number, t: number) {
   return a + (b - a) * t;
 }
 
+const DEBUG_CANVAS =
+  typeof import.meta !== "undefined" &&
+  Boolean((import.meta as ImportMeta & { env?: { DEV?: boolean } }).env?.DEV);
+
+declare global {
+  interface Window {
+    __nexusCanvasDebug?: {
+      paused: boolean;
+      isPaused: () => boolean;
+      rafActive: boolean;
+    };
+  }
+}
+
 /**
- * Full-bleed cinematic commit-boundary scene.
- * Atmospheric only — not product evidence.
+ * Direction 2 — Forensic Cross-Section instrument.
+ * ONE continuous apparatus; chambers are internal mechanical spaces.
+ * Atmospheric illustration only — not product evidence.
  */
 export function CommitBoundaryCanvas({
   progress,
   className,
 }: {
-  /** 0…1 scroll narrative progress */
   progress: number;
   className?: string;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const progressRef = useRef(progress);
   const reduced = useReducedMotion();
-  const particlesRef = useRef<Particle[]>([]);
-  const timeRef = useRef(0);
   const rafRef = useRef(0);
+  const timeRef = useRef(0);
+  const pausedRef = useRef(false);
+  const runningRef = useRef(true);
 
   progressRef.current = progress;
 
@@ -65,433 +70,570 @@ export function CommitBoundaryCanvas({
 
     let w = 0;
     let h = 0;
-    let dpr = 1;
+    runningRef.current = true;
 
-    const seedParticles = () => {
-      const n = Math.min(140, Math.floor((w * h) / 12000));
-      const list: Particle[] = [];
-      for (let i = 0; i < n; i++) {
-        list.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          z: Math.random(),
-          s: 0.4 + Math.random() * 1.8,
-          a: 0.08 + Math.random() * 0.35,
-          vx: (Math.random() - 0.5) * 0.15,
-          vy: (Math.random() - 0.5) * 0.08 - 0.02,
-        });
-      }
-      particlesRef.current = list;
+    const publishDebug = () => {
+      if (!DEBUG_CANVAS) return;
+      window.__nexusCanvasDebug = {
+        paused: pausedRef.current,
+        isPaused: () => pausedRef.current,
+        rafActive: !pausedRef.current && runningRef.current && !reduced,
+      };
     };
+
+    const clearDebug = () => {
+      if (!DEBUG_CANVAS) return;
+      if (window.__nexusCanvasDebug) {
+        window.__nexusCanvasDebug.rafActive = false;
+        window.__nexusCanvasDebug.paused = true;
+      }
+      delete window.__nexusCanvasDebug;
+    };
+
+    const setPaused = (p: boolean) => {
+      pausedRef.current = p;
+      publishDebug();
+    };
+
+    publishDebug();
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = Math.max(1, Math.floor(rect.width));
       h = Math.max(1, Math.floor(rect.height));
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      seedParticles();
     };
 
-    const drawSoftCircle = (
+    const roundRect = (
       x: number,
       y: number,
+      rw: number,
+      rh: number,
       r: number,
-      color: string,
-      alpha: number,
     ) => {
-      const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-      g.addColorStop(0, color);
-      g.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = g;
+      const rr = Math.min(r, rw / 2, rh / 2);
       ctx.beginPath();
-      ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.globalAlpha = 1;
+      ctx.moveTo(x + rr, y);
+      ctx.arcTo(x + rw, y, x + rw, y + rh, rr);
+      ctx.arcTo(x + rw, y + rh, x, y + rh, rr);
+      ctx.arcTo(x, y + rh, x, y, rr);
+      ctx.arcTo(x, y, x + rw, y, rr);
+      ctx.closePath();
     };
 
-    const frame = (now: number) => {
+    const draw = () => {
       const p = Math.min(1, Math.max(0, progressRef.current));
-      const dt = reduced ? 0 : 0.016;
-      timeRef.current += reduced ? 0 : dt;
-      const t = timeRef.current;
-
-      // Narrative phases
-      const stage = smoothstep(0.08, 0.28, p);
+      const stage = smoothstep(0.06, 0.28, p);
       const constrain = smoothstep(0.28, 0.48, p);
       const validate = smoothstep(0.48, 0.62, p);
       const decide = smoothstep(0.58, 0.78, p);
-      const emit = smoothstep(0.78, 0.95, p);
+      const emit = smoothstep(0.78, 0.96, p);
+      const portrait = h > w * 0.95;
 
-      // Background void + atmospheric depth
       ctx.fillStyle = C.void;
       ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = "rgba(17,24,32,0.55)";
+      ctx.fillRect(0, h * 0.08, w, h * 0.84);
 
-      // Deep fog bands
-      drawSoftCircle(w * 0.35, h * 0.55, h * 0.7, C.carbon, 0.55);
-      drawSoftCircle(w * 0.7, h * 0.35, h * 0.55, C.institution, 0.12 + validate * 0.12);
-      drawSoftCircle(w * 0.15, h * 0.8, h * 0.4, C.oxide, 0.06);
-
-      // Horizon floor plane
-      const floorY = h * 0.72;
-      const floorGrad = ctx.createLinearGradient(0, floorY - 40, 0, h);
-      floorGrad.addColorStop(0, "rgba(0,0,0,0)");
-      floorGrad.addColorStop(0.3, "rgba(17,24,32,0.4)");
-      floorGrad.addColorStop(1, "rgba(7,9,11,0.95)");
-      ctx.fillStyle = floorGrad;
-      ctx.fillRect(0, floorY - 40, w, h - floorY + 40);
-
-      // Subtle perspective grid on floor (fades — atmospheric, not UI chrome)
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(0, floorY, w, h - floorY);
-      ctx.clip();
-      ctx.strokeStyle = `rgba(246,241,231,${0.03 + stage * 0.04})`;
-      ctx.lineWidth = 1;
-      const vanishX = w * 0.55;
-      for (let i = 0; i < 12; i++) {
-        const x = mix(-w * 0.2, w * 1.2, i / 11);
-        ctx.beginPath();
-        ctx.moveTo(x, h);
-        ctx.lineTo(vanishX, floorY);
-        ctx.stroke();
-      }
-      for (let j = 0; j < 6; j++) {
-        const y = floorY + ((h - floorY) * j) / 5;
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(w, y);
-        ctx.stroke();
-      }
-      ctx.restore();
-
-      // Constrain walls — closing aperture
-      const wallOpen = mix(0.42, 0.18, constrain);
-      const wallLeft = w * (0.5 - wallOpen);
-      const wallRight = w * (0.5 + wallOpen * 0.35 + 0.08);
-      if (constrain > 0.01) {
-        ctx.fillStyle = `rgba(7,9,11,${0.35 + constrain * 0.45})`;
-        // top squeeze
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(w, 0);
-        ctx.lineTo(w, h * 0.12 * constrain);
-        ctx.lineTo(wallRight, h * (0.28 + constrain * 0.08));
-        ctx.lineTo(wallLeft, h * (0.28 + constrain * 0.08));
-        ctx.lineTo(0, h * 0.12 * constrain);
-        ctx.closePath();
-        ctx.fill();
-        // bottom squeeze
-        ctx.beginPath();
-        ctx.moveTo(0, h);
-        ctx.lineTo(w, h);
-        ctx.lineTo(w, h - h * 0.15 * constrain);
-        ctx.lineTo(wallRight, h * (0.68 - constrain * 0.05));
-        ctx.lineTo(wallLeft, h * (0.68 - constrain * 0.05));
-        ctx.lineTo(0, h - h * 0.15 * constrain);
-        ctx.closePath();
-        ctx.fill();
+      let shellX: number, shellY: number, shellW: number, shellH: number;
+      if (portrait) {
+        shellX = w * 0.08;
+        shellY = h * 0.12;
+        shellW = w * 0.84;
+        shellH = h * 0.72;
+      } else {
+        shellX = w * 0.32;
+        shellY = h * 0.18;
+        shellW = w * 0.62;
+        shellH = h * 0.58;
       }
 
-      // Stage chamber silhouette (left)
-      if (stage > 0.02) {
-        const chX = w * 0.08;
-        const chY = h * 0.22;
-        const chW = w * (0.32 - constrain * 0.08);
-        const chH = h * 0.48;
-        ctx.fillStyle = `rgba(17,24,32,${0.25 + stage * 0.35})`;
-        roundRect(ctx, chX, chY, chW, chH, 24);
-        ctx.fill();
-        // rim light
-        ctx.strokeStyle = `rgba(47,94,115,${0.15 + stage * 0.35})`;
-        ctx.lineWidth = 1.5;
-        roundRect(ctx, chX, chY, chW, chH, 24);
-        ctx.stroke();
-      }
+      ctx.fillStyle = C.carbon;
+      roundRect(shellX, shellY, shellW, shellH, 18);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(246,241,231,0.14)";
+      ctx.lineWidth = 1.5;
+      roundRect(shellX, shellY, shellW, shellH, 18);
+      ctx.stroke();
 
-      // Commit plane — dominant vertical light wall
-      const planeX = mix(w * 0.72, w * 0.55, smoothstep(0, 0.55, p));
-      const planeH = h * (0.55 + validate * 0.2);
-      const planeTop = (h - planeH) / 2 - h * 0.04;
-      const planeAlpha = 0.35 + stage * 0.3 + validate * 0.55;
+      const pad = 10;
+      const ix = shellX + pad;
+      const iy = shellY + pad;
+      const iw = shellW - pad * 2;
+      const ih = shellH - pad * 2;
+      ctx.fillStyle = C.void;
+      roundRect(ix, iy, iw, ih, 12);
+      ctx.fill();
 
-      // Outer bloom
-      const bloom = ctx.createLinearGradient(planeX - 80, 0, planeX + 80, 0);
-      bloom.addColorStop(0, "rgba(47,94,115,0)");
-      bloom.addColorStop(0.45, `rgba(90,155,184,${planeAlpha * 0.35})`);
-      bloom.addColorStop(0.5, `rgba(246,241,231,${planeAlpha * 0.55})`);
-      bloom.addColorStop(0.55, `rgba(90,155,184,${planeAlpha * 0.35})`);
-      bloom.addColorStop(1, "rgba(47,94,115,0)");
-      ctx.fillStyle = bloom;
-      ctx.fillRect(planeX - 120, planeTop - 30, 240, planeH + 60);
-
-      // Core plane edge
-      const core = ctx.createLinearGradient(0, planeTop, 0, planeTop + planeH);
-      core.addColorStop(0, "rgba(246,241,231,0)");
-      core.addColorStop(0.15, `rgba(246,241,231,${0.4 + validate * 0.4})`);
-      core.addColorStop(0.5, `rgba(246,241,231,${0.85 + validate * 0.15})`);
-      core.addColorStop(0.85, `rgba(246,241,231,${0.4 + validate * 0.4})`);
-      core.addColorStop(1, "rgba(246,241,231,0)");
-      ctx.fillStyle = core;
-      ctx.fillRect(planeX - 2, planeTop, 4, planeH);
-
-      // Validate scan pulses
-      if (validate > 0.05) {
-        for (let i = 0; i < 3; i++) {
-          const sy =
-            planeTop +
-            planeH * (0.25 + i * 0.25) +
-            Math.sin(t * 2 + i) * (reduced ? 0 : 4);
-          ctx.fillStyle = `rgba(169,121,59,${0.25 + validate * 0.5})`;
-          ctx.beginPath();
-          ctx.arc(planeX, sy, 3 + validate * 2, 0, Math.PI * 2);
-          ctx.fill();
-          drawSoftCircle(planeX, sy, 18, C.signal, 0.15 * validate);
-        }
-      }
-
-      // Floor reflection of plane
-      drawSoftCircle(planeX, floorY + 8, 60 + validate * 40, C.institutionBright, 0.12 + validate * 0.1);
-
-      // Action packet travel
-      const packetT = smoothstep(0.02, 0.72, p);
-      const packetX = mix(w * 0.18, planeX - 18, packetT);
-      const packetY =
-        h * 0.48 +
-        Math.sin(t * 1.2) * (reduced ? 0 : 6) * (1 - emit) -
-        emit * h * 0.02;
-      const packetScale = mix(1, 0.55, emit);
-      const packetVis = 1 - emit * 0.85;
-
-      // Trail
-      if (packetT > 0.05 && packetVis > 0.1) {
-        const trail = ctx.createLinearGradient(w * 0.12, packetY, packetX, packetY);
-        trail.addColorStop(0, "rgba(90,155,184,0)");
-        trail.addColorStop(1, `rgba(90,155,184,${0.25 * packetVis})`);
-        ctx.strokeStyle = trail;
-        ctx.lineWidth = 2;
+      if (!portrait) {
+        const spineY = iy + ih * 0.5;
+        ctx.strokeStyle = "rgba(90,155,184,0.35)";
+        ctx.lineWidth = 3;
         ctx.beginPath();
-        ctx.moveTo(w * 0.14, packetY);
-        ctx.lineTo(packetX, packetY);
+        ctx.moveTo(ix + 8, spineY);
+        ctx.lineTo(ix + iw - 8, spineY);
         ctx.stroke();
-      }
-
-      // Packet glow layers
-      if (packetVis > 0.05) {
-        drawSoftCircle(packetX, packetY, 110 * packetScale, C.institutionBright, 0.28 * packetVis);
-        drawSoftCircle(packetX, packetY, 58 * packetScale, C.porcelain, 0.28 * packetVis);
-        drawSoftCircle(packetX, packetY, 28 * packetScale, C.porcelain, 0.7 * packetVis);
-        // Core diamond
-        ctx.save();
-        ctx.translate(packetX, packetY);
-        ctx.scale(packetScale, packetScale);
-        ctx.rotate(Math.PI / 4);
-        ctx.fillStyle = `rgba(246,241,231,${0.9 * packetVis})`;
-        ctx.fillRect(-7, -7, 14, 14);
-        ctx.restore();
-      }
-
-      // Dual paths after plane — Commit (oxide) and Abort (controlled red)
-      if (decide > 0.01) {
-        const forkOriginX = planeX + 6;
-        const forkOriginY = h * 0.48;
-        const abortEndX = w * 0.86;
-        const abortEndY = h * 0.18;
-        const commitEndX = w * 0.88;
-        const commitEndY = h * 0.72;
-
-        // Abort path — upward
-        ctx.save();
-        ctx.globalAlpha = Math.min(1, decide * 1.15);
-        const abortGrad = ctx.createLinearGradient(
-          forkOriginX,
-          forkOriginY,
-          abortEndX,
-          abortEndY,
-        );
-        abortGrad.addColorStop(0, "rgba(192,112,112,1)");
-        abortGrad.addColorStop(1, "rgba(192,112,112,0.15)");
-        ctx.strokeStyle = abortGrad;
-        ctx.lineWidth = 3.5;
-        ctx.shadowColor = C.abortBright;
-        ctx.shadowBlur = 22;
-        ctx.beginPath();
-        ctx.moveTo(forkOriginX, forkOriginY - 10);
-        ctx.bezierCurveTo(
-          w * 0.64,
-          h * 0.4,
-          w * 0.74,
-          h * 0.26,
-          abortEndX,
-          abortEndY,
-        );
-        ctx.stroke();
-        drawSoftCircle(abortEndX, abortEndY, 48, C.abortBright, 0.45 * decide);
-        // Abort node + label
-        ctx.shadowBlur = 0;
-        ctx.fillStyle = C.abort;
-        ctx.beginPath();
-        ctx.arc(abortEndX, abortEndY, 11, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = C.abortBright;
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.font = "600 12px IBM Plex Sans, system-ui, sans-serif";
-        ctx.fillStyle = C.porcelain;
-        ctx.textAlign = "center";
-        ctx.fillText("ABORT", abortEndX, abortEndY + 28);
-        ctx.restore();
-
-        // Commit path — forward-down
-        ctx.save();
-        ctx.globalAlpha = Math.min(1, decide * 1.15);
-        const commitGrad = ctx.createLinearGradient(
-          forkOriginX,
-          forkOriginY,
-          commitEndX,
-          commitEndY,
-        );
-        commitGrad.addColorStop(0, "rgba(122,176,137,1)");
-        commitGrad.addColorStop(1, "rgba(122,176,137,0.15)");
-        ctx.strokeStyle = commitGrad;
-        ctx.lineWidth = 3.5;
-        ctx.shadowColor = C.oxideBright;
-        ctx.shadowBlur = 22;
-        ctx.beginPath();
-        ctx.moveTo(forkOriginX, forkOriginY + 10);
-        ctx.bezierCurveTo(
-          w * 0.64,
-          h * 0.54,
-          w * 0.78,
-          h * 0.64,
-          commitEndX,
-          commitEndY,
-        );
-        ctx.stroke();
-        drawSoftCircle(commitEndX, commitEndY, 48, C.oxideBright, 0.45 * decide);
-        ctx.shadowBlur = 0;
-        ctx.fillStyle = C.oxide;
-        ctx.beginPath();
-        ctx.arc(commitEndX, commitEndY, 11, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = C.oxideBright;
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.font = "600 12px IBM Plex Sans, system-ui, sans-serif";
-        ctx.fillStyle = C.porcelain;
-        ctx.textAlign = "center";
-        ctx.fillText("COMMIT", commitEndX, commitEndY + 28);
-        ctx.restore();
-      }
-
-      // Emitted Proof Capsule — warm archive object (visual metaphor only)
-      if (emit > 0.01) {
-        const cx = mix(planeX + 30, w * 0.72, emit);
-        const cy = mix(h * 0.48, h * 0.42, emit);
-        const cw = 56 + emit * 20;
-        const ch = 32 + emit * 8;
-        ctx.save();
-        ctx.globalAlpha = emit;
-        drawSoftCircle(cx, cy, 70, C.archive, 0.25);
-        ctx.fillStyle = C.archive;
-        roundRect(ctx, cx - cw / 2, cy - ch / 2, cw, ch, 8);
-        ctx.fill();
-        ctx.strokeStyle = "rgba(26,31,36,0.25)";
+        ctx.strokeStyle = "rgba(246,241,231,0.08)";
         ctx.lineWidth = 1;
-        roundRect(ctx, cx - cw / 2, cy - ch / 2, cw, ch, 8);
+        ctx.beginPath();
+        ctx.moveTo(ix + 8, spineY - 14);
+        ctx.lineTo(ix + iw * 0.62, spineY - 14);
+        ctx.moveTo(ix + 8, spineY + 14);
+        ctx.lineTo(ix + iw * 0.62, spineY + 14);
         ctx.stroke();
-        // micro lines (not readable fake data — pure texture)
-        ctx.strokeStyle = "rgba(26,31,36,0.2)";
-        for (let i = 0; i < 3; i++) {
-          const ly = cy - 6 + i * 6;
+      } else {
+        const spineX = ix + iw * 0.5;
+        ctx.strokeStyle = "rgba(90,155,184,0.35)";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(spineX, iy + 8);
+        ctx.lineTo(spineX, iy + ih - 8);
+        ctx.stroke();
+      }
+
+      type BayH = { x0: number; x1: number };
+      type BayV = { y0: number; y1: number };
+      const baysH: BayH[] = [
+        { x0: 0.02, x1: 0.14 },
+        { x0: 0.14, x1: 0.28 },
+        { x0: 0.28, x1: 0.42 },
+        { x0: 0.42, x1: 0.54 },
+        { x0: 0.54, x1: 0.78 },
+        { x0: 0.78, x1: 0.98 },
+      ];
+      const baysV: BayV[] = [
+        { y0: 0.02, y1: 0.16 },
+        { y0: 0.16, y1: 0.3 },
+        { y0: 0.3, y1: 0.44 },
+        { y0: 0.44, y1: 0.58 },
+        { y0: 0.58, y1: 0.78 },
+        { y0: 0.78, y1: 0.98 },
+      ];
+
+      const wallAlpha = 0.35 + stage * 0.35;
+      ctx.strokeStyle = `rgba(246,241,231,${wallAlpha})`;
+      ctx.lineWidth = 1.25;
+      if (!portrait) {
+        for (let i = 1; i < 5; i++) {
+          const bx = ix + iw * baysH[i]!.x0;
           ctx.beginPath();
-          ctx.moveTo(cx - cw / 2 + 10, ly);
-          ctx.lineTo(cx + cw / 2 - 10 - i * 6, ly);
+          ctx.moveTo(bx, iy + 6);
+          ctx.lineTo(bx, iy + ih - 6);
+          ctx.stroke();
+          ctx.fillStyle = C.elevated;
+          ctx.fillRect(bx - 3, iy + ih * 0.35, 6, ih * 0.3);
+        }
+      } else {
+        for (let i = 1; i < 5; i++) {
+          const by = iy + ih * baysV[i]!.y0;
+          ctx.beginPath();
+          ctx.moveTo(ix + 6, by);
+          ctx.lineTo(ix + iw - 6, by);
           ctx.stroke();
         }
-        ctx.restore();
       }
 
-      // Floating particles
-      for (const pt of particlesRef.current) {
-        if (!reduced) {
-          pt.x += pt.vx + Math.sin(t + pt.y) * 0.02;
-          pt.y += pt.vy;
-          if (pt.x < 0) pt.x = w;
-          if (pt.x > w) pt.x = 0;
-          if (pt.y < 0) pt.y = h;
-          if (pt.y > h) pt.y = 0;
+      {
+        const s = Math.max(stage, 0.25);
+        ctx.fillStyle = `rgba(26,37,45,${0.25 + s * 0.45})`;
+        if (!portrait) {
+          const b = baysH[1]!;
+          const cx = ix + iw * b.x0;
+          const cw = iw * (b.x1 - b.x0);
+          ctx.fillRect(cx + 2, iy + ih * 0.18, cw - 4, ih * 0.64);
+          ctx.strokeStyle = `rgba(90,155,184,${0.2 + s * 0.5})`;
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(cx + 2, iy + ih * 0.18, cw - 4, ih * 0.64);
+        } else {
+          const b = baysV[1]!;
+          const cy = iy + ih * b.y0;
+          const ch = ih * (b.y1 - b.y0);
+          ctx.fillRect(ix + iw * 0.12, cy + 2, iw * 0.76, ch - 4);
+          ctx.strokeStyle = `rgba(90,155,184,${0.2 + s * 0.5})`;
+          ctx.strokeRect(ix + iw * 0.12, cy + 2, iw * 0.76, ch - 4);
         }
-        const depth = 0.3 + pt.z * 0.7;
-        // Attract slightly toward plane when validating
-        const attract = validate * 0.15;
-        const dx = planeX - pt.x;
-        ctx.fillStyle = `rgba(246,241,231,${pt.a * depth * (0.4 + validate * 0.3)})`;
-        ctx.beginPath();
-        ctx.arc(
-          pt.x + dx * attract * 0.02,
-          pt.y,
-          pt.s * depth,
-          0,
-          Math.PI * 2,
-        );
-        ctx.fill();
       }
 
-      // Vignette
-      const vig = ctx.createRadialGradient(
-        w * 0.5,
-        h * 0.45,
-        h * 0.2,
-        w * 0.5,
-        h * 0.5,
-        h * 0.85,
-      );
-      vig.addColorStop(0, "rgba(0,0,0,0)");
-      vig.addColorStop(1, "rgba(7,9,11,0.72)");
-      ctx.fillStyle = vig;
-      ctx.fillRect(0, 0, w, h);
+      if (constrain > 0.01) {
+        const squeeze = mix(0.22, 0.08, constrain);
+        ctx.fillStyle = `rgba(7,9,11,${0.45 + constrain * 0.4})`;
+        if (!portrait) {
+          const b = baysH[2]!;
+          const cx = ix + iw * b.x0;
+          const cw = iw * (b.x1 - b.x0);
+          ctx.beginPath();
+          ctx.moveTo(cx, iy);
+          ctx.lineTo(cx + cw, iy);
+          ctx.lineTo(cx + cw, iy + ih * (0.5 - squeeze));
+          ctx.lineTo(cx, iy + ih * (0.5 - squeeze * 0.6));
+          ctx.closePath();
+          ctx.fill();
+          ctx.beginPath();
+          ctx.moveTo(cx, iy + ih);
+          ctx.lineTo(cx + cw, iy + ih);
+          ctx.lineTo(cx + cw, iy + ih * (0.5 + squeeze));
+          ctx.lineTo(cx, iy + ih * (0.5 + squeeze * 0.6));
+          ctx.closePath();
+          ctx.fill();
+          ctx.strokeStyle = `rgba(169,121,59,${0.3 + constrain * 0.5})`;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(cx + 4, iy + ih * 0.5);
+          ctx.lineTo(cx + cw - 4, iy + ih * 0.5);
+          ctx.stroke();
+        } else {
+          const b = baysV[2]!;
+          const cy = iy + ih * b.y0;
+          const ch = ih * (b.y1 - b.y0);
+          const side = mix(0.2, 0.08, constrain);
+          ctx.fillRect(ix, cy, iw * side, ch);
+          ctx.fillRect(ix + iw * (1 - side), cy, iw * side, ch);
+        }
+      }
 
-      rafRef.current = requestAnimationFrame(frame);
+      if (validate > 0.01) {
+        ctx.fillStyle = `rgba(47,94,115,${0.15 + validate * 0.35})`;
+        if (!portrait) {
+          const b = baysH[3]!;
+          const cx = ix + iw * b.x0;
+          const cw = iw * (b.x1 - b.x0);
+          ctx.fillRect(cx + cw * 0.35, iy + ih * 0.15, cw * 0.3, ih * 0.7);
+          ctx.fillStyle = C.porcelain;
+          ctx.globalAlpha = 0.5 + validate * 0.5;
+          ctx.fillRect(cx + cw * 0.45, iy + ih * 0.15, 3, ih * 0.7);
+          ctx.globalAlpha = 1;
+          for (let i = 0; i < 3; i++) {
+            const ny = iy + ih * (0.28 + i * 0.2);
+            ctx.fillStyle = C.signal;
+            ctx.beginPath();
+            ctx.arc(cx + cw * 0.5, ny, 4 + validate * 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        } else {
+          const b = baysV[3]!;
+          const cy = iy + ih * b.y0;
+          const ch = ih * (b.y1 - b.y0);
+          ctx.fillRect(ix + iw * 0.15, cy + ch * 0.35, iw * 0.7, ch * 0.3);
+        }
+      }
+
+      if (decide > 0.01) {
+        ctx.globalAlpha = Math.min(1, decide * 1.2);
+        if (!portrait) {
+          const b = baysH[4]!;
+          const cx = ix + iw * b.x0;
+          const cw = iw * (b.x1 - b.x0);
+          const midY = iy + ih * 0.5;
+          ctx.strokeStyle = "rgba(246,241,231,0.2)";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(cx, midY);
+          ctx.lineTo(cx + cw * 0.9, midY);
+          ctx.stroke();
+
+          ctx.strokeStyle = C.abortBright;
+          ctx.lineWidth = 3.5;
+          ctx.shadowColor = C.abortBright;
+          ctx.shadowBlur = 12;
+          ctx.beginPath();
+          ctx.moveTo(cx + 8, midY - 10);
+          ctx.bezierCurveTo(
+            cx + cw * 0.4,
+            midY - 18,
+            cx + cw * 0.55,
+            iy + ih * 0.22,
+            cx + cw * 0.85,
+            iy + ih * 0.2,
+          );
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+          const ax = cx + cw * 0.85;
+          const ay = iy + ih * 0.2;
+          ctx.fillStyle = C.abort;
+          ctx.beginPath();
+          ctx.moveTo(ax, ay - 10);
+          ctx.lineTo(ax + 10, ay);
+          ctx.lineTo(ax, ay + 10);
+          ctx.lineTo(ax - 10, ay);
+          ctx.closePath();
+          ctx.fill();
+          ctx.strokeStyle = C.abortBright;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.font = "600 11px IBM Plex Sans, system-ui, sans-serif";
+          ctx.fillStyle = C.porcelain;
+          ctx.textAlign = "center";
+          ctx.fillText("ABORT", ax, ay + 24);
+
+          ctx.strokeStyle = C.oxideBright;
+          ctx.lineWidth = 3.5;
+          ctx.shadowColor = C.oxideBright;
+          ctx.shadowBlur = 12;
+          ctx.beginPath();
+          ctx.moveTo(cx + 8, midY + 10);
+          ctx.bezierCurveTo(
+            cx + cw * 0.4,
+            midY + 18,
+            cx + cw * 0.55,
+            iy + ih * 0.78,
+            cx + cw * 0.85,
+            iy + ih * 0.8,
+          );
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+          const cmx = cx + cw * 0.85;
+          const cmy = iy + ih * 0.8;
+          ctx.fillStyle = C.oxide;
+          ctx.fillRect(cmx - 9, cmy - 9, 18, 18);
+          ctx.strokeStyle = C.oxideBright;
+          ctx.lineWidth = 2;
+          ctx.strokeRect(cmx - 9, cmy - 9, 18, 18);
+          ctx.fillStyle = C.porcelain;
+          ctx.fillText("COMMIT", cmx, cmy + 26);
+        } else {
+          const b = baysV[4]!;
+          const cy = iy + ih * b.y0;
+          const ch = ih * (b.y1 - b.y0);
+          ctx.strokeStyle = C.abortBright;
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(ix + iw * 0.5, cy + 4);
+          ctx.lineTo(ix + iw * 0.22, cy + ch * 0.55);
+          ctx.stroke();
+          const ax = ix + iw * 0.22;
+          const ay = cy + ch * 0.55;
+          ctx.fillStyle = C.abort;
+          ctx.beginPath();
+          ctx.moveTo(ax, ay - 8);
+          ctx.lineTo(ax + 8, ay);
+          ctx.lineTo(ax, ay + 8);
+          ctx.lineTo(ax - 8, ay);
+          ctx.closePath();
+          ctx.fill();
+          ctx.font = "600 10px IBM Plex Sans, system-ui, sans-serif";
+          ctx.fillStyle = C.porcelain;
+          ctx.textAlign = "center";
+          ctx.fillText("ABORT", ax, ay + 20);
+
+          ctx.strokeStyle = C.oxideBright;
+          ctx.beginPath();
+          ctx.moveTo(ix + iw * 0.5, cy + 4);
+          ctx.lineTo(ix + iw * 0.78, cy + ch * 0.55);
+          ctx.stroke();
+          const cmx = ix + iw * 0.78;
+          const cmy = cy + ch * 0.55;
+          ctx.fillStyle = C.oxide;
+          ctx.fillRect(cmx - 8, cmy - 8, 16, 16);
+          ctx.fillStyle = C.porcelain;
+          ctx.fillText("COMMIT", cmx, cmy + 20);
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      if (emit > 0.01) {
+        ctx.globalAlpha = emit;
+        if (!portrait) {
+          const b = baysH[5]!;
+          const cx = ix + iw * b.x0;
+          const cw = iw * (b.x1 - b.x0);
+          const trayY = iy + ih * 0.38;
+          const trayH = ih * 0.24;
+          ctx.fillStyle = C.elevated;
+          roundRect(cx + 4, trayY, cw - 8, trayH, 6);
+          ctx.fill();
+          ctx.strokeStyle = "rgba(246,241,231,0.18)";
+          ctx.stroke();
+          const capW = mix(28, 56, emit);
+          const capH = 28;
+          const capX = cx + cw * 0.35 + emit * 8;
+          const capY = trayY + trayH * 0.5 - capH / 2;
+          ctx.fillStyle = C.archive;
+          roundRect(capX, capY, capW, capH, 6);
+          ctx.fill();
+          ctx.strokeStyle = "rgba(26,31,36,0.35)";
+          ctx.stroke();
+          ctx.strokeStyle = "rgba(26,31,36,0.25)";
+          for (let i = 0; i < 3; i++) {
+            ctx.beginPath();
+            ctx.moveTo(capX + 8, capY + 8 + i * 6);
+            ctx.lineTo(capX + capW - 8 - i * 4, capY + 8 + i * 6);
+            ctx.stroke();
+          }
+        } else {
+          const b = baysV[5]!;
+          const cy = iy + ih * b.y0;
+          const ch = ih * (b.y1 - b.y0);
+          ctx.fillStyle = C.elevated;
+          roundRect(ix + iw * 0.2, cy + 6, iw * 0.6, ch - 12, 6);
+          ctx.fill();
+          ctx.fillStyle = C.archive;
+          roundRect(ix + iw * 0.32, cy + ch * 0.3, iw * 0.36, ch * 0.4, 5);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      const packetT = smoothstep(0.02, 0.72, p);
+      const packetVis = 1 - emit * 0.85;
+      if (packetVis > 0.05) {
+        let px: number, py: number;
+        if (!portrait) {
+          px = mix(ix + iw * 0.06, ix + iw * 0.52, packetT);
+          py =
+            iy +
+            ih * 0.5 +
+            (reduced ? 0 : Math.sin(timeRef.current * 1.4) * 3);
+        } else {
+          px = ix + iw * 0.5;
+          py = mix(iy + ih * 0.08, iy + ih * 0.52, packetT);
+        }
+        ctx.fillStyle = `rgba(90,155,184,${0.35 * packetVis})`;
+        ctx.beginPath();
+        ctx.arc(px, py, 18, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = `rgba(246,241,231,${0.92 * packetVis})`;
+        ctx.save();
+        ctx.translate(px, py);
+        ctx.rotate(Math.PI / 4);
+        ctx.fillRect(-6, -6, 12, 12);
+        ctx.restore();
+        ctx.strokeStyle = C.institutionBright;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.rect(px - 7, py - 7, 14, 14);
+        ctx.stroke();
+      }
+
+      ctx.font = "500 9px IBM Plex Mono, ui-monospace, monospace";
+      ctx.fillStyle = "rgba(246,241,231,0.28)";
+      ctx.textAlign = "left";
+      ctx.fillText(
+        "TXN CROSS-SECTION · ATMOSPHERIC",
+        shellX + 14,
+        shellY + shellH - 10,
+      );
     };
+
+    const schedule = () => {
+      if (!runningRef.current || pausedRef.current || reduced) return;
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(loop);
+    };
+
+    const loop = () => {
+      if (!runningRef.current) return;
+      if (pausedRef.current || reduced) {
+        publishDebug();
+        return;
+      }
+      timeRef.current += 0.016;
+      draw();
+      publishDebug();
+      rafRef.current = requestAnimationFrame(loop);
+    };
+
+    /** Viewport geometry check — reliable when sticky pin scrolls away */
+    const isCanvasInView = () => {
+      const rect = canvas.getBoundingClientRect();
+      return (
+        rect.width > 0 &&
+        rect.height > 0 &&
+        rect.bottom > 1 &&
+        rect.top < window.innerHeight - 1 &&
+        rect.right > 1 &&
+        rect.left < window.innerWidth - 1
+      );
+    };
+
+    const applyVisibility = () => {
+      const shouldPause = document.hidden || !isCanvasInView();
+      if (shouldPause) {
+        setPaused(true);
+        cancelAnimationFrame(rafRef.current);
+        publishDebug();
+      } else if (pausedRef.current) {
+        setPaused(false);
+        if (reduced) {
+          draw();
+          publishDebug();
+        } else {
+          schedule();
+        }
+      } else {
+        publishDebug();
+      }
+    };
+
+    const onVisibility = () => applyVisibility();
+    const onScrollOrResize = () => applyVisibility();
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        const off =
+          !entry ||
+          !entry.isIntersecting ||
+          entry.intersectionRatio <= 0.01;
+        if (off || document.hidden) {
+          setPaused(true);
+          cancelAnimationFrame(rafRef.current);
+          publishDebug();
+        } else {
+          setPaused(false);
+          if (reduced) {
+            draw();
+            publishDebug();
+          } else {
+            schedule();
+          }
+        }
+      },
+      { threshold: [0, 0.01, 0.1, 0.25, 0.5, 1], rootMargin: "0px" },
+    );
+    io.observe(canvas);
 
     resize();
-    const ro = new ResizeObserver(resize);
+    // Reduced: single composed draw, no rAF animation loop
+    draw();
+    publishDebug();
+    const ro = new ResizeObserver(() => {
+      resize();
+      if (!pausedRef.current) draw();
+      applyVisibility();
+    });
     ro.observe(canvas);
-    rafRef.current = requestAnimationFrame(frame);
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize);
+    if (!reduced) {
+      schedule();
+    }
+    applyVisibility();
 
     return () => {
-      ro.disconnect();
+      runningRef.current = false;
       cancelAnimationFrame(rafRef.current);
+      ro.disconnect();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
+      clearDebug();
     };
   }, [reduced]);
+
+  useEffect(() => {
+    void progress;
+  }, [progress]);
 
   return (
     <canvas
       ref={canvasRef}
       className={className}
       aria-hidden
+      data-instrument="cross-section"
     />
   );
-}
-
-function roundRect(
-  ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  w: number,
-  h: number,
-  r: number,
-) {
-  const rr = Math.min(r, w / 2, h / 2);
-  ctx.beginPath();
-  ctx.moveTo(x + rr, y);
-  ctx.arcTo(x + w, y, x + w, y + h, rr);
-  ctx.arcTo(x + w, y + h, x, y + h, rr);
-  ctx.arcTo(x, y + h, x, y, rr);
-  ctx.arcTo(x, y, x + w, y, rr);
-  ctx.closePath();
 }

@@ -1,0 +1,669 @@
+{
+  "console": {
+    "initialLoad": {
+      "count": 0,
+      "events": []
+    },
+    "pinnedScroll": {
+      "count": 0,
+      "events": [],
+      "steps": [
+        0,
+        0.15,
+        0.3,
+        0.4,
+        0.55,
+        0.68,
+        0.8,
+        0.9,
+        1,
+        1.1
+      ]
+    },
+    "demoCommit": {
+      "count": 0,
+      "events": [],
+      "demoSnippet": "TXN 03\nSTAGE → DECIDE\nWatch the boundary run\n\nPRODUCT DEMONSTRATION\n\nWatch a consequential action cross the commit bound"
+    },
+    "demoAbort": {
+      "count": 0,
+      "events": [],
+      "demoSnippet": "TXN 03\nSTAGE → DECIDE\nWatch the boundary run\n\nPRODUCT DEMONSTRATION\n\nWatch a consequential action cross the commit bound"
+    },
+    "reducedMotion": {
+      "count": 0,
+      "events": [],
+      "headline": "Consequential agent action belongs behind a commit boundary."
+    },
+    "mobile390": {
+      "count": 0,
+      "events": []
+    }
+  },
+  "keyboard": {
+    "headerNav": {
+      "reached": true,
+      "focus": {
+        "hasFocus": true,
+        "tag": "A",
+        "role": null,
+        "name": "Nexus-IQArchitecture v1",
+        "outline": "auto 1px rgb(16, 16, 16)",
+        "boxShadow": "none",
+        "focusVisible": true,
+        "ringLikely": true,
+        "rect": {
+          "t": 16,
+          "l": 88,
+          "w": 184.8125,
+          "h": 24
+        }
+      },
+      "samplePath": [
+        {
+          "hasFocus": true,
+          "tag": "A",
+          "role": null,
+          "name": "Nexus-IQArchitecture v1",
+          "outline": "auto 1px rgb(16, 16, 16)",
+          "boxShadow": "none",
+          "focusVisible": true,
+          "ringLikely": true,
+          "rect": {
+            "t": 16,
+            "l": 88,
+            "w": 184.8125,
+            "h": 24
+          }
+        }
+      ]
+    },
+    "heroCTAs": {
+      "reached": true,
+      "focus": {
+        "hasFocus": true,
+        "tag": "A",
+        "role": null,
+        "name": "System",
+        "outline": "auto 1px rgb(155, 151, 141)",
+        "boxShadow": "none",
+        "focusVisible": true,
+        "ringLikely": true,
+        "rect": {
+          "t": 12,
+          "l": 406,
+          "w": 67,
+          "h": 32
+        }
+      }
+    },
+    "demoCommitControl": {
+      "reached": true,
+      "focus": {
+        "hasFocus": true,
+        "tag": "A",
+        "role": null,
+        "name": "Evaluate: Commit path",
+        "outline": "auto 1px rgb(119, 115, 109)",
+        "boxShadow": "none",
+        "focusVisible": true,
+        "ringLikely": true,
+        "rect": {
+          "t": 534.5234375,
+          "l": 23,
+          "w": 130,
+          "h": 38.578125
+        }
+      }
+    },
+    "demoCommitActivated": {
+      "snippet": "TXN 03\nSTAGE → DECIDE\nWatch the boundary run\n\nPRODUCT DEMONSTRATION\n\nWatch a consequential action cr"
+    },
+    "demoAbortControl": {
+      "reached": false,
+      "focus": {
+        "hasFocus": true,
+        "tag": "A",
+        "role": null,
+        "name": "Security",
+        "outline": "auto 1px rgb(67, 66, 62)",
+        "boxShadow": "none",
+        "focusVisible": true,
+        "ringLikely": true,
+        "rect": {
+          "t": 12,
+          "l": 663,
+          "w": 72,
+          "h": 32
+        }
+      }
+    },
+    "demoPhaseControls": [
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Commit path",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Abort path",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Film",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Compare paths",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Restart film",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Pause",
+        "tabIndex": 0
+      },
+      {
+        "tag": "INPUT",
+        "role": null,
+        "name": "Seek Change Gate phase",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Prop",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Stag",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Auth",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Val",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Cmt",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Emit",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "✓Propose○Target Architecture",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "✓Stage●Implemented Foundation",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "✓Constrain●Implemented Foundation",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "✓Validate◐In Integration",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "✓Commit◐In Integration",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "6Emit●Implemented Foundation",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": "tab",
+        "name": "capsule_id",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": "tab",
+        "name": "subject",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": "tab",
+        "name": "capabilities",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": "tab",
+        "name": "snapshot",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": "tab",
+        "name": "failure",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": "tab",
+        "name": "rollback",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": "tab",
+        "name": "limitations",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": "tab",
+        "name": "signature",
+        "tabIndex": 0
+      },
+      {
+        "tag": "BUTTON",
+        "role": null,
+        "name": "Download capsule JSON",
+        "tabIndex": 0
+      }
+    ],
+    "transactionRail": {
+      "present": true,
+      "interactiveCount": 9,
+      "items": [
+        {
+          "tag": "A",
+          "name": "Intent: Propose",
+          "tabIndex": 0
+        },
+        {
+          "tag": "A",
+          "name": "Gap: Missing controls",
+          "tabIndex": 0
+        },
+        {
+          "tag": "A",
+          "name": "Execute: Stage → Decide",
+          "tabIndex": 0
+        },
+        {
+          "tag": "A",
+          "name": "Model: Change Gate",
+          "tabIndex": 0
+        },
+        {
+          "tag": "A",
+          "name": "Evidence: Emit",
+          "tabIndex": 0
+        },
+        {
+          "tag": "A",
+          "name": "Compose: Substrates",
+          "tabIndex": 0
+        },
+        {
+          "tag": "A",
+          "name": "Outcomes: Finished system",
+          "tabIndex": 0
+        },
+        {
+          "tag": "A",
+          "name": "Trust: Adversarial read",
+          "tabIndex": 0
+        }
+      ]
+    },
+    "heroCommitAbortChrome": {
+      "abort": [
+        {
+          "tag": "SPAN",
+          "tabIndex": -1,
+          "role": null,
+          "interactive": false
+        },
+        {
+          "tag": "SPAN",
+          "tabIndex": -1,
+          "role": null,
+          "interactive": false
+        }
+      ],
+      "commit": [
+        {
+          "tag": "SPAN",
+          "tabIndex": -1,
+          "role": null,
+          "interactive": false
+        },
+        {
+          "tag": "SPAN",
+          "tabIndex": -1,
+          "role": null,
+          "interactive": false
+        }
+      ]
+    },
+    "tabOrderFirst30": [
+      {
+        "i": 0,
+        "tag": "A",
+        "name": "Nexus-IQArchitecture v1",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 1,
+        "tag": "A",
+        "name": "System",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 2,
+        "tag": "A",
+        "name": "Change Gate",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 3,
+        "tag": "A",
+        "name": "Evidence",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 4,
+        "tag": "A",
+        "name": "Security",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 5,
+        "tag": "A",
+        "name": "Research",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 6,
+        "tag": "A",
+        "name": "Developers",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 7,
+        "tag": "A",
+        "name": "Maturity",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 8,
+        "tag": "A",
+        "name": "GitHub",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 9,
+        "tag": "A",
+        "name": "Request Evaluation",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 10,
+        "tag": "A",
+        "name": "Intent: Propose",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 11,
+        "tag": "A",
+        "name": "Gap: Missing controls",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 12,
+        "tag": "A",
+        "name": "Execute: Stage → Decide",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 13,
+        "tag": "A",
+        "name": "Model: Change Gate",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 14,
+        "tag": "A",
+        "name": "Evidence: Emit",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 15,
+        "tag": "A",
+        "name": "Compose: Substrates",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 16,
+        "tag": "A",
+        "name": "Outcomes: Finished system",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 17,
+        "tag": "A",
+        "name": "Trust: Adversarial read",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 18,
+        "tag": "A",
+        "name": "Evaluate: Commit path",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 19,
+        "tag": "A",
+        "name": "See the control gap",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 20,
+        "tag": "A",
+        "name": "Watch the commit boundary",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 21,
+        "tag": "A",
+        "name": "Explore the model",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 22,
+        "tag": "A",
+        "name": "View implementation maturity",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 23,
+        "tag": "BUTTON",
+        "name": "Commit path",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 24,
+        "tag": "BUTTON",
+        "name": "Abort path",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 25,
+        "tag": "BUTTON",
+        "name": "Film",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 26,
+        "tag": "BUTTON",
+        "name": "Compare paths",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 27,
+        "tag": "BUTTON",
+        "name": "Restart film",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 28,
+        "tag": "BUTTON",
+        "name": "Pause",
+        "focusVisible": true,
+        "ringLikely": true
+      },
+      {
+        "i": 29,
+        "tag": "INPUT",
+        "name": "Seek Change Gate phase",
+        "focusVisible": true,
+        "ringLikely": true
+      }
+    ]
+  },
+  "focus": {
+    "sampleOnActive": {
+      "hasFocus": true,
+      "tag": "A",
+      "role": null,
+      "name": "System",
+      "outline": "auto 1px rgb(155, 151, 141)",
+      "boxShadow": "none",
+      "focusVisible": true,
+      "ringLikely": true,
+      "rect": {
+        "t": 12,
+        "l": 406,
+        "w": 67,
+        "h": 32
+      }
+    },
+    "ariaHiddenFocusables": [
+      {
+        "tag": "A",
+        "name": "See the control gap",
+        "opacity": "1",
+        "inPin": true
+      },
+      {
+        "tag": "A",
+        "name": "Watch the commit boundary",
+        "opacity": "1",
+        "inPin": true
+      },
+      {
+        "tag": "A",
+        "name": "Explore the model",
+        "opacity": "1",
+        "inPin": true
+      },
+      {
+        "tag": "A",
+        "name": "View implementation maturity",
+        "opacity": "1",
+        "inPin": true
+      }
+    ],
+    "ariaHiddenFocusableCount": 4,
+    "afterFirstTab": {
+      "hasFocus": true,
+      "tag": "A",
+      "role": null,
+      "name": "Nexus-IQArchitecture v1",
+      "outline": "auto 1px rgb(16, 16, 16)",
+      "boxShadow": "none",
+      "focusVisible": true,
+      "ringLikely": true,
+      "rect": {
+        "t": 16,
+        "l": 88,
+        "w": 184.8125,
+        "h": 24
+      }
+    }
+  },
+  "overflow": {
+    "mobile390": {
+      "hasHorizontalOverflow": false
+    }
+  },
+  "notes": []
+}
+
+WROTE /workspace/artifacts/keyboard-console-evidence.json

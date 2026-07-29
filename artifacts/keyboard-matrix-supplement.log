@@ -1,0 +1,69 @@
+HERO_LINKS [
+  {
+    "text": "See the control gap",
+    "href": "#problem",
+    "ariaHidden": null
+  },
+  {
+    "text": "Watch the commit boundary",
+    "href": "#live-demo",
+    "ariaHidden": null
+  },
+  {
+    "text": "Explore the model",
+    "href": "#change-gate",
+    "ariaHidden": null
+  },
+  {
+    "text": "View implementation maturity",
+    "href": "/maturity",
+    "ariaHidden": null
+  }
+]
+COMMIT_FOCUS { name: 'Commit path', focusVisible: true }
+AFTER_COMMIT_SNIP TXN 03
+STAGE → DECIDE
+Watch the boundary run
+
+PRODUCT DEMONSTRATION
+
+Watch a consequential action cross the commit boundary
+
+A live product film of the Change Gate — not a marketing video. Scrub any p
+ABORT_FOCUS { name: 'Abort path', focusVisible: true }
+AFTER_ABORT_SNIP TXN 03
+STAGE → DECIDE
+Watch the boundary run
+
+PRODUCT DEMONSTRATION
+
+Watch a consequential action cross the commit boundary
+
+A live product film of the Change Gate — not a marketing video. Scrub any p
+ARIA_HIDDEN_FOCUSABLES [
+  {
+    "name": "See the control gap",
+    "opacity": "1",
+    "tabIndex": 0,
+    "parentOpacity": "0"
+  },
+  {
+    "name": "Watch the commit boundary",
+    "opacity": "1",
+    "tabIndex": 0,
+    "parentOpacity": "0"
+  },
+  {
+    "name": "Explore the model",
+    "opacity": "1",
+    "tabIndex": 0,
+    "parentOpacity": "0"
+  },
+  {
+    "name": "View implementation maturity",
+    "opacity": "1",
+    "tabIndex": 0,
+    "parentOpacity": "0"
+  }
+]
+CONSOLE_ERRS []

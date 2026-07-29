@@ -1,56 +1,83 @@
 import type { ReactNode } from "react";
 
 /**
- * Visual bridge: commit plane + dual-path echo continues into DemoPlayer.
- * Same focal language as the pinned scene — not a text-only gradient.
+ * Motif-first handoff: instrument emit tray / capsule continues into DemoPlayer.
+ * Not a text-only gradient wash. DemoPlayer remains the interactive proof surface.
  */
 export function SceneHandoff({ children }: { children?: ReactNode }) {
   return (
-    <div className="relative overflow-hidden border-b border-border bg-void">
+    <div
+      className="relative overflow-hidden border-b border-border bg-void"
+      data-testid="scene-handoff"
+    >
+      {/* Apparatus shell continuation */}
       <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden
-        style={{
-          background: `
-            radial-gradient(ellipse 50% 40% at 55% 0%, color-mix(in oklab, var(--color-institution) 32%, transparent), transparent 70%),
-            radial-gradient(ellipse 30% 25% at 82% 18%, color-mix(in oklab, var(--color-controlled-red) 22%, transparent), transparent 70%),
-            radial-gradient(ellipse 30% 30% at 86% 70%, color-mix(in oklab, var(--color-oxide) 22%, transparent), transparent 70%)
-          `,
-        }}
-      />
-      <div
-        className="pointer-events-none absolute inset-y-0 left-[55%] w-px -translate-x-1/2 max-lg:left-1/2"
-        aria-hidden
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(246,241,231,0.7), rgba(90,155,184,0.4) 40%, transparent)",
-          boxShadow:
-            "0 0 60px 14px color-mix(in oklab, var(--color-institution) 35%, transparent)",
-        }}
-      />
-      <svg
-        className="pointer-events-none absolute left-1/2 top-0 h-40 w-full max-w-3xl -translate-x-1/2 opacity-70"
-        viewBox="0 0 600 120"
+        className="pointer-events-none absolute inset-x-0 top-0 flex justify-center"
         aria-hidden
       >
-        <path
-          d="M300 0 C 360 30, 420 20, 520 28"
-          fill="none"
-          stroke="var(--color-controlled-red)"
-          strokeWidth="2"
-          opacity="0.7"
-        />
-        <path
-          d="M300 0 C 360 40, 440 70, 530 95"
-          fill="none"
-          stroke="var(--color-oxide)"
-          strokeWidth="2"
-          opacity="0.7"
-        />
-        <circle cx="520" cy="28" r="5" fill="var(--color-controlled-red)" />
-        <circle cx="530" cy="95" r="5" fill="var(--color-oxide)" />
-      </svg>
-      <div className="relative">{children}</div>
+        <div className="relative h-36 w-full max-w-3xl px-4 sm:px-6">
+          {/* Instrument mouth opening downward into demo */}
+          <div
+            className="absolute left-1/2 top-0 h-28 w-[min(100%,36rem)] -translate-x-1/2 rounded-b-2xl border border-t-0 border-border bg-carbon/80"
+            style={{
+              boxShadow:
+                "inset 0 -24px 48px color-mix(in oklab, var(--color-void) 55%, transparent)",
+            }}
+          />
+          {/* Spine continuation */}
+          <div
+            className="absolute left-1/2 top-0 h-32 w-0.5 -translate-x-1/2"
+            style={{
+              background:
+                "linear-gradient(to bottom, color-mix(in oklab, var(--color-institution) 70%, transparent), transparent)",
+            }}
+          />
+          {/* Dual exit echoes — diamond Abort / square Commit */}
+          <svg
+            className="absolute left-1/2 top-2 h-28 w-full max-w-xl -translate-x-1/2"
+            viewBox="0 0 400 100"
+            aria-hidden
+          >
+            <path
+              d="M200 8 C 240 20, 280 18, 340 28"
+              fill="none"
+              stroke="var(--color-controlled-red)"
+              strokeWidth="2.5"
+            />
+            <path
+              d="M200 8 C 240 30, 290 55, 345 72"
+              fill="none"
+              stroke="var(--color-oxide)"
+              strokeWidth="2.5"
+            />
+            {/* Abort diamond */}
+            <polygon
+              points="340,20 348,28 340,36 332,28"
+              fill="var(--color-controlled-red)"
+            />
+            {/* Commit square */}
+            <rect
+              x="337"
+              y="64"
+              width="16"
+              height="16"
+              fill="var(--color-oxide)"
+            />
+          </svg>
+          {/* Capsule tray aligning into demo */}
+          <div
+            data-instrument-node="handoff-capsule"
+            className="absolute left-1/2 top-16 flex -translate-x-1/2 items-center gap-2 rounded-md border border-archive-ink/15 bg-archive px-3 py-1.5 opacity-90"
+          >
+            <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-archive-ink/70">
+              Capsule → proof surface
+            </span>
+            <span className="block h-3 w-8 rounded-sm bg-archive-ink/20" />
+          </div>
+        </div>
+      </div>
+
+      <div className="relative pt-8">{children}</div>
     </div>
   );
 }

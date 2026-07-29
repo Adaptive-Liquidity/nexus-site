@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { CommitBoundaryCanvas } from "@/components/home/commit-boundary-canvas";
 import { Button } from "@/components/ui/button";
@@ -21,9 +21,15 @@ function phaseOf(p: number) {
   return { id: "emit", label: "Emit" };
 }
 
+/** Shared content gutter: clears txn rail spine at xl+ */
+const CONTENT_GUTTER =
+  "px-4 pb-24 pt-20 sm:px-8 lg:px-12 xl:pl-[var(--txn-content-gutter)] xl:pr-10";
+
+const LAYER_ACTIVE = 0.1;
+
 /**
  * Sticky full-viewport cinematic continuum for Intent → Gap.
- * One scene. No stacked dashboard diagrams.
+ * Direction 2: one continuous forensic instrument (not cards/bento).
  */
 export function PinnedCinematic({
   maturityCounts,
@@ -31,14 +37,17 @@ export function PinnedCinematic({
   maturityCounts: ReturnType<typeof countByPublicStatus>;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const intentLayerRef = useRef<HTMLDivElement>(null);
+  const gapLayerRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
-  const [progress, setProgress] = useState(reduced ? 0.88 : 0.04);
-  const [phase, setPhase] = useState(phaseOf(reduced ? 0.88 : 0.04));
+  // Reduced motion: complete composed state (decide+emit with both exits + capsule)
+  const [progress, setProgress] = useState(reduced ? 0.94 : 0.04);
+  const [phase, setPhase] = useState(phaseOf(reduced ? 0.94 : 0.04));
 
   useEffect(() => {
     if (reduced) {
-      setProgress(0.88);
-      setPhase(phaseOf(0.88));
+      setProgress(0.94);
+      setPhase(phaseOf(0.94));
       return;
     }
     const el = trackRef.current;
@@ -65,7 +74,6 @@ export function PinnedCinematic({
     };
   }, [reduced]);
 
-  // Overlay opacities
   const intentOpacity = reduced
     ? 1
     : progress < 0.12
@@ -85,6 +93,24 @@ export function PinnedCinematic({
             ? 1 - (progress - 0.72) / 0.16
             : 0;
   const exitOpacity = reduced ? 0 : clamp01((progress - 0.82) / 0.12);
+  const showDualExits = reduced || progress > 0.62;
+
+  const intentActive = intentOpacity >= LAYER_ACTIVE;
+  const gapActive = gapOpacity >= LAYER_ACTIVE;
+
+  // When a narrative layer deactivates, release any focus trapped inside it.
+  useEffect(() => {
+    const active = document.activeElement;
+    if (!(active instanceof HTMLElement)) return;
+    const intentEl = intentLayerRef.current;
+    const gapEl = gapLayerRef.current;
+    if (intentEl?.contains(active) && !intentActive) {
+      active.blur();
+    }
+    if (gapEl?.contains(active) && !gapActive) {
+      active.blur();
+    }
+  }, [intentActive, gapActive]);
 
   return (
     <div
@@ -92,17 +118,22 @@ export function PinnedCinematic({
       id="intent"
       className="relative"
       style={{ height: reduced ? "100dvh" : "320vh" }}
+      data-testid="forensic-instrument"
+      data-instrument="cross-section"
+      data-pin-progress={progress.toFixed(3)}
+      data-reduced-motion={reduced ? "true" : "false"}
+      aria-label="Transactional change gate cross-section continuum"
     >
       <div className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-void">
-        {/* Scene */}
         <CommitBoundaryCanvas
           progress={progress}
           className="absolute inset-0 h-full w-full"
         />
 
-        {/* Soft read scrim — left only, not a full dark sheet */}
+        {/* Read scrim — respects rail gutter */}
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-full max-w-2xl bg-gradient-to-r from-void/90 via-void/55 to-transparent"
+          className="pointer-events-none absolute inset-y-0 left-0 w-full max-w-2xl bg-gradient-to-r from-void/92 via-void/55 to-transparent xl:max-w-xl"
+          style={{ marginLeft: 0 }}
           aria-hidden
         />
         <div
@@ -110,15 +141,20 @@ export function PinnedCinematic({
           aria-hidden
         />
 
-        {/* Intent copy */}
+        {/* Intent copy — inert when not the active narrative layer */}
         <div
+          ref={intentLayerRef}
+          data-narrative-layer="intent"
+          data-narrative-active={intentActive ? "true" : "false"}
           className={cn(
-            "absolute inset-0 flex flex-col justify-center px-4 pb-24 pt-20 sm:px-8 lg:px-12",
+            "absolute inset-0 flex flex-col justify-center",
+            CONTENT_GUTTER,
             "transition-opacity duration-300",
-            intentOpacity < 0.05 && "pointer-events-none",
+            !intentActive && "pointer-events-none",
           )}
           style={{ opacity: intentOpacity }}
-          aria-hidden={intentOpacity < 0.1}
+          aria-hidden={!intentActive}
+          {...(!intentActive ? ({ inert: true } as { inert: boolean }) : {})}
         >
           <div className="max-w-xl space-y-5">
             <div className="space-y-2">
@@ -140,12 +176,12 @@ export function PinnedCinematic({
 
             <h1
               id="hero-headline"
-              className="text-hero font-medium tracking-tight text-porcelain drop-shadow-[0_2px_24px_rgba(7,9,11,0.8)]"
+              className="text-hero text-balance font-medium tracking-tight text-porcelain drop-shadow-[0_2px_24px_rgba(7,9,11,0.8)]"
             >
               {HERO.headline}
             </h1>
 
-            <p className="max-w-prose text-base leading-relaxed text-porcelain-muted sm:text-[1.05rem]">
+            <p className="max-w-prose text-pretty text-base leading-relaxed text-porcelain-muted sm:text-[1.05rem]">
               {HERO.supportingDefinition}
             </p>
 
@@ -182,24 +218,29 @@ export function PinnedCinematic({
           </div>
         </div>
 
-        {/* Gap copy — appears mid-scroll while scene stays pinned */}
+        {/* Gap copy — inert when not active */}
         <div
+          ref={gapLayerRef}
+          data-narrative-layer="gap"
+          data-narrative-active={gapActive ? "true" : "false"}
           className={cn(
-            "absolute inset-0 flex flex-col justify-center px-4 pb-28 pt-20 sm:px-8 lg:px-12",
-            "transition-opacity duration-300",
-            gapOpacity < 0.05 && "pointer-events-none",
+            "absolute inset-0 flex flex-col justify-center",
+            CONTENT_GUTTER,
+            "pb-28 transition-opacity duration-300",
+            !gapActive && "pointer-events-none",
           )}
           style={{ opacity: gapOpacity }}
-          aria-hidden={gapOpacity < 0.1}
+          aria-hidden={!gapActive}
+          {...(!gapActive ? ({ inert: true } as { inert: boolean }) : {})}
         >
           <div className="max-w-lg space-y-4">
             <p className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-porcelain-subtle">
               The control gap
             </p>
-            <h2 className="font-serif text-3xl text-porcelain sm:text-4xl">
+            <h2 className="text-balance font-serif text-3xl text-porcelain sm:text-4xl">
               Intent is not authority
             </h2>
-            <p className="text-base leading-relaxed text-porcelain-muted">
+            <p className="text-pretty text-base leading-relaxed text-porcelain-muted">
               {PROBLEM.core}
             </p>
             <ul className="space-y-2 pt-2">
@@ -222,9 +263,37 @@ export function PinnedCinematic({
           </div>
         </div>
 
-        {/* Bottom chrome: phase + maturity (minimal, not a diagram card) */}
-        <div className="absolute inset-x-0 bottom-0 z-10">
-          <div className="mx-auto flex max-w-[72rem] flex-col gap-3 px-4 pb-5 pt-8 sm:flex-row sm:items-end sm:justify-between sm:px-8 lg:px-12">
+        {/* DOM capsule silhouette — required for reduced-motion composed state */}
+        {(reduced || progress > 0.82) && (
+          <div
+            data-testid="proof-capsule-silhouette"
+            data-instrument-node="capsule"
+            className={cn(
+              "pointer-events-none absolute z-[5] rounded-md border border-archive-ink/20 bg-archive px-3 py-2 shadow-lg",
+              "right-6 bottom-28 sm:right-10 md:right-[12%] lg:right-[10%]",
+              !reduced && "opacity-90",
+            )}
+            aria-hidden
+          >
+            <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-archive-ink/70">
+              Proof Capsule
+            </p>
+            <div className="mt-1.5 space-y-1">
+              <div className="h-0.5 w-16 bg-archive-ink/25" />
+              <div className="h-0.5 w-12 bg-archive-ink/20" />
+              <div className="h-0.5 w-14 bg-archive-ink/15" />
+            </div>
+          </div>
+        )}
+
+        {/* Bottom chrome */}
+        <div
+          className={cn(
+            "absolute inset-x-0 bottom-0 z-10",
+            "xl:pl-[var(--txn-content-gutter)]",
+          )}
+        >
+          <div className="mx-auto flex max-w-[72rem] flex-col gap-3 px-4 pb-5 pt-8 sm:flex-row sm:items-end sm:justify-between sm:px-8 lg:px-12 xl:pl-0 xl:pr-10">
             <div className="space-y-1">
               <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-porcelain-subtle">
                 Operating model
@@ -232,12 +301,26 @@ export function PinnedCinematic({
               <p className="font-serif text-lg text-porcelain sm:text-xl">
                 {phase.label}
               </p>
-              {phase.id === "decide" || progress > 0.65 ? (
-                <p className="text-xs text-porcelain-muted">
-                  <span className="text-controlled-red-fg">Abort</span>
-                  <span className="mx-2 text-porcelain-subtle">·</span>
-                  <span className="text-oxide-fg">Commit</span>
-                  <span className="text-porcelain-subtle"> — both first-class</span>
+              {showDualExits ? (
+                <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-porcelain-muted">
+                  <span className="inline-flex items-center gap-1.5">
+                    <span
+                      className="inline-block size-2 rotate-45 bg-controlled-red"
+                      aria-hidden
+                    />
+                    <span className="text-controlled-red-fg">Abort</span>
+                  </span>
+                  <span className="text-porcelain-subtle">·</span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <span
+                      className="inline-block size-2 bg-oxide"
+                      aria-hidden
+                    />
+                    <span className="text-oxide-fg">Commit</span>
+                  </span>
+                  <span className="text-porcelain-subtle">
+                    — both first-class
+                  </span>
                 </p>
               ) : null}
             </div>
@@ -253,8 +336,7 @@ export function PinnedCinematic({
               </span>
             </div>
           </div>
-          {/* Progress spine */}
-          <div className="h-0.5 w-full bg-carbon">
+          <div className="h-0.5 w-full bg-carbon" data-testid="hero-progress-spine">
             <div
               className="h-full bg-institution transition-[width] duration-100 ease-out"
               style={{ width: `${Math.round(progress * 100)}%` }}
@@ -262,7 +344,6 @@ export function PinnedCinematic({
           </div>
         </div>
 
-        {/* Exit cue into demo */}
         <div
           className={cn(
             "pointer-events-none absolute inset-x-0 bottom-16 flex justify-center transition-opacity",
