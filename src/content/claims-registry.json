@@ -1,0 +1,228 @@
+{
+  "version": "1.0.0",
+  "asOf": "2026-07-28",
+  "product": "Nexus-IQ",
+  "stage0": {
+    "status": "IN_DEVELOPMENT",
+    "blocking": true,
+    "summary": "Stage 0 evidence integrity is blocking for end-to-end transactional guarantees and full memory-state binding."
+  },
+  "statusLegend": {
+    "CURRENT": "Implemented Foundation \u2014 exists and is evidence-backed; may not complete full product workflow",
+    "IN_DEVELOPMENT": "In Integration \u2014 actively being connected into the end-to-end product",
+    "TARGET": "Target Architecture \u2014 defined destination capability not yet implemented",
+    "EXPERIMENTAL": "Experimental \u2014 research or evaluation surface without production commitment",
+    "LIMITATION": "Known Limitation \u2014 restricts the associated guarantee"
+  },
+  "capabilities": [
+    {
+      "id": "isolation-snap-rollback",
+      "name": "Execution isolation & snap-rollback",
+      "status": "CURRENT",
+      "summary": "WASM sandbox with microsecond-class init, native snapshot of linear memory/globals/tables, sub-ms to low-tens-ms rollback for small-to-medium state, capability-gated WASI.",
+      "evidence": [
+        {
+          "type": "benchmark_dashboard",
+          "label": "Live Nexus benchmarks",
+          "url": "https://adaptiveliquidity.github.io/Nexus/"
+        },
+        {
+          "type": "source",
+          "label": "Nexus hypervisor / snapshot modules",
+          "url": "https://github.com/adaptiveliquidity/Nexus"
+        }
+      ],
+      "limitations": [
+        "Large-state snapshots scale with size/compressibility",
+        "Full end-to-end cold-start higher than pure sandbox init",
+        "Governs WASM guest\u2194host boundary; does not intercept LLM tool choice today"
+      ],
+      "target": "Broader agent tool execution coverage beyond pure WASM/WASI boundary"
+    },
+    {
+      "id": "proof-capsules",
+      "name": "Proof Capsules / ExecutionReceipt",
+      "status": "CURRENT",
+      "summary": "Produced on execution: digests, capability evidence, snapshot, failure/rollback, redaction, limitations[] (always non-empty), optional Ed25519 signature, memory modes when feature-enabled. Portable signed evidence of what the runtime observed and enforced.",
+      "evidence": [
+        {
+          "type": "schema",
+          "label": "src/proof/schema.rs",
+          "url": "https://github.com/adaptiveliquidity/Nexus/blob/main/src/proof/schema.rs"
+        },
+        {
+          "type": "fixture",
+          "label": "Structure-identical sample capsules",
+          "path": "src/content/capsules/"
+        }
+      ],
+      "limitations": [
+        "runtime_attestation_only",
+        "does_not_prove_correct_execution",
+        "does_not_prove_absence_of_external_side_effects",
+        "does_not_guarantee_full_deterministic_replay",
+        "does_not_include_raw_snapshot_memory",
+        "trusts_nexus_runtime_and_host_boundary"
+      ],
+      "inDevelopment": [
+        "Stronger binding",
+        "External anchoring",
+        "Production key management"
+      ],
+      "target": "Portable evidence fully binding action + authority + memory context under Change Gate"
+    },
+    {
+      "id": "proof-capsule-explorer-ui",
+      "name": "Public Proof Capsule Explorer (web UI)",
+      "status": "CURRENT",
+      "summary": "Browser Explorer ships for fixture inspection: dual scenarios, field explainers, mandatory limitations[], structural checks, downloadable structure-identical capsules. Schema and artifacts remain Implemented Foundations; production cryptographic verification and durable trust anchors stay Target / In Integration.",
+      "evidence": [
+        {
+          "type": "product_ui",
+          "label": "Proof Capsule Explorer",
+          "url": "/evidence/proof-capsules"
+        },
+        {
+          "type": "fixture",
+          "label": "Structure-identical sample capsules",
+          "path": "src/content/capsules/"
+        }
+      ],
+      "limitations": [
+        "Educational inspection of fixtures \u2014 not live runtime stream",
+        "Structural checks are non-cryptographic",
+        "Demo signatures are not production trust anchors"
+      ]
+    },
+    {
+      "id": "capability-authority",
+      "name": "Capability authority",
+      "status": "CURRENT",
+      "summary": "Ed25519-signed tokens, attenuation chains (narrow only), denial on missing/expired/revoked, MemoryRecall gating, rate limits, policy profiles.",
+      "evidence": [
+        {
+          "type": "source",
+          "label": "Nexus capability module",
+          "url": "https://github.com/adaptiveliquidity/Nexus"
+        }
+      ],
+      "limitations": [
+        "Memory remains advisory input; Nexus is sole execution authority today"
+      ],
+      "inDevelopment": [
+        "Durable end-to-end authority chain across full Nexus-IQ path and Change Gate (Stage 0)"
+      ],
+      "target": "Full durable capability authority enforced at every transactional stage"
+    },
+    {
+      "id": "aeon-memory-binding",
+      "name": "AEON-IQ memory plane & evidence binding",
+      "status": "IN_DEVELOPMENT",
+      "summary": "Transparent proxy, persistent memory, retrieval logs, schema-contract verifier (PR #21), Ed25519 countersign foundations, HMAC digests when keys present, modes recorded in capsules. Full production RecallEnvelope path and live verification under Stage 0.",
+      "evidence": [
+        {
+          "type": "source",
+          "label": "AEON-IQ repository",
+          "url": "https://github.com/adaptiveliquidity/AEON-IQ"
+        }
+      ],
+      "currentFoundations": [
+        "Proxy + persistent memory",
+        "Schema-contract verifier",
+        "Attestation modes: Attested, AttestedWithRecall, Advisory, Degraded, Absent"
+      ],
+      "limitations": [
+        "Incomplete binding yields Advisory/Degraded/Absent modes",
+        "Residual risks on timeline completeness, key management, clock skew"
+      ],
+      "target": "Cryptographically bound, verifiable memory context in every receipt under transactional guarantees"
+    },
+    {
+      "id": "transactional-change-gate",
+      "name": "Transactional Change Gate",
+      "status": "IN_DEVELOPMENT",
+      "summary": "First product: stage \u2192 validate \u2192 approve \u2192 commit/abort + compensation for consequential agent changes. Foundations exist; full public product surface is under construction. Stage 0 evidence integrity is blocking.",
+      "evidence": [
+        {
+          "type": "prd",
+          "label": "WEB_APP_PRD honest positioning",
+          "url": "https://github.com/adaptiveliquidity/Nexus-IQ/blob/main/WEB_APP_PRD.md"
+        }
+      ],
+      "currentFoundations": [
+        "Isolation",
+        "Snap-rollback for recovery",
+        "Proof Capsules",
+        "Capability structures",
+        "Health/failure classification"
+      ],
+      "limitations": [
+        "Not a finished public product surface",
+        "Must never be presented as currently deployable end-to-end",
+        "Nexus does not yet sit between LLM and tool choices"
+      ],
+      "target": "Complete transactional semantics: stage, constrain, validate, commit only what survives, emit binding evidence, rollback/compensate on failure"
+    },
+    {
+      "id": "production-signing-anchors",
+      "name": "Production-grade signing identity & external anchors",
+      "status": "TARGET",
+      "summary": "Durable trust anchors and external anchoring for Proof Capsules beyond opt-in runtime signing.",
+      "evidence": [],
+      "limitations": [
+        "Current capsules may use opt-in Ed25519; production trust model incomplete"
+      ]
+    },
+    {
+      "id": "wasm-boundary-scope",
+      "name": "Execution governance scope",
+      "status": "LIMITATION",
+      "summary": "Nexus governs the sandboxed WASM guest\u2194host boundary (WASI host-calls). It does not currently intercept model tool decisions or route providers.",
+      "evidence": [
+        {
+          "type": "prd",
+          "label": "WEB_APP_PRD \u00a7 Honest positioning",
+          "url": "https://github.com/adaptiveliquidity/Nexus-IQ/blob/main/WEB_APP_PRD.md"
+        }
+      ],
+      "limitations": [
+        "Full agent/MCP governance wrapper is destination architecture",
+        "Do not demo 'block the model tool call' until that layer ships"
+      ]
+    }
+  ],
+  "marketingConstraints": [
+    "No first/only claims",
+    "No unverified performance claims",
+    "No production-grade pre-audit language",
+    "Honest limitations always visible",
+    "Evidence-backed claims only"
+  ],
+  "homepageOutcomesMaturityHint": {
+    "controlled-change": {
+      "implemented_foundation": 2,
+      "in_integration": 4,
+      "target_architecture": 2
+    },
+    "inspectable": {
+      "implemented_foundation": 3,
+      "in_integration": 1,
+      "target_architecture": 1
+    },
+    "recoverable": {
+      "implemented_foundation": 2,
+      "in_integration": 1,
+      "target_architecture": 1
+    },
+    "governed-memory": {
+      "implemented_foundation": 1,
+      "in_integration": 2,
+      "target_architecture": 1
+    },
+    "institutional-eval": {
+      "implemented_foundation": 1,
+      "in_integration": 2,
+      "target_architecture": 1
+    }
+  }
+}

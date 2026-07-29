@@ -1,0 +1,103 @@
+{
+  "version": "1",
+  "capsule_id": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+  "subject": {
+    "run_id": "b2c3d4e5-f6a7-4890-b123-456789abcdef",
+    "tool_name": "repo_patch_apply",
+    "started_at": "2026-07-28T18:00:00.000Z",
+    "finished_at": "2026-07-28T18:00:00.142Z",
+    "duration_ms": 142
+  },
+  "tool": {
+    "module_digest": {
+      "algorithm": "sha256",
+      "value": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "public_recomputable": true
+    },
+    "module_name": "repo_patch_apply",
+    "entrypoint": "_start"
+  },
+  "input": {
+    "digest": {
+      "algorithm": "sha256",
+      "value": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae",
+      "public_recomputable": true
+    },
+    "media_type": "application/json",
+    "raw_included": false
+  },
+  "policy": {
+    "profile_digest": null,
+    "profile_name": "demo-repo-write",
+    "mode": "ProfileEnforcedMcpCapabilitiesOnly"
+  },
+  "capabilities": {
+    "required": ["WriteFile:/workspace/src"],
+    "granted": ["WriteFile:/workspace/src"],
+    "mismatch": null
+  },
+  "snapshot": {
+    "snapshot_id": "c3d4e5f6-a7b8-4901-c234-56789abcdef0",
+    "snapshot_kind": "LatestRuntime",
+    "memory_digest": {
+      "algorithm": "sha256",
+      "value": "fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9",
+      "public_recomputable": true
+    },
+    "original_size": 1048576,
+    "compressed_size": 98304
+  },
+  "failure": null,
+  "rollback": {
+    "occurred": false,
+    "from_snapshot_id": null,
+    "reason": null
+  },
+  "branches": null,
+  "redaction": {
+    "hashed_fields": ["input.digest"],
+    "truncated_fields": [],
+    "removed_fields": [],
+    "hmac_fields": ["input.digest"]
+  },
+  "limitations": [
+    "runtime_attestation_only",
+    "does_not_prove_correct_execution",
+    "does_not_prove_absence_of_external_side_effects",
+    "does_not_prove_external_side_effects_absent",
+    "does_not_include_raw_snapshot_memory",
+    "does_not_guarantee_full_deterministic_replay",
+    "does_not_restore_stack_or_registers",
+    "execution_state_is_memory_globals_and_table_metadata",
+    "blocked_sync_wasi_io_cancellation_is_cooperative",
+    "trusts_nexus_runtime_and_host_boundary",
+    "proof_trusts_nexus_runtime_and_host_boundary"
+  ],
+  "memory_mode": "AttestedWithRecall",
+  "memory_evidence": {
+    "mode": "AttestedWithRecall",
+    "hit_count": 2,
+    "evidence_digest": {
+      "algorithm": "sha256",
+      "value": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+      "public_recomputable": false
+    },
+    "note": "Structure-identical demo field; production MemoryEvidenceRef shape may add HMAC and countersign fields when keys are provisioned."
+  },
+  "signature": {
+    "signer": "nexus-runtime-demo",
+    "key_id": "demo-ed25519-2026-06",
+    "signature": "DEMO_SIGNATURE_NOT_A_PRODUCTION_TRUST_ANCHOR_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "signed_payload_digest": {
+      "algorithm": "sha256",
+      "value": "aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899",
+      "public_recomputable": true
+    }
+  },
+  "_meta": {
+    "fixture": true,
+    "scenario": "successful_execution_with_snapshot",
+    "honesty": "Structure-identical to ProofCapsule schema for educational inspection. Signature is a demo placeholder — not a production trust anchor. Limitations list matches DEFAULT_PROOF_CAPSULE_LIMITATIONS.",
+    "asOf": "2026-07-28"
+  }
+}

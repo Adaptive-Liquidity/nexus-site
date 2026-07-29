@@ -1,0 +1,125 @@
+/**
+ * Nexus-IQ design tokens — Forensic systems modernism
+ * Dark = system operation / runtime / control
+ * Archive paper = evidence / receipts / research / claims
+ *
+ * Import into src/styles.css @theme once the app shell exists.
+ * Do not use raw hex in components; map through these tokens.
+ */
+
+:root {
+  /* --- Surfaces: dark runtime --- */
+  --color-void: #07090b;
+  --color-carbon: #111820;
+  --color-slate: #1a252d;
+  --color-slate-elevated: #243039;
+
+  /* --- Surfaces: archive paper --- */
+  --color-archive: #eee7d8;
+  --color-archive-muted: #e0d8c6;
+  --color-archive-ink: #1a1f24;
+  --color-archive-ink-muted: #4a5560;
+
+  /* --- Text on dark --- */
+  --color-porcelain: #f6f1e7;
+  --color-porcelain-muted: #b8b3a8;
+  --color-porcelain-subtle: #7a7670;
+
+  /* --- Institutional accent --- */
+  --color-institution: #2f5e73;
+  --color-institution-hover: #3a7390;
+  --color-institution-fg: #f6f1e7;
+
+  /* --- Maturity / status (small badges only) --- */
+  --color-oxide: #496f59;
+  --color-oxide-fg: #e8f0eb;
+  --color-signal: #a9793b;
+  --color-signal-fg: #1a1408;
+  --color-controlled-red: #7a3e3e;
+  --color-controlled-red-fg: #f5eaea;
+  --color-target-outline: #5a7a8c;
+
+  /* --- Borders --- */
+  --color-border-dark: color-mix(in oklab, var(--color-porcelain) 12%, transparent);
+  --color-border-dark-strong: color-mix(in oklab, var(--color-porcelain) 22%, transparent);
+  --color-border-paper: color-mix(in oklab, var(--color-archive-ink) 14%, transparent);
+
+  /* --- Typography --- */
+  --font-display: "IBM Plex Serif", "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-sans: "IBM Plex Sans", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.75rem, 1.2rem + 1.5vw, 2.5rem);
+  --text-3xl: clamp(2.25rem, 1.4rem + 2.5vw, 3.5rem);
+  --text-hero: clamp(2rem, 1.2rem + 3vw, 3.25rem);
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.55;
+  --tracking-display: -0.025em;
+  --tracking-label: 0.08em;
+
+  /* --- Radius --- */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* --- Spacing --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* --- Motion --- */
+  --motion-micro: 80ms;
+  --motion-quick: 150ms;
+  --motion-fast: 250ms;
+  --motion-medium: 350ms;
+  --motion-slow: 400ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* --- Layout --- */
+  --max-content: 72rem;
+  --max-prose: 42rem;
+  --header-h: 3.5rem;
+}
+
+/* Semantic aliases for dark (default site chrome) */
+:root {
+  --bg: var(--color-void);
+  --bg-elevated: var(--color-carbon);
+  --bg-panel: var(--color-slate);
+  --fg: var(--color-porcelain);
+  --fg-muted: var(--color-porcelain-muted);
+  --fg-subtle: var(--color-porcelain-subtle);
+  --accent: var(--color-institution);
+  --accent-fg: var(--color-institution-fg);
+  --border: var(--color-border-dark);
+}
+
+/* Paper surface context — set on evidence sections */
+[data-surface="paper"] {
+  --bg: var(--color-archive);
+  --bg-elevated: var(--color-archive-muted);
+  --bg-panel: #f5f0e4;
+  --fg: var(--color-archive-ink);
+  --fg-muted: var(--color-archive-ink-muted);
+  --fg-subtle: color-mix(in oklab, var(--color-archive-ink) 55%, transparent);
+  --border: var(--color-border-paper);
+  --accent: var(--color-institution);
+  --accent-fg: var(--color-porcelain);
+  background-color: var(--bg);
+  color: var(--fg);
+}

@@ -1,0 +1,293 @@
+@import "tailwindcss";
+@import "./content/design-tokens.css";
+
+@theme {
+  --color-void: #07090b;
+  --color-carbon: #111820;
+  --color-slate: #1a252d;
+  --color-slate-elevated: #243039;
+  --color-archive: #eee7d8;
+  --color-archive-muted: #e0d8c6;
+  --color-archive-ink: #1a1f24;
+  --color-archive-ink-muted: #4a5560;
+  --color-porcelain: #f6f1e7;
+  --color-porcelain-muted: #b8b3a8;
+  --color-porcelain-subtle: #7a7670;
+  --color-institution: #2f5e73;
+  --color-institution-hover: #3a7390;
+  --color-institution-fg: #f6f1e7;
+  --color-oxide: #496f59;
+  --color-oxide-fg: #e8f0eb;
+  --color-signal: #a9793b;
+  --color-signal-fg: #1a1408;
+  --color-controlled-red: #7a3e3e;
+  --color-controlled-red-fg: #f5eaea;
+  --color-target-outline: #5a7a8c;
+  --color-background: #07090b;
+  --color-foreground: #f6f1e7;
+  --color-card: #111820;
+  --color-card-foreground: #f6f1e7;
+  --color-primary: #2f5e73;
+  --color-primary-foreground: #f6f1e7;
+  --color-secondary: #1a252d;
+  --color-secondary-foreground: #f6f1e7;
+  --color-muted: #1a252d;
+  --color-muted-foreground: #b8b3a8;
+  --color-accent: #2f5e73;
+  --color-accent-foreground: #f6f1e7;
+  --color-destructive: #7a3e3e;
+  --color-border: color-mix(in oklab, #f6f1e7 12%, transparent);
+  --color-input: color-mix(in oklab, #f6f1e7 14%, transparent);
+  --color-ring: #2f5e73;
+  --font-sans: "IBM Plex Sans", "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "IBM Plex Serif", "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--color-void);
+    color: var(--color-porcelain);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-institution) 45%, transparent);
+    color: var(--color-porcelain);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    font-family: var(--font-serif);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  code,
+  pre,
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal-base {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+  }
+}
+
+@layer utilities {
+  .surface-runtime {
+    background-color: var(--color-void);
+    color: var(--color-porcelain);
+  }
+
+  .surface-paper {
+    background-color: var(--color-archive);
+    color: var(--color-archive-ink);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .reveal-base {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
+    transition:
+      opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  .reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  .hero-enter {
+    animation: heroEnter 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .hero-enter-delay-1 {
+    animation-delay: 80ms;
+  }
+  .hero-enter-delay-2 {
+    animation-delay: 160ms;
+  }
+  .hero-enter-delay-3 {
+    animation-delay: 240ms;
+  }
+  .hero-enter-delay-4 {
+    animation-delay: 320ms;
+  }
+  .hero-enter-delay-5 {
+    animation-delay: 400ms;
+  }
+
+  @keyframes heroEnter {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+      filter: blur(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .animate-pulse-soft {
+    animation: pulseSoft 1.6s ease-in-out infinite;
+  }
+
+  @keyframes pulseSoft {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.45;
+    }
+  }
+
+  .demo-log-line {
+    animation: logIn 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes logIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+      filter: blur(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .demo-node-active {
+    animation: nodeGlow 1.2s ease-in-out infinite alternate;
+  }
+
+  @keyframes nodeGlow {
+    from {
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-institution) 0%, transparent);
+    }
+    to {
+      box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-institution) 35%, transparent);
+    }
+  }
+
+  .demo-capsule-glow {
+    animation: capsuleIn 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes capsuleIn {
+    from {
+      opacity: 0.6;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .demo-scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      color-mix(in oklab, var(--color-porcelain) 2.5%, transparent) 2px,
+      color-mix(in oklab, var(--color-porcelain) 2.5%, transparent) 3px
+    );
+    pointer-events: none;
+  }
+
+  .demo-scrubber {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--color-porcelain) 12%, transparent);
+    outline: none;
+    cursor: pointer;
+  }
+  .demo-scrubber::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background: var(--color-institution);
+    border: 2px solid var(--color-porcelain);
+    box-shadow: 0 0 0 1px
+      color-mix(in oklab, var(--color-institution) 40%, transparent);
+  }
+  .demo-scrubber::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background: var(--color-institution);
+    border: 2px solid var(--color-porcelain);
+  }
+  .demo-scrubber:focus-visible {
+    outline: 2px solid var(--color-institution);
+    outline-offset: 3px;
+  }
+
+  /* Phase D — forensic density */
+  .forensic-density {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in oklab, var(--color-institution) 12%, transparent), transparent);
+  }
+}
