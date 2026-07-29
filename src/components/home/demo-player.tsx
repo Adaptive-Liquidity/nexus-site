@@ -328,7 +328,7 @@ export function DemoPlayer({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-xl border border-border bg-void shadow-[0_24px_80px_-32px_rgba(0,0,0,0.85)]",
+        "overflow-hidden rounded-lg border border-border/80 bg-void shadow-[0_28px_80px_-36px_rgba(0,0,0,0.9)]",
         className,
       )}
       data-demo-scenario={scenario}

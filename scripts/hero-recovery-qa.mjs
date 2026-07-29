@@ -331,6 +331,227 @@ for (const width of [390, 430]) {
   await page.close();
 }
 
+// ── DemoPlayer rail collision (desktop) ──────────────────────
+for (const width of [1280, 1440, 1920]) {
+  const page = await browser.newPage({
+    viewport: { width, height: width >= 1920 ? 1080 : 900 },
+  });
+  await page.goto(BASE, { waitUntil: "networkidle", timeout: 60000 });
+  await page.locator("#live-demo").scrollIntoViewIfNeeded();
+  await page.waitForTimeout(400);
+
+  const geo = await page.evaluate(() => {
+    const rail = document.querySelector('nav[aria-label="Transaction progress"]');
+    if (!rail) return { error: "no rail" };
+    const r = rail.getBoundingClientRect();
+    const railVisible =
+      getComputedStyle(rail).display !== "none" && r.width > 0;
+    const railRight = r.right;
+    const mode = rail.getAttribute("data-rail-mode") || document.documentElement.dataset.txnRail;
+    const heading = document.getElementById("demo-heading");
+    const commit = document.querySelector('#live-demo [data-demo-path="success"]');
+    const abort = document.querySelector('#live-demo [data-demo-path="abort"]');
+    const phase =
+      document.querySelector('#live-demo button[aria-label*="Seek"]') ||
+      document.querySelector('#live-demo input[type="range"]') ||
+      Array.from(document.querySelectorAll("#live-demo button")).find((b) =>
+        /prop|stag|auth|val|cmt|emit/i.test(b.textContent || ""),
+      );
+
+    function leftOf(el) {
+      if (!el) return null;
+      return el.getBoundingClientRect().left;
+    }
+    function underRail(el) {
+      if (!el || !railVisible) return false;
+      const e = el.getBoundingClientRect();
+      // Overlap with rail box
+      return e.left < railRight - 1 && e.right > r.left + 1 && e.top < r.bottom && e.bottom > r.top;
+    }
+
+    return {
+      railRight,
+      railVisible,
+      mode,
+      headingLeft: leftOf(heading),
+      commitLeft: leftOf(commit),
+      abortLeft: leftOf(abort),
+      phaseLeft: leftOf(phase),
+      under: {
+        heading: underRail(heading),
+        commit: underRail(commit),
+        abort: underRail(abort),
+        phase: underRail(phase),
+      },
+      gaps: {
+        heading: heading ? leftOf(heading) - railRight : null,
+        commit: commit ? leftOf(commit) - railRight : null,
+        abort: abort ? leftOf(abort) - railRight : null,
+        phase: phase ? leftOf(phase) - railRight : null,
+      },
+    };
+  });
+
+  const minGap = 8;
+  ok(
+    `Demo handoff: rail spine (not full) @ ${width}`,
+    geo.mode === "spine" || (geo.railVisible && geo.railRight < 80),
+    JSON.stringify({ mode: geo.mode, railRight: geo.railRight }),
+  );
+  ok(
+    `Demo heading clears rail ≥${minGap}px @ ${width}`,
+    geo.gaps?.heading != null && geo.gaps.heading >= minGap,
+    JSON.stringify(geo.gaps),
+  );
+  ok(
+    `Demo Commit control clears rail ≥${minGap}px @ ${width}`,
+    geo.gaps?.commit != null && geo.gaps.commit >= minGap,
+    JSON.stringify(geo.gaps),
+  );
+  ok(
+    `Demo Abort control clears rail ≥${minGap}px @ ${width}`,
+    geo.gaps?.abort != null && geo.gaps.abort >= minGap,
+    JSON.stringify(geo.gaps),
+  );
+  ok(
+    `Demo phase/pipeline control clears rail ≥${minGap}px @ ${width}`,
+    geo.gaps?.phase != null && geo.gaps.phase >= minGap,
+    JSON.stringify(geo.gaps),
+  );
+  ok(
+    `Demo no pointer target under rail @ ${width}`,
+    geo.under &&
+      !geo.under.heading &&
+      !geo.under.commit &&
+      !geo.under.abort &&
+      !geo.under.phase,
+    JSON.stringify(geo.under),
+  );
+
+  // Focus Commit — must not be visually covered by rail
+  const commitBtn = page.locator('#live-demo [data-demo-path="success"]');
+  await commitBtn.focus();
+  const focusCovered = await page.evaluate(() => {
+    const el = document.activeElement;
+    const rail = document.querySelector('nav[aria-label="Transaction progress"]');
+    if (!el || !rail) return false;
+    const e = el.getBoundingClientRect();
+    const r = rail.getBoundingClientRect();
+    return e.left < r.right - 1 && e.right > r.left && e.top < r.bottom && e.bottom > r.top;
+  });
+  ok(
+    `Demo focused control not hidden by rail @ ${width}`,
+    !focusCovered,
+    `focusCovered=${focusCovered}`,
+  );
+
+  await page.close();
+}
+
+// ── Mobile Decide phase (real progress mapping) ──────────────
+for (const width of [390, 430]) {
+  const height = width === 390 ? 844 : 932;
+  const page = await browser.newPage({ viewport: { width, height } });
+  await page.goto(BASE, { waitUntil: "networkidle", timeout: 60000 });
+  await page.waitForTimeout(250);
+  // Scroll to Decide band (progress ≈ 0.68)
+  await scrollPin(page, 0.68);
+  await page.waitForTimeout(300);
+  const decide = await page.evaluate(() => {
+    const pin = document.getElementById("intent");
+    const phaseEl = document.querySelector("[data-testid='operating-model-phase']");
+    const dual = document.querySelector("[data-testid='dual-exit-chrome']");
+    return {
+      phaseId: pin?.getAttribute("data-pin-phase"),
+      progress: pin?.getAttribute("data-pin-progress"),
+      phaseLabel: phaseEl?.textContent?.trim(),
+      dualPresent: !!dual,
+      dualText: dual?.textContent?.replace(/\s+/g, " ").trim() ?? "",
+      abortVisible: !!dual && /Abort/i.test(dual.textContent || ""),
+      commitVisible: !!dual && /Commit/i.test(dual.textContent || ""),
+    };
+  });
+  ok(
+    `mobile Decide phase id @ ${width}`,
+    decide.phaseId === "decide",
+    JSON.stringify(decide),
+  );
+  ok(
+    `mobile Decide label Commit·Abort @ ${width}`,
+    /commit|abort|decide/i.test(decide.phaseLabel || ""),
+    JSON.stringify(decide),
+  );
+  ok(
+    `mobile Decide dual exits readable @ ${width}`,
+    decide.dualPresent && decide.abortVisible && decide.commitVisible,
+    JSON.stringify(decide),
+  );
+  ok(`no horizontal overflow mid-decide @ ${width}`, !(await overflow(page)));
+  await page.close();
+}
+
+// ── Motif handoff: capsule + demo heading same viewport ──────
+{
+  const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  await page.goto(BASE, { waitUntil: "networkidle", timeout: 60000 });
+  await page.waitForTimeout(200);
+  // Use Playwright scrollIntoView with block:start on the handoff root
+  const handoffEl = page.locator("[data-testid='scene-handoff']");
+  await handoffEl.scrollIntoViewIfNeeded();
+  await page.evaluate(() => {
+    const handoff = document.querySelector("[data-testid='scene-handoff']");
+    if (!handoff) return;
+    handoff.scrollIntoView({ block: "start", inline: "nearest" });
+  });
+  await page.waitForTimeout(400);
+  // Nudge so capsule stays on screen if sticky chrome pushed it
+  await page.evaluate(() => {
+    const cap = document.querySelector("[data-testid='handoff-capsule']");
+    if (!cap) return;
+    const top = cap.getBoundingClientRect().top;
+    if (top < 8 || top > 120) {
+      window.scrollBy(0, top - 48);
+    }
+  });
+  await page.waitForTimeout(200);
+  const handoff = await page.evaluate(() => {
+    const cap = document.querySelector("[data-testid='handoff-capsule']");
+    const heading = document.getElementById("demo-heading");
+    const player = document.querySelector("#live-demo [data-demo-scenario]");
+    const vh = window.innerHeight;
+    const cr = cap?.getBoundingClientRect();
+    const hr = heading?.getBoundingClientRect();
+    const pr = player?.getBoundingClientRect();
+    return {
+      scrollY: window.scrollY,
+      capsuleInView: !!cr && cr.top < vh && cr.bottom > 0,
+      headingInView: !!hr && hr.top < vh && hr.bottom > 0,
+      headingFullyVisible: !!hr && hr.top >= -4 && hr.bottom <= vh + 4,
+      playerTopInView: !!pr && pr.top < vh,
+      capsuleTop: cr?.top ?? null,
+      headingTop: hr?.top ?? null,
+      headingBottom: hr?.bottom ?? null,
+      playerTop: pr?.top ?? null,
+    };
+  });
+  ok(
+    "handoff capsule and demo heading share viewport",
+    handoff.capsuleInView && handoff.headingInView,
+    JSON.stringify(handoff),
+  );
+  ok(
+    "demo heading fully visible at handoff",
+    handoff.headingFullyVisible,
+    JSON.stringify(handoff),
+  );
+  ok(
+    "DemoPlayer top enters same handoff viewport",
+    handoff.playerTopInView,
+    JSON.stringify(handoff),
+  );
+  await page.close();
+}
+
 // ── Reduced motion: first paint + no rAF loop ────────────────
 {
   const page = await browser.newPage({

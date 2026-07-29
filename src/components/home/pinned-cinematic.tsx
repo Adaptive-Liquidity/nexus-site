@@ -16,7 +16,7 @@ function phaseOf(p: number) {
   if (p < 0.18) return { id: "intent", label: "Intent" };
   if (p < 0.35) return { id: "stage", label: "Stage" };
   if (p < 0.5) return { id: "constrain", label: "Constrain" };
-  if (p < 0.62) return { id: "validate", label: "Validate" };
+  if (p < 0.58) return { id: "validate", label: "Validate" };
   if (p < 0.8) return { id: "decide", label: "Commit · Abort" };
   return { id: "emit", label: "Emit" };
 }
@@ -39,6 +39,7 @@ export function PinnedCinematic({
   const trackRef = useRef<HTMLDivElement>(null);
   const intentLayerRef = useRef<HTMLDivElement>(null);
   const gapLayerRef = useRef<HTMLDivElement>(null);
+  const typeSafeRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   // Reduced motion: complete composed state (decide+emit with both exits + capsule)
   const [progress, setProgress] = useState(reduced ? 0.94 : 0.04);
@@ -74,6 +75,39 @@ export function PinnedCinematic({
     };
   }, [reduced]);
 
+  // Publish type-safe column geometry for canvas mask (no instrument under copy)
+  useEffect(() => {
+    const publish = () => {
+      const plane = typeSafeRef.current;
+      const sticky = trackRef.current?.querySelector(
+        "[data-type-safe-host]",
+      ) as HTMLElement | null;
+      if (!plane || !sticky) return;
+      const pr = plane.getBoundingClientRect();
+      const sr = sticky.getBoundingClientRect();
+      // On portrait, type plane is lower band — horizontal type-safe width is 0
+      const portrait = window.innerHeight > window.innerWidth * 0.95;
+      const right = portrait
+        ? 0
+        : Math.max(0, pr.right - sr.left + 12);
+      sticky.style.setProperty("--type-safe-right", `${right}px`);
+      document.documentElement.style.setProperty(
+        "--type-safe-right",
+        `${right}px`,
+      );
+    };
+    publish();
+    window.addEventListener("resize", publish);
+    window.addEventListener("scroll", publish, { passive: true });
+    const ro = new ResizeObserver(publish);
+    if (typeSafeRef.current) ro.observe(typeSafeRef.current);
+    return () => {
+      window.removeEventListener("resize", publish);
+      window.removeEventListener("scroll", publish);
+      ro.disconnect();
+    };
+  }, [progress, reduced]);
+
   const intentOpacity = reduced
     ? 1
     : progress < 0.12
@@ -87,13 +121,14 @@ export function PinnedCinematic({
       ? 0
       : progress < 0.36
         ? (progress - 0.22) / 0.14
-        : progress < 0.72
+        : progress < 0.55
           ? 1
-          : progress < 0.88
-            ? 1 - (progress - 0.72) / 0.16
+          : progress < 0.64
+            ? 1 - (progress - 0.55) / 0.09
             : 0;
   const exitOpacity = reduced ? 0 : clamp01((progress - 0.82) / 0.12);
-  const showDualExits = reduced || progress > 0.62;
+  // Dual exits visible through entire Decide window (widened from 0.62)
+  const showDualExits = reduced || progress >= 0.58;
 
   const intentActive = intentOpacity >= LAYER_ACTIVE;
   const gapActive = gapOpacity >= LAYER_ACTIVE;
@@ -121,23 +156,51 @@ export function PinnedCinematic({
       data-testid="forensic-instrument"
       data-instrument="cross-section"
       data-pin-progress={progress.toFixed(3)}
+      data-pin-phase={phase.id}
       data-reduced-motion={reduced ? "true" : "false"}
       aria-label="Transactional change gate cross-section continuum"
     >
-      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-void">
+      <div
+        className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-void"
+        data-type-safe-host
+      >
         <CommitBoundaryCanvas
           progress={progress}
           className="absolute inset-0 h-full w-full"
         />
 
-        {/* Read scrim — respects rail gutter */}
+        {/* Type-safe opaque plane — desktop left column; mobile lower band only */}
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-full max-w-2xl bg-gradient-to-r from-void/92 via-void/55 to-transparent xl:max-w-xl"
-          style={{ marginLeft: 0 }}
+          ref={typeSafeRef}
+          data-testid="type-safe-plane"
+          className={cn(
+            "pointer-events-none absolute z-[1]",
+            // Mobile: lower half only so upper instrument stays visible
+            "inset-x-0 bottom-0 top-[42%] sm:top-0 sm:bottom-0 sm:left-0 sm:right-auto",
+            "w-full sm:max-w-[min(100%,36rem)] xl:max-w-[min(42%,32rem)]",
+            "xl:pl-[var(--txn-content-gutter)]",
+          )}
           aria-hidden
-        />
+        >
+          <div
+            className="h-full w-full sm:hidden"
+            style={{
+              background:
+                "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--color-void) 70%, transparent) 12%, var(--color-void) 28%, var(--color-void) 100%)",
+            }}
+          />
+          <div
+            className="hidden h-full w-full sm:block"
+            style={{
+              background:
+                "linear-gradient(90deg, var(--color-void) 0%, var(--color-void) 78%, color-mix(in oklab, var(--color-void) 85%, transparent) 92%, transparent 100%)",
+            }}
+          />
+        </div>
+
+        {/* Bottom read band for mobile / chrome */}
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-void via-void/50 to-transparent"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-36 bg-gradient-to-t from-void via-void/70 to-transparent md:h-28"
           aria-hidden
         />
 
@@ -147,16 +210,23 @@ export function PinnedCinematic({
           data-narrative-layer="intent"
           data-narrative-active={intentActive ? "true" : "false"}
           className={cn(
-            "absolute inset-0 flex flex-col justify-center",
+            "absolute inset-0 z-[2] flex flex-col justify-end sm:justify-center",
             CONTENT_GUTTER,
-            "transition-opacity duration-300",
+            "pb-28 transition-opacity duration-300 sm:pb-24",
             !intentActive && "pointer-events-none",
           )}
           style={{ opacity: intentOpacity }}
           aria-hidden={!intentActive}
           {...(!intentActive ? ({ inert: true } as { inert: boolean }) : {})}
         >
-          <div className="max-w-xl space-y-5">
+          <div
+            className="max-w-xl space-y-5 rounded-lg px-1 py-2 sm:px-0"
+            style={{
+              // Solid material plate under type — not glass/card chrome
+              background:
+                "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--color-void) 92%, transparent) 8%, color-mix(in oklab, var(--color-void) 96%, transparent) 100%)",
+            }}
+          >
             <div className="space-y-2">
               <p className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-porcelain-subtle">
                 {HERO.categoryLabel}
@@ -176,7 +246,7 @@ export function PinnedCinematic({
 
             <h1
               id="hero-headline"
-              className="text-hero text-balance font-medium tracking-tight text-porcelain drop-shadow-[0_2px_24px_rgba(7,9,11,0.8)]"
+              className="text-hero text-balance font-medium tracking-tight text-porcelain"
             >
               {HERO.headline}
             </h1>
@@ -224,16 +294,22 @@ export function PinnedCinematic({
           data-narrative-layer="gap"
           data-narrative-active={gapActive ? "true" : "false"}
           className={cn(
-            "absolute inset-0 flex flex-col justify-center",
+            "absolute inset-0 z-[2] flex flex-col justify-end sm:justify-center",
             CONTENT_GUTTER,
-            "pb-28 transition-opacity duration-300",
+            "pb-28 transition-opacity duration-300 sm:pb-24",
             !gapActive && "pointer-events-none",
           )}
           style={{ opacity: gapOpacity }}
           aria-hidden={!gapActive}
           {...(!gapActive ? ({ inert: true } as { inert: boolean }) : {})}
         >
-          <div className="max-w-lg space-y-4">
+          <div
+            className="max-w-lg space-y-4 rounded-lg px-1 py-2 sm:px-0"
+            style={{
+              background:
+                "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--color-void) 92%, transparent) 8%, color-mix(in oklab, var(--color-void) 96%, transparent) 100%)",
+            }}
+          >
             <p className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-porcelain-subtle">
               The control gap
             </p>
@@ -269,19 +345,19 @@ export function PinnedCinematic({
             data-testid="proof-capsule-silhouette"
             data-instrument-node="capsule"
             className={cn(
-              "pointer-events-none absolute z-[5] rounded-md border border-archive-ink/20 bg-archive px-3 py-2 shadow-lg",
-              "right-6 bottom-28 sm:right-10 md:right-[12%] lg:right-[10%]",
-              !reduced && "opacity-90",
+              "pointer-events-none absolute z-[5] rounded-md border border-archive-ink/25 bg-archive px-3 py-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.7)]",
+              "right-4 bottom-32 sm:right-10 md:right-[10%] lg:right-[8%]",
+              !reduced && "opacity-95",
             )}
             aria-hidden
           >
-            <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-archive-ink/70">
+            <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-archive-ink/75">
               Proof Capsule
             </p>
             <div className="mt-1.5 space-y-1">
-              <div className="h-0.5 w-16 bg-archive-ink/25" />
-              <div className="h-0.5 w-12 bg-archive-ink/20" />
-              <div className="h-0.5 w-14 bg-archive-ink/15" />
+              <div className="h-0.5 w-16 bg-archive-ink/30" />
+              <div className="h-0.5 w-12 bg-archive-ink/22" />
+              <div className="h-0.5 w-14 bg-archive-ink/18" />
             </div>
           </div>
         )}
@@ -298,25 +374,34 @@ export function PinnedCinematic({
               <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-porcelain-subtle">
                 Operating model
               </p>
-              <p className="font-serif text-lg text-porcelain sm:text-xl">
+              <p
+                className="font-serif text-lg text-porcelain sm:text-xl"
+                data-testid="operating-model-phase"
+                data-phase-id={phase.id}
+              >
                 {phase.label}
               </p>
               {showDualExits ? (
-                <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-porcelain-muted">
+                <p
+                  className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-porcelain-muted"
+                  data-testid="dual-exit-chrome"
+                >
                   <span className="inline-flex items-center gap-1.5">
                     <span
-                      className="inline-block size-2 rotate-45 bg-controlled-red"
+                      className="inline-block size-2.5 rotate-45 bg-controlled-red ring-1 ring-controlled-red-fg/40"
                       aria-hidden
                     />
-                    <span className="text-controlled-red-fg">Abort</span>
+                    <span className="font-medium text-controlled-red-fg">
+                      Abort
+                    </span>
                   </span>
                   <span className="text-porcelain-subtle">·</span>
                   <span className="inline-flex items-center gap-1.5">
                     <span
-                      className="inline-block size-2 bg-oxide"
+                      className="inline-block size-2.5 bg-oxide ring-1 ring-oxide-fg/40"
                       aria-hidden
                     />
-                    <span className="text-oxide-fg">Commit</span>
+                    <span className="font-medium text-oxide-fg">Commit</span>
                   </span>
                   <span className="text-porcelain-subtle">
                     — both first-class
@@ -346,13 +431,13 @@ export function PinnedCinematic({
 
         <div
           className={cn(
-            "pointer-events-none absolute inset-x-0 bottom-16 flex justify-center transition-opacity",
+            "pointer-events-none absolute inset-x-0 bottom-16 z-[6] flex justify-center transition-opacity",
             exitOpacity < 0.05 && "opacity-0",
           )}
           style={{ opacity: exitOpacity }}
           aria-hidden
         >
-          <p className="rounded-full bg-void/70 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-porcelain-muted backdrop-blur-sm">
+          <p className="rounded-full bg-void/80 px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-porcelain-muted">
             Entering live demonstration
           </p>
         </div>

@@ -49,9 +49,10 @@ function HomePage() {
           id="live-demo"
           className="relative"
           aria-labelledby="demo-heading"
+          data-demo-section
         >
           <TransactionBeatChrome beatId="execute">
-            <div className="mx-auto max-w-[72rem] px-4 py-14 sm:px-6 sm:py-20">
+            <div className="mx-auto max-w-[72rem] px-4 py-10 sm:px-6 sm:py-14 xl:pl-[var(--txn-content-gutter)] xl:pr-10">
               <Reveal>
                 <div className="mb-8 max-w-2xl space-y-3">
                   <p className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-porcelain-subtle">
