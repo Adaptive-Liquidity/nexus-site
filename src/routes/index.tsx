@@ -18,6 +18,9 @@ import {
   TransactionBeatChrome,
   TransactionConnector,
 } from "@/components/home/transaction-beat";
+import { CinematicSequence, useCinematicProgress } from "@/components/home/cinematic-sequence";
+import { CommitBoundaryStage } from "@/components/home/commit-boundary-stage";
+import { CinematicHandoff } from "@/components/home/cinematic-handoff";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -45,6 +48,7 @@ function HomePage() {
     <main className="relative">
       <TransactionRail />
 
+      <CinematicSequence>
       {/* ── TXN 01 · Intent (hero) ───────────────────────────── */}
       <section
         id="intent"
@@ -146,7 +150,8 @@ function HomePage() {
                 </div>
               </div>
 
-              <div className="min-w-0 hero-enter hero-enter-delay-2">
+              <div className="min-w-0 space-y-3 hero-enter hero-enter-delay-2">
+                <HeroCinematicStage />
                 <HeroSchematic />
               </div>
             </div>
@@ -186,6 +191,9 @@ function HomePage() {
       <TransactionBeatChrome beatId="gap">
         <ProblemSection />
       </TransactionBeatChrome>
+      </CinematicSequence>
+
+      <CinematicHandoff />
 
       <TransactionConnector from="Gap identified" to="Execute at boundary" />
 
@@ -294,6 +302,12 @@ function HomePage() {
       </TransactionBeatChrome>
     </main>
   );
+}
+
+
+function HeroCinematicStage() {
+  const progress = useCinematicProgress();
+  return <CommitBoundaryStage progress={progress} />;
 }
 
 function MaturityCount({

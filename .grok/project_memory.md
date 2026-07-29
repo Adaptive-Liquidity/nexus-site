@@ -1,3 +1,3 @@
-- Nexus-IQ product: proof-carrying transactional autonomy. Core: Nexus + AEON-IQ + Transactional Change Gate. Stage 0 blocking. [2026-07-26]
-- Hero: "Consequential agent action belongs behind a commit boundary." Brand: Nexus-IQ primary. [2026-07-28]
-- Elevation phases A–F COMPLETE (2026-07-28): densified hero, DemoPlayer v2, scroll-as-txn, forensic diagrams, Proof Capsule Explorer, claims/security/research/developers density. Explorer claim marked CURRENT. Production `npm run build` + typecheck pass (Vercel nitro). `vite preview` expects dist/server — use .vercel/output for deploy. Live preview remains `npm run dev` :8080 via startup.sh. [2026-07-28]
+- Nexus-IQ: proof-carrying transactional autonomy. Stage 0 blocking. Hero commit-boundary thesis. [2026-07-26]
+- Elevation A–F complete prior. [2026-07-28]
+- Cinematic integration COMPLETE (2026-07-29): DOM/SVG + rAF Intent→Gap→Execute continuum; CommitBoundaryStage (atmospheric, not evidence); CinematicHandoff into DemoPlayer; no new deps; no external media services. Verified: typecheck pass, lint 0 errors, `npm exec -- vite build` pass, multi-viewport + reduced-motion + DemoPlayer, claims intact. Live preview via startup.sh. [2026-07-29]

@@ -1,7 +1,7 @@
 import { i as require_jsx_runtime } from "../_libs/@radix-ui/react-primitive+[...].mjs";
 import { t as Button } from "./button-B-7YDd73.mjs";
-import { g as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { i as toPublicStatus, n as PUBLIC_STATUS_META, t as MaturityBadge } from "./maturity-badge-C3dmPz-F.mjs";
+import { g as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { t as claimsRegistry } from "./content-BpadpKYG.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/maturity-DlIbBZbY.js
 var import_jsx_runtime = require_jsx_runtime();
