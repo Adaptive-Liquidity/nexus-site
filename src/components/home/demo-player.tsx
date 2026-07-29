@@ -331,6 +331,8 @@ export function DemoPlayer({ className }: { className?: string }) {
         "overflow-hidden rounded-xl border border-border bg-void shadow-[0_24px_80px_-32px_rgba(0,0,0,0.85)]",
         className,
       )}
+      data-demo-scenario={scenario}
+      data-demo-view={view}
     >
       <div className="flex items-center gap-3 border-b border-border bg-carbon px-3 py-2.5">
         <div className="flex gap-1.5" aria-hidden>
@@ -371,6 +373,8 @@ export function DemoPlayer({ className }: { className?: string }) {
             <button
               type="button"
               onClick={() => setScenario("success")}
+              aria-pressed={scenario === "success"}
+              data-demo-path="success"
               className={cn(
                 "min-h-9 rounded px-2.5 py-1 text-xs transition-colors",
                 scenario === "success"
@@ -383,6 +387,8 @@ export function DemoPlayer({ className }: { className?: string }) {
             <button
               type="button"
               onClick={() => setScenario("abort")}
+              aria-pressed={scenario === "abort"}
+              data-demo-path="abort"
               className={cn(
                 "min-h-9 rounded px-2.5 py-1 text-xs transition-colors",
                 scenario === "abort"

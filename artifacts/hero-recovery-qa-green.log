@@ -1,0 +1,43 @@
+PASS  headline clears rail ≥8px @ 1280 — gap=12.0 left=68 railR=56
+PASS  gap h2 clears rail ≥8px mid-pin @ 1280 — gap=12.0 readable=true
+PASS  no horizontal overflow @ 1280
+PASS  headline clears rail ≥8px @ 1440 — gap=12.0 left=68 railR=56
+PASS  gap h2 clears rail ≥8px mid-pin @ 1440 — gap=12.0 readable=true
+PASS  no horizontal overflow @ 1440
+PASS  headline clears rail ≥8px @ 1920 — gap=12.0 left=68 railR=56
+PASS  gap h2 clears rail ≥8px mid-pin @ 1920 — gap=12.0 readable=true
+PASS  no horizontal overflow @ 1920
+PASS  no horizontal overflow @ 390
+PASS  no horizontal overflow mid-pin @ 390
+PASS  no horizontal overflow @ 430
+PASS  no horizontal overflow mid-pin @ 430
+PASS  single canvas instrument in pin — count=1
+PASS  forensic instrument landmark present — count=2
+PASS  no bento/card grid inside sticky pin
+PASS  reduced-motion: hero headline readable
+PASS  reduced-motion: Abort exit label (exact)
+PASS  reduced-motion: Commit exit label (exact, not headline)
+PASS  reduced-motion: dual-exit shape markers present
+PASS  reduced-motion: capsule silhouette present — count=1
+PASS  DemoPlayer Commit path control present
+PASS  DemoPlayer Abort path control present
+PASS  DemoPlayer Commit path operable — TXN 03
+STAGE → DECIDE
+Watch the boundary run
+
+PRODUCT DEMONSTRATION
+
+Watch a con
+PASS  DemoPlayer Abort path operable — TXN 03
+STAGE → DECIDE
+Watch the boundary run
+
+PRODUCT DEMONSTRATION
+
+Watch a con
+PASS  canvas exposes pause debug API for lifecycle — {"paused":false,"rafActive":true,"hasApi":true}
+PASS  canvas not paused while pin in view — {"paused":false,"rafActive":true,"hasApi":true}
+PASS  canvas pauses when scrolled offscreen — {"paused":true,"rafActive":false,"canvasTop":-924,"canvasBottom":-124,"vh":800}
+PASS  canvas resumes when returned to view — {"paused":false,"rafActive":true}
+
+29/29 passed

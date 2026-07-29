@@ -1,0 +1,43 @@
+PASS  headline clears rail ≥8px @ 1280 — gap=12.0 left=68 railR=56
+PASS  gap h2 clears rail ≥8px mid-pin @ 1280 — gap=12.0 readable=true
+PASS  no horizontal overflow @ 1280
+PASS  headline clears rail ≥8px @ 1440 — gap=12.0 left=68 railR=56
+PASS  gap h2 clears rail ≥8px mid-pin @ 1440 — gap=12.0 readable=true
+PASS  no horizontal overflow @ 1440
+PASS  headline clears rail ≥8px @ 1920 — gap=12.0 left=68 railR=56
+PASS  gap h2 clears rail ≥8px mid-pin @ 1920 — gap=12.0 readable=true
+PASS  no horizontal overflow @ 1920
+PASS  no horizontal overflow @ 390
+PASS  no horizontal overflow mid-pin @ 390
+PASS  no horizontal overflow @ 430
+PASS  no horizontal overflow mid-pin @ 430
+PASS  single canvas instrument in pin — count=1
+PASS  forensic instrument landmark present — count=2
+PASS  no bento/card grid inside sticky pin
+PASS  Intent state: intent layer active with focusable CTAs — {"intent":{"exists":true,"count":4,"names":["See the control gap","Watch the commit boundary","Explore the model","View implementation maturity"],"ariaHidden":false,"inert":false},"intentActiveAttrs":{"intent":"true","gap":"false"}}
+PASS  Intent state: gap layer inert / zero sequential focusables — {"exists":true,"count":0,"names":[],"ariaHidden":true,"inert":true}
+PASS  Gap state: intent layer inert / zero sequential focusables — {"exists":true,"count":0,"names":[],"ariaHidden":true,"inert":true}
+PASS  Gap state: gap layer active (no stranded focus requirement — no CTAs) — {"gap":{"exists":true,"count":0,"names":[],"ariaHidden":false,"inert":false},"gapAttrs":{"intent":"false","gap":"true"}}
+PASS  Decide state: every aria-hidden narrative layer has zero sequential focusables — {"decideHiddenOk":[{"layer":"intent","hidden":true,"inert":true,"focusable":0,"ok":true},{"layer":"gap","hidden":false,"inert":false,"focusable":0,"ok":true}],"intent":{"exists":true,"count":0,"names":[],"ariaHidden":true,"inert":true},"gap":{"exists":true,"count":0,"names":[],"ariaHidden":false,"inert":false}}
+PASS  Emit state: every aria-hidden narrative layer has zero sequential focusables — {"emitHiddenOk":[{"layer":"intent","hidden":true,"inert":true,"focusable":0,"ok":true},{"layer":"gap","hidden":true,"inert":true,"focusable":0,"ok":true}],"intent":{"exists":true,"count":0,"names":[],"ariaHidden":true,"inert":true},"gap":{"exists":true,"count":0,"names":[],"ariaHidden":true,"inert":true}}
+PASS  transition Intent→Gap does not strand focus in hidden layer — {"focusedBefore":"See the control gap","focusAfter":{"name":null,"inHidden":false}}
+PASS  active Intent CTAs remain keyboard reachable
+PASS  reduced-motion first paint: data-reduced-motion=true — {"reducedAttr":"true","progress":"0.940","height":"900px","abort":true,"commit":true,"capsule":true}
+PASS  reduced-motion first paint: composed progress ≥0.9 (Decide+Emit) — {"reducedAttr":"true","progress":"0.940","height":"900px","abort":true,"commit":true,"capsule":true}
+PASS  reduced-motion first paint: dual exits + capsule present — {"reducedAttr":"true","progress":"0.940","height":"900px","abort":true,"commit":true,"capsule":true}
+PASS  reduced-motion: canvas animation loop not active — {"hasDebug":false,"rafActive":null,"paused":null,"probeRaf":0}
+PASS  reduced-motion: hero headline readable
+PASS  reduced-motion: Abort exit label (exact)
+PASS  reduced-motion: Commit exit label (exact, not headline)
+PASS  reduced-motion: dual-exit shape markers present
+PASS  reduced-motion: capsule silhouette present — count=1
+PASS  DemoPlayer Commit path control present
+PASS  DemoPlayer Abort path control present
+PASS  DemoPlayer Abort path changes scenario state — {"before":{"scenario":"success","commitPressed":"true","abortPressed":"false"},"afterAbort":{"scenario":"abort","commitPressed":"false","abortPressed":"true"}}
+PASS  DemoPlayer Commit path changes scenario state — {"afterAbort":{"scenario":"abort","commitPressed":"false","abortPressed":"true"},"afterCommit":{"scenario":"success","commitPressed":"true","abortPressed":"false"}}
+PASS  canvas exposes pause debug API in dev — {"paused":false,"rafActive":true,"hasApi":true}
+PASS  canvas not paused while pin in view — {"paused":false,"rafActive":true,"hasApi":true}
+PASS  canvas pauses when scrolled offscreen — {"paused":true,"rafActive":false,"canvasTop":-924,"canvasBottom":-124,"vh":800}
+PASS  canvas resumes when returned to view — {"paused":false,"rafActive":true}
+
+41/41 passed

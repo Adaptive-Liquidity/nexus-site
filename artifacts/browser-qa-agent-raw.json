@@ -1,0 +1,2249 @@
+{
+  "cases": [
+    {
+      "label": "d1280-intent",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "hasOverflow": false
+      },
+      "gap": 12,
+      "railRight": 56,
+      "headlineLeft": 68,
+      "railVisible": true,
+      "railRect": {
+        "l": 0,
+        "r": 56,
+        "t": 240,
+        "b": 560,
+        "w": 56,
+        "h": 320
+      },
+      "headlineRect": {
+        "l": 68,
+        "r": 644,
+        "t": 280,
+        "b": 298.4,
+        "w": 576,
+        "h": 18.4
+      },
+      "primary": {
+        "text": "Consequential agent action belongs behind a commit boundary.",
+        "color": "rgb(246, 241, 231)",
+        "opacity": "1",
+        "fontSize": "16px",
+        "visibility": "visible",
+        "display": "block",
+        "w": 576,
+        "h": 18.390625,
+        "top": 280.046875,
+        "left": 68,
+        "inViewport": true,
+        "readable": true
+      },
+      "visibleCopy": [
+        {
+          "tag": "P",
+          "text": "PROOF-CARRYING TRANSACTIONAL EXECUTION",
+          "opacity": "1",
+          "top": 210
+        },
+        {
+          "tag": "H1",
+          "text": "Consequential agent action belongs behind a commit boundary.",
+          "opacity": "1",
+          "top": 280
+        },
+        {
+          "tag": "P",
+          "text": "Without a commit boundary, autonomous intent becomes irreversible effect. Nexus-IQ stages the change",
+          "opacity": "1",
+          "top": 318
+        },
+        {
+          "tag": "P",
+          "text": "Intent is not authority. A tool call is not a transaction. A runtime report is not evidence.",
+          "opacity": "1",
+          "top": 420
+        },
+        {
+          "tag": "P",
+          "text": "THE CONTROL GAP",
+          "opacity": "1",
+          "top": 263
+        },
+        {
+          "tag": "H2",
+          "text": "Intent is not authority",
+          "opacity": "1",
+          "top": 297
+        },
+        {
+          "tag": "P",
+          "text": "A model can propose an action. That does not establish the authority, validity, or safety required t",
+          "opacity": "1",
+          "top": 353
+        },
+        {
+          "tag": "P",
+          "text": "OPERATING MODEL",
+          "opacity": "1",
+          "top": 725
+        },
+        {
+          "tag": "P",
+          "text": "Intent",
+          "opacity": "1",
+          "top": 744
+        },
+        {
+          "tag": "P",
+          "text": "ENTERING LIVE DEMONSTRATION",
+          "opacity": "1",
+          "top": 709
+        }
+      ],
+      "canvasDebug": {
+        "paused": false,
+        "rafActive": true
+      },
+      "instrument": {
+        "canvasCount": 1,
+        "forensicLandmarks": 2,
+        "bentoInPin": false
+      },
+      "dualExitText": [],
+      "reducedMarkers": {
+        "commitLabel": true,
+        "abortLabel": true
+      },
+      "scrollY": 57,
+      "vw": 1280,
+      "vh": 800,
+      "console": [],
+      "progressRequested": 0,
+      "hash": null,
+      "reducedMotion": false,
+      "scrollInfo": {
+        "method": "intent-track",
+        "progress": 0,
+        "y": 57,
+        "max": 1760,
+        "trackH": 2560
+      },
+      "screenshot": "/workspace/artifacts/qa-agent-d1280-intent.png",
+      "pass": {
+        "noOverflow": true,
+        "gapOk": true,
+        "primaryReadable": true,
+        "noConsoleErrors": true
+      }
+    },
+    {
+      "label": "d1280-constrain",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "hasOverflow": false
+      },
+      "gap": 12,
+      "railRight": 56,
+      "headlineLeft": 68,
+      "railVisible": true,
+      "railRect": {
+        "l": 0,
+        "r": 56,
+        "t": 240,
+        "b": 560,
+        "w": 56,
+        "h": 320
+      },
+      "headlineRect": {
+        "l": 68,
+        "r": 644,
+        "t": 280,
+        "b": 298.4,
+        "w": 576,
+        "h": 18.4
+      },
+      "primary": {
+        "text": "Consequential agent action belongs behind a commit boundary.",
+        "color": "rgb(246, 241, 231)",
+        "opacity": "1",
+        "fontSize": "16px",
+        "visibility": "visible",
+        "display": "block",
+        "w": 576,
+        "h": 18.390625,
+        "top": 280.046875,
+        "left": 68,
+        "inViewport": true,
+        "readable": true
+      },
+      "visibleCopy": [
+        {
+          "tag": "P",
+          "text": "PROOF-CARRYING TRANSACTIONAL EXECUTION",
+          "opacity": "1",
+          "top": 210
+        },
+        {
+          "tag": "H1",
+          "text": "Consequential agent action belongs behind a commit boundary.",
+          "opacity": "1",
+          "top": 280
+        },
+        {
+          "tag": "P",
+          "text": "Without a commit boundary, autonomous intent becomes irreversible effect. Nexus-IQ stages the change",
+          "opacity": "1",
+          "top": 318
+        },
+        {
+          "tag": "P",
+          "text": "Intent is not authority. A tool call is not a transaction. A runtime report is not evidence.",
+          "opacity": "1",
+          "top": 420
+        },
+        {
+          "tag": "P",
+          "text": "THE CONTROL GAP",
+          "opacity": "1",
+          "top": 263
+        },
+        {
+          "tag": "H2",
+          "text": "Intent is not authority",
+          "opacity": "1",
+          "top": 297
+        },
+        {
+          "tag": "P",
+          "text": "A model can propose an action. That does not establish the authority, validity, or safety required t",
+          "opacity": "1",
+          "top": 353
+        },
+        {
+          "tag": "P",
+          "text": "OPERATING MODEL",
+          "opacity": "1",
+          "top": 725
+        },
+        {
+          "tag": "P",
+          "text": "Constrain",
+          "opacity": "1",
+          "top": 744
+        },
+        {
+          "tag": "P",
+          "text": "ENTERING LIVE DEMONSTRATION",
+          "opacity": "1",
+          "top": 709
+        }
+      ],
+      "canvasDebug": {
+        "paused": false,
+        "rafActive": true
+      },
+      "instrument": {
+        "canvasCount": 1,
+        "forensicLandmarks": 2,
+        "bentoInPin": false
+      },
+      "dualExitText": [],
+      "reducedMarkers": {
+        "commitLabel": true,
+        "abortLabel": true
+      },
+      "scrollY": 761,
+      "vw": 1280,
+      "vh": 800,
+      "console": [],
+      "progressRequested": 0.4,
+      "hash": null,
+      "reducedMotion": false,
+      "scrollInfo": {
+        "method": "intent-track",
+        "progress": 0.4,
+        "y": 761,
+        "max": 1760,
+        "trackH": 2560
+      },
+      "screenshot": "/workspace/artifacts/qa-agent-d1280-constrain.png",
+      "pass": {
+        "noOverflow": true,
+        "gapOk": true,
+        "primaryReadable": true,
+        "noConsoleErrors": true
+      }
+    },
+    {
+      "label": "d1280-validate",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "hasOverflow": false
+      },
+      "gap": 12,
+      "railRight": 56,
+      "headlineLeft": 68,
+      "railVisible": true,
+      "railRect": {
+        "l": 0,
+        "r": 56,
+        "t": 240,
+        "b": 560,
+        "w": 56,
+        "h": 320
+      },
+      "headlineRect": {
+        "l": 68,
+        "r": 644,
+        "t": 280,
+        "b": 298.4,
+        "w": 576,
+        "h": 18.4
+      },
+      "primary": {
+        "text": "Consequential agent action belongs behind a commit boundary.",
+        "color": "rgb(246, 241, 231)",
+        "opacity": "1",
+        "fontSize": "16px",
+        "visibility": "visible",
+        "display": "block",
+        "w": 576,
+        "h": 18.390625,
+        "top": 280.046875,
+        "left": 68,
+        "inViewport": true,
+        "readable": true
+      },
+      "visibleCopy": [
+        {
+          "tag": "P",
+          "text": "PROOF-CARRYING TRANSACTIONAL EXECUTION",
+          "opacity": "1",
+          "top": 210
+        },
+        {
+          "tag": "H1",
+          "text": "Consequential agent action belongs behind a commit boundary.",
+          "opacity": "1",
+          "top": 280
+        },
+        {
+          "tag": "P",
+          "text": "Without a commit boundary, autonomous intent becomes irreversible effect. Nexus-IQ stages the change",
+          "opacity": "1",
+          "top": 318
+        },
+        {
+          "tag": "P",
+          "text": "Intent is not authority. A tool call is not a transaction. A runtime report is not evidence.",
+          "opacity": "1",
+          "top": 420
+        },
+        {
+          "tag": "P",
+          "text": "THE CONTROL GAP",
+          "opacity": "1",
+          "top": 263
+        },
+        {
+          "tag": "H2",
+          "text": "Intent is not authority",
+          "opacity": "1",
+          "top": 297
+        },
+        {
+          "tag": "P",
+          "text": "A model can propose an action. That does not establish the authority, validity, or safety required t",
+          "opacity": "1",
+          "top": 353
+        },
+        {
+          "tag": "P",
+          "text": "OPERATING MODEL",
+          "opacity": "1",
+          "top": 725
+        },
+        {
+          "tag": "P",
+          "text": "Validate",
+          "opacity": "1",
+          "top": 744
+        },
+        {
+          "tag": "P",
+          "text": "ENTERING LIVE DEMONSTRATION",
+          "opacity": "1",
+          "top": 709
+        }
+      ],
+      "canvasDebug": {
+        "paused": false,
+        "rafActive": true
+      },
+      "instrument": {
+        "canvasCount": 1,
+        "forensicLandmarks": 2,
+        "bentoInPin": false
+      },
+      "dualExitText": [],
+      "reducedMarkers": {
+        "commitLabel": true,
+        "abortLabel": true
+      },
+      "scrollY": 1025,
+      "vw": 1280,
+      "vh": 800,
+      "console": [],
+      "progressRequested": 0.55,
+      "hash": null,
+      "reducedMotion": false,
+      "scrollInfo": {
+        "method": "intent-track",
+        "progress": 0.55,
+        "y": 1025,
+        "max": 1760,
+        "trackH": 2560
+      },
+      "screenshot": "/workspace/artifacts/qa-agent-d1280-validate.png",
+      "pass": {
+        "noOverflow": true,
+        "gapOk": true,
+        "primaryReadable": true,
+        "noConsoleErrors": true
+      }
+    },
+    {
+      "label": "d1280-decide",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "hasOverflow": false
+      },
+      "gap": 12,
+      "railRight": 56,
+      "headlineLeft": 68,
+      "railVisible": true,
+      "railRect": {
+        "l": 0,
+        "r": 56,
+        "t": 240,
+        "b": 560,
+        "w": 56,
+        "h": 320
+      },
+      "headlineRect": {
+        "l": 68,
+        "r": 644,
+        "t": 280,
+        "b": 298.4,
+        "w": 576,
+        "h": 18.4
+      },
+      "primary": {
+        "text": "Consequential agent action belongs behind a commit boundary.",
+        "color": "rgb(246, 241, 231)",
+        "opacity": "1",
+        "fontSize": "16px",
+        "visibility": "visible",
+        "display": "block",
+        "w": 576,
+        "h": 18.390625,
+        "top": 280.046875,
+        "left": 68,
+        "inViewport": true,
+        "readable": true
+      },
+      "visibleCopy": [
+        {
+          "tag": "P",
+          "text": "PROOF-CARRYING TRANSACTIONAL EXECUTION",
+          "opacity": "1",
+          "top": 210
+        },
+        {
+          "tag": "H1",
+          "text": "Consequential agent action belongs behind a commit boundary.",
+          "opacity": "1",
+          "top": 280
+        },
+        {
+          "tag": "P",
+          "text": "Without a commit boundary, autonomous intent becomes irreversible effect. Nexus-IQ stages the change",
+          "opacity": "1",
+          "top": 318
+        },
+        {
+          "tag": "P",
+          "text": "Intent is not authority. A tool call is not a transaction. A runtime report is not evidence.",
+          "opacity": "1",
+          "top": 420
+        },
+        {
+          "tag": "P",
+          "text": "THE CONTROL GAP",
+          "opacity": "1",
+          "top": 263
+        },
+        {
+          "tag": "H2",
+          "text": "Intent is not authority",
+          "opacity": "1",
+          "top": 297
+        },
+        {
+          "tag": "P",
+          "text": "A model can propose an action. That does not establish the authority, validity, or safety required t",
+          "opacity": "1",
+          "top": 353
+        },
+        {
+          "tag": "P",
+          "text": "OPERATING MODEL",
+          "opacity": "1",
+          "top": 705
+        },
+        {
+          "tag": "P",
+          "text": "Commit · Abort",
+          "opacity": "1",
+          "top": 724
+        },
+        {
+          "tag": "P",
+          "text": "Abort\n·\nCommit\n— both first-class",
+          "opacity": "1",
+          "top": 762
+        },
+        {
+          "tag": "P",
+          "text": "ENTERING LIVE DEMONSTRATION",
+          "opacity": "1",
+          "top": 709
+        }
+      ],
+      "canvasDebug": {
+        "paused": false,
+        "rafActive": true
+      },
+      "instrument": {
+        "canvasCount": 1,
+        "forensicLandmarks": 2,
+        "bentoInPin": false
+      },
+      "dualExitText": [
+        "Abort",
+        "Abort",
+        "Commit",
+        "Commit"
+      ],
+      "reducedMarkers": {
+        "commitLabel": true,
+        "abortLabel": true
+      },
+      "scrollY": 1247,
+      "vw": 1280,
+      "vh": 800,
+      "console": [],
+      "progressRequested": 0.68,
+      "hash": null,
+      "reducedMotion": false,
+      "scrollInfo": {
+        "method": "intent-track",
+        "progress": 0.68,
+        "y": 1253.8000000000002,
+        "max": 1760,
+        "trackH": 2560
+      },
+      "screenshot": "/workspace/artifacts/qa-agent-d1280-decide.png",
+      "pass": {
+        "noOverflow": true,
+        "gapOk": true,
+        "primaryReadable": true,
+        "noConsoleErrors": true
+      }
+    },
+    {
+      "label": "d1280-emit",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "hasOverflow": false
+      },
+      "gap": 12,
+      "railRight": 56,
+      "headlineLeft": 68,
+      "railVisible": true,
+      "railRect": {
+        "l": 0,
+        "r": 56,
+        "t": 240,
+        "b": 560,
+        "w": 56,
+        "h": 320
+      },
+      "headlineRect": {
+        "l": 68,
+        "r": 644,
+        "t": 280,
+        "b": 298.4,
+        "w": 576,
+        "h": 18.4
+      },
+      "primary": {
+        "text": "Consequential agent action belongs behind a commit boundary.",
+        "color": "rgb(246, 241, 231)",
+        "opacity": "1",
+        "fontSize": "16px",
+        "visibility": "visible",
+        "display": "block",
+        "w": 576,
+        "h": 18.390625,
+        "top": 280.046875,
+        "left": 68,
+        "inViewport": true,
+        "readable": true
+      },
+      "visibleCopy": [
+        {
+          "tag": "P",
+          "text": "PROOF-CARRYING TRANSACTIONAL EXECUTION",
+          "opacity": "1",
+          "top": 210
+        },
+        {
+          "tag": "H1",
+          "text": "Consequential agent action belongs behind a commit boundary.",
+          "opacity": "1",
+          "top": 280
+        },
+        {
+          "tag": "P",
+          "text": "Without a commit boundary, autonomous intent becomes irreversible effect. Nexus-IQ stages the change",
+          "opacity": "1",
+          "top": 318
+        },
+        {
+          "tag": "P",
+          "text": "Intent is not authority. A tool call is not a transaction. A runtime report is not evidence.",
+          "opacity": "1",
+          "top": 420
+        },
+        {
+          "tag": "P",
+          "text": "THE CONTROL GAP",
+          "opacity": "1",
+          "top": 263
+        },
+        {
+          "tag": "H2",
+          "text": "Intent is not authority",
+          "opacity": "1",
+          "top": 297
+        },
+        {
+          "tag": "P",
+          "text": "A model can propose an action. That does not establish the authority, validity, or safety required t",
+          "opacity": "1",
+          "top": 353
+        },
+        {
+          "tag": "P",
+          "text": "PROOF CAPSULE",
+          "opacity": "1",
+          "top": 645
+        },
+        {
+          "tag": "P",
+          "text": "OPERATING MODEL",
+          "opacity": "1",
+          "top": 705
+        },
+        {
+          "tag": "P",
+          "text": "Emit",
+          "opacity": "1",
+          "top": 724
+        },
+        {
+          "tag": "P",
+          "text": "Abort\n·\nCommit\n— both first-class",
+          "opacity": "1",
+          "top": 762
+        },
+        {
+          "tag": "P",
+          "text": "ENTERING LIVE DEMONSTRATION",
+          "opacity": "1",
+          "top": 709
+        }
+      ],
+      "canvasDebug": {
+        "paused": false,
+        "rafActive": true
+      },
+      "instrument": {
+        "canvasCount": 1,
+        "forensicLandmarks": 2,
+        "bentoInPin": false
+      },
+      "dualExitText": [
+        "Abort",
+        "Abort",
+        "Commit",
+        "Commit"
+      ],
+      "reducedMarkers": {
+        "commitLabel": true,
+        "abortLabel": true
+      },
+      "scrollY": 1604,
+      "vw": 1280,
+      "vh": 800,
+      "console": [],
+      "progressRequested": 0.9,
+      "hash": null,
+      "reducedMotion": false,
+      "scrollInfo": {
+        "method": "intent-track",
+        "progress": 0.9,
+        "y": 1641,
+        "max": 1760,
+        "trackH": 2560
+      },
+      "screenshot": "/workspace/artifacts/qa-agent-d1280-emit.png",
+      "pass": {
+        "noOverflow": true,
+        "gapOk": true,
+        "primaryReadable": true,
+        "noConsoleErrors": true
+      }
+    },
+    {
+      "label": "d1280-demo-handoff",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "hasOverflow": false
+      },
+      "gap": 32,
+      "railRight": 164,
+      "headlineLeft": 196,
+      "railVisible": true,
+      "railRect": {
+        "l": 0,
+        "r": 164,
+        "t": 177,
+        "b": 623,
+        "w": 164,
+        "h": 446.1
+      },
+      "headlineRect": {
+        "l": 196,
+        "r": 772,
+        "t": -1717,
+        "b": -1698.6,
+        "w": 576,
+        "h": 18.4
+      },
+      "primary": {
+        "text": "Consequential agent action belongs behind a commit boundary.",
+        "color": "rgb(246, 241, 231)",
+        "opacity": "1",
+        "fontSize": "16px",
+        "visibility": "visible",
+        "display": "block",
+        "w": 576,
+        "h": 18.390625,
+        "top": -1716.953125,
+        "left": 196,
+        "inViewport": false,
+        "readable": true
+      },
+      "visibleCopy": [],
+      "canvasDebug": {
+        "paused": true,
+        "rafActive": false
+      },
+      "instrument": {
+        "canvasCount": 1,
+        "forensicLandmarks": 2,
+        "bentoInPin": false
+      },
+      "dualExitText": [
+        "Abort",
+        "Abort",
+        "Commit",
+        "Commit"
+      ],
+      "reducedMarkers": {
+        "commitLabel": true,
+        "abortLabel": true
+      },
+      "scrollY": 3814,
+      "vw": 1280,
+      "vh": 800,
+      "console": [],
+      "hash": "#live-demo",
+      "reducedMotion": false,
+      "scrollInfo": null,
+      "screenshot": "/workspace/artifacts/qa-agent-d1280-demo-handoff.png",
+      "pass": {
+        "noOverflow": true,
+        "gapOk": true,
+        "primaryReadable": true,
+        "noConsoleErrors": true
+      }
+    },
+    {
+      "label": "d1440-intent",
+      "overflow": {
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "hasOverflow": false
+      },
+      "gap": 12,
+      "railRight": 56,
+      "headlineLeft": 68,
+      "railVisible": true,
+      "railRect": {
+        "l": 0,
+        "r": 56,
+        "t": 290,
+        "b": 610,
+        "w": 56,
+        "h": 320
+      },
+      "headlineRect": {
+        "l": 68,
+        "r": 644,
+        "t": 330,
+        "b": 348.4,
+        "w": 576,
+        "h": 18.4
+      },
+      "primary": {
+        "text": "Consequential agent action belongs behind a commit boundary.",
+        "color": "rgb(246, 241, 231)",
+        "opacity": "1",
+        "fontSize": "16px",
+        "visibility": "visible",
+        "display": "block",
+        "w": 576,
+        "h": 18.390625,
+        "top": 330.046875,
+        "left": 68,
+        "inViewport": true,
+        "readable": true
+      },
+      "visibleCopy": [
+        {
+          "tag": "P",
+          "text": "PROOF-CARRYING TRANSACTIONAL EXECUTION",
+          "opacity": "1",
+          "top": 260
+        },
+        {
+          "tag": "H1",
+          "text": "Consequential agent action belongs behind a commit boundary.",
+          "opacity": "1",
+          "top": 330
+        },
+        {
+          "tag": "P",
+          "text": "Without a commit boundary, autonomous intent becomes irreversible effect. Nexus-IQ stages the change",
+          "opacity": "1",
+          "top": 368
+        },
+        {
+          "tag": "P",
+          "text": "Intent is not authority. A tool call is not a transaction. A runtime report is not evidence.",
+          "opacity": "1",
+          "top": 470
+        },
+        {
+          "tag": "P",
+          "text": "THE CONTROL GAP",
+          "opacity": "1",
+          "top": 313
+        },
+        {
+          "tag": "H2",
+          "text": "Intent is not authority",
+          "opacity": "1",
+          "top": 347
+        },
+        {
+          "tag": "P",
+          "text": "A model can propose an action. That does not establish the authority, validity, or safety required t",
+          "opacity": "1",
+          "top": 403
+        },
+        {
+          "tag": "P",
+          "text": "OPERATING MODEL",
+          "opacity": "1",
+          "top": 825
+        },
+        {
+          "tag": "P",
+          "text": "Intent",
+          "opacity": "1",
+          "top": 844
+        },
+        {
+          "tag": "P",
+          "text": "ENTERING LIVE DEMONSTRATION",
+          "opacity": "1",
+          "top": 809
+        }
+      ],
+      "canvasDebug": {
+        "paused": false,
+        "rafActive": true
+      },
+      "instrument": {
+        "canvasCount": 1,
+        "forensicLandmarks": 2,
+        "bentoInPin": false
+      },
+      "dualExitText": [],
+      "reducedMarkers": {
+        "commitLabel": true,
+        "abortLabel": true
+      },
+      "scrollY": 57,
+      "vw": 1440,
+      "vh": 900,
+      "console": [],
+      "progressRequested": 0,
+      "hash": null,
+      "reducedMotion": false,
+      "scrollInfo": {
+        "method": "intent-track",
+        "progress": 0,
+        "y": 57,
+        "max": 1980,
+        "trackH": 2880
+      },
+      "screenshot": "/workspace/artifacts/qa-agent-d1440-intent.png",
+      "pass": {
+        "noOverflow": true,
+        "gapOk": true,
+        "primaryReadable": true,
+        "noConsoleErrors": true
+      }
+    },
+    {
+      "label": "m390-intent",
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasOverflow": false
+      },
+      "gap": null,
+      "railRight": 0,
+      "headlineLeft": 16,
+      "railVisible": false,
+      "railRect": {
+        "l": 0,
+        "r": 0,
+        "t": 0,
+        "b": 0,
+        "w": 0,
+        "h": 0
+      },
+      "headlineRect": {
+        "l": 16,
+        "r": 374,
+        "t": 260.8,
+        "b": 297.6,
+        "w": 358,
+        "h": 36.8
+      },
+      "primary": {
+        "text": "Consequential agent action belongs behind a commit boundary.",
+        "color": "rgb(246, 241, 231)",
+        "opacity": "1",
+        "fontSize": "16px",
+        "visibility": "visible",
+        "display": "block",
+        "w": 358,
+        "h": 36.78125,
+        "top": 260.78125,
+        "left": 16,
+        "inViewport": true,
+        "readable": true
+      },
+      "visibleCopy": [
+        {
+          "tag": "P",
+          "text": "PROOF-CARRYING TRANSACTIONAL EXECUTION",
+          "opacity": "1",
+          "top": 147
+        },
+        {
+          "tag": "H1",
+          "text": "Consequential agent action belongs behind a commit boundary.",
+          "opacity": "1",
+          "top": 261
+        },
+        {
+          "tag": "P",
+          "text": "Without a commit boundary, autonomous intent becomes irreversible effect. Nexus-IQ stages the change",
+          "opacity": "1",
+          "top": 318
+        },
+        {
+          "tag": "P",
+          "text": "Intent is not authority. A tool call is not a transaction. A runtime report is not evidence.",
+          "opacity": "1",
+          "top": 468
+        },
+        {
+          "tag": "P",
+          "text": "THE CONTROL GAP",
+          "opacity": "1",
+          "top": 271
+        },
+        {
+          "tag": "H2",
+          "text": "Intent is not authority",
+          "opacity": "1",
+          "top": 304
+        },
+        {
+          "tag": "P",
+          "text": "A model can propose an action. That does not establish the authority, validity, or safety required t",
+          "opacity": "1",
+          "top": 363
+        },
+        {
+          "tag": "P",
+          "text": "OPERATING MODEL",
+          "opacity": "1",
+          "top": 723
+        },
+        {
+          "tag": "P",
+          "text": "Intent",
+          "opacity": "1",
+          "top": 743
+        },
+        {
+          "tag": "P",
+          "text": "ENTERING LIVE DEMONSTRATION",
+          "opacity": "1",
+          "top": 753
+        }
+      ],
+      "canvasDebug": {
+        "paused": false,
+        "rafActive": true
+      },
+      "instrument": {
+        "canvasCount": 1,
+        "forensicLandmarks": 2,
+        "bentoInPin": false
+      },
+      "dualExitText": [],
+      "reducedMarkers": {
+        "commitLabel": true,
+        "abortLabel": true
+      },
+      "scrollY": 96,
+      "vw": 390,
+      "vh": 844,
+      "console": [],
+      "progressRequested": 0,
+      "hash": null,
+      "reducedMotion": false,
+      "scrollInfo": {
+        "method": "intent-track",
+        "progress": 0,
+        "y": 96,
+        "max": 1857,
+        "trackH": 2701
+      },
+      "screenshot": "/workspace/artifacts/qa-agent-m390-intent.png",
+      "pass": {
+        "noOverflow": true,
+        "gapOk": true,
+        "primaryReadable": true,
+        "noConsoleErrors": true
+      }
+    },
+    {
+      "label": "m390-decide",
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "hasOverflow": false
+      },
+      "gap": null,
+      "railRight": 0,
+      "headlineLeft": 16,
+      "railVisible": false,
+      "railRect": {
+        "l": 0,
+        "r": 0,
+        "t": 0,
+        "b": 0,
+        "w": 0,
+        "h": 0
+      },
+      "headlineRect": {
+        "l": 16,
+        "r": 374,
+        "t": 260.8,
+        "b": 297.6,
+        "w": 358,
+        "h": 36.8
+      },
+      "primary": {
+        "text": "Consequential agent action belongs behind a commit boundary.",
+        "color": "rgb(246, 241, 231)",
+        "opacity": "1",
+        "fontSize": "16px",
+        "visibility": "visible",
+        "display": "block",
+        "w": 358,
+        "h": 36.78125,
+        "top": 260.78125,
+        "left": 16,
+        "inViewport": true,
+        "readable": true
+      },
+      "visibleCopy": [
+        {
+          "tag": "P",
+          "text": "PROOF-CARRYING TRANSACTIONAL EXECUTION",
+          "opacity": "1",
+          "top": 147
+        },
+        {
+          "tag": "H1",
+          "text": "Consequential agent action belongs behind a commit boundary.",
+          "opacity": "1",
+          "top": 261
+        },
+        {
+          "tag": "P",
+          "text": "Without a commit boundary, autonomous intent becomes irreversible effect. Nexus-IQ stages the change",
+          "opacity": "1",
+          "top": 318
+        },
+        {
+          "tag": "P",
+          "text": "Intent is not authority. A tool call is not a transaction. A runtime report is not evidence.",
+          "opacity": "1",
+          "top": 468
+        },
+        {
+          "tag": "P",
+          "text": "THE CONTROL GAP",
+          "opacity": "1",
+          "top": 271
+        },
+        {
+          "tag": "H2",
+          "text": "Intent is not authority",
+          "opacity": "1",
+          "top": 304
+        },
+        {
+          "tag": "P",
+          "text": "A model can propose an action. That does not establish the authority, validity, or safety required t",
+          "opacity": "1",
+          "top": 363
+        },
+        {
+          "tag": "P",
+          "text": "OPERATING MODEL",
+          "opacity": "1",
+          "top": 703
+        },
+        {
+          "tag": "P",
+          "text": "Commit · Abort",
+          "opacity": "1",
+          "top": 723
+        },
+        {
+          "tag": "P",
+          "text": "Abort\n·\nCommit\n— both first-class",
+          "opacity": "1",
+          "top": 755
+        },
+        {
+          "tag": "P",
+          "text": "ENTERING LIVE DEMONSTRATION",
+          "opacity": "1",
+          "top": 753
+        }
+      ],
+      "canvasDebug": {
+        "paused": false,
+        "rafActive": true
+      },
+      "instrument": {
+        "canvasCount": 1,
+        "forensicLandmarks": 2,
+        "bentoInPin": false
+      },
+      "dualExitText": [
+        "Abort",
+        "Abort",
+        "Commit",
+        "Commit"
+      ],
+      "reducedMarkers": {
+        "commitLabel": true,
+        "abortLabel": true
+      },
+      "scrollY": 1350,
+      "vw": 390,
+      "vh": 844,
+      "console": [],
+      "progressRequested": 0.68,
+      "hash": null,
+      "reducedMotion": false,
+      "scrollInfo": {
+        "method": "intent-track",
+        "progress": 0.68,
+        "y": 1358.76,
+        "max": 1857,
+        "trackH": 2701
+      },
+      "screenshot": "/workspace/artifacts/qa-agent-m390-decide.png",
+      "pass": {
+        "noOverflow": true,
+        "gapOk": true,
+        "primaryReadable": true,
+        "noConsoleErrors": true
+      }
+    },
+    {
+      "label": "m430-intent",
+      "overflow": {
+        "scrollWidth": 430,
+        "clientWidth": 430,
+        "hasOverflow": false
+      },
+      "gap": null,
+      "railRight": 0,
+      "headlineLeft": 16,
+      "railVisible": false,
+      "railRect": {
+        "l": 0,
+        "r": 0,
+        "t": 0,
+        "b": 0,
+        "w": 0,
+        "h": 0
+      },
+      "headlineRect": {
+        "l": 16,
+        "r": 414,
+        "t": 304.8,
+        "b": 341.6,
+        "w": 398,
+        "h": 36.8
+      },
+      "primary": {
+        "text": "Consequential agent action belongs behind a commit boundary.",
+        "color": "rgb(246, 241, 231)",
+        "opacity": "1",
+        "fontSize": "16px",
+        "visibility": "visible",
+        "display": "block",
+        "w": 398,
+        "h": 36.78125,
+        "top": 304.78125,
+        "left": 16,
+        "inViewport": true,
+        "readable": true
+      },
+      "visibleCopy": [
+        {
+          "tag": "P",
+          "text": "PROOF-CARRYING TRANSACTIONAL EXECUTION",
+          "opacity": "1",
+          "top": 191
+        },
+        {
+          "tag": "H1",
+          "text": "Consequential agent action belongs behind a commit boundary.",
+          "opacity": "1",
+          "top": 305
+        },
+        {
+          "tag": "P",
+          "text": "Without a commit boundary, autonomous intent becomes irreversible effect. Nexus-IQ stages the change",
+          "opacity": "1",
+          "top": 362
+        },
+        {
+          "tag": "P",
+          "text": "Intent is not authority. A tool call is not a transaction. A runtime report is not evidence.",
+          "opacity": "1",
+          "top": 512
+        },
+        {
+          "tag": "P",
+          "text": "THE CONTROL GAP",
+          "opacity": "1",
+          "top": 315
+        },
+        {
+          "tag": "H2",
+          "text": "Intent is not authority",
+          "opacity": "1",
+          "top": 348
+        },
+        {
+          "tag": "P",
+          "text": "A model can propose an action. That does not establish the authority, validity, or safety required t",
+          "opacity": "1",
+          "top": 407
+        },
+        {
+          "tag": "P",
+          "text": "OPERATING MODEL",
+          "opacity": "1",
+          "top": 833
+        },
+        {
+          "tag": "P",
+          "text": "Intent",
+          "opacity": "1",
+          "top": 853
+        },
+        {
+          "tag": "P",
+          "text": "ENTERING LIVE DEMONSTRATION",
+          "opacity": "1",
+          "top": 841
+        }
+      ],
+      "canvasDebug": {
+        "paused": false,
+        "rafActive": true
+      },
+      "instrument": {
+        "canvasCount": 1,
+        "forensicLandmarks": 2,
+        "bentoInPin": false
+      },
+      "dualExitText": [],
+      "reducedMarkers": {
+        "commitLabel": true,
+        "abortLabel": true
+      },
+      "scrollY": 96,
+      "vw": 430,
+      "vh": 932,
+      "console": [],
+      "progressRequested": 0,
+      "hash": null,
+      "reducedMotion": false,
+      "scrollInfo": {
+        "method": "intent-track",
+        "progress": 0,
+        "y": 96,
+        "max": 2050,
+        "trackH": 2982
+      },
+      "screenshot": "/workspace/artifacts/qa-agent-m430-intent.png",
+      "pass": {
+        "noOverflow": true,
+        "gapOk": true,
+        "primaryReadable": true,
+        "noConsoleErrors": true
+      }
+    },
+    {
+      "label": "d1280-reduced",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "hasOverflow": false
+      },
+      "gap": 12,
+      "railRight": 56,
+      "headlineLeft": 68,
+      "railVisible": true,
+      "railRect": {
+        "l": 0,
+        "r": 56,
+        "t": 240,
+        "b": 560,
+        "w": 56,
+        "h": 320
+      },
+      "headlineRect": {
+        "l": 68,
+        "r": 644,
+        "t": 279,
+        "b": 297.4,
+        "w": 576,
+        "h": 18.4
+      },
+      "primary": {
+        "text": "Consequential agent action belongs behind a commit boundary.",
+        "color": "rgb(246, 241, 231)",
+        "opacity": "1",
+        "fontSize": "16px",
+        "visibility": "visible",
+        "display": "block",
+        "w": 576,
+        "h": 18.390625,
+        "top": 279.046875,
+        "left": 68,
+        "inViewport": true,
+        "readable": true
+      },
+      "visibleCopy": [
+        {
+          "tag": "P",
+          "text": "PROOF-CARRYING TRANSACTIONAL EXECUTION",
+          "opacity": "1",
+          "top": 209
+        },
+        {
+          "tag": "H1",
+          "text": "Consequential agent action belongs behind a commit boundary.",
+          "opacity": "1",
+          "top": 279
+        },
+        {
+          "tag": "P",
+          "text": "Without a commit boundary, autonomous intent becomes irreversible effect. Nexus-IQ stages the change",
+          "opacity": "1",
+          "top": 317
+        },
+        {
+          "tag": "P",
+          "text": "Intent is not authority. A tool call is not a transaction. A runtime report is not evidence.",
+          "opacity": "1",
+          "top": 419
+        },
+        {
+          "tag": "P",
+          "text": "THE CONTROL GAP",
+          "opacity": "1",
+          "top": 262
+        },
+        {
+          "tag": "H2",
+          "text": "Intent is not authority",
+          "opacity": "1",
+          "top": 296
+        },
+        {
+          "tag": "P",
+          "text": "A model can propose an action. That does not establish the authority, validity, or safety required t",
+          "opacity": "1",
+          "top": 352
+        },
+        {
+          "tag": "P",
+          "text": "PROOF CAPSULE",
+          "opacity": "1",
+          "top": 644
+        },
+        {
+          "tag": "P",
+          "text": "OPERATING MODEL",
+          "opacity": "1",
+          "top": 704
+        },
+        {
+          "tag": "P",
+          "text": "Emit",
+          "opacity": "1",
+          "top": 723
+        },
+        {
+          "tag": "P",
+          "text": "Abort\n·\nCommit\n— both first-class",
+          "opacity": "1",
+          "top": 761
+        },
+        {
+          "tag": "P",
+          "text": "ENTERING LIVE DEMONSTRATION",
+          "opacity": "1",
+          "top": 708
+        }
+      ],
+      "canvasDebug": {
+        "paused": false,
+        "rafActive": false
+      },
+      "instrument": {
+        "canvasCount": 1,
+        "forensicLandmarks": 2,
+        "bentoInPin": false
+      },
+      "dualExitText": [
+        "Abort",
+        "Abort",
+        "Commit",
+        "Commit"
+      ],
+      "reducedMarkers": {
+        "commitLabel": true,
+        "abortLabel": true
+      },
+      "scrollY": 58,
+      "vw": 1280,
+      "vh": 800,
+      "console": [],
+      "progressRequested": 0.68,
+      "hash": null,
+      "reducedMotion": true,
+      "scrollInfo": {
+        "method": "intent-track",
+        "progress": 0.68,
+        "y": 57.68,
+        "max": 1,
+        "trackH": 800
+      },
+      "screenshot": "/workspace/artifacts/qa-agent-d1280-reduced.png",
+      "pass": {
+        "noOverflow": true,
+        "gapOk": true,
+        "primaryReadable": true,
+        "noConsoleErrors": true
+      }
+    }
+  ],
+  "keyboard": {
+    "focusTrail": [
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Nexus-IQ ARCHITECTURE V1",
+        "href": "/",
+        "focusVisible": true,
+        "outline": "rgb(16, 16, 16) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": true,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "System",
+        "href": "/system",
+        "focusVisible": true,
+        "outline": "rgb(154, 150, 141) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": true,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Change Gate",
+        "href": "/change-gate",
+        "focusVisible": true,
+        "outline": "rgb(107, 104, 98) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": true,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Evidence",
+        "href": "/evidence",
+        "focusVisible": true,
+        "outline": "rgb(107, 104, 98) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": true,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Security",
+        "href": "/security",
+        "focusVisible": true,
+        "outline": "rgb(155, 151, 141) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": true,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Research",
+        "href": "/research",
+        "focusVisible": true,
+        "outline": "rgb(107, 104, 98) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": true,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Developers",
+        "href": "/developers",
+        "focusVisible": true,
+        "outline": "rgb(155, 151, 141) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": true,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Maturity",
+        "href": "/maturity",
+        "focusVisible": true,
+        "outline": "rgb(107, 105, 99) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": true,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "GitHub",
+        "href": "https://github.com/adaptiveliquidity",
+        "focusVisible": true,
+        "outline": "rgb(154, 150, 141) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": true,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Request Evaluation",
+        "href": "#evaluation",
+        "focusVisible": true,
+        "outline": "rgb(16, 16, 16) none 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(7, 9, 1",
+        "inAriaHidden": false,
+        "inHeader": true,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Intent: Propose",
+        "href": "#intent",
+        "focusVisible": true,
+        "outline": "rgb(206, 202, 193) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Gap: Missing controls",
+        "href": "#problem",
+        "focusVisible": true,
+        "outline": "rgb(103, 100, 95) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Execute: Stage → Decide",
+        "href": "#live-demo",
+        "focusVisible": true,
+        "outline": "rgb(74, 71, 68) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Model: Change Gate",
+        "href": "#change-gate",
+        "focusVisible": true,
+        "outline": "rgb(103, 100, 95) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Evidence: Emit",
+        "href": "#evidence",
+        "focusVisible": true,
+        "outline": "rgb(103, 100, 95) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Compose: Substrates",
+        "href": "#system",
+        "focusVisible": true,
+        "outline": "rgb(74, 71, 68) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Outcomes: Finished system",
+        "href": "#outcomes",
+        "focusVisible": true,
+        "outline": "rgb(103, 100, 95) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Trust: Adversarial read",
+        "href": "#trust",
+        "focusVisible": true,
+        "outline": "rgb(103, 100, 95) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Evaluate: Commit path",
+        "href": "#evaluation",
+        "focusVisible": true,
+        "outline": "rgb(103, 100, 95) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": true,
+        "inHero": false,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "See the control gap",
+        "href": "#problem",
+        "focusVisible": true,
+        "outline": "rgb(16, 16, 16) none 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(7, 9, 1",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": true,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Watch the commit boundary",
+        "href": "#live-demo",
+        "focusVisible": true,
+        "outline": "rgb(16, 16, 16) none 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(7, 9, 1",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": true,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "Explore the model",
+        "href": "#change-gate",
+        "focusVisible": true,
+        "outline": "rgb(74, 71, 68) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": true,
+        "inDemo": false
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "text": "View implementation maturity",
+        "href": "/maturity",
+        "focusVisible": true,
+        "outline": "rgb(103, 100, 95) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": true,
+        "inDemo": false
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "text": "Commit path",
+        "href": null,
+        "focusVisible": true,
+        "outline": "rgb(206, 201, 193) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "text": "Abort path",
+        "href": null,
+        "focusVisible": true,
+        "outline": "rgb(107, 104, 98) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "text": "Film",
+        "href": null,
+        "focusVisible": true,
+        "outline": "rgb(206, 202, 193) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "text": "Compare paths",
+        "href": null,
+        "focusVisible": true,
+        "outline": "rgb(181, 176, 165) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "text": "Restart film",
+        "href": null,
+        "focusVisible": true,
+        "outline": "rgb(103, 100, 95) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "text": "Pause",
+        "href": null,
+        "focusVisible": true,
+        "outline": "rgb(104, 100, 95) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": true
+      },
+      {
+        "tag": "INPUT",
+        "id": "",
+        "text": "Seek Change Gate phase",
+        "href": null,
+        "focusVisible": true,
+        "outline": "rgb(47, 94, 115) solid 2px",
+        "outlineWidth": "2px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "text": "PROP",
+        "href": null,
+        "focusVisible": true,
+        "outline": "rgb(107, 104, 98) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "text": "STAG",
+        "href": null,
+        "focusVisible": true,
+        "outline": "rgb(107, 104, 99) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "text": "AUTH",
+        "href": null,
+        "focusVisible": true,
+        "outline": "rgb(206, 202, 193) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "text": "VAL",
+        "href": null,
+        "focusVisible": true,
+        "outline": "rgb(74, 71, 68) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": true
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "text": "CMT",
+        "href": null,
+        "focusVisible": true,
+        "outline": "rgb(103, 100, 95) auto 1px",
+        "outlineWidth": "1px",
+        "boxShadow": "none",
+        "inAriaHidden": false,
+        "inHeader": false,
+        "inNav": false,
+        "inHero": false,
+        "inDemo": true
+      }
+    ],
+    "focusVisibleTrue": 35,
+    "focusWithRing": 35,
+    "totalFocused": 35,
+    "headerNavFocused": [
+      "Nexus-IQ ARCHITECTURE V1",
+      "System",
+      "Change Gate",
+      "Evidence",
+      "Security",
+      "Research",
+      "Developers",
+      "Maturity",
+      "GitHub",
+      "Request Evaluation",
+      "Intent: Propose",
+      "Gap: Missing controls",
+      "Execute: Stage → Decide",
+      "Model: Change Gate",
+      "Evidence: Emit",
+      "Compose: Substrates",
+      "Outcomes: Finished system",
+      "Trust: Adversarial read",
+      "Evaluate: Commit path"
+    ],
+    "heroFocused": [
+      "See the control gap",
+      "Watch the commit boundary",
+      "Explore the model",
+      "View implementation maturity"
+    ],
+    "demoFocused": [
+      "Commit path",
+      "Abort path",
+      "Film",
+      "Compare paths",
+      "Restart film",
+      "Pause",
+      "Seek Change Gate phase",
+      "PROP",
+      "STAG",
+      "AUTH",
+      "VAL",
+      "CMT"
+    ],
+    "inAriaHiddenDuringTab": [],
+    "hiddenFocusables": [
+      {
+        "tag": "A",
+        "text": "See the control gap",
+        "region": "absolute inset-0 flex flex-col justify-center px-4"
+      },
+      {
+        "tag": "A",
+        "text": "Watch the commit boundary",
+        "region": "absolute inset-0 flex flex-col justify-center px-4"
+      },
+      {
+        "tag": "A",
+        "text": "Explore the model",
+        "region": "absolute inset-0 flex flex-col justify-center px-4"
+      },
+      {
+        "tag": "A",
+        "text": "View implementation maturity",
+        "region": "absolute inset-0 flex flex-col justify-center px-4"
+      }
+    ]
+  },
+  "demo": {
+    "controls": [
+      {
+        "text": "Commit path",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "Abort path",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "Film",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "Compare paths",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "Restart film",
+        "aria": "Restart film",
+        "disabled": null
+      },
+      {
+        "text": "Pause",
+        "aria": "Pause",
+        "disabled": null
+      },
+      {
+        "text": "PROP",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "STAG",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "AUTH",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "VAL",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "CMT",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "EMIT",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "✓ Propose ○ Target Architecture",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "✓ Stage ● Implemented Foundation",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "✓ Constrain ● Implemented Foundation",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "4 Validate ◐ In Integration",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "5 Commit ◐ In Integration",
+        "aria": null,
+        "disabled": null
+      },
+      {
+        "text": "6 Emit ● Implemented Foundation",
+        "aria": null,
+        "disabled": null
+      }
+    ],
+    "commitClicked": true,
+    "abortClicked": true,
+    "before": "TXN 03\nSTAGE → DECIDE\nWatch the boundary run\n\nPRODUCT DEMONSTRATION\n\nWatch a consequential action cross the commit boundary\n\nA live product film of the Change Gate — not a marketing video. Scrub any phase, toggle Commit vs Abort, compare both paths, and walk Proof Capsule fields on Emit. Download structure-identical fixtures. Maturity stays on every step.\n\nnexus-iq · change-gate · product film v2\n",
+    "afterCommit": "TXN 03\nSTAGE → DECIDE\nWatch the boundary run\n\nPRODUCT DEMONSTRATION\n\nWatch a consequential action cross the commit boundary\n\nA live product film of the Change Gate — not a marketing video. Scrub any phase, toggle Commit vs Abort, compare both paths, and walk Proof Capsule fields on Emit. Download structure-identical fixtures. Maturity stays on every step.\n\nnexus-iq · change-gate · product film v2\nREC\nCommit path\nAbort path\nFilm\nCompare paths\n\nSCRUB TIMELINE\n\n5/6 · Commit\n\nPROP\nSTAG\nAUTH\nVAL\nCMT\n",
+    "afterAbort": "TXN 03\nSTAGE → DECIDE\nWatch the boundary run\n\nPRODUCT DEMONSTRATION\n\nWatch a consequential action cross the commit boundary\n\nA live product film of the Change Gate — not a marketing video. Scrub any phase, toggle Commit vs Abort, compare both paths, and walk Proof Capsule fields on Emit. Download structure-identical fixtures. Maturity stays on every step.\n\nnexus-iq · change-gate · product film v2\nREC\nCommit path\nAbort path\nFilm\nCompare paths\n\nSCRUB TIMELINE\n\n1/6 · Propose\n\nPROP\nSTAG\nAUTH\nVAL\nABT",
+    "commitChanged": true,
+    "abortChanged": true,
+    "keyboard": {
+      "kbCommit": true,
+      "kbAbort": true,
+      "commitFV": false,
+      "abortFV": true
+    }
+  },
+  "canvas": {
+    "inView": {
+      "hasApi": true,
+      "paused": false,
+      "rafActive": true
+    },
+    "offscreen": {
+      "hasApi": true,
+      "paused": true,
+      "rafActive": false,
+      "canvasTop": -900,
+      "canvasBottom": -100
+    },
+    "returned": {
+      "hasApi": true,
+      "paused": false,
+      "rafActive": true
+    }
+  },
+  "consoleDuringInteractive": []
+}

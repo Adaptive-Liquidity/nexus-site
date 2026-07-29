@@ -1,0 +1,14 @@
+filename | workspace path | viewport | state | bytes | sha256
+before-d1280-intent.png | screenshots/hero-recovery-before/d1280-intent.png | 1280×800 | Intent · soft-glow baseline · progress≈0 | 593742 | 0e042a3335ac309e0a78f920d7fff73d42a42248d2c793b2ab16dfa23b67a1ea
+before-d1440-intent.png | screenshots/hero-recovery-before/d1440-intent.png | 1440×900 | Intent · soft-glow baseline · progress≈0 | 730710 | 61aa42d11e337b79554bc5be9d1c64120de5f20e8a4ebe7d806351d42cc05cf7
+after-d1280-intent.png | screenshots/hero-recovery-after/d1280-intent.png | 1280×800 | Intent · D2 instrument · progress≈0 | 252161 | bae72cf448fd5b45de1a103d7233d422f75cbd748854ea27d35bd4f10830f975
+after-d1440-intent.png | screenshots/hero-recovery-after/d1440-intent.png | 1440×900 | Intent · D2 instrument · progress≈0 | 289608 | 3033a92faee4359f6269b909e5efc9bbce34909dd03894001adb85fe278dccfb
+after-d1280-constrain.png | screenshots/hero-recovery-after/d1280-constrain.png | 1280×800 | Constrain · progress≈0.40 | 240453 | 139a549a5b58ea940eeb9e6dd7e80930eeef49e6f7ff02bfd12987c27df0e82c
+after-d1280-validate.png | screenshots/hero-recovery-after/d1280-validate.png | 1280×800 | Validate · progress≈0.55 | 224090 | 5dd8d478b2033c29faf1493361cdfc4dcb683dc8de895063ae0de476f5e8b6ef
+after-d1280-decide.png | screenshots/hero-recovery-after/d1280-decide.png | 1280×800 | Commit/Abort · progress≈0.68 | 239417 | cb1cb74dd70aad40790d0e8c90461e13c75130be137a8c4ce3b264a38a8de23f
+after-d1280-emit.png | screenshots/hero-recovery-after/d1280-emit.png | 1280×800 | Emit · progress≈0.90 | 243082 | 9556c342ba5264cb3ba55c46ae584e00c667612b2cc7424bc3737e977f96e5ea
+after-d1280-demo-handoff.png | screenshots/hero-recovery-after/d1280-demo-handoff.png | 1280×800 | DemoPlayer handoff | 112952 | b360a90e6e7d8ad1b1e128289d13f05c3abebe2510f300b11713b459fbd53d18
+after-m390-intent.png | screenshots/hero-recovery-after/m390-intent.png | 390×844 | Mobile Intent | 180736 | 141dc697328a98988d3f62454ce9d2f1b20af818930fb37a56a553d7481641a2
+after-m390-decide.png | screenshots/hero-recovery-after/m390-decide.png | 390×844 | Mobile Commit/Abort | 164122 | 6827c504e9749fd452c961a36d8408d7d3d6c6f56f22a3a714d6d8e96feae046
+after-m430-intent.png | screenshots/hero-recovery-after/m430-intent.png | 430×932 | Mobile Intent | 206287 | 0c244beed0fb9523dfce985c931d7c37b72e36ab842e60598c747bbd07897f34
+after-d1280-reduced.png | screenshots/hero-recovery-after/d1280-reduced.png | 1280×800 | prefers-reduced-motion complete | 276483 | dda4f94014ddcd19bd0c7176614da3131bf1e5e20cc4f7a9865743ebaedc0334

@@ -1,3 +1,2 @@
 - Nexus-IQ: proof-carrying transactional autonomy. Stage 0 blocking. Hero commit-boundary thesis. [2026-07-26]
-- Elevation A–F complete prior. [2026-07-28]
-- Cinematic integration COMPLETE (2026-07-29): DOM/SVG + rAF Intent→Gap→Execute continuum; CommitBoundaryStage (atmospheric, not evidence); CinematicHandoff into DemoPlayer; no new deps; no external media services. Verified: typecheck pass, lint 0 errors, `npm exec -- vite build` pass, multi-viewport + reduced-motion + DemoPlayer, claims intact. Live preview via startup.sh. [2026-07-29]
+- Branch fix/cinematic-hero-scene (from afcd2f0): replaced dashboard SVG panels with full-viewport sticky Canvas 2D cinematic (packet → commit plane → dual Commit/Abort → capsule). HeroSchematic removed from hero. SceneHandoff carries plane light into DemoPlayer. No push/merge. Screenshots: screenshots/cinematic-fix/. [2026-07-29]
