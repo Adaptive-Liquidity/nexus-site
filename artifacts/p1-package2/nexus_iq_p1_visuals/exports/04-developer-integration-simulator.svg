@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+<defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#111820"/><stop offset="1" stop-color="#080b0e"/></linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5f93a8" stop-opacity=".22"/><stop offset=".52" stop-color="#e8f6fb" stop-opacity=".06"/><stop offset="1" stop-color="#2f5e73" stop-opacity=".14"/></linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#fff" stroke-opacity=".035"/></pattern>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#aaa79f"/></marker>
+      <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5f93a8"/></marker>
+      <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#b96464"/></marker>
+    </defs>
+<rect x="24" y="24" width="1552" height="852" rx="18" fill="url(#bg)" stroke="#34414a"/>
+    <rect x="24" y="24" width="1552" height="54" rx="18" fill="#0e1419"/>
+    <line x1="24" y1="78" x2="1576" y2="78" stroke="#34414a"/>
+    <text x="50" y="57" fill="#f2ede2" font-family="Georgia,serif" font-size="20">Developer integration simulator</text>
+    <text x="1550" y="56" text-anchor="end" fill="#747b7f" font-family="monospace" font-size="11" letter-spacing="1.5">DEV-SIM-01  ·  REPRESENTATIVE CONTRACT SKETCH</text>
+<rect x="44" y="94" width="1512" height="754" rx="14" fill="#0b1014" stroke="#34414a"/>
+<rect x="65" y="116" width="245" height="38" rx="8" fill="#111820" fill-opacity="1" stroke="#34414a"/><text x="187" y="140" text-anchor="middle" fill="#aaa79f" font-family="monospace" font-size="9">Read-only inspection</text>
+<rect x="325" y="116" width="245" height="38" rx="8" fill="#2f5e73" fill-opacity="0.5" stroke="#5f93a8"/><text x="447" y="140" text-anchor="middle" fill="#f2ede2" font-family="monospace" font-size="9">Stage + validate patch</text>
+<rect x="585" y="116" width="245" height="38" rx="8" fill="#111820" fill-opacity="1" stroke="#34414a"/><text x="707" y="140" text-anchor="middle" fill="#aaa79f" font-family="monospace" font-size="9">Denied network request</text>
+<rect x="65" y="178" width="1000" height="582" rx="12" fill="#0e1419" stroke="#34414a"/>
+<rect x="63" y="204" width="124" height="38" rx="7" fill="#151d23" stroke="#34414a"/><text x="125" y="228" text-anchor="middle" fill="#f2ede2" font-family="monospace" font-size="9">AGENT</text><line x1="125" y1="242" x2="125" y2="724" stroke="#fff" stroke-opacity=".12" stroke-dasharray="4 7"/>
+<rect x="238" y="204" width="124" height="38" rx="7" fill="#151d23" stroke="#34414a"/><text x="300" y="228" text-anchor="middle" fill="#f2ede2" font-family="monospace" font-size="9">NEXUS-IQ</text><line x1="300" y1="242" x2="300" y2="724" stroke="#fff" stroke-opacity=".12" stroke-dasharray="4 7"/>
+<rect x="413" y="204" width="124" height="38" rx="7" fill="#151d23" stroke="#34414a"/><text x="475" y="228" text-anchor="middle" fill="#f2ede2" font-family="monospace" font-size="9">NEXUS</text><line x1="475" y1="242" x2="475" y2="724" stroke="#fff" stroke-opacity=".12" stroke-dasharray="4 7"/>
+<rect x="588" y="204" width="124" height="38" rx="7" fill="#151d23" stroke="#34414a"/><text x="650" y="228" text-anchor="middle" fill="#f2ede2" font-family="monospace" font-size="9">VALIDATOR</text><line x1="650" y1="242" x2="650" y2="724" stroke="#fff" stroke-opacity=".12" stroke-dasharray="4 7"/>
+<rect x="763" y="204" width="124" height="38" rx="7" fill="#151d23" stroke="#34414a"/><text x="825" y="228" text-anchor="middle" fill="#f2ede2" font-family="monospace" font-size="9">EFFECT</text><line x1="825" y1="242" x2="825" y2="724" stroke="#fff" stroke-opacity=".12" stroke-dasharray="4 7"/>
+<rect x="938" y="204" width="124" height="38" rx="7" fill="#151d23" stroke="#34414a"/><text x="1000" y="228" text-anchor="middle" fill="#f2ede2" font-family="monospace" font-size="9">EVIDENCE</text><line x1="1000" y1="242" x2="1000" y2="724" stroke="#fff" stroke-opacity=".12" stroke-dasharray="4 7"/>
+<line x1="135" y1="278" x2="288" y2="278" stroke="#d4a55f" stroke-width="2" marker-end="url(#arrowBlue)"/>
+<rect x="118.5" y="255" width="188" height="22" rx="6" fill="#111820" stroke="#d4a55f" stroke-opacity=".55"/><text x="212.5" y="270" text-anchor="middle" fill="#aaa79f" font-family="monospace" font-size="8">submit intent + scope</text>
+<circle cx="125" cy="278" r="6" fill="#d4a55f"/><text x="136" y="296" fill="#d4a55f" font-family="monospace" font-size="8">◐ IN INTEGRATION</text>
+<line x1="310" y1="352" x2="463" y2="352" stroke="#75a184" stroke-width="2" marker-end="url(#arrowBlue)"/>
+<rect x="293.5" y="329" width="188" height="22" rx="6" fill="#111820" stroke="#75a184" stroke-opacity=".55"/><text x="387.5" y="344" text-anchor="middle" fill="#aaa79f" font-family="monospace" font-size="8">create isolated state</text>
+<circle cx="300" cy="352" r="6" fill="#75a184"/><text x="311" y="370" fill="#75a184" font-family="monospace" font-size="8">● CURRENT</text>
+<line x1="310" y1="426" x2="463" y2="426" stroke="#d4a55f" stroke-width="2" marker-end="url(#arrowBlue)"/>
+<rect x="293.5" y="403" width="188" height="22" rx="6" fill="#111820" stroke="#d4a55f" stroke-opacity=".55"/><text x="387.5" y="418" text-anchor="middle" fill="#aaa79f" font-family="monospace" font-size="8">apply constrained change</text>
+<circle cx="300" cy="426" r="6" fill="#d4a55f"/><text x="311" y="444" fill="#d4a55f" font-family="monospace" font-size="8">◐ IN INTEGRATION</text>
+<line x1="485" y1="500" x2="638" y2="500" stroke="#d4a55f" stroke-width="2" marker-end="url(#arrowBlue)"/>
+<rect x="468.5" y="477" width="188" height="22" rx="6" fill="#111820" stroke="#d4a55f" stroke-opacity=".55"/><text x="562.5" y="492" text-anchor="middle" fill="#aaa79f" font-family="monospace" font-size="8">execute validators</text>
+<circle cx="475" cy="500" r="6" fill="#d4a55f"/><text x="486" y="518" fill="#d4a55f" font-family="monospace" font-size="8">◐ IN INTEGRATION</text>
+<line x1="660" y1="574" x2="813" y2="574" stroke="#d4a55f" stroke-width="2" marker-end="url(#arrowBlue)"/>
+<rect x="643.5" y="551" width="188" height="22" rx="6" fill="#111820" stroke="#d4a55f" stroke-opacity=".55"/><text x="737.5" y="566" text-anchor="middle" fill="#aaa79f" font-family="monospace" font-size="8">commit or abort</text>
+<circle cx="650" cy="574" r="6" fill="#d4a55f"/><text x="661" y="592" fill="#d4a55f" font-family="monospace" font-size="8">◐ IN INTEGRATION</text>
+<line x1="310" y1="648" x2="988" y2="648" stroke="#5f93a8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+<rect x="556.0" y="625" width="188" height="22" rx="6" fill="#111820" stroke="#5f93a8" stroke-opacity=".55"/><text x="650.0" y="640" text-anchor="middle" fill="#aaa79f" font-family="monospace" font-size="8">assemble binding receipt</text>
+<circle cx="300" cy="648" r="6" fill="#5f93a8"/><text x="311" y="666" fill="#5f93a8" font-family="monospace" font-size="8">○ TARGET</text>
+<path d="M825,574 C870,560 900,545 950,530" fill="none" stroke="#75a184" stroke-width="2.2" marker-end="url(#arrowBlue)"/><text x="908" y="534" fill="#75a184" font-family="monospace" font-size="9">COMMIT</text>
+<path d="M825,574 C870,590 900,606 950,620" fill="none" stroke="#b96464" stroke-width="2.2" marker-end="url(#arrowRed)"/><text x="908" y="611" fill="#b96464" font-family="monospace" font-size="9">ABORT</text>
+<rect x="1090" y="178" width="435" height="582" rx="12" fill="#111820" stroke="#34414a"/>
+<text x="1116" y="210" fill="#d4a55f" font-family="monospace" font-size="10">STAGE + VALIDATE PATCH · IN INTEGRATION</text>
+<text x="1116" y="245" fill="#f2ede2" font-family="Georgia,serif" font-size="23">Contract under inspection</text>
+<rect x="1116" y="268" width="383" height="176" rx="9" fill="#080b0e" stroke="#34414a"/>
+<text x="1134" y="294" fill="#5f93a8" font-family="monospace" font-size="10">intent: propose_patch</text>
+<text x="1134" y="314" fill="#5f93a8" font-family="monospace" font-size="10">authority:</text>
+<text x="1134" y="334" fill="#aaa79f" font-family="monospace" font-size="10">  - repo.read</text>
+<text x="1134" y="354" fill="#aaa79f" font-family="monospace" font-size="10">  - workspace.write:staged</text>
+<text x="1134" y="374" fill="#5f93a8" font-family="monospace" font-size="10">validators: [tests, policy]</text>
+<text x="1134" y="394" fill="#5f93a8" font-family="monospace" font-size="10">decision: explicit</text>
+<text x="1134" y="414" fill="#5f93a8" font-family="monospace" font-size="10">evidence: ProofCapsule</text>
+<text x="1116" y="482" fill="#747b7f" font-family="monospace" font-size="9">CURRENTLY GROUNDED</text>
+<circle cx="1122" cy="510" r="3.5" fill="#75a184"/><text x="1134" y="514" fill="#aaa79f" font-family="Arial" font-size="11">WASM isolation + rollback</text>
+<circle cx="1122" cy="535" r="3.5" fill="#75a184"/><text x="1134" y="539" fill="#aaa79f" font-family="Arial" font-size="11">Capability structures</text>
+<circle cx="1122" cy="560" r="3.5" fill="#75a184"/><text x="1134" y="564" fill="#aaa79f" font-family="Arial" font-size="11">Proof Capsule foundations</text>
+<text x="1116" y="604" fill="#747b7f" font-family="monospace" font-size="9">MUST REMAIN VISIBLE</text>
+<circle cx="1122" cy="632" r="3.5" fill="#b96464"/><text x="1134" y="636" fill="#aaa79f" font-family="Arial" font-size="10">Change Gate is not complete end-to-end</text>
+<circle cx="1122" cy="657" r="3.5" fill="#b96464"/><text x="1134" y="661" fill="#aaa79f" font-family="Arial" font-size="10">Approval + durable binding are Stage 0 work</text>
+<circle cx="1122" cy="682" r="3.5" fill="#b96464"/><text x="1134" y="686" fill="#aaa79f" font-family="Arial" font-size="10">This simulator is representative—not live execution</text>
+<rect x="1116" y="716" width="383" height="24" rx="6" fill="#221b12" stroke="#d4a55f"/><text x="1307" y="732" text-anchor="middle" fill="#d4a55f" font-family="monospace" font-size="9">SIMULATION · NO LIVE SIDE EFFECT</text>
+<text x="70" y="818" fill="#747b7f" font-family="monospace" font-size="9">THE SIMULATOR TEACHES BOUNDARIES, AUTHORITY, DECISIONS, AND EVIDENCE — NOT A FABRICATED PUBLIC API.</text>
+</svg>

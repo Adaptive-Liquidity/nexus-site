@@ -290,4 +290,19 @@
     background-image:
       radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in oklab, var(--color-institution) 12%, transparent), transparent);
   }
+
+  /* Visual system · Cognitive Hypervisor flow stroke */
+  .vs-flow {
+    animation: vsFlow 1.6s linear infinite;
+  }
+  @keyframes vsFlow {
+    to {
+      stroke-dashoffset: -26;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vs-flow {
+      animation: none;
+    }
+  }
 }

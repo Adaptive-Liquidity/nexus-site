@@ -11,10 +11,10 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-void/90 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-[72rem] items-center gap-4 px-4 sm:px-6">
+      <div className="mx-auto flex h-14 max-w-[72rem] items-center gap-4 overflow-x-hidden px-4 sm:px-6">
         <Link
           to="/"
-          className="flex shrink-0 items-baseline gap-2 font-serif text-base font-medium tracking-tight text-porcelain"
+          className="flex min-h-9 shrink-0 items-center gap-2 font-serif text-base font-medium tracking-tight text-porcelain"
           onClick={() => setOpen(false)}
         >
           {BRAND.product}
@@ -23,8 +23,9 @@ export function SiteHeader() {
           </span>
         </Link>
 
+        {/* Desktop nav starts at lg (1024) — md/tablet uses mobile menu to avoid overflow */}
         <nav
-          className="ml-auto hidden items-center gap-1 md:flex"
+          className="ml-auto hidden items-center gap-1 lg:flex"
           aria-label="Primary"
         >
           {NAV.primary.map((item) => {
@@ -35,7 +36,7 @@ export function SiteHeader() {
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "rounded-md px-2.5 py-1.5 text-sm transition-colors",
+                  "inline-flex min-h-9 items-center rounded-md px-2.5 py-2 text-sm transition-colors",
                   active
                     ? "bg-slate text-porcelain"
                     : "text-porcelain-muted hover:bg-carbon hover:text-porcelain",
@@ -47,10 +48,10 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2 lg:flex">
           <Link
             to="/maturity"
-            className="text-sm text-porcelain-muted transition-colors hover:text-porcelain"
+            className="inline-flex min-h-9 items-center text-sm text-porcelain-muted transition-colors hover:text-porcelain"
           >
             Maturity
           </Link>
@@ -58,7 +59,7 @@ export function SiteHeader() {
             href={BRAND.githubOrg}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1 text-sm text-porcelain-muted transition-colors hover:text-porcelain"
+            className="inline-flex min-h-9 items-center gap-1 text-sm text-porcelain-muted transition-colors hover:text-porcelain"
           >
             GitHub
             <ExternalLink className="size-3.5 opacity-60" aria-hidden />
@@ -72,7 +73,7 @@ export function SiteHeader() {
           type="button"
           variant="ghost"
           size="icon"
-          className="ml-auto md:hidden"
+          className="ml-auto lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -85,7 +86,7 @@ export function SiteHeader() {
       {open ? (
         <div
           id="mobile-nav"
-          className="border-t border-border bg-carbon md:hidden"
+          className="border-t border-border bg-carbon lg:hidden"
         >
           <nav className="mx-auto flex max-w-[72rem] flex-col gap-1 px-4 py-3" aria-label="Mobile">
             {NAV.primary.map((item) => (

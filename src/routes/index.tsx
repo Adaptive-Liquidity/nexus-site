@@ -19,8 +19,14 @@ import {
   buildMaturityCounts,
 } from "@/components/home/pinned-cinematic";
 import { SceneHandoff } from "@/components/home/scene-handoff";
+import {
+  homeSearchFromRaw,
+  resolveHomeSearch,
+} from "@/lib/evaluator-search";
 
 export const Route = createFileRoute("/")({
+  validateSearch: (raw: Record<string, unknown>) =>
+    homeSearchFromRaw(raw),
   component: HomePage,
 });
 
@@ -29,6 +35,8 @@ export const Route = createFileRoute("/")({
  * Intent → Gap (pinned cinematic) → Execute → Model → Evidence → …
  */
 function HomePage() {
+  const search = resolveHomeSearch(Route.useSearch());
+  const navigate = Route.useNavigate();
   const counts = buildMaturityCounts();
 
   return (
@@ -49,9 +57,10 @@ function HomePage() {
           id="live-demo"
           className="relative"
           aria-labelledby="demo-heading"
+          data-demo-section
         >
           <TransactionBeatChrome beatId="execute">
-            <div className="mx-auto max-w-[72rem] px-4 py-14 sm:px-6 sm:py-20">
+            <div className="mx-auto max-w-[72rem] px-4 py-10 sm:px-6 sm:py-14 xl:pl-[var(--txn-content-gutter)] xl:pr-10">
               <Reveal>
                 <div className="mb-8 max-w-2xl space-y-3">
                   <p className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-porcelain-subtle">
@@ -72,7 +81,16 @@ function HomePage() {
                 </div>
               </Reveal>
               <Reveal delay={80}>
-                <DemoPlayer />
+                <DemoPlayer
+          scenarioId={search.obs}
+          stepIndex={search.stage}
+          onScenarioChange={(obs) =>
+            navigate({ search: (prev) => ({ ...prev, obs, stage: 0 }), replace: true })
+          }
+          onStepChange={(stage) =>
+            navigate({ search: (prev) => ({ ...prev, stage }), replace: true })
+          }
+ />
               </Reveal>
             </div>
           </TransactionBeatChrome>

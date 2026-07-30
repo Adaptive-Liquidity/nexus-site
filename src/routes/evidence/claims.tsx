@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { claimsRegistry } from "@/content";
 import { MaturityBadge } from "@/components/site/maturity-badge";
@@ -10,8 +10,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ForensicFrame } from "@/components/home/forensic-frame";
+import { ClaimDependencyGraph } from "@/components/evidence/claim-dependency-graph";
+import {
+  claimsSearchFromRaw,
+  resolveClaimsSearch,
+} from "@/lib/evaluator-search";
 
 export const Route = createFileRoute("/evidence/claims")({
+  validateSearch: (raw: Record<string, unknown>) =>
+    claimsSearchFromRaw(raw),
   component: ClaimsPage,
 });
 
@@ -26,11 +33,28 @@ const FILTERS: { id: Filter; label: string }[] = [
 ];
 
 function ClaimsPage() {
-  const [filter, setFilter] = useState<Filter>("ALL");
-  const [query, setQuery] = useState("");
-  const [openId, setOpenId] = useState<string | null>(
-    claimsRegistry.capabilities[0]?.id ?? null,
-  );
+  const rawSearch = Route.useSearch();
+  const search = resolveClaimsSearch(rawSearch);
+  const navigate = Route.useNavigate();
+  const filter = search.status as Filter;
+  const query = search.q;
+  const openId = search.claim;
+
+  const setFilter = (status: Filter) =>
+    navigate({
+      search: (prev) => ({
+        ...prev,
+        status: status === "EXPERIMENTAL" ? "ALL" : status,
+      }),
+      replace: true,
+    });
+  const setQuery = (q: string) =>
+    navigate({ search: (prev) => ({ ...prev, q }), replace: true });
+  const setOpenId = (claim: string | null) =>
+    navigate({
+      search: (prev) => ({ ...prev, claim: claim ?? prev.claim }),
+      replace: true,
+    });
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -70,6 +94,39 @@ function ClaimsPage() {
           {claimsRegistry.stage0.summary}
         </div>
       </div>
+
+      <ClaimDependencyGraph
+        selectedId={openId ?? undefined}
+        onSelect={(id) => setOpenId(id)}
+        lens={
+          search.view === "support"
+            ? "support"
+            : search.view === "blockers" || search.view === "boundaries"
+              ? "blocker"
+              : "all"
+        }
+        currentOnly={!search.targets}
+        onLensChange={(lens) =>
+          navigate({
+            search: (prev) => ({
+              ...prev,
+              view:
+                lens === "support"
+                  ? "support"
+                  : lens === "blocker"
+                    ? "blockers"
+                    : "all",
+            }),
+            replace: true,
+          })
+        }
+        onCurrentOnlyChange={(currentOnly) =>
+          navigate({
+            search: (prev) => ({ ...prev, targets: currentOnly ? false : true }),
+            replace: true,
+          })
+        }
+      />
 
       <ForensicFrame
         title="Status legend"

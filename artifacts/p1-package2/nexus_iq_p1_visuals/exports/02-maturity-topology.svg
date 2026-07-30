@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+<defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#111820"/><stop offset="1" stop-color="#080b0e"/></linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5f93a8" stop-opacity=".22"/><stop offset=".52" stop-color="#e8f6fb" stop-opacity=".06"/><stop offset="1" stop-color="#2f5e73" stop-opacity=".14"/></linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#fff" stroke-opacity=".035"/></pattern>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#aaa79f"/></marker>
+      <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5f93a8"/></marker>
+      <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#b96464"/></marker>
+    </defs>
+<rect x="24" y="24" width="1552" height="852" rx="18" fill="url(#bg)" stroke="#34414a"/>
+    <rect x="24" y="24" width="1552" height="54" rx="18" fill="#0e1419"/>
+    <line x1="24" y1="78" x2="1576" y2="78" stroke="#34414a"/>
+    <text x="50" y="57" fill="#f2ede2" font-family="Georgia,serif" font-size="20">Maturity topology</text>
+    <text x="1550" y="56" text-anchor="end" fill="#747b7f" font-family="monospace" font-size="11" letter-spacing="1.5">MATURITY-TOPO-01  ·  CRITICAL PATH LENS</text>
+<rect x="44" y="94" width="1512" height="754" rx="14" fill="url(#grid)" stroke="#34414a"/>
+<path d="M70,760 C260,742 400,778 600,756 S980,742 1230,768 S1450,742 1530,760" fill="none" stroke="#5f93a8" stroke-opacity="0.060" stroke-width="1"/>
+<path d="M70,682 C260,661 400,703 600,678 S980,661 1230,690 S1450,661 1530,682" fill="none" stroke="#5f93a8" stroke-opacity="0.072" stroke-width="1"/>
+<path d="M70,604 C260,580 400,628 600,600 S980,580 1230,612 S1450,580 1530,604" fill="none" stroke="#5f93a8" stroke-opacity="0.084" stroke-width="1"/>
+<path d="M70,526 C260,499 400,553 600,522 S980,499 1230,534 S1450,499 1530,526" fill="none" stroke="#5f93a8" stroke-opacity="0.096" stroke-width="1"/>
+<path d="M70,448 C260,418 400,478 600,444 S980,418 1230,456 S1450,418 1530,448" fill="none" stroke="#5f93a8" stroke-opacity="0.108" stroke-width="1"/>
+<path d="M70,370 C260,337 400,403 600,366 S980,337 1230,378 S1450,337 1530,370" fill="none" stroke="#5f93a8" stroke-opacity="0.120" stroke-width="1"/>
+<path d="M70,292 C260,256 400,328 600,288 S980,256 1230,300 S1450,256 1530,292" fill="none" stroke="#5f93a8" stroke-opacity="0.132" stroke-width="1"/>
+<path d="M70,214 C260,175 400,253 600,210 S980,175 1230,222 S1450,175 1530,214" fill="none" stroke="#5f93a8" stroke-opacity="0.144" stroke-width="1"/>
+<line x1="80" y1="660" x2="1515" y2="660" stroke="#7a3e3e" stroke-opacity=".45" stroke-dasharray="4 8"/>
+<text x="82" y="650" fill="#7a3e3e" font-family="monospace" font-size="10" letter-spacing="1.4">KNOWN BOUNDARY</text>
+<line x1="80" y1="505" x2="1515" y2="505" stroke="#496f59" stroke-opacity=".45" stroke-dasharray="4 8"/>
+<text x="82" y="495" fill="#496f59" font-family="monospace" font-size="10" letter-spacing="1.4">IMPLEMENTED FOUNDATIONS</text>
+<line x1="80" y1="330" x2="1515" y2="330" stroke="#8c632f" stroke-opacity=".45" stroke-dasharray="4 8"/>
+<text x="82" y="320" fill="#8c632f" font-family="monospace" font-size="10" letter-spacing="1.4">INTEGRATION RIDGE</text>
+<line x1="80" y1="155" x2="1515" y2="155" stroke="#2f5e73" stroke-opacity=".45" stroke-dasharray="4 8"/>
+<text x="82" y="145" fill="#2f5e73" font-family="monospace" font-size="10" letter-spacing="1.4">TARGET TRUST PLANE</text>
+<path d="M270,520 C390,455 470,430 620,365 C740,312 840,300 970,270 C1100,238 1190,205 1320,165" fill="none" stroke="#d4a55f" stroke-width="7" opacity=".16" filter="url(#glow)"/>
+<path d="M270,520 C390,455 470,430 620,365 C740,312 840,300 970,270 C1100,238 1190,205 1320,165" fill="none" stroke="#d4a55f" stroke-width="2" marker-end="url(#arrow)"/>
+<g><circle cx="210" cy="515" r="92" fill="#0e1419" stroke="#75a184" stroke-width="2"/><circle cx="210" cy="515" r="82" fill="url(#glass)" stroke="#34414a"/>
+<text x="210" y="495" text-anchor="middle" fill="#75a184" font-family="monospace" font-size="10">● IMPLEMENTED</text>
+<text x="210" y="523" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">Isolation +</text>
+<text x="210" y="541" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">rollback</text>
+</g>
+<g><circle cx="460" cy="515" r="92" fill="#0e1419" stroke="#75a184" stroke-width="2"/><circle cx="460" cy="515" r="82" fill="url(#glass)" stroke="#34414a"/>
+<text x="460" y="495" text-anchor="middle" fill="#75a184" font-family="monospace" font-size="10">● IMPLEMENTED</text>
+<text x="460" y="523" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">Capability</text>
+<text x="460" y="541" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">authority</text>
+</g>
+<g><circle cx="710" cy="515" r="88" fill="#0e1419" stroke="#75a184" stroke-width="2"/><circle cx="710" cy="515" r="78" fill="url(#glass)" stroke="#34414a"/>
+<text x="710" y="495" text-anchor="middle" fill="#75a184" font-family="monospace" font-size="10">● IMPLEMENTED</text>
+<text x="710" y="523" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">Proof Capsules</text>
+</g>
+<g><circle cx="970" cy="515" r="86" fill="#0e1419" stroke="#75a184" stroke-width="2"/><circle cx="970" cy="515" r="76" fill="url(#glass)" stroke="#34414a"/>
+<text x="970" y="495" text-anchor="middle" fill="#75a184" font-family="monospace" font-size="10">● IMPLEMENTED</text>
+<text x="970" y="523" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">Capsule Explorer</text>
+</g>
+<g><circle cx="585" cy="330" r="86" fill="#0e1419" stroke="#d4a55f" stroke-width="2"/><circle cx="585" cy="330" r="76" fill="url(#glass)" stroke="#34414a"/>
+<text x="585" y="310" text-anchor="middle" fill="#d4a55f" font-family="monospace" font-size="10">◐ IN INTEGRATION</text>
+<text x="585" y="338" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">Memory binding</text>
+</g>
+<g><circle cx="910" cy="330" r="86" fill="#0e1419" stroke="#d4a55f" stroke-width="2"/><circle cx="910" cy="330" r="76" fill="url(#glass)" stroke="#34414a"/>
+<text x="910" y="310" text-anchor="middle" fill="#d4a55f" font-family="monospace" font-size="10">◐ IN INTEGRATION</text>
+<text x="910" y="338" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">Change Gate</text>
+</g>
+<g><circle cx="1180" cy="155" r="84" fill="#0e1419" stroke="#5f93a8" stroke-width="2"/><circle cx="1180" cy="155" r="74" fill="url(#glass)" stroke="#34414a"/>
+<text x="1180" y="135" text-anchor="middle" fill="#5f93a8" font-family="monospace" font-size="10">○ TARGET</text>
+<text x="1180" y="163" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">Signing anchors</text>
+</g>
+<g><circle cx="1380" cy="155" r="88" fill="#0e1419" stroke="#5f93a8" stroke-width="2"/><circle cx="1380" cy="155" r="78" fill="url(#glass)" stroke="#34414a"/>
+<text x="1380" y="135" text-anchor="middle" fill="#5f93a8" font-family="monospace" font-size="10">○ TARGET</text>
+<text x="1380" y="163" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">Durable</text>
+<text x="1380" y="181" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">transaction</text>
+</g>
+<g><circle cx="920" cy="690" r="92" fill="#0e1419" stroke="#b96464" stroke-width="2"/><circle cx="920" cy="690" r="82" fill="url(#glass)" stroke="#34414a"/>
+<text x="920" y="670" text-anchor="middle" fill="#b96464" font-family="monospace" font-size="10">! LIMITATION</text>
+<text x="920" y="698" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">WASM scope</text>
+<text x="920" y="716" text-anchor="middle" fill="#f2ede2" font-family="Arial" font-size="14" font-weight="600">boundary</text>
+</g>
+<g filter="url(#glow)"><rect x="748" y="393" width="280" height="72" rx="14" fill="#241b13" stroke="#d4a55f" stroke-width="2.4"/><text x="770" y="419" fill="#d4a55f" font-family="monospace" font-size="10" letter-spacing="1.2">CRITICAL PASS · BLOCKING</text><text x="770" y="447" fill="#f2ede2" font-family="Arial" font-size="15" font-weight="600">Stage 0 evidence integrity</text></g>
+<path d="M888,393 C850,365 750,347 675,338" fill="none" stroke="#b96464" stroke-width="1.8" stroke-dasharray="6 6" marker-end="url(#arrowRed)"/>
+<path d="M930,393 C940,370 936,352 925,340" fill="none" stroke="#b96464" stroke-width="1.8" stroke-dasharray="6 6" marker-end="url(#arrowRed)"/>
+<rect x="1125" y="405" width="390" height="262" rx="14" fill="#0d1216" stroke="#34414a"/>
+<text x="1152" y="438" fill="#d4a55f" font-family="monospace" font-size="10">WHY THE CHANGE GATE IS NOT “CURRENT”</text>
+<circle cx="1157" cy="472" r="3.5" fill="#d4a55f"/><text x="1170" y="476" fill="#aaa79f" font-family="Arial" font-size="12">Foundations exist independently.</text>
+<circle cx="1157" cy="506" r="3.5" fill="#d4a55f"/><text x="1170" y="510" fill="#aaa79f" font-family="Arial" font-size="12">The critical path still crosses Stage 0.</text>
+<circle cx="1157" cy="540" r="3.5" fill="#d4a55f"/><text x="1170" y="544" fill="#aaa79f" font-family="Arial" font-size="12">Full memory-state binding is incomplete.</text>
+<circle cx="1157" cy="574" r="3.5" fill="#5f93a8"/><text x="1170" y="578" fill="#aaa79f" font-family="Arial" font-size="12">Signing identity + external anchors remain Target.</text>
+<circle cx="1157" cy="608" r="3.5" fill="#5f93a8"/><text x="1170" y="612" fill="#aaa79f" font-family="Arial" font-size="12">The WASM boundary still limits governance scope.</text>
+<text x="70" y="824" fill="#747b7f" font-family="monospace" font-size="9">TOPOLOGY ENCODES DEPENDENCY AND BLOCKER PROPAGATION — NOT CALENDAR TIME OR COMPLETION PERCENTAGE.</text>
+</svg>

@@ -1,0 +1,2251 @@
+diff --git a/package-lock.json b/package-lock.json
+index 9dd25ef..310ad89 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -59,6 +59,7 @@
+       },
+       "devDependencies": {
+         "@eslint/js": "^9.20.0",
++        "@playwright/test": "^1.61.1",
+         "@types/node": "^22.16.5",
+         "@types/pg": "^8.11.10",
+         "@types/react": "^19.1.0",
+@@ -970,6 +971,22 @@
+         "url": "https://opencollective.com/pkgr"
+       }
+     },
++    "node_modules/@playwright/test": {
++      "version": "1.61.1",
++      "resolved": "https://registry.npmjs.org/@playwright/test/-/test-1.61.1.tgz",
++      "integrity": "sha512-8nKv6+0RJSL9FE4jYOEGXnPeM/Hg12qZpmqzZjRh3qM0Y7c3z1mrOTfFLids72RDQYVh9WpLEfR5WdpNX4fkig==",
++      "dev": true,
++      "license": "Apache-2.0",
++      "dependencies": {
++        "playwright": "1.61.1"
++      },
++      "bin": {
++        "playwright": "cli.js"
++      },
++      "engines": {
++        "node": ">=18"
++      }
++    },
+     "node_modules/@radix-ui/number": {
+       "version": "1.1.3",
+       "resolved": "https://registry.npmjs.org/@radix-ui/number/-/number-1.1.3.tgz",
+diff --git a/package.json b/package.json
+index 57f15ca..fa886d2 100644
+--- a/package.json
++++ b/package.json
+@@ -14,14 +14,14 @@
+     "preview": "vite preview --host 0.0.0.0 --port 8080",
+     "typecheck": "tsc --noEmit",
+     "lint": "eslint .",
+-    "format": "prettier --write ."
++    "format": "prettier --write .",
++    "test:e2e": "playwright test",
++    "test:p1": "playwright test tests/p1-instruments.spec.ts",
++    "test:visual": "playwright test tests/p1-instruments.spec.ts"
+   },
+   "dependencies": {
+     "@electric-sql/pglite": "^0.5.3",
+     "@hookform/resolvers": "^5.0.0",
+-    "better-auth": "^1.4.0",
+-    "kysely": "^0.28.5",
+-    "pg": "^8.16.3",
+     "@radix-ui/react-accordion": "^1.2.12",
+     "@radix-ui/react-alert-dialog": "^1.1.15",
+     "@radix-ui/react-avatar": "^1.1.11",
+@@ -49,11 +49,14 @@
+     "@tanstack/react-start": "^1.160.0",
+     "@tanstack/react-table": "^8.21.0",
+     "@tanstack/router-plugin": "^1.160.0",
++    "better-auth": "^1.4.0",
+     "class-variance-authority": "^0.7.1",
+     "clsx": "^2.1.1",
+     "cmdk": "^1.1.1",
+     "date-fns": "^4.0.0",
++    "kysely": "^0.28.5",
+     "lucide-react": "^0.510.0",
++    "pg": "^8.16.3",
+     "react": "^19.1.0",
+     "react-day-picker": "^9.14.0",
+     "react-dom": "^19.1.0",
+@@ -70,6 +73,7 @@
+   },
+   "devDependencies": {
+     "@eslint/js": "^9.20.0",
++    "@playwright/test": "^1.61.1",
+     "@types/node": "^22.16.5",
+     "@types/pg": "^8.11.10",
+     "@types/react": "^19.1.0",
+@@ -90,4 +94,3 @@
+     "vite": "^8.1.0"
+   }
+ }
+-
+diff --git a/src/components/home/change-gate-section.tsx b/src/components/home/change-gate-section.tsx
+index 35cbbcf..36f4f4d 100644
+--- a/src/components/home/change-gate-section.tsx
++++ b/src/components/home/change-gate-section.tsx
+@@ -5,6 +5,7 @@ import { MaturityBadge } from "@/components/site/maturity-badge";
+ import { SectionHeading } from "@/components/home/section-heading";
+ import { Reveal } from "@/components/home/reveal";
+ import { ChangeGateMap } from "@/components/home/change-gate-map";
++import { ChangeGateStateSpace } from "@/components/visual-system/change-gate-state-space";
+ import { cn } from "@/lib/utils";
+ import { ChevronRight } from "lucide-react";
+ 
+@@ -37,14 +38,23 @@ export function ChangeGateSection() {
+           </div>
+         </Reveal>
+ 
+-        <Reveal delay={70}>
++        <Reveal delay={60}>
+           <div className="mt-8">
++            <ChangeGateStateSpace
++              activePhaseId={openId}
++              onSelectPhase={setOpenId}
++            />
++          </div>
++        </Reveal>
++
++        <Reveal delay={80}>
++          <div className="mt-6">
+             <ChangeGateMap activeId={openId} onSelect={setOpenId} />
+           </div>
+         </Reveal>
+ 
+         <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+-          <Reveal delay={80}>
++          <Reveal delay={90}>
+             <ol className="relative space-y-0 border-l border-border pl-0">
+               {CHANGE_GATE_PHASES.map((phase, index) => {
+                 const open = openId === phase.id;
+@@ -177,9 +187,7 @@ function Block({ label, body }: { label: string; body: string }) {
+       <p className="text-[11px] font-medium uppercase tracking-wide text-porcelain-subtle">
+         {label}
+       </p>
+-      <p className="mt-1.5 text-sm leading-relaxed text-porcelain-muted">
+-        {body}
+-      </p>
++      <p className="mt-1.5 text-sm leading-relaxed text-porcelain-muted">{body}</p>
+     </div>
+   );
+ }
+diff --git a/src/components/home/composition-section.tsx b/src/components/home/composition-section.tsx
+index f900dc2..bf7af77 100644
+--- a/src/components/home/composition-section.tsx
++++ b/src/components/home/composition-section.tsx
+@@ -1,7 +1,8 @@
+ import { COMPOSITION } from "@/content/site-copy";
+ import { SectionHeading } from "@/components/home/section-heading";
+ import { Reveal } from "@/components/home/reveal";
+-import { SystemArchitectureDiagram } from "@/components/home/system-architecture-diagram";
++import { ArchitectureAtlas } from "@/components/visual-system/architecture-atlas";
++import { Link } from "@tanstack/react-router";
+ import { ArrowRight } from "lucide-react";
+ 
+ export function CompositionSection() {
+@@ -25,10 +26,23 @@ export function CompositionSection() {
+ 
+         <Reveal delay={60}>
+           <div className="mt-10">
+-            <SystemArchitectureDiagram />
++            <ArchitectureAtlas compact />
+           </div>
+         </Reveal>
+ 
++        <Reveal delay={80}>
++          <p className="mt-4 text-sm text-porcelain-subtle">
++            Full atlas, plane contracts, and evaluator links on{" "}
++            <Link
++              to="/system"
++              className="text-porcelain-muted underline-offset-4 hover:text-porcelain hover:underline"
++            >
++              /system
++            </Link>
++            .
++          </p>
++        </Reveal>
++
+         <Reveal delay={100}>
+           <div className="mt-6 overflow-hidden rounded-xl border border-border bg-carbon">
+             <div className="border-b border-border px-4 py-3 sm:px-5">
+@@ -40,7 +54,7 @@ export function CompositionSection() {
+               {COMPOSITION.map((layer, i) => (
+                 <div
+                   key={layer.id}
+-                  className="relative p-5 sm:p-6 transition-colors hover:bg-slate/30"
++                  className="relative p-5 transition-colors hover:bg-slate/30 sm:p-6"
+                 >
+                   <div className="flex items-center justify-between gap-2">
+                     <span className="font-mono text-[10px] tabular-nums text-porcelain-subtle">
+diff --git a/src/components/home/demo-player.tsx b/src/components/home/demo-player.tsx
+index 0680ac2..e22573e 100644
+--- a/src/components/home/demo-player.tsx
++++ b/src/components/home/demo-player.tsx
+@@ -1,312 +1,117 @@
+-import { useCallback, useEffect, useMemo, useState } from "react";
++import { useCallback, useEffect, useState } from "react";
+ import { Download, Pause, Play, SkipBack } from "lucide-react";
+ import { useReducedMotion } from "@/hooks/use-reduced-motion";
+ import { cn } from "@/lib/utils";
+ import { MaturityBadge } from "@/components/site/maturity-badge";
+-import type { InternalStatus } from "@/content/maturity";
+-import {
+-  CAPSULE_FIELD_EXPLAINERS,
+-  type FieldExplainer,
+-} from "@/content/capsules/field-explainers";
+ import { sampleCapsules } from "@/content";
++import {
++  OBSERVATORY_SCENARIOS,
++  type ObservatoryScenarioId,
++  projectObservatory,
++} from "@/content/observatory-scenarios";
++import { DENIAL_SCOPED_COPY } from "@/content/transaction-model";
+ import { Button } from "@/components/ui/button";
+-
+-type StepId =
+-  | "propose"
+-  | "stage"
+-  | "constrain"
+-  | "validate"
+-  | "decide"
+-  | "emit";
+-
+-interface Step {
+-  id: StepId;
+-  label: string;
+-  tick: string;
+-  status: InternalStatus;
+-  log: string;
+-  detail: string;
+-  branch?: "commit" | "abort";
+-  duration: number;
+-}
+-
+-const SUCCESS_SCRIPT: Step[] = [
+-  {
+-    id: "propose",
+-    label: "Propose",
+-    tick: "Prop",
+-    status: "TARGET",
+-    log: "agent.propose(repo_patch: dependency-bump)",
+-    detail: "Agent declares intent + scope for a repository change.",
+-    duration: 1200,
+-  },
+-  {
+-    id: "stage",
+-    label: "Stage",
+-    tick: "Stag",
+-    status: "CURRENT",
+-    log: "nexus.snapshot(create) · isolation=worktree",
+-    detail: "Change isolated. Pre-execution snapshot captured.",
+-    duration: 1300,
+-  },
+-  {
+-    id: "constrain",
+-    label: "Constrain",
+-    tick: "Auth",
+-    status: "CURRENT",
+-    log: "capability.bind(WriteFile:/src) · grant OK",
+-    detail: "Authority tokens bound. Unauthorized paths denied.",
+-    duration: 1200,
+-  },
+-  {
+-    id: "validate",
+-    label: "Validate",
+-    tick: "Val",
+-    status: "IN_DEVELOPMENT",
+-    log: "validators.run([policy, health, diff]) · pass",
+-    detail: "Pre-commit validators evaluate the staged change.",
+-    duration: 1400,
+-  },
+-  {
+-    id: "decide",
+-    label: "Commit",
+-    tick: "Cmt",
+-    status: "IN_DEVELOPMENT",
+-    log: "txn.decide(COMMIT) · effects applied",
+-    detail: "Only surviving changes cross the commit boundary.",
+-    branch: "commit",
+-    duration: 1300,
+-  },
+-  {
+-    id: "emit",
+-    label: "Emit",
+-    tick: "Emit",
+-    status: "CURRENT",
+-    log: "proof_capsule.emit(signed, limitations[])",
+-    detail: "Portable runtime evidence leaves the boundary.",
+-    duration: 1600,
+-  },
+-];
+-
+-const ABORT_SCRIPT: Step[] = [
+-  {
+-    id: "propose",
+-    label: "Propose",
+-    tick: "Prop",
+-    status: "TARGET",
+-    log: "agent.propose(tool: network_fetch)",
+-    detail: "Agent requests outbound network capability.",
+-    duration: 1100,
+-  },
+-  {
+-    id: "stage",
+-    label: "Stage",
+-    tick: "Stag",
+-    status: "CURRENT",
+-    log: "nexus.snapshot(create) · isolation=sandbox",
+-    detail: "Execution staged behind the boundary.",
+-    duration: 1100,
+-  },
+-  {
+-    id: "constrain",
+-    label: "Constrain",
+-    tick: "Auth",
+-    status: "CURRENT",
+-    log: "capability.bind(NetworkOutbound) · DENIED",
+-    detail: "Required capability not granted. Mismatch recorded.",
+-    duration: 1300,
+-  },
+-  {
+-    id: "validate",
+-    label: "Validate",
+-    tick: "Val",
+-    status: "IN_DEVELOPMENT",
+-    log: "validators.run · requires_rollback=true",
+-    detail: "Failure classified; rollback required.",
+-    duration: 1200,
+-  },
+-  {
+-    id: "decide",
+-    label: "Abort",
+-    tick: "Abt",
+-    status: "CURRENT",
+-    log: "txn.decide(ABORT) · rollback(snapshot)",
+-    detail: "Abort restores pre-execution state. No irreversible effect.",
+-    branch: "abort",
+-    duration: 1400,
+-  },
+-  {
+-    id: "emit",
+-    label: "Emit",
+-    tick: "Emit",
+-    status: "CURRENT",
+-    log: "proof_capsule.emit(failure+rollback evidence)",
+-    detail: "Denial path still produces inspectable evidence.",
+-    duration: 1600,
+-  },
+-];
+-
+-const WALKTHROUGH_PATHS = [
+-  "capsule_id",
+-  "subject",
+-  "capabilities",
+-  "snapshot",
+-  "failure",
+-  "rollback",
+-  "limitations",
+-  "signature",
+-] as const;
+-
+-function fieldValuePreview(
+-  capsule: Record<string, unknown>,
+-  path: string,
+-  scenario: "success" | "abort",
+-): string {
+-  if (path === "capsule_id") return String(capsule.capsule_id ?? "—");
+-  if (path === "subject") {
+-    const s = capsule.subject as { tool_name?: string; duration_ms?: number };
+-    return `${s?.tool_name ?? "—"} · ${s?.duration_ms ?? "—"}ms`;
+-  }
+-  if (path === "capabilities") {
+-    const c = capsule.capabilities as {
+-      required?: string[];
+-      granted?: string[];
+-      mismatch?: string[] | null;
+-    };
+-    if (scenario === "abort" && c?.mismatch?.length) {
+-      return `mismatch: ${c.mismatch.join(", ")}`;
+-    }
+-    return `${c?.granted?.length ?? 0} granted / ${c?.required?.length ?? 0} required`;
+-  }
+-  if (path === "snapshot") {
+-    const snap = capsule.snapshot as { snapshot_id?: string };
+-    return snap?.snapshot_id
+-      ? `${String(snap.snapshot_id).slice(0, 13)}…`
+-      : "—";
+-  }
+-  if (path === "failure") {
+-    const f = capsule.failure as { failure_category?: string } | null;
+-    return f?.failure_category ?? "null (success path)";
+-  }
+-  if (path === "rollback") {
+-    const r = capsule.rollback as { occurred?: boolean };
+-    return r?.occurred ? "occurred · restored snapshot" : "none";
+-  }
+-  if (path === "limitations") {
+-    const lim = capsule.limitations as string[] | undefined;
+-    return `${lim?.length ?? 0} mandatory entries`;
+-  }
+-  if (path === "signature") {
+-    const sig = capsule.signature as { signer?: string };
+-    return `${sig?.signer ?? "—"} · demo key only`;
+-  }
+-  return "—";
+-}
++import { ExecutionObservatoryLenses } from "@/components/visual-system/execution-observatory-lenses";
++import { TRUST_CLASS_META } from "@/content/trust-taxonomy";
+ 
+ /**
+- * Phase B — DemoPlayer v2 product film.
+- * Scrubber · dual path · capsule field walkthrough · downloadable fixtures.
++ * Execution Observatory — DemoPlayer with immutable event streams.
++ * Scenarios: Commit | Pre-effect denial | Post-stage rollback
+  */
+-export function DemoPlayer({ className }: { className?: string }) {
++export function DemoPlayer({
++  className,
++  scenarioId: scenarioIdProp,
++  stepIndex: stepIndexProp,
++  onScenarioChange,
++  onStepChange,
++}: {
++  className?: string;
++  scenarioId?: ObservatoryScenarioId;
++  stepIndex?: number;
++  onScenarioChange?: (id: ObservatoryScenarioId) => void;
++  onStepChange?: (step: number) => void;
++}) {
+   const reduced = useReducedMotion();
+-  const [scenario, setScenario] = useState<"success" | "abort">("success");
+-  const [stepIndex, setStepIndex] = useState(0);
++  const [internalScenarioId, setInternalScenarioId] =
++    useState<ObservatoryScenarioId>("commit");
++  const [internalStepIndex, setInternalStepIndex] = useState(0);
+   const [playing, setPlaying] = useState(true);
+-  const [fieldIndex, setFieldIndex] = useState(0);
+   const [view, setView] = useState<"film" | "compare">("film");
+ 
+-  const script = scenario === "success" ? SUCCESS_SCRIPT : ABORT_SCRIPT;
++  const scenarioId = scenarioIdProp ?? internalScenarioId;
++  const stepIndex = stepIndexProp ?? internalStepIndex;
++
++  const setScenarioId = (id: ObservatoryScenarioId) => {
++    setInternalScenarioId(id);
++    onScenarioChange?.(id);
++  };
++  const setStepIndex = (v: number | ((p: number) => number)) => {
++    const next = typeof v === "function" ? v(stepIndex) : v;
++    setInternalStepIndex(next);
++    onStepChange?.(next);
++  };
++
++  const scenario = OBSERVATORY_SCENARIOS[scenarioId];
++  const script = scenario.events;
++  const projected = projectObservatory(scenarioId, stepIndex);
++  const step = projected.event;
++  const progress = ((stepIndex + 1) / script.length) * 100;
++  const atEmit = step.stage === "emit";
++  const trust = TRUST_CLASS_META[projected.trust];
++
+   const capsule =
+-    scenario === "success"
++    scenarioId === "commit"
+       ? (sampleCapsules.success as Record<string, unknown>)
+       : (sampleCapsules.failureRollback as Record<string, unknown>);
+ 
+-  const step = script[Math.min(stepIndex, script.length - 1)]!;
+-  const atEmit = step.id === "emit";
+-  const progress = ((stepIndex + 1) / script.length) * 100;
+-
+-  const logs = useMemo(
+-    () => script.slice(0, stepIndex + 1).map((s) => s.log),
+-    [script, stepIndex],
+-  );
+-
+-  const walkthroughFields = useMemo(() => {
+-    return WALKTHROUGH_PATHS.map((path) => {
+-      const explainer = CAPSULE_FIELD_EXPLAINERS.find((e) => e.path === path);
+-      return {
+-        path,
+-        explainer: explainer as FieldExplainer | undefined,
+-        preview: fieldValuePreview(capsule, path, scenario),
+-      };
+-    });
+-  }, [capsule, scenario]);
+-
+-  const activeField =
+-    walkthroughFields[Math.min(fieldIndex, walkthroughFields.length - 1)];
+-
+   useEffect(() => {
+     setStepIndex(0);
+-    setFieldIndex(0);
+     if (!reduced) setPlaying(true);
+-  }, [scenario, reduced]);
++  }, [scenarioId, reduced]);
+ 
+   useEffect(() => {
+     if (reduced || !playing || view === "compare") return;
+     const current = script[stepIndex];
+     if (!current) return;
+-
+-    // On emit: cycle fields, then loop film
+-    if (stepIndex >= script.length - 1 && atEmit) {
+-      const t = window.setTimeout(() => {
+-        setFieldIndex((fi) => {
+-          if (fi < walkthroughFields.length - 1) return fi + 1;
+-          setStepIndex(0);
+-          return 0;
+-        });
+-      }, current.duration);
+-      return () => window.clearTimeout(t);
+-    }
+-
+     const t = window.setTimeout(() => {
+-      setStepIndex((i) => Math.min(i + 1, script.length - 1));
+-      if (script[Math.min(stepIndex + 1, script.length - 1)]?.id === "emit") {
+-        setFieldIndex(0);
+-      }
+-    }, current.duration);
++      setStepIndex((i) => {
++        if (i >= script.length - 1) return 0;
++        return i + 1;
++      });
++    }, 1300);
+     return () => window.clearTimeout(t);
+-  }, [
+-    stepIndex,
+-    playing,
+-    reduced,
+-    script,
+-    view,
+-    atEmit,
+-    walkthroughFields.length,
+-  ]);
++  }, [stepIndex, playing, reduced, script, view]);
+ 
+   useEffect(() => {
+     if (!reduced) return;
+     setStepIndex(script.length - 1);
+-    setFieldIndex(0);
+     setPlaying(false);
+   }, [reduced, script.length]);
+ 
+   const seekTo = useCallback(
+     (index: number) => {
+-      const next = Math.max(0, Math.min(index, script.length - 1));
+-      setStepIndex(next);
++      setStepIndex(Math.max(0, Math.min(index, script.length - 1)));
+       setPlaying(false);
+-      if (script[next]?.id === "emit") setFieldIndex(0);
+     },
+-    [script],
++    [script.length],
+   );
+ 
+   function downloadCapsule() {
+     const name =
+-      scenario === "success"
++      scenarioId === "commit"
+         ? "success.capsule.json"
+-        : "failure-rollback.capsule.json";
+-    const blob = new Blob([JSON.stringify(capsule, null, 2)], {
++        : scenarioId === "denial"
++          ? "denial.fixture.note.json"
++          : "failure-rollback.capsule.json";
++    const payload =
++      scenarioId === "denial"
++        ? {
++            note: "Denial fixture — structure-identical failure fields may apply; rollback.occurred not asserted",
++            scenario: "pre-effect-denial",
++            limitations: (capsule as { limitations?: string[] }).limitations,
++          }
++        : capsule;
++    const blob = new Blob([JSON.stringify(payload, null, 2)], {
+       type: "application/json",
+     });
+     const url = URL.createObjectURL(blob);
+@@ -317,13 +122,7 @@ export function DemoPlayer({ className }: { className?: string }) {
+     URL.revokeObjectURL(url);
+   }
+ 
+-  const branchLabel =
+-    step.branch ??
+-    (scenario === "abort" && stepIndex >= 4
+-      ? "abort"
+-      : scenario === "success" && stepIndex >= 4
+-        ? "commit"
+-        : null);
++  const branchLabel = projected.branch;
+ 
+   return (
+     <div
+@@ -331,8 +130,9 @@ export function DemoPlayer({ className }: { className?: string }) {
+         "overflow-hidden rounded-lg border border-border/80 bg-void shadow-[0_28px_80px_-36px_rgba(0,0,0,0.9)]",
+         className,
+       )}
+-      data-demo-scenario={scenario}
++      data-demo-scenario={scenarioId}
+       data-demo-view={view}
++      data-testid="execution-observatory"
+     >
+       <div className="flex items-center gap-3 border-b border-border bg-carbon px-3 py-2.5">
+         <div className="flex gap-1.5" aria-hidden>
+@@ -342,72 +142,48 @@ export function DemoPlayer({ className }: { className?: string }) {
+         </div>
+         <div className="flex min-w-0 flex-1 items-center justify-center">
+           <div className="truncate rounded-md border border-border bg-void/80 px-3 py-1 font-mono text-[10px] text-porcelain-subtle">
+-            nexus-iq · change-gate · product film v2
++            nexus-iq · execution observatory · event stream
+           </div>
+         </div>
+-        <div className="flex items-center gap-1.5">
+-          <span
+-            className={cn(
+-              "size-1.5 rounded-full",
+-              playing && !reduced && view === "film"
+-                ? "bg-oxide animate-pulse-soft"
+-                : "bg-porcelain-subtle",
+-            )}
+-            aria-hidden
+-          />
+-          <span className="font-mono text-[10px] uppercase tracking-wider text-porcelain-subtle">
+-            {reduced
+-              ? "static"
+-              : view === "compare"
+-                ? "compare"
+-                : playing
+-                  ? "rec"
+-                  : "paused"}
+-          </span>
+-        </div>
++        <span className="font-mono text-[10px] uppercase tracking-wider text-porcelain-subtle">
++          {reduced ? "static" : playing && view === "film" ? "rec" : "paused"}
++        </span>
+       </div>
+ 
+       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-carbon/80 px-3 py-2">
+         <div className="flex flex-wrap items-center gap-2">
+-          <div className="flex rounded-md border border-border p-0.5">
+-            <button
+-              type="button"
+-              onClick={() => setScenario("success")}
+-              aria-pressed={scenario === "success"}
+-              data-demo-path="success"
+-              className={cn(
+-                "min-h-9 rounded px-2.5 py-1 text-xs transition-colors",
+-                scenario === "success"
+-                  ? "bg-slate text-porcelain"
+-                  : "text-porcelain-muted hover:text-porcelain",
+-              )}
+-            >
+-              Commit path
+-            </button>
+-            <button
+-              type="button"
+-              onClick={() => setScenario("abort")}
+-              aria-pressed={scenario === "abort"}
+-              data-demo-path="abort"
+-              className={cn(
+-                "min-h-9 rounded px-2.5 py-1 text-xs transition-colors",
+-                scenario === "abort"
+-                  ? "bg-slate text-porcelain"
+-                  : "text-porcelain-muted hover:text-porcelain",
+-              )}
+-            >
+-              Abort path
+-            </button>
++          <div className="flex flex-wrap rounded-md border border-border p-0.5">
++            {(
++              [
++                ["commit", "Commit"],
++                ["denial", "Pre-effect denial"],
++                ["rollback", "Post-stage rollback"],
++              ] as const
++            ).map(([id, label]) => (
++              <button
++                key={id}
++                type="button"
++                onClick={() => setScenarioId(id)}
++                aria-pressed={scenarioId === id}
++                data-demo-path={id}
++                className={cn(
++                  "min-h-9 rounded px-2.5 py-1 text-xs transition-colors",
++                  scenarioId === id
++                    ? "bg-slate text-porcelain"
++                    : "text-porcelain-muted hover:text-porcelain",
++                )}
++              >
++                {label}
++              </button>
++            ))}
+           </div>
+           <div className="flex rounded-md border border-border p-0.5">
+             <button
+               type="button"
+               onClick={() => setView("film")}
+               className={cn(
+-                "min-h-9 rounded px-2.5 py-1 text-xs transition-colors",
+-                view === "film"
+-                  ? "bg-slate text-porcelain"
+-                  : "text-porcelain-muted hover:text-porcelain",
++                "min-h-9 rounded px-2.5 py-1 text-xs",
++                view === "film" ? "bg-slate text-porcelain" : "text-porcelain-muted",
+               )}
+             >
+               Film
+@@ -419,51 +195,55 @@ export function DemoPlayer({ className }: { className?: string }) {
+                 setPlaying(false);
+               }}
+               className={cn(
+-                "min-h-9 rounded px-2.5 py-1 text-xs transition-colors",
++                "min-h-9 rounded px-2.5 py-1 text-xs",
+                 view === "compare"
+                   ? "bg-slate text-porcelain"
+-                  : "text-porcelain-muted hover:text-porcelain",
++                  : "text-porcelain-muted",
+               )}
+             >
+               Compare paths
+             </button>
+           </div>
+         </div>
+-
+         <div className="flex items-center gap-1">
+           <button
+             type="button"
+             onClick={() => seekTo(0)}
+-            className="inline-flex size-9 items-center justify-center rounded-md text-porcelain-subtle transition-colors hover:bg-slate hover:text-porcelain disabled:opacity-40"
+-            aria-label="Restart film"
++            className="inline-flex size-9 items-center justify-center rounded-md text-porcelain-subtle hover:bg-slate hover:text-porcelain"
++            aria-label="Restart"
+             disabled={view === "compare"}
+           >
+-            <SkipBack className="size-3.5" aria-hidden />
++            <SkipBack className="size-3.5" />
+           </button>
+           <button
+             type="button"
+             onClick={() => setPlaying((p) => !p)}
+-            className="inline-flex size-9 items-center justify-center rounded-md text-porcelain-subtle transition-colors hover:bg-slate hover:text-porcelain disabled:opacity-40"
++            className="inline-flex size-9 items-center justify-center rounded-md text-porcelain-subtle hover:bg-slate hover:text-porcelain"
+             aria-label={playing ? "Pause" : "Play"}
+             disabled={reduced || view === "compare"}
+           >
+-            {playing ? (
+-              <Pause className="size-3.5" aria-hidden />
+-            ) : (
+-              <Play className="size-3.5" aria-hidden />
+-            )}
++            {playing ? <Pause className="size-3.5" /> : <Play className="size-3.5" />}
+           </button>
+         </div>
+       </div>
+ 
++      <div className="border-b border-border bg-void/80 px-3 py-2 text-xs text-porcelain-muted">
++        <span className="font-mono text-porcelain-subtle">Scenario · </span>
++        {scenario.summary}
++        <span className="mx-2 text-porcelain-subtle">·</span>
++        <span className="font-mono text-[10px] uppercase tracking-wider text-porcelain-subtle">
++          {trust.symbol} {trust.short}
++        </span>
++      </div>
++
+       {view === "film" ? (
+         <div className="border-b border-border bg-void px-3 py-2.5">
+           <div className="flex items-center justify-between gap-2">
+             <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-porcelain-subtle">
+-              Scrub timeline
++              Scrub timeline · master clock
+             </p>
+             <p className="font-mono text-[10px] tabular-nums text-porcelain-muted">
+-              {stepIndex + 1}/{script.length} · {step.label}
++              {stepIndex + 1}/{script.length} · {step.stage}
+             </p>
+           </div>
+           <input
+@@ -474,8 +254,7 @@ export function DemoPlayer({ className }: { className?: string }) {
+             value={stepIndex}
+             onChange={(e) => seekTo(Number(e.target.value))}
+             className="demo-scrubber mt-2 w-full"
+-            aria-label="Seek Change Gate phase"
+-            aria-valuetext={`${step.label}, step ${stepIndex + 1} of ${script.length}`}
++            aria-label="Seek phase"
+           />
+           <div className="mt-1.5 flex justify-between gap-1">
+             {script.map((s, i) => (
+@@ -484,22 +263,17 @@ export function DemoPlayer({ className }: { className?: string }) {
+                 type="button"
+                 onClick={() => seekTo(i)}
+                 className={cn(
+-                  "min-h-8 flex-1 truncate rounded px-0.5 font-mono text-[9px] uppercase tracking-wide transition-colors",
+-                  i === stepIndex
+-                    ? "text-porcelain"
+-                    : i < stepIndex
+-                      ? "text-porcelain-muted hover:text-porcelain"
+-                      : "text-porcelain-subtle hover:text-porcelain-muted",
++                  "min-h-8 flex-1 truncate rounded px-0.5 font-mono text-[9px] uppercase",
++                  i === stepIndex ? "text-porcelain" : "text-porcelain-subtle",
+                 )}
+-                aria-current={i === stepIndex ? "step" : undefined}
+               >
+-                {s.tick}
++                {s.stage.slice(0, 4)}
+               </button>
+             ))}
+           </div>
+           <div className="mt-2 h-0.5 overflow-hidden rounded-full bg-slate">
+             <div
+-              className="h-full bg-institution transition-[width] duration-300 ease-out"
++              className="h-full bg-institution transition-[width] duration-300"
+               style={{ width: `${progress}%` }}
+             />
+           </div>
+@@ -507,329 +281,156 @@ export function DemoPlayer({ className }: { className?: string }) {
+       ) : null}
+ 
+       {view === "compare" ? (
+-        <ComparePaths
+-          onSelectPath={(path) => {
+-            setScenario(path);
+-            setView("film");
+-            setStepIndex(0);
+-            setPlaying(true);
+-          }}
+-        />
++        <div className="grid gap-0 md:grid-cols-3">
++          {(
++            [
++              ["commit", "Commit", "Authority granted → emit success evidence"],
++              [
++                "denial",
++                "Pre-effect denial",
++                "Capability denied · no authorized host effect · rollback not asserted",
++              ],
++              [
++                "rollback",
++                "Post-stage rollback",
++                "Mutation staged · validator fails · S₀ restored",
++              ],
++            ] as const
++          ).map(([id, title, body]) => (
++            <button
++              key={id}
++              type="button"
++              onClick={() => {
++                setScenarioId(id);
++                setView("film");
++                setStepIndex(0);
++                setPlaying(true);
++              }}
++              className="border-b border-border p-4 text-left hover:bg-slate/30 md:border-b-0 md:border-r last:md:border-r-0"
++            >
++              <p className="font-mono text-[10px] uppercase tracking-wider text-porcelain-subtle">
++                {title}
++              </p>
++              <p className="mt-2 text-sm text-porcelain-muted">{body}</p>
++              <p className="mt-3 font-mono text-[10px] text-institution">
++                Play this path →
++              </p>
++            </button>
++          ))}
++        </div>
+       ) : (
+-        <div className="grid gap-0 lg:grid-cols-[1.05fr_0.95fr]">
+-          <div className="border-b border-border p-4 lg:border-b-0 lg:border-r">
+-            <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.14em] text-porcelain-subtle">
+-              Transaction pipeline · click to seek
+-            </p>
+-            <ol className="space-y-1.5">
+-              {script.map((s, i) => {
+-                const active = i === stepIndex;
+-                const done = i < stepIndex;
+-                return (
+-                  <li key={`${scenario}-${s.id}`}>
+-                    <button
+-                      type="button"
+-                      onClick={() => seekTo(i)}
+-                      aria-current={active ? "step" : undefined}
+-                      className={cn(
+-                        "flex w-full items-center gap-2 rounded-md border px-2.5 py-2 text-left transition-[background-color,border-color,opacity] duration-200",
+-                        active &&
+-                          "border-institution/50 bg-institution/15 demo-node-active",
+-                        done &&
+-                          !active &&
+-                          "border-border/80 bg-slate/40 opacity-90",
+-                        !done &&
+-                          !active &&
+-                          "border-border/50 bg-transparent opacity-50 hover:opacity-80",
+-                      )}
+-                    >
+-                      <span
++        <>
++          <div className="grid gap-0 lg:grid-cols-[1.05fr_0.95fr]">
++            <div className="border-b border-border p-4 lg:border-b-0 lg:border-r">
++              <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.14em] text-porcelain-subtle">
++                Event stream · click to seek
++              </p>
++              <ol className="space-y-1.5">
++                {script.map((s, i) => {
++                  const active = i === stepIndex;
++                  const done = i < stepIndex;
++                  return (
++                    <li key={s.id}>
++                      <button
++                        type="button"
++                        onClick={() => seekTo(i)}
+                         className={cn(
+-                          "flex size-5 shrink-0 items-center justify-center rounded-full font-mono text-[10px]",
+-                          active && "bg-institution text-porcelain",
+-                          done && !active && "bg-oxide/30 text-oxide-fg",
+-                          !done &&
+-                            !active &&
+-                            "bg-slate text-porcelain-subtle",
++                          "flex w-full items-center gap-2 rounded-md border px-2.5 py-2 text-left text-sm",
++                          active && "border-institution/50 bg-institution/15",
++                          done && !active && "border-border/80 bg-slate/40",
++                          !done && !active && "border-border/50 opacity-50",
+                         )}
+                       >
+-                        {done && !active ? "✓" : String(i + 1)}
+-                      </span>
+-                      <span className="min-w-0 flex-1 truncate text-sm text-porcelain">
+-                        {s.label}
+-                      </span>
+-                      <MaturityBadge
+-                        status={s.status}
+-                        compact
+-                        showLabel={false}
+-                      />
+-                    </button>
+-                  </li>
+-                );
+-              })}
+-            </ol>
+-          </div>
++                        <span className="font-mono text-[10px] text-porcelain-subtle">
++                          {String(i + 1)}
++                        </span>
++                        <span className="min-w-0 flex-1 truncate text-porcelain">
++                          {s.stage} · {s.type}
++                        </span>
++                        <MaturityBadge status={s.maturity} compact showLabel={false} />
++                      </button>
++                    </li>
++                  );
++                })}
++              </ol>
++            </div>
+ 
+-          <div className="flex flex-col p-4">
+-            <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-porcelain-subtle">
+-              Runtime console
+-            </p>
+-            <div className="min-h-[7.5rem] rounded-md border border-border bg-carbon/80 p-3 font-mono text-[11px] leading-relaxed">
+-              {logs.length === 0 ? (
+-                <p className="text-porcelain-subtle">awaiting transaction…</p>
+-              ) : (
++            <div className="flex flex-col p-4">
++              <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.14em] text-porcelain-subtle">
++                Runtime console
++              </p>
++              <div className="min-h-[7.5rem] rounded-md border border-border bg-carbon/80 p-3 font-mono text-[11px]">
+                 <ul className="space-y-1.5">
+-                  {logs.map((line, i) => (
++                  {projected.events.map((e, i) => (
+                     <li
+-                      key={`${line}-${i}`}
++                      key={e.id}
+                       className={cn(
+                         "text-porcelain-muted",
+-                        i === logs.length - 1 && "text-porcelain",
++                        i === projected.events.length - 1 && "text-porcelain",
+                       )}
+                     >
+-                      <span className="text-institution">›</span> {line}
++                      <span className="text-institution">›</span> {e.log}
+                     </li>
+                   ))}
+                 </ul>
+-              )}
+-            </div>
+-
+-            <div
+-              className={cn(
+-                "mt-3 flex flex-1 flex-col rounded-md border p-3 transition-[border-color,background-color] duration-300",
+-                atEmit
+-                  ? "border-archive/40 bg-archive/10 demo-capsule-glow"
+-                  : "border-border bg-slate/30",
+-              )}
+-            >
+-              <div className="flex flex-wrap items-center justify-between gap-2">
+-                <p className="font-mono text-[10px] uppercase tracking-wider text-porcelain-subtle">
+-                  {atEmit
+-                    ? "Proof Capsule · field walkthrough"
+-                    : "Proof Capsule"}
+-                </p>
+-                {branchLabel === "abort" ? (
+-                  <span className="rounded bg-controlled-red/20 px-1.5 py-0.5 font-mono text-[10px] text-controlled-red-fg">
+-                    abort
+-                  </span>
+-                ) : branchLabel === "commit" ? (
+-                  <span className="rounded bg-oxide/20 px-1.5 py-0.5 font-mono text-[10px] text-oxide-fg">
+-                    commit
+-                  </span>
+-                ) : (
+-                  <span className="font-mono text-[10px] text-porcelain-subtle">
+-                    pending
+-                  </span>
+-                )}
+               </div>
+-
+-              {!atEmit ? (
+-                <>
+-                  <p className="mt-2 text-xs leading-relaxed text-porcelain-muted">
+-                    {step.detail}
++              <div className="mt-3 rounded-md border border-border bg-slate/30 p-3">
++                <div className="flex flex-wrap items-center justify-between gap-2">
++                  <p className="font-mono text-[10px] uppercase text-porcelain-subtle">
++                    {atEmit ? "Evidence emit" : "Phase detail"}
+                   </p>
+-                  <p className="mt-2 font-mono text-[10px] text-porcelain-subtle">
+-                    Capsule walkthrough unlocks on Emit
+-                  </p>
+-                </>
+-              ) : (
+-                <div className="mt-2 flex min-h-0 flex-1 flex-col gap-2">
+-                  <div
+-                    className="flex flex-wrap gap-1"
+-                    role="tablist"
+-                    aria-label="Capsule fields"
+-                  >
+-                    {walkthroughFields.map((f, i) => (
+-                      <button
+-                        key={f.path}
+-                        type="button"
+-                        role="tab"
+-                        aria-selected={i === fieldIndex}
+-                        onClick={() => {
+-                          setFieldIndex(i);
+-                          setPlaying(false);
+-                        }}
+-                        className={cn(
+-                          "rounded border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wide transition-colors",
+-                          i === fieldIndex
+-                            ? "border-archive/50 bg-archive/20 text-porcelain"
+-                            : "border-border/60 text-porcelain-subtle hover:text-porcelain-muted",
+-                        )}
+-                      >
+-                        {f.path.split(".").pop()}
+-                      </button>
+-                    ))}
+-                  </div>
+-
+-                  {activeField ? (
+-                    <div
+-                      role="tabpanel"
+-                      className="rounded border border-border/60 bg-void/50 p-2.5"
++                  {branchLabel ? (
++                    <span
++                      className={cn(
++                        "rounded px-1.5 py-0.5 font-mono text-[10px]",
++                        branchLabel === "commit" && "bg-oxide/20 text-oxide-fg",
++                        (branchLabel === "abort" || branchLabel === "deny") &&
++                          "bg-controlled-red/20 text-controlled-red-fg",
++                      )}
+                     >
+-                      <div className="flex flex-wrap items-baseline justify-between gap-2">
+-                        <p className="text-sm font-medium text-porcelain">
+-                          {activeField.explainer?.title ?? activeField.path}
+-                        </p>
+-                        <code className="font-mono text-[10px] text-porcelain-subtle">
+-                          {activeField.path}
+-                        </code>
+-                      </div>
+-                      <p className="mt-1 font-mono text-[11px] text-oxide">
+-                        {activeField.preview}
+-                      </p>
+-                      <p className="mt-2 text-xs leading-relaxed text-porcelain-muted">
+-                        {activeField.explainer?.whyItExists}
+-                      </p>
+-                      {activeField.explainer?.doesNotMean ? (
+-                        <p className="mt-1.5 border-l-2 border-controlled-red/40 pl-2 text-[11px] leading-relaxed text-porcelain-subtle">
+-                          Does not mean: {activeField.explainer.doesNotMean}
+-                        </p>
+-                      ) : null}
+-                    </div>
++                      {branchLabel}
++                    </span>
+                   ) : null}
+-
+-                  <div className="mt-auto flex flex-wrap gap-2 pt-1">
+-                    <Button
+-                      type="button"
+-                      size="sm"
+-                      variant="outline"
+-                      onClick={downloadCapsule}
+-                      className="min-h-9"
+-                    >
+-                      <Download className="size-3.5" aria-hidden />
+-                      Download capsule JSON
+-                    </Button>
+-                  </div>
+                 </div>
+-              )}
++                <p className="mt-2 text-xs leading-relaxed text-porcelain-muted">
++                  {step.detail}
++                </p>
++                {scenarioId === "denial" && stepIndex >= 2 ? (
++                  <p className="mt-2 border-l-2 border-controlled-red/40 pl-2 text-[11px] text-porcelain-subtle">
++                    {DENIAL_SCOPED_COPY}
++                  </p>
++                ) : null}
++                {atEmit ? (
++                  <Button
++                    type="button"
++                    size="sm"
++                    variant="outline"
++                    onClick={downloadCapsule}
++                    className="mt-3 min-h-9"
++                  >
++                    <Download className="size-3.5" />
++                    Download fixture JSON
++                  </Button>
++                ) : null}
++              </div>
+             </div>
+           </div>
+-        </div>
++          <ExecutionObservatoryLenses
++            scenarioId={scenarioId}
++            stepIndex={stepIndex}
++          />
++        </>
+       )}
+ 
+       <div className="border-t border-border bg-carbon px-3 py-2.5">
+         <p className="text-[11px] leading-relaxed text-porcelain-subtle">
+           <span className="text-porcelain-muted">Stage 0 · </span>
+-          Demo uses Implemented Foundations for snapshot, capability denial, and
+-          capsule emission. Full Change Gate commit barrier remains In
+-          Integration. Downloaded fixtures are structure-identical to the
+-          ProofCapsule schema; signatures are demo placeholders, not production
+-          trust anchors.
++          Lenses project one immutable event stream. Pre-effect denial never
++          claims rollback; post-stage rollback restores guest state only. External
++          effects are not proven absent. Demo signatures are not production trust
++          anchors.
+         </p>
+       </div>
+     </div>
+   );
+ }
+-
+-function ComparePaths({
+-  onSelectPath,
+-}: {
+-  onSelectPath: (path: "success" | "abort") => void;
+-}) {
+-  return (
+-    <div className="grid gap-0 md:grid-cols-2">
+-      <PathColumn
+-        title="Commit path"
+-        tone="commit"
+-        steps={[
+-          "Propose repo change",
+-          "Stage + snapshot",
+-          "Bind WriteFile capability",
+-          "Validators pass",
+-          "Commit surviving effects",
+-          "Emit success capsule",
+-        ]}
+-        statuses={[
+-          "TARGET",
+-          "CURRENT",
+-          "CURRENT",
+-          "IN_DEVELOPMENT",
+-          "IN_DEVELOPMENT",
+-          "CURRENT",
+-        ]}
+-        onOpen={() => onSelectPath("success")}
+-      />
+-      <PathColumn
+-        title="Abort path"
+-        tone="abort"
+-        steps={[
+-          "Propose network tool",
+-          "Stage + snapshot",
+-          "Network capability DENIED",
+-          "Rollback required",
+-          "Abort · restore snapshot",
+-          "Emit failure capsule",
+-        ]}
+-        statuses={[
+-          "TARGET",
+-          "CURRENT",
+-          "CURRENT",
+-          "IN_DEVELOPMENT",
+-          "CURRENT",
+-          "CURRENT",
+-        ]}
+-        onOpen={() => onSelectPath("abort")}
+-      />
+-    </div>
+-  );
+-}
+-
+-function PathColumn({
+-  title,
+-  tone,
+-  steps,
+-  statuses,
+-  onOpen,
+-}: {
+-  title: string;
+-  tone: "commit" | "abort";
+-  steps: string[];
+-  statuses: InternalStatus[];
+-  onOpen: () => void;
+-}) {
+-  return (
+-    <div
+-      className={cn(
+-        "border-b border-border p-4 md:border-b-0",
+-        tone === "abort" ? "md:border-l md:border-border" : "",
+-      )}
+-    >
+-      <div className="mb-3 flex items-center justify-between gap-2">
+-        <p
+-          className={cn(
+-            "font-mono text-[10px] uppercase tracking-[0.12em]",
+-            tone === "abort" ? "text-controlled-red-fg/90" : "text-oxide-fg/90",
+-          )}
+-        >
+-          {title}
+-        </p>
+-        <button
+-          type="button"
+-          onClick={onOpen}
+-          className="font-mono text-[10px] uppercase tracking-wider text-porcelain-subtle underline-offset-2 hover:text-porcelain hover:underline"
+-        >
+-          Play this path
+-        </button>
+-      </div>
+-      <ol className="space-y-1.5">
+-        {steps.map((label, i) => (
+-          <li
+-            key={label}
+-            className={cn(
+-              "flex items-center gap-2 rounded-md border px-2.5 py-2",
+-              tone === "abort"
+-                ? "border-controlled-red/20 bg-controlled-red/5"
+-                : "border-oxide/20 bg-oxide/5",
+-            )}
+-          >
+-            <span className="font-mono text-[10px] tabular-nums text-porcelain-subtle">
+-              {String(i + 1).padStart(2, "0")}
+-            </span>
+-            <span className="min-w-0 flex-1 text-sm text-porcelain">{label}</span>
+-            <MaturityBadge status={statuses[i]!} compact showLabel={false} />
+-          </li>
+-        ))}
+-      </ol>
+-    </div>
+-  );
+-}
+diff --git a/src/components/home/pinned-cinematic.tsx b/src/components/home/pinned-cinematic.tsx
+index 5dcc739..5acaf2c 100644
+--- a/src/components/home/pinned-cinematic.tsx
++++ b/src/components/home/pinned-cinematic.tsx
+@@ -1,6 +1,10 @@
+ import { useEffect, useRef, useState } from "react";
+ import { Link } from "@tanstack/react-router";
+-import { CommitBoundaryCanvas } from "@/components/home/commit-boundary-canvas";
++import { CognitiveHypervisor } from "@/components/visual-system/cognitive-hypervisor";
++import {
++  hypervisorPhaseFromProgress,
++  type HypervisorPhase,
++} from "@/components/visual-system/phase-copy";
+ import { Button } from "@/components/ui/button";
+ import { MaturityBadge } from "@/components/site/maturity-badge";
+ import { HERO, BRAND, POSITIONING, PROBLEM, claimsRegistry } from "@/content";
+@@ -21,15 +25,15 @@ function phaseOf(p: number) {
+   return { id: "emit", label: "Emit" };
+ }
+ 
+-/** Shared content gutter: clears txn rail spine at xl+ */
+ const CONTENT_GUTTER =
+   "px-4 pb-24 pt-20 sm:px-8 lg:px-12 xl:pl-[var(--txn-content-gutter)] xl:pr-10";
+ 
+ const LAYER_ACTIVE = 0.1;
+ 
+ /**
+- * Sticky full-viewport cinematic continuum for Intent → Gap.
+- * Direction 2: one continuous forensic instrument (not cards/bento).
++ * Sticky continuum Intent → Gap.
++ * Primary instrument: Cognitive Hypervisor (product-native SVG cutaway).
++ * Forensic Canvas demoted — not rendered as prestige hero.
+  */
+ export function PinnedCinematic({
+   maturityCounts,
+@@ -41,9 +45,11 @@ export function PinnedCinematic({
+   const gapLayerRef = useRef<HTMLDivElement>(null);
+   const typeSafeRef = useRef<HTMLDivElement>(null);
+   const reduced = useReducedMotion();
+-  // Reduced motion: complete composed state (decide+emit with both exits + capsule)
+   const [progress, setProgress] = useState(reduced ? 0.94 : 0.04);
+   const [phase, setPhase] = useState(phaseOf(reduced ? 0.94 : 0.04));
++  const [manualPhase, setManualPhase] = useState<HypervisorPhase | null>(null);
++  const [inspectionMode, setInspectionMode] = useState(false);
++  const lastScrollProgress = useRef(progress);
+ 
+   useEffect(() => {
+     if (reduced) {
+@@ -61,6 +67,12 @@ export function PinnedCinematic({
+       const p = clamp01(-rect.top / total);
+       setProgress(p);
+       setPhase(phaseOf(p));
++      // Resume scroll drive when user scrolls after manual inspection
++      if (inspectionMode && Math.abs(p - lastScrollProgress.current) > 0.02) {
++        setInspectionMode(false);
++        setManualPhase(null);
++      }
++      lastScrollProgress.current = p;
+     };
+     const schedule = () => {
+       if (!frame) frame = requestAnimationFrame(measure);
+@@ -73,9 +85,8 @@ export function PinnedCinematic({
+       window.removeEventListener("resize", schedule);
+       if (frame) cancelAnimationFrame(frame);
+     };
+-  }, [reduced]);
++  }, [reduced, inspectionMode]);
+ 
+-  // Publish type-safe column geometry for canvas mask (no instrument under copy)
+   useEffect(() => {
+     const publish = () => {
+       const plane = typeSafeRef.current;
+@@ -85,11 +96,8 @@ export function PinnedCinematic({
+       if (!plane || !sticky) return;
+       const pr = plane.getBoundingClientRect();
+       const sr = sticky.getBoundingClientRect();
+-      // On portrait, type plane is lower band — horizontal type-safe width is 0
+       const portrait = window.innerHeight > window.innerWidth * 0.95;
+-      const right = portrait
+-        ? 0
+-        : Math.max(0, pr.right - sr.left + 12);
++      const right = portrait ? 0 : Math.max(0, pr.right - sr.left + 12);
+       sticky.style.setProperty("--type-safe-right", `${right}px`);
+       document.documentElement.style.setProperty(
+         "--type-safe-right",
+@@ -127,24 +135,22 @@ export function PinnedCinematic({
+             ? 1 - (progress - 0.55) / 0.09
+             : 0;
+   const exitOpacity = reduced ? 0 : clamp01((progress - 0.82) / 0.12);
+-  // Dual exits visible through entire Decide window (widened from 0.62)
+   const showDualExits = reduced || progress >= 0.58;
+ 
+   const intentActive = intentOpacity >= LAYER_ACTIVE;
+   const gapActive = gapOpacity >= LAYER_ACTIVE;
+ 
+-  // When a narrative layer deactivates, release any focus trapped inside it.
++  const scrollPhase = hypervisorPhaseFromProgress(
++    reduced ? 0.94 : progress,
++    false,
++  );
++  const activeHypervisorPhase = manualPhase ?? scrollPhase;
++
+   useEffect(() => {
+     const active = document.activeElement;
+     if (!(active instanceof HTMLElement)) return;
+-    const intentEl = intentLayerRef.current;
+-    const gapEl = gapLayerRef.current;
+-    if (intentEl?.contains(active) && !intentActive) {
+-      active.blur();
+-    }
+-    if (gapEl?.contains(active) && !gapActive) {
+-      active.blur();
+-    }
++    if (intentLayerRef.current?.contains(active) && !intentActive) active.blur();
++    if (gapLayerRef.current?.contains(active) && !gapActive) active.blur();
+   }, [intentActive, gapActive]);
+ 
+   return (
+@@ -154,30 +160,48 @@ export function PinnedCinematic({
+       className="relative"
+       style={{ height: reduced ? "100dvh" : "320vh" }}
+       data-testid="forensic-instrument"
+-      data-instrument="cross-section"
++      data-instrument="cognitive-hypervisor"
+       data-pin-progress={progress.toFixed(3)}
+       data-pin-phase={phase.id}
++      data-control-mode={inspectionMode ? "manual" : "scroll"}
+       data-reduced-motion={reduced ? "true" : "false"}
+-      aria-label="Transactional change gate cross-section continuum"
++      aria-label="Cognitive Hypervisor controlled-transaction continuum"
+     >
+       <div
+         className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-void"
+         data-type-safe-host
+       >
+-        <CommitBoundaryCanvas
+-          progress={progress}
+-          className="absolute inset-0 h-full w-full"
+-        />
++        <div className="absolute inset-0 z-0">
++          <CognitiveHypervisor
++            progress={progress}
++            phase={activeHypervisorPhase}
++            reducedMotion={reduced}
++            interactive
++            onPhaseChange={(p) => {
++              setManualPhase(p);
++              setInspectionMode(true);
++              lastScrollProgress.current = progress;
++            }}
++            className="h-full w-full"
++          />
++        </div>
++        {inspectionMode ? (
++          <p
++            className="pointer-events-none absolute bottom-3 left-1/2 z-[35] -translate-x-1/2 rounded-md border border-institution/40 bg-void/90 px-2 py-1 font-mono text-[10px] text-porcelain-muted"
++            role="status"
++            aria-live="polite"
++          >
++            Manual inspection · scroll to resume
++          </p>
++        ) : null}
+ 
+-        {/* Type-safe opaque plane — desktop left column; mobile lower band only */}
+         <div
+           ref={typeSafeRef}
+           data-testid="type-safe-plane"
+           className={cn(
+             "pointer-events-none absolute z-[1]",
+-            // Mobile: lower half only so upper instrument stays visible
+-            "inset-x-0 bottom-0 top-[42%] sm:top-0 sm:bottom-0 sm:left-0 sm:right-auto",
+-            "w-full sm:max-w-[min(100%,36rem)] xl:max-w-[min(42%,32rem)]",
++            "inset-x-0 bottom-0 top-[48%] sm:top-0 sm:bottom-0 sm:left-0 sm:right-auto",
++            "w-full sm:max-w-[min(100%,34rem)] xl:max-w-[min(38%,30rem)]",
+             "xl:pl-[var(--txn-content-gutter)]",
+           )}
+           aria-hidden
+@@ -193,40 +217,32 @@ export function PinnedCinematic({
+             className="hidden h-full w-full sm:block"
+             style={{
+               background:
+-                "linear-gradient(90deg, var(--color-void) 0%, var(--color-void) 78%, color-mix(in oklab, var(--color-void) 85%, transparent) 92%, transparent 100%)",
++                "linear-gradient(90deg, var(--color-void) 0%, var(--color-void) 72%, color-mix(in oklab, var(--color-void) 80%, transparent) 90%, transparent 100%)",
+             }}
+           />
+         </div>
+ 
+-        {/* Bottom read band for mobile / chrome */}
+         <div
+-          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-36 bg-gradient-to-t from-void via-void/70 to-transparent md:h-28"
++          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-36 bg-gradient-to-t from-void via-void/80 to-transparent md:h-32"
+           aria-hidden
+         />
+ 
+-        {/* Intent copy — inert when not the active narrative layer */}
++        {/* Intent */}
+         <div
+           ref={intentLayerRef}
+           data-narrative-layer="intent"
+           data-narrative-active={intentActive ? "true" : "false"}
+           className={cn(
+-            "absolute inset-0 z-[2] flex flex-col justify-end sm:justify-center",
++            "absolute inset-x-0 bottom-0 top-12 z-[2] flex flex-col justify-end sm:justify-center sm:top-12",
+             CONTENT_GUTTER,
+-            "pb-28 transition-opacity duration-300 sm:pb-24",
++            "pb-32 transition-opacity duration-300 sm:pb-28",
+             !intentActive && "pointer-events-none",
+           )}
+           style={{ opacity: intentOpacity }}
+           aria-hidden={!intentActive}
+           {...(!intentActive ? ({ inert: true } as { inert: boolean }) : {})}
+         >
+-          <div
+-            className="max-w-xl space-y-5 rounded-lg px-1 py-2 sm:px-0"
+-            style={{
+-              // Solid material plate under type — not glass/card chrome
+-              background:
+-                "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--color-void) 92%, transparent) 8%, color-mix(in oklab, var(--color-void) 96%, transparent) 100%)",
+-            }}
+-          >
++          <div className="max-w-xl space-y-5 px-1 py-2 sm:px-0">
+             <div className="space-y-2">
+               <p className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-porcelain-subtle">
+                 {HERO.categoryLabel}
+@@ -243,22 +259,18 @@ export function PinnedCinematic({
+                 </span>
+               </div>
+             </div>
+-
+             <h1
+               id="hero-headline"
+               className="text-hero text-balance font-medium tracking-tight text-porcelain"
+             >
+               {HERO.headline}
+             </h1>
+-
+             <p className="max-w-prose text-pretty text-base leading-relaxed text-porcelain-muted sm:text-[1.05rem]">
+               {HERO.supportingDefinition}
+             </p>
+-
+             <p className="max-w-prose border-l-2 border-signal/50 pl-3 text-sm leading-relaxed text-porcelain-subtle">
+               {HERO.lossLine}
+             </p>
+-
+             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+               <Button asChild variant="default" size="lg">
+                 <a href="#problem">See the control gap</a>
+@@ -267,7 +279,6 @@ export function PinnedCinematic({
+                 <a href={HERO.primaryCta.href}>{HERO.primaryCta.label}</a>
+               </Button>
+             </div>
+-
+             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+               <a
+                 href={HERO.modelCta.href}
+@@ -288,28 +299,22 @@ export function PinnedCinematic({
+           </div>
+         </div>
+ 
+-        {/* Gap copy — inert when not active */}
++        {/* Gap */}
+         <div
+           ref={gapLayerRef}
+           data-narrative-layer="gap"
+           data-narrative-active={gapActive ? "true" : "false"}
+           className={cn(
+-            "absolute inset-0 z-[2] flex flex-col justify-end sm:justify-center",
++            "absolute inset-x-0 bottom-0 top-12 z-[2] flex flex-col justify-end sm:justify-center sm:top-12",
+             CONTENT_GUTTER,
+-            "pb-28 transition-opacity duration-300 sm:pb-24",
++            "pb-32 transition-opacity duration-300 sm:pb-28",
+             !gapActive && "pointer-events-none",
+           )}
+           style={{ opacity: gapOpacity }}
+           aria-hidden={!gapActive}
+           {...(!gapActive ? ({ inert: true } as { inert: boolean }) : {})}
+         >
+-          <div
+-            className="max-w-lg space-y-4 rounded-lg px-1 py-2 sm:px-0"
+-            style={{
+-              background:
+-                "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--color-void) 92%, transparent) 8%, color-mix(in oklab, var(--color-void) 96%, transparent) 100%)",
+-            }}
+-          >
++          <div className="max-w-lg space-y-4 px-1 py-2 sm:px-0">
+             <p className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-porcelain-subtle">
+               The control gap
+             </p>
+@@ -339,7 +344,6 @@ export function PinnedCinematic({
+           </div>
+         </div>
+ 
+-        {/* DOM capsule silhouette — required for reduced-motion composed state */}
+         {(reduced || progress > 0.82) && (
+           <div
+             data-testid="proof-capsule-silhouette"
+@@ -347,7 +351,6 @@ export function PinnedCinematic({
+             className={cn(
+               "pointer-events-none absolute z-[5] rounded-md border border-archive-ink/25 bg-archive px-3 py-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.7)]",
+               "right-4 bottom-32 sm:right-10 md:right-[10%] lg:right-[8%]",
+-              !reduced && "opacity-95",
+             )}
+             aria-hidden
+           >
+@@ -372,7 +375,7 @@ export function PinnedCinematic({
+           <div className="mx-auto flex max-w-[72rem] flex-col gap-3 px-4 pb-5 pt-8 sm:flex-row sm:items-end sm:justify-between sm:px-8 lg:px-12 xl:pl-0 xl:pr-10">
+             <div className="space-y-1">
+               <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-porcelain-subtle">
+-                Operating model
++                Operating model · FIG-HYP-01
+               </p>
+               <p
+                 className="font-serif text-lg text-porcelain sm:text-xl"
+@@ -417,11 +420,14 @@ export function PinnedCinematic({
+               </span>
+               <MaturityBadge status="TARGET" compact showLabel />
+               <span className="font-mono text-[9px] uppercase tracking-wider text-porcelain-subtle">
+-                Atmospheric · not evidence
++                Mechanism · not scenery
+               </span>
+             </div>
+           </div>
+-          <div className="h-0.5 w-full bg-carbon" data-testid="hero-progress-spine">
++          <div
++            className="h-0.5 w-full bg-carbon"
++            data-testid="hero-progress-spine"
++          >
+             <div
+               className="h-full bg-institution transition-[width] duration-100 ease-out"
+               style={{ width: `${Math.round(progress * 100)}%` }}
+diff --git a/src/components/home/problem-section.tsx b/src/components/home/problem-section.tsx
+index 5f14f48..f48efe3 100644
+--- a/src/components/home/problem-section.tsx
++++ b/src/components/home/problem-section.tsx
+@@ -1,6 +1,6 @@
+ import { PROBLEM } from "@/content/site-copy";
+ import { SectionHeading } from "@/components/home/section-heading";
+-import { ProblemDemo } from "@/components/home/problem-demo";
++import { CausalControlTrace } from "@/components/visual-system/causal-control-trace";
+ import { Reveal } from "@/components/home/reveal";
+ import { ShieldAlert, GitCommitHorizontal, FileSearch } from "lucide-react";
+ 
+@@ -27,7 +27,7 @@ export function ProblemSection() {
+ 
+         <Reveal delay={60}>
+           <div className="mt-10">
+-            <ProblemDemo />
++            <CausalControlTrace />
+           </div>
+         </Reveal>
+ 
+diff --git a/src/components/site/site-header.tsx b/src/components/site/site-header.tsx
+index b0e9ef3..bc61302 100644
+--- a/src/components/site/site-header.tsx
++++ b/src/components/site/site-header.tsx
+@@ -11,10 +11,10 @@ export function SiteHeader() {
+ 
+   return (
+     <header className="sticky top-0 z-50 border-b border-border bg-void/90 backdrop-blur-md">
+-      <div className="mx-auto flex h-14 max-w-[72rem] items-center gap-4 px-4 sm:px-6">
++      <div className="mx-auto flex h-14 max-w-[72rem] items-center gap-4 overflow-x-hidden px-4 sm:px-6">
+         <Link
+           to="/"
+-          className="flex shrink-0 items-baseline gap-2 font-serif text-base font-medium tracking-tight text-porcelain"
++          className="flex min-h-9 shrink-0 items-center gap-2 font-serif text-base font-medium tracking-tight text-porcelain"
+           onClick={() => setOpen(false)}
+         >
+           {BRAND.product}
+@@ -23,8 +23,9 @@ export function SiteHeader() {
+           </span>
+         </Link>
+ 
++        {/* Desktop nav starts at lg (1024) — md/tablet uses mobile menu to avoid overflow */}
+         <nav
+-          className="ml-auto hidden items-center gap-1 md:flex"
++          className="ml-auto hidden items-center gap-1 lg:flex"
+           aria-label="Primary"
+         >
+           {NAV.primary.map((item) => {
+@@ -35,7 +36,7 @@ export function SiteHeader() {
+                 key={item.href}
+                 to={item.href}
+                 className={cn(
+-                  "rounded-md px-2.5 py-1.5 text-sm transition-colors",
++                  "inline-flex min-h-9 items-center rounded-md px-2.5 py-2 text-sm transition-colors",
+                   active
+                     ? "bg-slate text-porcelain"
+                     : "text-porcelain-muted hover:bg-carbon hover:text-porcelain",
+@@ -47,10 +48,10 @@ export function SiteHeader() {
+           })}
+         </nav>
+ 
+-        <div className="hidden items-center gap-2 md:flex">
++        <div className="hidden items-center gap-2 lg:flex">
+           <Link
+             to="/maturity"
+-            className="text-sm text-porcelain-muted transition-colors hover:text-porcelain"
++            className="inline-flex min-h-9 items-center text-sm text-porcelain-muted transition-colors hover:text-porcelain"
+           >
+             Maturity
+           </Link>
+@@ -58,7 +59,7 @@ export function SiteHeader() {
+             href={BRAND.githubOrg}
+             target="_blank"
+             rel="noreferrer"
+-            className="inline-flex items-center gap-1 text-sm text-porcelain-muted transition-colors hover:text-porcelain"
++            className="inline-flex min-h-9 items-center gap-1 text-sm text-porcelain-muted transition-colors hover:text-porcelain"
+           >
+             GitHub
+             <ExternalLink className="size-3.5 opacity-60" aria-hidden />
+@@ -72,7 +73,7 @@ export function SiteHeader() {
+           type="button"
+           variant="ghost"
+           size="icon"
+-          className="ml-auto md:hidden"
++          className="ml-auto lg:hidden"
+           aria-expanded={open}
+           aria-controls="mobile-nav"
+           aria-label={open ? "Close menu" : "Open menu"}
+@@ -85,7 +86,7 @@ export function SiteHeader() {
+       {open ? (
+         <div
+           id="mobile-nav"
+-          className="border-t border-border bg-carbon md:hidden"
++          className="border-t border-border bg-carbon lg:hidden"
+         >
+           <nav className="mx-auto flex max-w-[72rem] flex-col gap-1 px-4 py-3" aria-label="Mobile">
+             {NAV.primary.map((item) => (
+diff --git a/src/content/index.ts b/src/content/index.ts
+index c4fb740..f94e6ef 100644
+--- a/src/content/index.ts
++++ b/src/content/index.ts
+@@ -7,12 +7,19 @@ export * from "./site-copy";
+ export * from "./maturity";
+ export * from "./change-gate";
+ export * from "./capsules/field-explainers";
++export * from "./trust-taxonomy";
++export * from "./transaction-model";
++export * from "./observatory-scenarios";
++export * from "./integration-scenarios";
++export * from "./benchmark-fixture";
+ 
+ import claimsRegistryJson from "./claims-registry.json";
+ import successCapsule from "./capsules/success.capsule.json";
+ import failureRollbackCapsule from "./capsules/failure-rollback.capsule.json";
++import claimRelationsJson from "./claim-relations.json";
+ 
+ export const claimsRegistry = claimsRegistryJson;
++export const claimRelations = claimRelationsJson;
+ export const sampleCapsules = {
+   success: successCapsule,
+   failureRollback: failureRollbackCapsule,
+diff --git a/src/routes/developers.tsx b/src/routes/developers.tsx
+index 2f29297..1e3ad01 100644
+--- a/src/routes/developers.tsx
++++ b/src/routes/developers.tsx
+@@ -3,8 +3,15 @@ import { ForensicFrame } from "@/components/home/forensic-frame";
+ import { Button } from "@/components/ui/button";
+ import { BRAND } from "@/content/site-copy";
+ import { MaturityBadge } from "@/components/site/maturity-badge";
++import { IntegrationSimulator } from "@/components/developers/integration-simulator";
++import {
++  developersSearchFromRaw,
++  resolveDevelopersSearch,
++} from "@/lib/evaluator-search";
+ 
+ export const Route = createFileRoute("/developers")({
++  validateSearch: (raw: Record<string, unknown>) =>
++    developersSearchFromRaw(raw),
+   component: DevelopersPage,
+ });
+ 
+@@ -36,6 +43,8 @@ const PATHS = [
+ ];
+ 
+ function DevelopersPage() {
++  const search = resolveDevelopersSearch(Route.useSearch());
++  const navigate = Route.useNavigate();
+   return (
+     <main className="mx-auto min-w-0 max-w-[72rem] space-y-10 overflow-x-hidden px-4 py-10 sm:px-6 sm:py-14">
+       <header className="max-w-2xl space-y-4">
+@@ -57,6 +66,30 @@ function DevelopersPage() {
+         </div>
+       </header>
+ 
++      <IntegrationSimulator
++          scenarioId={search.scenario}
++          stepIndex={search.step}
++          architecture={search.architecture}
++          onScenarioChange={(scenario) =>
++            navigate({
++              search: (prev) => ({ ...prev, scenario, step: 0 }),
++              replace: true,
++            })
++          }
++          onStepChange={(step) =>
++            navigate({
++              search: (prev) => ({ ...prev, step }),
++              replace: true,
++            })
++          }
++          onArchitectureChange={(architecture) =>
++            navigate({
++              search: (prev) => ({ ...prev, architecture }),
++              replace: true,
++            })
++          }
++        />
++
+       <ForensicFrame
+         title="Integration paths"
+         refId="DEV-PATH-01"
+diff --git a/src/routes/evidence/benchmarks.tsx b/src/routes/evidence/benchmarks.tsx
+index 73783d4..390a509 100644
+--- a/src/routes/evidence/benchmarks.tsx
++++ b/src/routes/evidence/benchmarks.tsx
+@@ -3,12 +3,21 @@ import { ForensicFrame } from "@/components/home/forensic-frame";
+ import { BRAND } from "@/content/site-copy";
+ import { Button } from "@/components/ui/button";
+ import { MaturityBadge } from "@/components/site/maturity-badge";
++import { BenchmarkWorkbench } from "@/components/evidence/benchmark-workbench";
++import {
++  benchmarksSearchFromRaw,
++  resolveBenchmarksSearch,
++} from "@/lib/evaluator-search";
+ 
+ export const Route = createFileRoute("/evidence/benchmarks")({
++  validateSearch: (raw: Record<string, unknown>) =>
++    benchmarksSearchFromRaw(raw),
+   component: BenchmarksPage,
+ });
+ 
+ function BenchmarksPage() {
++  const search = resolveBenchmarksSearch(Route.useSearch());
++  const navigate = Route.useNavigate();
+   return (
+     <main className="mx-auto min-w-0 max-w-[72rem] space-y-8 overflow-x-hidden px-4 py-10 sm:px-6">
+       <header className="max-w-2xl space-y-3">
+@@ -25,6 +34,27 @@ function BenchmarksPage() {
+         </p>
+       </header>
+ 
++      <BenchmarkWorkbench
++          metricId={search.benchmark}
++          showRaw={search.samples}
++          onMetricChange={(id) =>
++            navigate({
++              search: (prev) => ({ ...prev, benchmark: id }),
++              replace: true,
++            })
++          }
++          onShowRawChange={(samples) =>
++            navigate({
++              search: (prev) => ({
++                ...prev,
++                samples,
++                view: samples ? "samples" : "distribution",
++              }),
++              replace: true,
++            })
++          }
++        />
++
+       <ForensicFrame
+         title="Live measurement surface"
+         refId="BENCH-01 · Nexus CI"
+diff --git a/src/routes/evidence/claims.tsx b/src/routes/evidence/claims.tsx
+index 0798cd2..6bc906d 100644
+--- a/src/routes/evidence/claims.tsx
++++ b/src/routes/evidence/claims.tsx
+@@ -1,4 +1,4 @@
+-import { useMemo, useState } from "react";
++import { useMemo } from "react";
+ import { createFileRoute, Link } from "@tanstack/react-router";
+ import { claimsRegistry } from "@/content";
+ import { MaturityBadge } from "@/components/site/maturity-badge";
+@@ -10,8 +10,15 @@ import {
+ import { Button } from "@/components/ui/button";
+ import { cn } from "@/lib/utils";
+ import { ForensicFrame } from "@/components/home/forensic-frame";
++import { ClaimDependencyGraph } from "@/components/evidence/claim-dependency-graph";
++import {
++  claimsSearchFromRaw,
++  resolveClaimsSearch,
++} from "@/lib/evaluator-search";
+ 
+ export const Route = createFileRoute("/evidence/claims")({
++  validateSearch: (raw: Record<string, unknown>) =>
++    claimsSearchFromRaw(raw),
+   component: ClaimsPage,
+ });
+ 
+@@ -26,11 +33,28 @@ const FILTERS: { id: Filter; label: string }[] = [
+ ];
+ 
+ function ClaimsPage() {
+-  const [filter, setFilter] = useState<Filter>("ALL");
+-  const [query, setQuery] = useState("");
+-  const [openId, setOpenId] = useState<string | null>(
+-    claimsRegistry.capabilities[0]?.id ?? null,
+-  );
++  const rawSearch = Route.useSearch();
++  const search = resolveClaimsSearch(rawSearch);
++  const navigate = Route.useNavigate();
++  const filter = search.status as Filter;
++  const query = search.q;
++  const openId = search.claim;
++
++  const setFilter = (status: Filter) =>
++    navigate({
++      search: (prev) => ({
++        ...prev,
++        status: status === "EXPERIMENTAL" ? "ALL" : status,
++      }),
++      replace: true,
++    });
++  const setQuery = (q: string) =>
++    navigate({ search: (prev) => ({ ...prev, q }), replace: true });
++  const setOpenId = (claim: string | null) =>
++    navigate({
++      search: (prev) => ({ ...prev, claim: claim ?? prev.claim }),
++      replace: true,
++    });
+ 
+   const filtered = useMemo(() => {
+     const q = query.trim().toLowerCase();
+@@ -71,6 +95,39 @@ function ClaimsPage() {
+         </div>
+       </div>
+ 
++      <ClaimDependencyGraph
++        selectedId={openId ?? undefined}
++        onSelect={(id) => setOpenId(id)}
++        lens={
++          search.view === "support"
++            ? "support"
++            : search.view === "blockers" || search.view === "boundaries"
++              ? "blocker"
++              : "all"
++        }
++        currentOnly={!search.targets}
++        onLensChange={(lens) =>
++          navigate({
++            search: (prev) => ({
++              ...prev,
++              view:
++                lens === "support"
++                  ? "support"
++                  : lens === "blocker"
++                    ? "blockers"
++                    : "all",
++            }),
++            replace: true,
++          })
++        }
++        onCurrentOnlyChange={(currentOnly) =>
++          navigate({
++            search: (prev) => ({ ...prev, targets: currentOnly ? false : true }),
++            replace: true,
++          })
++        }
++      />
++
+       <ForensicFrame
+         title="Status legend"
+         refId="REG-CLAIM-LEGEND"
+diff --git a/src/routes/evidence/proof-capsules.tsx b/src/routes/evidence/proof-capsules.tsx
+index 2683d6c..156d31f 100644
+--- a/src/routes/evidence/proof-capsules.tsx
++++ b/src/routes/evidence/proof-capsules.tsx
+@@ -1,6 +1,7 @@
+ import { createFileRoute, Link } from "@tanstack/react-router";
+ import { ProofCapsuleExplorer } from "@/components/explorer/proof-capsule-explorer";
+ import { CapsuleAnatomy } from "@/components/home/capsule-anatomy";
++import { EvidenceLattice } from "@/components/visual-system/evidence-lattice";
+ import { Reveal } from "@/components/home/reveal";
+ import { Button } from "@/components/ui/button";
+ 
+@@ -11,6 +12,24 @@ export const Route = createFileRoute("/evidence/proof-capsules")({
+ function ProofCapsulesPage() {
+   return (
+     <main className="mx-auto min-w-0 max-w-[72rem] space-y-12 overflow-x-hidden px-4 py-10 sm:px-6">
++      <header className="max-w-2xl space-y-3">
++        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-porcelain-subtle">
++          Evidence · Proof Capsules
++        </p>
++        <h1 className="font-serif text-3xl text-porcelain sm:text-4xl">
++          Structured runtime evidence
++        </h1>
++        <p className="text-base leading-relaxed text-porcelain-muted">
++          A Proof Capsule is a binding lattice of observed fields—not a
++          three-dimensional pill. Inspect the lattice, then open fixtures in the
++          Explorer for structural checks.
++        </p>
++      </header>
++
++      <Reveal>
++        <EvidenceLattice />
++      </Reveal>
++
+       <ProofCapsuleExplorer />
+ 
+       <section aria-labelledby="anatomy-heading" className="space-y-4">
+diff --git a/src/routes/index.tsx b/src/routes/index.tsx
+index 8617894..a4558ac 100644
+--- a/src/routes/index.tsx
++++ b/src/routes/index.tsx
+@@ -19,8 +19,14 @@ import {
+   buildMaturityCounts,
+ } from "@/components/home/pinned-cinematic";
+ import { SceneHandoff } from "@/components/home/scene-handoff";
++import {
++  homeSearchFromRaw,
++  resolveHomeSearch,
++} from "@/lib/evaluator-search";
+ 
+ export const Route = createFileRoute("/")({
++  validateSearch: (raw: Record<string, unknown>) =>
++    homeSearchFromRaw(raw),
+   component: HomePage,
+ });
+ 
+@@ -29,6 +35,8 @@ export const Route = createFileRoute("/")({
+  * Intent → Gap (pinned cinematic) → Execute → Model → Evidence → …
+  */
+ function HomePage() {
++  const search = resolveHomeSearch(Route.useSearch());
++  const navigate = Route.useNavigate();
+   const counts = buildMaturityCounts();
+ 
+   return (
+@@ -73,7 +81,16 @@ function HomePage() {
+                 </div>
+               </Reveal>
+               <Reveal delay={80}>
+-                <DemoPlayer />
++                <DemoPlayer
++          scenarioId={search.obs}
++          stepIndex={search.stage}
++          onScenarioChange={(obs) =>
++            navigate({ search: (prev) => ({ ...prev, obs, stage: 0 }), replace: true })
++          }
++          onStepChange={(stage) =>
++            navigate({ search: (prev) => ({ ...prev, stage }), replace: true })
++          }
++ />
+               </Reveal>
+             </div>
+           </TransactionBeatChrome>
+diff --git a/src/routes/maturity.tsx b/src/routes/maturity.tsx
+index 522b85e..eb52280 100644
+--- a/src/routes/maturity.tsx
++++ b/src/routes/maturity.tsx
+@@ -7,14 +7,23 @@ import {
+   type InternalStatus,
+ } from "@/content/maturity";
+ import { Button } from "@/components/ui/button";
++import { CapabilityMaturityTopology } from "@/components/maturity/capability-maturity-topology";
++import {
++  maturitySearchFromRaw,
++  resolveMaturitySearch,
++} from "@/lib/evaluator-search";
+ 
+ export const Route = createFileRoute("/maturity")({
++  validateSearch: (raw: Record<string, unknown>) =>
++    maturitySearchFromRaw(raw),
+   component: MaturityPage,
+ });
+ 
+ function MaturityPage() {
++  const search = resolveMaturitySearch(Route.useSearch());
++  const navigate = Route.useNavigate();
+   return (
+-    <main className="mx-auto max-w-[72rem] px-4 py-10 sm:px-6 sm:py-14">
++    <main className="mx-auto w-full min-w-0 max-w-[72rem] overflow-x-hidden px-4 py-10 sm:px-6 sm:py-14">
+       <div className="mb-8 max-w-2xl space-y-4">
+         <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-porcelain-subtle">
+           Implementation maturity
+@@ -42,7 +51,45 @@ function MaturityPage() {
+         {claimsRegistry.stage0.summary}
+       </div>
+ 
+-      <div className="overflow-x-auto rounded-xl border border-border">
++      <div className="mb-8 min-w-0 max-w-full">
++        <CapabilityMaturityTopology
++          mode={
++            search.view === "all"
++              ? "full"
++              : search.view === "critical"
++                ? "critical"
++                : search.view === "trust"
++                  ? "trust"
++                  : "current"
++          }
++          selectedId={search.capability}
++          onModeChange={(mode) =>
++            navigate({
++              search: (prev) => ({
++                ...prev,
++                view:
++                  mode === "full"
++                    ? "all"
++                    : mode === "critical"
++                      ? "critical"
++                      : mode === "trust"
++                        ? "trust"
++                        : "current",
++                targets: mode === "full",
++              }),
++              replace: true,
++            })
++          }
++          onSelectRegistryId={(id) =>
++            navigate({
++              search: (prev) => ({ ...prev, capability: id }),
++              replace: true,
++            })
++          }
++        />
++      </div>
++
++      <div className="min-w-0 max-w-full overflow-x-auto rounded-xl border border-border">
+         <table className="w-full min-w-[36rem] text-left text-sm">
+           <thead className="border-b border-border bg-carbon">
+             <tr>
+diff --git a/src/routes/security.tsx b/src/routes/security.tsx
+index 5ad7c83..c900945 100644
+--- a/src/routes/security.tsx
++++ b/src/routes/security.tsx
+@@ -1,4 +1,5 @@
+ import { createFileRoute, Link } from "@tanstack/react-router";
++import { AdversarialTrustBoundary } from "@/components/visual-system/adversarial-trust-boundary";
+ import { TrustBoundaryDiagram } from "@/components/home/trust-boundary-diagram";
+ import { ForensicFrame } from "@/components/home/forensic-frame";
+ import { Button } from "@/components/ui/button";
+@@ -65,6 +66,8 @@ function SecurityPage() {
+         </div>
+       </header>
+ 
++      <AdversarialTrustBoundary />
++
+       <TrustBoundaryDiagram />
+ 
+       <ForensicFrame
+diff --git a/src/routes/system.tsx b/src/routes/system.tsx
+index f1d827a..dd81345 100644
+--- a/src/routes/system.tsx
++++ b/src/routes/system.tsx
+@@ -1,7 +1,8 @@
+-import { createFileRoute } from "@tanstack/react-router";
+-import { PageStub } from "@/components/site/page-stub";
++import { createFileRoute, Link } from "@tanstack/react-router";
+ import { COMPOSITION } from "@/content/site-copy";
+-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
++import { ArchitectureAtlas } from "@/components/visual-system/architecture-atlas";
++import { Button } from "@/components/ui/button";
++import { Reveal } from "@/components/home/reveal";
+ 
+ export const Route = createFileRoute("/system")({
+   component: SystemPage,
+@@ -9,23 +10,89 @@ export const Route = createFileRoute("/system")({
+ 
+ function SystemPage() {
+   return (
+-    <PageStub
+-      eyebrow="System"
+-      title="Operating model"
+-      description="Complete Nexus-IQ architecture: execution boundary, governed memory, transactional composition, and evidence flow. Full diagrams and maturity overlay in Phase 4."
+-    >
+-      <div className="grid gap-4 sm:grid-cols-3">
+-        {COMPOSITION.map((layer) => (
+-          <Card key={layer.id}>
+-            <CardHeader>
+-              <CardTitle className="text-base">{layer.name}</CardTitle>
+-            </CardHeader>
+-            <CardContent>
+-              <p className="text-sm text-porcelain-muted">{layer.role}</p>
+-            </CardContent>
+-          </Card>
+-        ))}
+-      </div>
+-    </PageStub>
++    <main className="mx-auto min-w-0 max-w-[72rem] space-y-10 overflow-x-hidden px-4 py-10 sm:px-6 sm:py-14">
++      <header className="max-w-2xl space-y-4">
++        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-porcelain-subtle">
++          System
++        </p>
++        <h1 className="font-serif text-3xl text-porcelain sm:text-4xl">
++          Operating model
++        </h1>
++        <p className="text-base leading-relaxed text-porcelain-muted">
++          Nexus-IQ is the transactional control plane. Nexus supplies isolated
++          execution and runtime evidence. AEON-IQ supplies governed memory that
++          may inform reasoning but never silently widens authority.
++        </p>
++        <p className="text-sm leading-relaxed text-porcelain-subtle">
++          Isolate planes with the atlas controls. Maturity is disclosed per
++          plane—not flattened into a single “complete architecture” claim.
++        </p>
++      </header>
++
++      <Reveal>
++        <ArchitectureAtlas />
++      </Reveal>
++
++      <section aria-labelledby="layers-heading" className="space-y-4">
++        <h2
++          id="layers-heading"
++          className="font-serif text-xl text-porcelain sm:text-2xl"
++        >
++          Layer contracts
++        </h2>
++        <div className="grid gap-3 sm:grid-cols-3">
++          {COMPOSITION.map((layer) => (
++            <article
++              key={layer.id}
++              className="rounded-xl border border-border bg-carbon p-5"
++            >
++              <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-porcelain-subtle">
++                {layer.id === "nexus-iq"
++                  ? "Composition"
++                  : layer.id === "aeon-iq"
++                    ? "Memory"
++                    : "Execution"}
++              </p>
++              <h3 className="mt-2 font-serif text-lg text-porcelain">
++                {layer.name}
++              </h3>
++              <p className="mt-2 text-sm leading-relaxed text-porcelain-muted">
++                {layer.role}
++              </p>
++            </article>
++          ))}
++        </div>
++      </section>
++
++      <section
++        className="rounded-xl border border-border bg-void p-5 sm:p-6"
++        aria-labelledby="next-sys"
++      >
++        <h2 id="next-sys" className="font-serif text-lg text-porcelain">
++          Continue evaluation
++        </h2>
++        <p className="mt-2 max-w-2xl text-sm text-porcelain-muted">
++          Follow a single request path through decision, evidence, and residual
++          trust—or inspect maturity blockers directly.
++        </p>
++        <div className="mt-5 flex flex-wrap gap-3">
++          <Button asChild variant="secondary" size="sm">
++            <Link to="/change-gate">Change Gate</Link>
++          </Button>
++          <Button asChild variant="outline" size="sm">
++            <Link to="/evidence/proof-capsules">Proof Capsules</Link>
++          </Button>
++          <Button asChild variant="outline" size="sm">
++            <Link to="/security">Security boundaries</Link>
++          </Button>
++          <Button asChild variant="outline" size="sm">
++            <Link to="/maturity">Maturity map</Link>
++          </Button>
++          <Button asChild variant="ghost" size="sm">
++            <a href="/#live-demo">Live demo</a>
++          </Button>
++        </div>
++      </section>
++    </main>
+   );
+ }
+diff --git a/src/styles.css b/src/styles.css
+index 5f4c9fa..746a8c0 100644
+--- a/src/styles.css
++++ b/src/styles.css
+@@ -290,4 +290,19 @@
+     background-image:
+       radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in oklab, var(--color-institution) 12%, transparent), transparent);
+   }
++
++  /* Visual system · Cognitive Hypervisor flow stroke */
++  .vs-flow {
++    animation: vsFlow 1.6s linear infinite;
++  }
++  @keyframes vsFlow {
++    to {
++      stroke-dashoffset: -26;
++    }
++  }
++  @media (prefers-reduced-motion: reduce) {
++    .vs-flow {
++      animation: none;
++    }
++  }
+ }

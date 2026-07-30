@@ -1,0 +1,121 @@
+{
+  "checks": [
+    {
+      "check": "desktop has no JavaScript errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "check": "prototype has no external network requests",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "check": "desktop has no body-level horizontal overflow",
+      "passed": true,
+      "detail": "{'sw': 1600, 'cw': 1600}"
+    },
+    {
+      "check": "claim nodes are keyboard focusable",
+      "passed": true,
+      "detail": "17"
+    },
+    {
+      "check": "topology nodes are keyboard focusable",
+      "passed": true,
+      "detail": "13"
+    },
+    {
+      "check": "claim keyboard selection updates inspector",
+      "passed": true,
+      "detail": "Inspectable execution"
+    },
+    {
+      "check": "claim family filter updates selected record",
+      "passed": true,
+      "detail": "Recoverable failure"
+    },
+    {
+      "check": "current-only control toggles state",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "maturity trust mode updates inspector",
+      "passed": true,
+      "detail": "Host and operator trust"
+    },
+    {
+      "check": "maturity keyboard selection updates inspector",
+      "passed": true,
+      "detail": "Capability authority"
+    },
+    {
+      "check": "benchmark metric changes chart title",
+      "passed": true,
+      "detail": "Rollback restoration by state size"
+    },
+    {
+      "check": "benchmark metric changes plotted path",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "benchmark raw-sample toggle renders samples",
+      "passed": true,
+      "detail": "45"
+    },
+    {
+      "check": "simulator scenario changes terminal outcome",
+      "passed": true,
+      "detail": "ABORT"
+    },
+    {
+      "check": "simulator step trace advances deterministically",
+      "passed": true,
+      "detail": "STEP 3/6"
+    },
+    {
+      "check": "simulator keeps mandatory limitations",
+      "passed": true,
+      "detail": "3"
+    },
+    {
+      "check": "390px mobile has no JavaScript errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "check": "390px mobile has no body-level horizontal overflow",
+      "passed": true,
+      "detail": "{'sw': 390, 'cw': 390}"
+    },
+    {
+      "check": "390px simulator stacks to one column",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "430px mobile has no JavaScript errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "check": "430px mobile has no body-level horizontal overflow",
+      "passed": true,
+      "detail": "{'sw': 430, 'cw': 430}"
+    },
+    {
+      "check": "430px simulator stacks to one column",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "reduced-motion disables flow animation",
+      "passed": true,
+      "detail": "none"
+    }
+  ],
+  "passed": 23,
+  "total": 23
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "route": "/",
+    "name": "home",
+    "fetchTime": "2026-07-29T19:15:59.816Z",
+    "performance": 100,
+    "accessibility": 95,
+    "bestPractices": 96,
+    "seo": 100
+  },
+  {
+    "route": "/system",
+    "name": "system",
+    "fetchTime": "2026-07-29T19:16:12.944Z",
+    "performance": 100,
+    "accessibility": 96,
+    "bestPractices": 96,
+    "seo": 100
+  },
+  {
+    "route": "/evidence/proof-capsules",
+    "name": "proof",
+    "fetchTime": "2026-07-29T19:16:24.866Z",
+    "performance": 100,
+    "accessibility": 96,
+    "bestPractices": 96,
+    "seo": 100
+  },
+  {
+    "route": "/evidence/claims",
+    "name": "claims",
+    "fetchTime": "2026-07-29T19:16:37.671Z",
+    "performance": 100,
+    "accessibility": 97,
+    "bestPractices": 96,
+    "seo": 100
+  },
+  {
+    "route": "/maturity",
+    "name": "maturity",
+    "fetchTime": "2026-07-29T19:16:50.104Z",
+    "performance": 100,
+    "accessibility": 96,
+    "bestPractices": 96,
+    "seo": 100
+  },
+  {
+    "route": "/evidence/benchmarks",
+    "name": "benchmarks",
+    "fetchTime": "2026-07-29T19:17:02.323Z",
+    "performance": 100,
+    "accessibility": 96,
+    "bestPractices": 96,
+    "seo": 100
+  },
+  {
+    "route": "/developers",
+    "name": "developers",
+    "fetchTime": "2026-07-29T19:17:14.425Z",
+    "performance": 100,
+    "accessibility": 96,
+    "bestPractices": 96,
+    "seo": 100
+  },
+  {
+    "route": "/security",
+    "name": "security",
+    "fetchTime": "2026-07-29T19:17:26.620Z",
+    "performance": 100,
+    "accessibility": 96,
+    "bestPractices": 96,
+    "seo": 100
+  }
+]

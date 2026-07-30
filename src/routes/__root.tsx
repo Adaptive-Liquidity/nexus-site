@@ -10,6 +10,11 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { BRAND } from "@/content/site-copy";
 import appCss from "../styles.css?url";
 
+const OG_TITLE = `${BRAND.product} — Commit boundary for agent action`;
+const OG_DESCRIPTION =
+  "Proof-carrying transactional execution infrastructure for AI agents. Stage changes, constrain authority, validate before commitment, emit inspectable evidence.";
+const OG_IMAGE = "/og-image.png";
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
@@ -19,17 +24,25 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: `${BRAND.product} — Commit boundary for agent action`,
+        title: OG_TITLE,
       },
       {
         name: "description",
-        content:
-          "Proof-carrying transactional execution infrastructure for AI agents. Stage changes, constrain authority, validate before commitment, emit inspectable evidence.",
+        content: OG_DESCRIPTION,
       },
       { name: "theme-color", content: "#07090B" },
+      { property: "og:type", content: "website" },
+      { property: "og:title", content: OG_TITLE },
+      { property: "og:description", content: OG_DESCRIPTION },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: OG_TITLE },
+      { name: "twitter:description", content: OG_DESCRIPTION },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       {
         rel: "preconnect",

@@ -1,0 +1,586 @@
+{
+  "asOf": "2026-07-28",
+  "stage0": {
+    "id": "stage0-evidence-integrity",
+    "name": "Stage 0 evidence integrity",
+    "status": "IN_DEVELOPMENT",
+    "blocking": true,
+    "summary": "Blocking for end-to-end transactional guarantees and full memory-state binding."
+  },
+  "claims": [
+    {
+      "id": "isolation-snap-rollback",
+      "short": "Isolation + snap-rollback",
+      "name": "Execution isolation & snap-rollback",
+      "status": "CURRENT",
+      "x": 120,
+      "y": 145,
+      "layer": "foundation"
+    },
+    {
+      "id": "capability-authority",
+      "short": "Capability authority",
+      "name": "Capability authority",
+      "status": "CURRENT",
+      "x": 120,
+      "y": 310,
+      "layer": "foundation"
+    },
+    {
+      "id": "proof-capsules",
+      "short": "Proof Capsules",
+      "name": "Proof Capsules / ExecutionReceipt",
+      "status": "CURRENT",
+      "x": 360,
+      "y": 145,
+      "layer": "foundation"
+    },
+    {
+      "id": "proof-capsule-explorer-ui",
+      "short": "Capsule Explorer",
+      "name": "Public Proof Capsule Explorer",
+      "status": "CURRENT",
+      "x": 590,
+      "y": 78,
+      "layer": "surface"
+    },
+    {
+      "id": "aeon-memory-binding",
+      "short": "Memory evidence binding",
+      "name": "AEON-IQ memory plane & evidence binding",
+      "status": "IN_DEVELOPMENT",
+      "x": 370,
+      "y": 360,
+      "layer": "integration"
+    },
+    {
+      "id": "transactional-change-gate",
+      "short": "Transactional Change Gate",
+      "name": "Transactional Change Gate",
+      "status": "IN_DEVELOPMENT",
+      "x": 635,
+      "y": 285,
+      "layer": "integration"
+    },
+    {
+      "id": "production-signing-anchors",
+      "short": "Signing + anchors",
+      "name": "Production-grade signing identity & external anchors",
+      "status": "TARGET",
+      "x": 850,
+      "y": 145,
+      "layer": "target"
+    },
+    {
+      "id": "wasm-boundary-scope",
+      "short": "WASM governance scope",
+      "name": "Execution governance scope",
+      "status": "LIMITATION",
+      "x": 625,
+      "y": 520,
+      "layer": "boundary"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "isolation-snap-rollback",
+      "to": "transactional-change-gate",
+      "type": "requires",
+      "confidence": "proposed"
+    },
+    {
+      "from": "capability-authority",
+      "to": "transactional-change-gate",
+      "type": "requires",
+      "confidence": "proposed"
+    },
+    {
+      "from": "proof-capsules",
+      "to": "transactional-change-gate",
+      "type": "requires",
+      "confidence": "proposed"
+    },
+    {
+      "from": "aeon-memory-binding",
+      "to": "transactional-change-gate",
+      "type": "binds-context",
+      "confidence": "proposed"
+    },
+    {
+      "from": "proof-capsules",
+      "to": "proof-capsule-explorer-ui",
+      "type": "supports",
+      "confidence": "direct"
+    },
+    {
+      "from": "capability-authority",
+      "to": "aeon-memory-binding",
+      "type": "requires",
+      "confidence": "proposed"
+    },
+    {
+      "from": "proof-capsules",
+      "to": "aeon-memory-binding",
+      "type": "supports",
+      "confidence": "proposed"
+    },
+    {
+      "from": "production-signing-anchors",
+      "to": "proof-capsules",
+      "type": "strengthens",
+      "confidence": "proposed"
+    },
+    {
+      "from": "production-signing-anchors",
+      "to": "transactional-change-gate",
+      "type": "target-extension",
+      "confidence": "proposed"
+    },
+    {
+      "from": "wasm-boundary-scope",
+      "to": "transactional-change-gate",
+      "type": "bounds",
+      "confidence": "direct"
+    },
+    {
+      "from": "stage0-evidence-integrity",
+      "to": "transactional-change-gate",
+      "type": "blocks",
+      "confidence": "direct"
+    },
+    {
+      "from": "stage0-evidence-integrity",
+      "to": "aeon-memory-binding",
+      "type": "blocks",
+      "confidence": "direct"
+    }
+  ],
+  "claimDetails": {
+    "isolation-snap-rollback": {
+      "status": "Implemented Foundation",
+      "supports": [
+        "Transactional Change Gate"
+      ],
+      "blocked": [],
+      "bounded": [
+        "WASM guest\u2194host boundary"
+      ],
+      "why": "The sandbox, native state capture, rollback, and capability-gated WASI substrate exist. Broader agent-tool coverage remains outside the current boundary."
+    },
+    "capability-authority": {
+      "status": "Implemented Foundation",
+      "supports": [
+        "Transactional Change Gate",
+        "Memory evidence binding"
+      ],
+      "blocked": [],
+      "bounded": [
+        "Nexus is the sole execution authority today"
+      ],
+      "why": "Signed, attenuable capability structures exist. The durable authority chain across the full Nexus-IQ transaction remains in integration."
+    },
+    "proof-capsules": {
+      "status": "Implemented Foundation",
+      "supports": [
+        "Capsule Explorer",
+        "Transactional Change Gate",
+        "Memory evidence binding"
+      ],
+      "blocked": [],
+      "bounded": [
+        "Runtime/host trust",
+        "No proof of correct execution"
+      ],
+      "why": "Receipts and mandatory limitations exist. Production trust anchors and stronger end-to-end binding are not yet complete."
+    },
+    "proof-capsule-explorer-ui": {
+      "status": "Implemented Foundation",
+      "supports": [],
+      "blocked": [],
+      "bounded": [
+        "Fixture inspection, not a live stream",
+        "Structural checks are non-cryptographic"
+      ],
+      "why": "The browser inspection surface exists and is tied to structure-identical fixtures, without implying production verification."
+    },
+    "aeon-memory-binding": {
+      "status": "In Integration",
+      "supports": [
+        "Transactional Change Gate"
+      ],
+      "blocked": [
+        "Stage 0 evidence integrity"
+      ],
+      "bounded": [
+        "Advisory/Degraded/Absent modes",
+        "Key and timeline completeness risks"
+      ],
+      "why": "Memory and attestation foundations exist, but full RecallEnvelope verification and durable binding into each transaction remain incomplete."
+    },
+    "transactional-change-gate": {
+      "status": "In Integration",
+      "supports": [],
+      "blocked": [
+        "Stage 0 evidence integrity"
+      ],
+      "bounded": [
+        "WASM boundary scope",
+        "Not a complete deployable product surface"
+      ],
+      "why": "Isolation, rollback, receipts, capability structures, and failure classification exist; the end-to-end stage\u2192validate\u2192approve\u2192commit/abort product is still being assembled."
+    },
+    "production-signing-anchors": {
+      "status": "Target Architecture",
+      "supports": [
+        "Stronger Proof Capsule trust",
+        "Durable Change Gate evidence"
+      ],
+      "blocked": [],
+      "bounded": [
+        "Current signing is optional; production trust model incomplete"
+      ],
+      "why": "This is the defined destination for durable signing identity and external anchoring, not a current guarantee."
+    },
+    "wasm-boundary-scope": {
+      "status": "Known Limitation",
+      "supports": [],
+      "blocked": [],
+      "bounded": [
+        "Isolation",
+        "Capability authority",
+        "Transactional Change Gate"
+      ],
+      "why": "The current enforcement boundary is WASM/WASI. It does not yet intercept model tool selection or provide a general agent/MCP governance wrapper."
+    }
+  },
+  "benchmarkFixture": {
+    "disclaimer": "REPRESENTATIVE VISUAL FIXTURE \u2014 NOT CITABLE PERFORMANCE DATA",
+    "metrics": [
+      {
+        "id": "sandbox",
+        "name": "Sandbox initialization",
+        "unit": "normalized latency",
+        "lowerBetter": true,
+        "baseline": [
+          1.04,
+          1.01,
+          0.99,
+          1.03,
+          0.98,
+          1.0,
+          1.02,
+          0.97,
+          1.01,
+          1.0,
+          1.04,
+          0.96
+        ],
+        "candidate": [
+          0.96,
+          0.94,
+          0.95,
+          0.97,
+          0.93,
+          0.95,
+          0.92,
+          0.96,
+          0.94,
+          0.95,
+          0.93,
+          0.97
+        ]
+      },
+      {
+        "id": "snapshot",
+        "name": "Snapshot creation",
+        "unit": "normalized latency",
+        "lowerBetter": true,
+        "baseline": [
+          1.05,
+          0.98,
+          1.02,
+          1.08,
+          0.95,
+          1.0,
+          1.03,
+          0.97,
+          1.06,
+          0.99,
+          1.01,
+          0.96
+        ],
+        "candidate": [
+          1.0,
+          0.97,
+          0.99,
+          1.02,
+          0.96,
+          0.98,
+          1.01,
+          0.95,
+          0.99,
+          0.97,
+          1.0,
+          0.96
+        ]
+      },
+      {
+        "id": "rollback",
+        "name": "Rollback",
+        "unit": "normalized latency",
+        "lowerBetter": true,
+        "baseline": [
+          1.02,
+          1.0,
+          0.99,
+          1.01,
+          0.98,
+          1.04,
+          0.97,
+          1.02,
+          1.0,
+          0.96,
+          1.03,
+          0.99
+        ],
+        "candidate": [
+          0.93,
+          0.94,
+          0.92,
+          0.95,
+          0.91,
+          0.96,
+          0.93,
+          0.92,
+          0.94,
+          0.9,
+          0.95,
+          0.93
+        ]
+      },
+      {
+        "id": "throughput",
+        "name": "Memory throughput",
+        "unit": "normalized throughput",
+        "lowerBetter": false,
+        "baseline": [
+          0.98,
+          1.02,
+          1.0,
+          0.97,
+          1.01,
+          0.99,
+          1.03,
+          0.96,
+          1.0,
+          1.01,
+          0.98,
+          1.02
+        ],
+        "candidate": [
+          1.05,
+          1.07,
+          1.04,
+          1.06,
+          1.08,
+          1.03,
+          1.05,
+          1.09,
+          1.06,
+          1.04,
+          1.07,
+          1.05
+        ]
+      },
+      {
+        "id": "integrated",
+        "name": "Integrated execution path",
+        "unit": "normalized latency",
+        "lowerBetter": true,
+        "baseline": [
+          1.06,
+          1.0,
+          1.04,
+          0.99,
+          1.02,
+          1.08,
+          0.97,
+          1.03,
+          1.01,
+          0.98,
+          1.05,
+          1.0
+        ],
+        "candidate": [
+          1.02,
+          0.99,
+          1.0,
+          0.98,
+          1.01,
+          1.03,
+          0.97,
+          1.0,
+          0.99,
+          0.98,
+          1.01,
+          1.0
+        ]
+      }
+    ]
+  },
+  "integrationScenarios": [
+    {
+      "id": "inspect",
+      "name": "Read-only repository inspection",
+      "mode": "CURRENT FOUNDATION",
+      "decision": "COMMIT",
+      "maturity": "Current substrate",
+      "summary": "A capability-limited WASM tool reads an allowed workspace and emits a runtime receipt.",
+      "capabilities": [
+        "fs.read:/workspace",
+        "clock.monotonic"
+      ],
+      "limitations": [
+        "Representative contract sketch",
+        "Does not imply full LLM tool-choice interception",
+        "Receipt trusts the Nexus runtime and host boundary"
+      ],
+      "steps": [
+        [
+          "Agent",
+          "Host",
+          "Declare inspection intent",
+          "CURRENT"
+        ],
+        [
+          "Host",
+          "Nexus",
+          "Issue attenuated capability token",
+          "CURRENT"
+        ],
+        [
+          "Nexus",
+          "Nexus",
+          "Execute in WASM sandbox",
+          "CURRENT"
+        ],
+        [
+          "Nexus",
+          "Host",
+          "Return observed result + receipt",
+          "CURRENT"
+        ],
+        [
+          "Host",
+          "Evidence",
+          "Expose Proof Capsule fields",
+          "CURRENT"
+        ]
+      ]
+    },
+    {
+      "id": "patch",
+      "name": "Stage and validate a patch",
+      "mode": "DESTINATION COMPOSITION",
+      "decision": "COMMIT / ABORT",
+      "maturity": "In Integration",
+      "summary": "A proposed change enters a reversible workspace, validators run, then an explicit decision commits or discards it.",
+      "capabilities": [
+        "repo.read",
+        "workspace.write:staged",
+        "validator.execute",
+        "commit.request"
+      ],
+      "limitations": [
+        "Full public Change Gate surface is not complete",
+        "Approval and durable evidence binding remain Stage 0 work",
+        "Do not present as currently deployable end-to-end"
+      ],
+      "steps": [
+        [
+          "Agent",
+          "Nexus-IQ",
+          "Submit intent + declared scope",
+          "IN_DEVELOPMENT"
+        ],
+        [
+          "Nexus-IQ",
+          "Nexus",
+          "Create isolated working state",
+          "CURRENT"
+        ],
+        [
+          "Nexus-IQ",
+          "Nexus",
+          "Apply constrained change",
+          "IN_DEVELOPMENT"
+        ],
+        [
+          "Nexus-IQ",
+          "Host",
+          "Run deterministic validators",
+          "IN_DEVELOPMENT"
+        ],
+        [
+          "Host",
+          "Effect",
+          "Commit or Abort",
+          "IN_DEVELOPMENT"
+        ],
+        [
+          "Nexus-IQ",
+          "Evidence",
+          "Assemble binding receipt",
+          "TARGET"
+        ]
+      ]
+    },
+    {
+      "id": "deny",
+      "name": "Denied network request",
+      "mode": "CURRENT FOUNDATION",
+      "decision": "ABORT / DENY",
+      "maturity": "Current substrate",
+      "summary": "A tool attempts an undeclared network effect and the capability boundary denies the host call.",
+      "capabilities": [
+        "fs.read:/workspace"
+      ],
+      "limitations": [
+        "Governance applies at the WASM guest\u2194host boundary",
+        "The model may still choose to request the disallowed tool action"
+      ],
+      "steps": [
+        [
+          "Agent",
+          "Host",
+          "Request tool execution",
+          "CURRENT"
+        ],
+        [
+          "Host",
+          "Nexus",
+          "Issue token without network authority",
+          "CURRENT"
+        ],
+        [
+          "Nexus",
+          "Effect",
+          "Attempt outbound host call",
+          "CURRENT"
+        ],
+        [
+          "Effect",
+          "Nexus",
+          "Deny: missing capability",
+          "CURRENT"
+        ],
+        [
+          "Nexus",
+          "Evidence",
+          "Record denial + limitations",
+          "CURRENT"
+        ]
+      ]
+    }
+  ]
+}

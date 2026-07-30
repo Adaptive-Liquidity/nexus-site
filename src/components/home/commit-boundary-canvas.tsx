@@ -42,7 +42,7 @@ declare global {
 
 /**
  * Direction 2 — Forensic Cross-Section instrument.
- * ONE continuous apparatus; chambers are internal mechanical spaces.
+ * ONE continuous apparatus; type-safe channel keeps instrument right of copy.
  * Atmospheric illustration only — not product evidence.
  */
 export function CommitBoundaryCanvas({
@@ -126,37 +126,64 @@ export function CommitBoundaryCanvas({
 
     const draw = () => {
       const p = Math.min(1, Math.max(0, progressRef.current));
-      const stage = smoothstep(0.06, 0.28, p);
-      const constrain = smoothstep(0.28, 0.48, p);
-      const validate = smoothstep(0.48, 0.62, p);
-      const decide = smoothstep(0.58, 0.78, p);
-      const emit = smoothstep(0.78, 0.96, p);
+      const stage = smoothstep(0.04, 0.26, p);
+      const constrain = smoothstep(0.26, 0.46, p);
+      const validate = smoothstep(0.46, 0.58, p);
+      const decide = smoothstep(0.55, 0.76, p);
+      const emit = smoothstep(0.76, 0.96, p);
       const portrait = h > w * 0.95;
+
+      const cssSafe = parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--type-safe-right",
+        ) || "0",
+      );
+      const typeSafe =
+        !portrait && cssSafe > 80
+          ? Math.min(w * 0.52, cssSafe)
+          : portrait
+            ? 0
+            : w * 0.4;
 
       ctx.fillStyle = C.void;
       ctx.fillRect(0, 0, w, h);
-      ctx.fillStyle = "rgba(17,24,32,0.55)";
-      ctx.fillRect(0, h * 0.08, w, h * 0.84);
+
+      if (!portrait) {
+        const g = ctx.createLinearGradient(typeSafe, 0, w, 0);
+        g.addColorStop(0, "rgba(17,24,32,0)");
+        g.addColorStop(0.08, "rgba(17,24,32,0.45)");
+        g.addColorStop(1, "rgba(17,24,32,0.65)");
+        ctx.fillStyle = g;
+        ctx.fillRect(typeSafe, h * 0.06, w - typeSafe, h * 0.88);
+      } else {
+        ctx.fillStyle = "rgba(17,24,32,0.55)";
+        ctx.fillRect(0, h * 0.02, w, h * 0.48);
+      }
 
       let shellX: number, shellY: number, shellW: number, shellH: number;
       if (portrait) {
-        shellX = w * 0.08;
-        shellY = h * 0.12;
-        shellW = w * 0.84;
-        shellH = h * 0.72;
+        shellX = w * 0.05;
+        shellY = h * 0.03;
+        shellW = w * 0.9;
+        shellH = h * 0.46;
       } else {
-        shellX = w * 0.32;
-        shellY = h * 0.18;
-        shellW = w * 0.62;
-        shellH = h * 0.58;
+        const left = Math.max(typeSafe + 8, w * 0.38);
+        shellX = left;
+        shellY = h * 0.14;
+        shellW = Math.max(120, w - left - w * 0.04);
+        shellH = h * 0.64;
       }
 
       ctx.fillStyle = C.carbon;
-      roundRect(shellX, shellY, shellW, shellH, 18);
+      roundRect(shellX, shellY, shellW, shellH, 14);
       ctx.fill();
-      ctx.strokeStyle = "rgba(246,241,231,0.14)";
-      ctx.lineWidth = 1.5;
-      roundRect(shellX, shellY, shellW, shellH, 18);
+      ctx.strokeStyle = "rgba(0,0,0,0.45)";
+      ctx.lineWidth = 3;
+      roundRect(shellX + 1, shellY + 1, shellW - 2, shellH - 2, 13);
+      ctx.stroke();
+      ctx.strokeStyle = "rgba(246,241,231,0.1)";
+      ctx.lineWidth = 1;
+      roundRect(shellX, shellY, shellW, shellH, 14);
       ctx.stroke();
 
       const pad = 10;
@@ -165,12 +192,12 @@ export function CommitBoundaryCanvas({
       const iw = shellW - pad * 2;
       const ih = shellH - pad * 2;
       ctx.fillStyle = C.void;
-      roundRect(ix, iy, iw, ih, 12);
+      roundRect(ix, iy, iw, ih, 10);
       ctx.fill();
 
       if (!portrait) {
         const spineY = iy + ih * 0.5;
-        ctx.strokeStyle = "rgba(90,155,184,0.35)";
+        ctx.strokeStyle = "rgba(90,155,184,0.4)";
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(ix + 8, spineY);
@@ -186,7 +213,7 @@ export function CommitBoundaryCanvas({
         ctx.stroke();
       } else {
         const spineX = ix + iw * 0.5;
-        ctx.strokeStyle = "rgba(90,155,184,0.35)";
+        ctx.strokeStyle = "rgba(90,155,184,0.4)";
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(spineX, iy + 8);
@@ -213,7 +240,48 @@ export function CommitBoundaryCanvas({
         { y0: 0.78, y1: 0.98 },
       ];
 
-      const wallAlpha = 0.35 + stage * 0.35;
+      // Intent intake funnel — meaningful geometry at progress≈0
+      {
+        const s = Math.max(stage, 0.55);
+        if (!portrait) {
+          const b = baysH[0]!;
+          const cx = ix + iw * b.x0;
+          const cw = iw * (b.x1 - b.x0);
+          ctx.fillStyle = `rgba(47,94,115,${0.12 + s * 0.28})`;
+          ctx.beginPath();
+          ctx.moveTo(cx + 4, iy + ih * 0.22);
+          ctx.lineTo(cx + cw - 2, iy + ih * 0.38);
+          ctx.lineTo(cx + cw - 2, iy + ih * 0.62);
+          ctx.lineTo(cx + 4, iy + ih * 0.78);
+          ctx.closePath();
+          ctx.fill();
+          ctx.strokeStyle = `rgba(90,155,184,${0.35 + s * 0.4})`;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+          const px = cx + cw * 0.35;
+          const py = iy + ih * 0.5;
+          ctx.fillStyle = `rgba(246,241,231,${0.55 + s * 0.35})`;
+          ctx.save();
+          ctx.translate(px, py);
+          ctx.rotate(Math.PI / 4);
+          ctx.fillRect(-5, -5, 10, 10);
+          ctx.restore();
+        } else {
+          const b = baysV[0]!;
+          const cy = iy + ih * b.y0;
+          const ch = ih * (b.y1 - b.y0);
+          ctx.fillStyle = `rgba(47,94,115,${0.2 + s * 0.3})`;
+          ctx.beginPath();
+          ctx.moveTo(ix + iw * 0.2, cy + 2);
+          ctx.lineTo(ix + iw * 0.8, cy + 2);
+          ctx.lineTo(ix + iw * 0.62, cy + ch - 2);
+          ctx.lineTo(ix + iw * 0.38, cy + ch - 2);
+          ctx.closePath();
+          ctx.fill();
+        }
+      }
+
+      const wallAlpha = 0.3 + stage * 0.4;
       ctx.strokeStyle = `rgba(246,241,231,${wallAlpha})`;
       ctx.lineWidth = 1.25;
       if (!portrait) {
@@ -321,7 +389,7 @@ export function CommitBoundaryCanvas({
       }
 
       if (decide > 0.01) {
-        ctx.globalAlpha = Math.min(1, decide * 1.2);
+        ctx.globalAlpha = Math.min(1, Math.max(0.4, decide * 1.35));
         if (!portrait) {
           const b = baysH[4]!;
           const cx = ix + iw * b.x0;
@@ -335,9 +403,7 @@ export function CommitBoundaryCanvas({
           ctx.stroke();
 
           ctx.strokeStyle = C.abortBright;
-          ctx.lineWidth = 3.5;
-          ctx.shadowColor = C.abortBright;
-          ctx.shadowBlur = 12;
+          ctx.lineWidth = 4;
           ctx.beginPath();
           ctx.moveTo(cx + 8, midY - 10);
           ctx.bezierCurveTo(
@@ -349,29 +415,26 @@ export function CommitBoundaryCanvas({
             iy + ih * 0.2,
           );
           ctx.stroke();
-          ctx.shadowBlur = 0;
           const ax = cx + cw * 0.85;
           const ay = iy + ih * 0.2;
           ctx.fillStyle = C.abort;
           ctx.beginPath();
-          ctx.moveTo(ax, ay - 10);
-          ctx.lineTo(ax + 10, ay);
-          ctx.lineTo(ax, ay + 10);
-          ctx.lineTo(ax - 10, ay);
+          ctx.moveTo(ax, ay - 12);
+          ctx.lineTo(ax + 12, ay);
+          ctx.lineTo(ax, ay + 12);
+          ctx.lineTo(ax - 12, ay);
           ctx.closePath();
           ctx.fill();
           ctx.strokeStyle = C.abortBright;
           ctx.lineWidth = 2;
           ctx.stroke();
-          ctx.font = "600 11px IBM Plex Sans, system-ui, sans-serif";
+          ctx.font = "600 12px IBM Plex Sans, system-ui, sans-serif";
           ctx.fillStyle = C.porcelain;
           ctx.textAlign = "center";
-          ctx.fillText("ABORT", ax, ay + 24);
+          ctx.fillText("ABORT", ax, ay + 26);
 
           ctx.strokeStyle = C.oxideBright;
-          ctx.lineWidth = 3.5;
-          ctx.shadowColor = C.oxideBright;
-          ctx.shadowBlur = 12;
+          ctx.lineWidth = 4;
           ctx.beginPath();
           ctx.moveTo(cx + 8, midY + 10);
           ctx.bezierCurveTo(
@@ -383,52 +446,67 @@ export function CommitBoundaryCanvas({
             iy + ih * 0.8,
           );
           ctx.stroke();
-          ctx.shadowBlur = 0;
           const cmx = cx + cw * 0.85;
           const cmy = iy + ih * 0.8;
           ctx.fillStyle = C.oxide;
-          ctx.fillRect(cmx - 9, cmy - 9, 18, 18);
+          ctx.fillRect(cmx - 11, cmy - 11, 22, 22);
           ctx.strokeStyle = C.oxideBright;
           ctx.lineWidth = 2;
-          ctx.strokeRect(cmx - 9, cmy - 9, 18, 18);
+          ctx.strokeRect(cmx - 11, cmy - 11, 22, 22);
           ctx.fillStyle = C.porcelain;
-          ctx.fillText("COMMIT", cmx, cmy + 26);
+          ctx.fillText("COMMIT", cmx, cmy + 28);
         } else {
-          const b = baysV[4]!;
-          const cy = iy + ih * b.y0;
-          const ch = ih * (b.y1 - b.y0);
-          ctx.strokeStyle = C.abortBright;
-          ctx.lineWidth = 3;
+          // Mobile Decide: large shape-distinct exits occupying the instrument band
+          const midX = ix + iw * 0.5;
+          const midY = iy + ih * 0.28;
+          ctx.strokeStyle = "rgba(246,241,231,0.25)";
+          ctx.lineWidth = 1.5;
           ctx.beginPath();
-          ctx.moveTo(ix + iw * 0.5, cy + 4);
-          ctx.lineTo(ix + iw * 0.22, cy + ch * 0.55);
+          ctx.moveTo(midX, iy + 6);
+          ctx.lineTo(midX, iy + ih * 0.22);
           ctx.stroke();
-          const ax = ix + iw * 0.22;
-          const ay = cy + ch * 0.55;
+
+          // Abort — left diamond
+          ctx.strokeStyle = C.abortBright;
+          ctx.lineWidth = 4;
+          ctx.beginPath();
+          ctx.moveTo(midX, midY);
+          ctx.lineTo(ix + iw * 0.18, iy + ih * 0.78);
+          ctx.stroke();
+          const ax = ix + iw * 0.18;
+          const ay = iy + ih * 0.78;
           ctx.fillStyle = C.abort;
           ctx.beginPath();
-          ctx.moveTo(ax, ay - 8);
-          ctx.lineTo(ax + 8, ay);
-          ctx.lineTo(ax, ay + 8);
-          ctx.lineTo(ax - 8, ay);
+          ctx.moveTo(ax, ay - 14);
+          ctx.lineTo(ax + 14, ay);
+          ctx.lineTo(ax, ay + 14);
+          ctx.lineTo(ax - 14, ay);
           ctx.closePath();
           ctx.fill();
-          ctx.font = "600 10px IBM Plex Sans, system-ui, sans-serif";
+          ctx.strokeStyle = C.abortBright;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.font = "700 13px IBM Plex Sans, system-ui, sans-serif";
           ctx.fillStyle = C.porcelain;
           ctx.textAlign = "center";
-          ctx.fillText("ABORT", ax, ay + 20);
+          ctx.fillText("ABORT", ax, ay + 28);
 
+          // Commit — right square
           ctx.strokeStyle = C.oxideBright;
+          ctx.lineWidth = 4;
           ctx.beginPath();
-          ctx.moveTo(ix + iw * 0.5, cy + 4);
-          ctx.lineTo(ix + iw * 0.78, cy + ch * 0.55);
+          ctx.moveTo(midX, midY);
+          ctx.lineTo(ix + iw * 0.82, iy + ih * 0.78);
           ctx.stroke();
-          const cmx = ix + iw * 0.78;
-          const cmy = cy + ch * 0.55;
+          const cmx = ix + iw * 0.82;
+          const cmy = iy + ih * 0.78;
           ctx.fillStyle = C.oxide;
-          ctx.fillRect(cmx - 8, cmy - 8, 16, 16);
+          ctx.fillRect(cmx - 13, cmy - 13, 26, 26);
+          ctx.strokeStyle = C.oxideBright;
+          ctx.lineWidth = 2;
+          ctx.strokeRect(cmx - 13, cmy - 13, 26, 26);
           ctx.fillStyle = C.porcelain;
-          ctx.fillText("COMMIT", cmx, cmy + 20);
+          ctx.fillText("COMMIT", cmx, cmy + 30);
         }
         ctx.globalAlpha = 1;
       }
@@ -478,37 +556,32 @@ export function CommitBoundaryCanvas({
 
       const packetT = smoothstep(0.02, 0.72, p);
       const packetVis = 1 - emit * 0.85;
-      if (packetVis > 0.05) {
+      if (packetVis > 0.05 && p > 0.08) {
         let px: number, py: number;
         if (!portrait) {
-          px = mix(ix + iw * 0.06, ix + iw * 0.52, packetT);
+          px = mix(ix + iw * 0.1, ix + iw * 0.52, packetT);
           py =
             iy +
             ih * 0.5 +
             (reduced ? 0 : Math.sin(timeRef.current * 1.4) * 3);
         } else {
           px = ix + iw * 0.5;
-          py = mix(iy + ih * 0.08, iy + ih * 0.52, packetT);
+          py = mix(iy + ih * 0.12, iy + ih * 0.52, packetT);
         }
         ctx.fillStyle = `rgba(90,155,184,${0.35 * packetVis})`;
         ctx.beginPath();
-        ctx.arc(px, py, 18, 0, Math.PI * 2);
+        ctx.arc(px, py, 16, 0, Math.PI * 2);
         ctx.fill();
         ctx.fillStyle = `rgba(246,241,231,${0.92 * packetVis})`;
         ctx.save();
         ctx.translate(px, py);
         ctx.rotate(Math.PI / 4);
-        ctx.fillRect(-6, -6, 12, 12);
+        ctx.fillRect(-5, -5, 10, 10);
         ctx.restore();
-        ctx.strokeStyle = C.institutionBright;
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.rect(px - 7, py - 7, 14, 14);
-        ctx.stroke();
       }
 
       ctx.font = "500 9px IBM Plex Mono, ui-monospace, monospace";
-      ctx.fillStyle = "rgba(246,241,231,0.28)";
+      ctx.fillStyle = "rgba(246,241,231,0.22)";
       ctx.textAlign = "left";
       ctx.fillText(
         "TXN CROSS-SECTION · ATMOSPHERIC",
@@ -535,7 +608,6 @@ export function CommitBoundaryCanvas({
       rafRef.current = requestAnimationFrame(loop);
     };
 
-    /** Viewport geometry check — reliable when sticky pin scrolls away */
     const isCanvasInView = () => {
       const rect = canvas.getBoundingClientRect();
       return (
@@ -595,7 +667,6 @@ export function CommitBoundaryCanvas({
     io.observe(canvas);
 
     resize();
-    // Reduced: single composed draw, no rAF animation loop
     draw();
     publishDebug();
     const ro = new ResizeObserver(() => {

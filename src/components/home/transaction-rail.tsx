@@ -5,14 +5,16 @@ import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 /**
  * Sticky scroll progress for the homepage "controlled transaction".
- * During pinned cinematic (#intent in view): collapse to icon/progress spine.
- * After pin: fuller labeled form. Mobile: top compact progress.
+ * Spine (collapsed) from page top through the complete DemoPlayer section —
+ * never expand full labels over DemoPlayer left chrome.
+ * Full labeled form only after #live-demo has fully scrolled past.
+ * Mobile: top compact progress.
  */
 export function TransactionRail() {
   const reduced = useReducedMotion();
   const [activeId, setActiveId] = useState(TRANSACTION_BEATS[0]!.id);
   const [progress, setProgress] = useState(0);
-  /** Spine while Intent pin occupies viewport; full after release */
+  /** Spine through pin + demo; full after demo releases */
   const [spineMode, setSpineMode] = useState(true);
 
   useEffect(() => {
@@ -63,30 +65,44 @@ export function TransactionRail() {
     };
   }, []);
 
-  // Pin occupancy → spine while any part of #intent remains on screen
+  // Spine until DemoPlayer section fully clears the viewport top.
+  // Covers #intent pin + gap detail + entire #live-demo — prevents full-rail
+  // collision with Demo controls (was only testing against #hero-headline).
   useEffect(() => {
-    const pin = document.getElementById("intent");
-    if (!pin) {
-      setSpineMode(false);
-      document.documentElement.dataset.txnRail = "full";
-      return;
-    }
-
     const update = () => {
-      const rect = pin.getBoundingClientRect();
-      // Spine for entire pin track lifetime (sticky + scroll-through)
-      const pinOnScreen = rect.bottom > 48 && rect.top < window.innerHeight;
-      setSpineMode(pinOnScreen);
-      document.documentElement.dataset.txnRail = pinOnScreen ? "spine" : "full";
+      const demo = document.getElementById("live-demo");
+      if (!demo) {
+        // Fallback: spine while pin visible
+        const pin = document.getElementById("intent");
+        if (!pin) {
+          setSpineMode(false);
+          document.documentElement.dataset.txnRail = "full";
+          return;
+        }
+        const rect = pin.getBoundingClientRect();
+        const on = rect.bottom > 48 && rect.top < window.innerHeight;
+        setSpineMode(on);
+        document.documentElement.dataset.txnRail = on ? "spine" : "full";
+        return;
+      }
+      const demoRect = demo.getBoundingClientRect();
+      // Keep spine while any part of demo (or content above it) still needs clearance:
+      // expand only after the demo section has scrolled fully above the header band.
+      const pastDemo = demoRect.bottom < 56;
+      setSpineMode(!pastDemo);
+      document.documentElement.dataset.txnRail = pastDemo ? "full" : "spine";
     };
 
     update();
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
+    const demo = document.getElementById("live-demo");
+    const pin = document.getElementById("intent");
     const io = new IntersectionObserver(update, {
       threshold: [0, 0.01, 0.1, 0.5, 1],
     });
-    io.observe(pin);
+    if (demo) io.observe(demo);
+    if (pin) io.observe(pin);
     return () => {
       io.disconnect();
       window.removeEventListener("scroll", update);
@@ -134,12 +150,16 @@ export function TransactionRail() {
         className="pointer-events-none fixed left-0 top-1/2 z-40 hidden -translate-y-1/2 pl-2 xl:block xl:pl-3"
         aria-label="Transaction progress"
         data-rail-mode={spineMode ? "spine" : "full"}
+        data-testid="transaction-rail"
       >
         <div
           className={cn(
-            "pointer-events-auto rounded-xl border border-border bg-carbon/90 shadow-[0_12px_40px_-20px_rgba(0,0,0,0.8)] backdrop-blur-md",
+            "pointer-events-auto border border-border/80 bg-carbon/95 shadow-[0_16px_48px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md",
             !reduced && "transition-[width,padding] duration-200 ease-out",
-            spineMode ? "w-11 p-1.5" : "w-[9.5rem] p-2.5",
+            // Softer chrome: less card-panel emphasis
+            spineMode
+              ? "w-11 rounded-lg p-1.5"
+              : "w-[9.5rem] rounded-lg p-2.5",
           )}
         >
           {!spineMode ? (

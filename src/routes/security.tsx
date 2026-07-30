@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { AdversarialTrustBoundary } from "@/components/visual-system/adversarial-trust-boundary";
 import { TrustBoundaryDiagram } from "@/components/home/trust-boundary-diagram";
 import { ForensicFrame } from "@/components/home/forensic-frame";
 import { Button } from "@/components/ui/button";
@@ -64,6 +65,8 @@ function SecurityPage() {
           {STAGE_0_NOTE}
         </div>
       </header>
+
+      <AdversarialTrustBoundary />
 
       <TrustBoundaryDiagram />
 

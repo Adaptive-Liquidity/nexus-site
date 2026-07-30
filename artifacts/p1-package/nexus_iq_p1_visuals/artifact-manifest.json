@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0",
+  "package": "Nexus-IQ P1 Technical Visual Instruments",
+  "generatedAt": "2026-07-29T00:00:00Z",
+  "provenance": {
+    "basis": "Public nexus-site source, claims registry, maturity vocabulary, package manifest, and checked-in screenshots reviewed on 2026-07-29.",
+    "livePreview": "Authenticated preview URL was not directly renderable outside its gateway.",
+    "benchmarkData": "Representative fixture data only; not a public performance claim.",
+    "simulatorData": "Browser-local representative fixtures; no live runtime claim."
+  },
+  "files": [
+    {
+      "path": "exports/00-p1-visual-overview.png",
+      "bytes": 1030850,
+      "sha256": "3953f13c6f81c001f8e95fb12bfc36b5ad061abc8438ab2d8e67e887745edba6",
+      "width": 1908,
+      "height": 1468,
+      "mode": "RGB"
+    },
+    {
+      "path": "exports/01-claim-dependency-graph.png",
+      "bytes": 498037,
+      "sha256": "50d5da8ee5e7bb49f2e7a1ec4b9b14e7d9b19f372f8a3ef339941d96ff3666a2",
+      "width": 1600,
+      "height": 1087,
+      "mode": "RGB"
+    },
+    {
+      "path": "exports/02-maturity-topology.png",
+      "bytes": 392737,
+      "sha256": "c5941e26c5401ece8f38170c026d320bf976b10808f824be72426de3f14bb7bf",
+      "width": 1600,
+      "height": 1087,
+      "mode": "RGB"
+    },
+    {
+      "path": "exports/03-benchmark-workbench.png",
+      "bytes": 374976,
+      "sha256": "658f65cc1da0bcb81de5a674efb07fb31f93623f59a2501558824dad60a80efc",
+      "width": 1600,
+      "height": 1199,
+      "mode": "RGB"
+    },
+    {
+      "path": "exports/04-developer-integration-simulator.png",
+      "bytes": 358130,
+      "sha256": "d03159cce28c8cf5cd42db62bc05a822827e25b1f46396f6158e02156df86584",
+      "width": 1600,
+      "height": 1129,
+      "mode": "RGB"
+    },
+    {
+      "path": "nexus-iq-p1-implementation-blueprint.md",
+      "bytes": 15994,
+      "sha256": "952fd50ba913d0bfdedb45818b8dbe46a622d2412c2eb89bc08a6617e7a3011b"
+    },
+    {
+      "path": "nexus-iq-p1-visual-lab.html",
+      "bytes": 73538,
+      "sha256": "ab14b7e3c62e59c65ae1fe772c7ac4e612343c3634ef380236aafc6f05242662"
+    },
+    {
+      "path": "qa-report.md",
+      "bytes": 1592,
+      "sha256": "8b60c35bdf977875e1c079a4caade2a70c7114ad749dd4d16ff72f823caeece8"
+    },
+    {
+      "path": "qa-results.json",
+      "bytes": 2865,
+      "sha256": "b89adc6e0e160d7d4f06376a10df62d8132fc03bbce292c5f127e30d6a3b9b6d"
+    },
+    {
+      "path": "spec/p1-visual-data-contracts.ts",
+      "bytes": 11561,
+      "sha256": "7424efa1aeb915f169cbe804924fdb87697951f664acb24da5909bd6a9c8f957"
+    }
+  ]
+}

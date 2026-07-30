@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-07-29T15:00:09.361443+00:00",
+  "service": "Grok Imagine (generate_image / image_edit)",
+  "model_version": "unlogged by tool API",
+  "cost": "unlogged",
+  "gate_parent": "APPROVE_REFERENCE_BOARD",
+  "candidates": [
+    {
+      "id": "V1",
+      "name": "Axial Ridge Vessel",
+      "output_id": "fvx51",
+      "tool": "image_edit",
+      "parent_id": "4eEb6",
+      "role": "primary_candidate",
+      "board_path": "artifacts/wow-sprint/object-language/V1_fvx51_board.jpg",
+      "thumb_path": "artifacts/wow-sprint/object-language/V1_160px.jpg",
+      "bytes": 191259,
+      "dims": "1248x832",
+      "sha256": "54981944dd13e0d6ce20a4cb9188224882d1a208a97a3db69a995e5fe9f17c78",
+      "thumb_sha256": "7522698dc3dc0bf3aaec5ec3305652923559e5a8a052eacd6c8bd6cf89c609ef",
+      "thumb_bytes": 5245,
+      "service": "Grok Imagine",
+      "model_version": "unlogged",
+      "cost": "unlogged",
+      "rights": "project study \u2014 not production hero; object-language candidate only"
+    },
+    {
+      "id": "V2",
+      "name": "Split Ledger Module",
+      "output_id": "DiOjw",
+      "tool": "image_edit",
+      "parent_id": "UckAi",
+      "role": "evidence_sibling",
+      "board_path": "artifacts/wow-sprint/object-language/V2_DiOjw_board.jpg",
+      "thumb_path": "artifacts/wow-sprint/object-language/V2_160px.jpg",
+      "bytes": 152681,
+      "dims": "1248x832",
+      "sha256": "1e38b7ea719f75e8bceb93fb72179a964dc4f1c8123f1a85ada6d86b04cf97b5",
+      "thumb_sha256": "6198a05841d5decfd1f5a0d1b64622e5a3103dafe094b824b66efb4ba526317f",
+      "thumb_bytes": 4068,
+      "service": "Grok Imagine",
+      "model_version": "unlogged",
+      "cost": "unlogged",
+      "rights": "project study \u2014 not production hero; object-language candidate only"
+    },
+    {
+      "id": "V3",
+      "name": "Orbital Keystone",
+      "output_id": "EuOmK",
+      "tool": "image_edit",
+      "parent_id": "PtoH1",
+      "role": "monumental_alternate",
+      "board_path": "artifacts/wow-sprint/object-language/V3_EuOmK_board.jpg",
+      "thumb_path": "artifacts/wow-sprint/object-language/V3_160px.jpg",
+      "bytes": 213299,
+      "dims": "1248x832",
+      "sha256": "e572d60eb002c5f2e4ed9a71b5c0b318471bc2af8d2b7944cc1ae37c5f50627e",
+      "thumb_sha256": "a0879c15c51824092f040d0994acf0b22f1927c81318e39ff95484af8db44863",
+      "thumb_bytes": 6098,
+      "service": "Grok Imagine",
+      "model_version": "unlogged",
+      "cost": "unlogged",
+      "rights": "project study \u2014 not production hero; object-language candidate only"
+    }
+  ],
+  "rejected_intermediates": [
+    {
+      "id": "4eEb6",
+      "note": "V1 first gen \u2014 gem/cross straps"
+    },
+    {
+      "id": "UckAi",
+      "note": "V2 first gen \u2014 cool gray glasses-case open"
+    },
+    {
+      "id": "T5ayB",
+      "note": "V2 plastic hinge case rejected"
+    },
+    {
+      "id": "PtoH1",
+      "note": "V3 first gen \u2014 symmetric hex bar"
+    }
+  ]
+}

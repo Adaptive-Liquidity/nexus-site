@@ -3,8 +3,15 @@ import { ForensicFrame } from "@/components/home/forensic-frame";
 import { Button } from "@/components/ui/button";
 import { BRAND } from "@/content/site-copy";
 import { MaturityBadge } from "@/components/site/maturity-badge";
+import { IntegrationSimulator } from "@/components/developers/integration-simulator";
+import {
+  developersSearchFromRaw,
+  resolveDevelopersSearch,
+} from "@/lib/evaluator-search";
 
 export const Route = createFileRoute("/developers")({
+  validateSearch: (raw: Record<string, unknown>) =>
+    developersSearchFromRaw(raw),
   component: DevelopersPage,
 });
 
@@ -36,6 +43,8 @@ const PATHS = [
 ];
 
 function DevelopersPage() {
+  const search = resolveDevelopersSearch(Route.useSearch());
+  const navigate = Route.useNavigate();
   return (
     <main className="mx-auto min-w-0 max-w-[72rem] space-y-10 overflow-x-hidden px-4 py-10 sm:px-6 sm:py-14">
       <header className="max-w-2xl space-y-4">
@@ -56,6 +65,30 @@ function DevelopersPage() {
           <MaturityBadge status="TARGET" />
         </div>
       </header>
+
+      <IntegrationSimulator
+          scenarioId={search.scenario}
+          stepIndex={search.step}
+          architecture={search.architecture}
+          onScenarioChange={(scenario) =>
+            navigate({
+              search: (prev) => ({ ...prev, scenario, step: 0 }),
+              replace: true,
+            })
+          }
+          onStepChange={(step) =>
+            navigate({
+              search: (prev) => ({ ...prev, step }),
+              replace: true,
+            })
+          }
+          onArchitectureChange={(architecture) =>
+            navigate({
+              search: (prev) => ({ ...prev, architecture }),
+              replace: true,
+            })
+          }
+        />
 
       <ForensicFrame
         title="Integration paths"

@@ -5,6 +5,7 @@ import { MaturityBadge } from "@/components/site/maturity-badge";
 import { SectionHeading } from "@/components/home/section-heading";
 import { Reveal } from "@/components/home/reveal";
 import { ChangeGateMap } from "@/components/home/change-gate-map";
+import { ChangeGateStateSpace } from "@/components/visual-system/change-gate-state-space";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 
@@ -37,14 +38,23 @@ export function ChangeGateSection() {
           </div>
         </Reveal>
 
-        <Reveal delay={70}>
+        <Reveal delay={60}>
           <div className="mt-8">
+            <ChangeGateStateSpace
+              activePhaseId={openId}
+              onSelectPhase={setOpenId}
+            />
+          </div>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <div className="mt-6">
             <ChangeGateMap activeId={openId} onSelect={setOpenId} />
           </div>
         </Reveal>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-          <Reveal delay={80}>
+          <Reveal delay={90}>
             <ol className="relative space-y-0 border-l border-border pl-0">
               {CHANGE_GATE_PHASES.map((phase, index) => {
                 const open = openId === phase.id;
@@ -177,9 +187,7 @@ function Block({ label, body }: { label: string; body: string }) {
       <p className="text-[11px] font-medium uppercase tracking-wide text-porcelain-subtle">
         {label}
       </p>
-      <p className="mt-1.5 text-sm leading-relaxed text-porcelain-muted">
-        {body}
-      </p>
+      <p className="mt-1.5 text-sm leading-relaxed text-porcelain-muted">{body}</p>
     </div>
   );
 }
