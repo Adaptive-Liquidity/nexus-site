@@ -1,6 +1,6 @@
 import { PROBLEM } from "@/content/site-copy";
 import { SectionHeading } from "@/components/home/section-heading";
-import { ProblemDemo } from "@/components/home/problem-demo";
+import { CausalControlTrace } from "@/components/visual-system/causal-control-trace";
 import { Reveal } from "@/components/home/reveal";
 import { ShieldAlert, GitCommitHorizontal, FileSearch } from "lucide-react";
 
@@ -27,7 +27,7 @@ export function ProblemSection() {
 
         <Reveal delay={60}>
           <div className="mt-10">
-            <ProblemDemo />
+            <CausalControlTrace />
           </div>
         </Reveal>
 

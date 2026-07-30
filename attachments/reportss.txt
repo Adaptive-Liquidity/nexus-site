@@ -1,0 +1,1127 @@
+Use the attached review report and complete Nexus-IQ P1 visual-instruments package as implementation inputs, then follow the attached NEXUS-IQ P0.5 + P1 Master Implementation Prompt as the controlling instructions.
+
+Begin by inspecting the actual repository, repository instructions, current branch, uncommitted state, canonical claims and evidence records, current preview, and every file in the supplied package. Do not merely produce another plan or copy the prototypes. Execute every gated phase in order, beginning with the required P0.5 semantic hardening, then build and integrate all four P1 evaluator instruments from canonical validated data.
+
+Preserve existing work and locked claims. Do not fabricate data, interfaces, benchmarks, integrations, maturity, guarantees, customers, or evidence. Do not report the assignment as complete merely because code exists. Completion requires every acceptance gate, production build, browser state, accessibility check, mobile transformation, failure state, visual review, claim-integrity check, and independent review specified in the master prompt to be verified with recorded evidence.
+
+
+
+-----------------------------------------------------------------------------------------------
+
+
+
+P0 is the correct foundation and should not be visually redesigned again; it needs a focused semantic-hardening pass, after which the four P1 evaluator instruments are ready to implement from the completed visual kit below.
+
+Teach-back
+
+Think of the completed P0 work as the operational observatory: it shows how Nexus-IQ handles one transaction.
+
+P1 becomes the evaluator’s analytical layer:
+
+
+
+
+
+What supports each claim?
+
+
+
+What is actually implemented?
+
+
+
+What blocks stronger maturity?
+
+
+
+How were benchmark results produced?
+
+
+
+What can a developer integrate today?
+
+1. Audit scope and confidence
+
+The supplied preview redirects external inspection to Grok’s authenticated preview gateway, so I could not independently inspect its rendered pixels, animations, focus behavior, or browser console.
+
+I therefore separated the review into:
+
+
+
+
+
+Project-reported live behavior: the P0 implementation and verification reports you supplied.
+
+
+
+Public-source verification: the current public route code, claims registry, maturity model, DemoPlayer, benchmark route, and developer route.
+
+
+
+Independent semantic and visual review: whether the described P0 instruments faithfully represent the system without visually upgrading maturity or guarantees.
+
+The public branch still shows the simpler baseline: /maturity is a Stage 0 notice followed by a horizontally scrollable capability table; /evidence/claims is a searchable and expandable dossier; /evidence/benchmarks is methodology copy plus external links; and /developers is a set of integration-path cards. The reported P0/P1-preview changes therefore appear to be ahead of the publicly inspectable source. (GitHub)
+
+Confidence:
+
+
+
+
+
+Product and semantic assessment: approximately 93%
+
+
+
+P1 visual-system direction: approximately 92%
+
+
+
+Pixel-level judgment of the authenticated preview: approximately 55%, pending direct screenshots or authenticated browser access
+
+2. Overall P0 verdict
+
+Conditional go
+
+The P0 visual system is conceptually strong and coherent:
+
+
+
+
+
+Cognitive Hypervisor
+
+
+
+Causal Control Trace
+
+
+
+Architecture Atlas
+
+
+
+Evidence Lattice
+
+
+
+Adversarial Trust Boundary
+
+
+
+Execution Observatory
+
+
+
+Transactional State-Space Map
+
+These instruments now express the product itself rather than surrounding the product with invented prestige imagery.
+
+The strongest decision was:
+
+The product is the spectacle.
+
+The current public claims model supports this direction because it explicitly distinguishes Implemented Foundations, In Integration, Target Architecture, Experimental work, and Known Limitations. It also identifies Stage 0 evidence integrity as blocking stronger end-to-end guarantees. (GitHub)
+
+The primary risk is no longer visual quality. It is semantic divergence: several sophisticated instruments could begin encoding slightly different versions of phases, maturity, authority, rollback, evidence, or trust.
+
+3. P0 instrument-by-instrument review
+
+P0 instrumentVerdictRequired refinementCognitive HypervisorKeep as the signature product visualDefine deterministic arbitration between scroll-driven phase selection and manual phase-chip selectionCausal Control TraceKeepAdd a persistent Known / Authorized / Reversible readout at every time pointArchitecture AtlasKeepIsolated planes should retain ghosted interface contracts so filtering does not imply independenceEvidence LatticeKeepPin limitations[]; synchronize each selected field with its exact JSON path, source event, interpretation, and trust boundaryAdversarial Trust BoundaryKeepStandardize all outcomes to Enforced, Observed, Residual Trust, or Not EstablishedExecution ObservatoryKeep, but correct its event modelSeparate pre-effect denial from post-stage rollback; derive every lens from one immutable event streamChange Gate State-SpaceKeepApproval must be policy-conditioned; compensation must originate after a committed external effect rather than resemble rollbackMaturity TopologyProceedDefault to current-only and preserve the complete canonical maturity table beneath it
+
+4. Corrections required before building P1
+
+4.1 Separate capability denial from rollback
+
+This is the most important correction.
+
+The publicly inspectable DemoPlayer’s Abort scenario currently:
+
+
+
+
+
+Denies NetworkOutbound at Constrain.
+
+
+
+Proceeds to a validator result that says rollback is required.
+
+
+
+Reports a snapshot rollback.
+
+
+
+Describes the outcome as restoring state with no irreversible effect.
+
+That combines two different failure mechanisms into one demonstration. (GitHub)
+
+They should become separate fixtures:
+
+Fixture A — Pre-effect authority denial
+
+Intent
+→ Stage
+→ Constrain: capability denied
+→ Abort / discard staged transaction
+→ Emit denial evidence
+
+
+Expected semantics:
+
+
+
+
+
+No authorized host effect occurred.
+
+
+
+rollback.occurred should not automatically become true.
+
+
+
+The snapshot may simply be discarded.
+
+
+
+Trust classification: Enforced
+
+
+
+Evidence classification: Observed
+
+
+
+External-effect absence is not established beyond the governed boundary.
+
+Fixture B — Post-stage validation failure
+
+Intent
+→ Stage
+→ Constrain: authority granted
+→ Apply staged mutation
+→ Validate: predicate fails
+→ Restore snapshot-backed guest state
+→ Emit failure + rollback evidence
+
+
+Expected semantics:
+
+
+
+
+
+Staged guest state changed.
+
+
+
+Snapshot-backed state restoration occurred.
+
+
+
+External effects still require separate analysis or compensation.
+
+
+
+Trust classification: Enforced + Observed
+
+
+
+External-effect absence remains Not Established unless independently proven.
+
+This distinction should drive all four Observatory lenses.
+
+4.2 Replace broad Abort language
+
+Avoid:
+
+Abort restores pre-execution state. No irreversible effect.
+
+Use:
+
+For this isolated fixture, Abort restores snapshot-backed guest state before any committed effect. External effects require explicit compensation semantics and are not proven absent.
+
+The claims registry already states that Proof Capsules do not prove absence of external side effects and trust the Nexus runtime and host boundary. (GitHub)
+
+4.3 Establish one canonical phase vocabulary
+
+Public product narrative
+
+Intent
+→ Stage
+→ Constrain
+→ Validate
+→ Decide
+→ Emit
+
+
+Internal transaction state
+
+Proposed
+→ Staged
+→ Constrained
+→ Validated
+→ AwaitingApproval? 
+→ Committed | Aborted
+→ EvidenceEmitted
+
+
+AwaitingApproval is optional and policy-conditioned. It must not appear as a universal requirement.
+
+The relationship between the two models should be documented once and reused by every visual.
+
+4.4 Drive the Observatory from one event stream
+
+Do not separately animate:
+
+
+
+
+
+a state diff;
+
+
+
+capability results;
+
+
+
+validator outcomes;
+
+
+
+Proof Capsule fields.
+
+Use one immutable sequence:
+
+interface ObservatoryEvent {
+  id: string;
+  sequence: number;
+  stage:
+    | "intent"
+    | "stage"
+    | "constrain"
+    | "validate"
+    | "decide"
+    | "commit"
+    | "abort"
+    | "emit";
+  type: string;
+  observedAtMs: number;
+  maturity: PublicStatus;
+  payloadRef: string;
+  evidenceFieldsUnlocked: string[];
+}
+
+
+Each lens becomes a pure projection of:
+
+selected scenario
++ event sequence
++ scrubber time
+
+
+That prevents impossible states such as a signature appearing before emission or a rollback result appearing before a mutation exists.
+
+4.5 Add canonical, sourced graph relationships
+
+The existing claims registry contains claim rows, evidence, limitations, and status, but does not yet provide the complete relationship topology required by P1. The current Claims page is appropriately registry-driven, searchable, and limitation-preserving, so the graph should augment that dossier rather than replace it. (GitHub)
+
+Every relationship must contain:
+
+interface ClaimRelation {
+  id: string;
+  from: string;
+  to: string;
+  kind:
+    | "requires"
+    | "supports"
+    | "binds_context"
+    | "blocks"
+    | "bounds"
+    | "strengthens"
+    | "extends_to"
+    | "supersedes"
+    | "evidences";
+  maturity: PublicStatus;
+  rationale: string;
+  sourceRefs: string[];
+  lastVerified: string;
+}
+
+
+Use one direction rule:
+
+from actively relates to to.
+
+For example:
+
+isolation supports transactional-change-gate
+stage0-integrity blocks transactional-change-gate
+wasm-scope bounds transactional-change-gate
+proof-capsule evidences execution-observation
+
+
+Do not mix active forms such as supports with passive forms such as blocked_by; that creates ambiguous arrow direction.
+
+4.6 Default every mixed-maturity graph to current-only
+
+Where destination architecture appears:
+
+
+
+
+
+Current-only is the initial view.
+
+
+
+Target nodes are not focusable or announced while hidden.
+
+
+
+Revealing targets requires an explicit action.
+
+
+
+Target edges remain dashed or patterned.
+
+
+
+A permanent text statement explains that targets are non-current.
+
+
+
+Current and target distinctions must survive grayscale.
+
+This is particularly important because the claims registry currently classifies the Change Gate and memory binding as In Integration, production signing as Target, and full agent/MCP governance as outside the current WASM boundary. (GitHub)
+
+4.7 Standardize the trust taxonomy
+
+Use exactly four top-level interpretation classes:
+
+ClassificationMeaningEnforcedA runtime or policy boundary actively allowed or denied the actionObservedAn event was recorded, without proving correctness or enforcementResidual TrustThe conclusion still depends on a named host, signer, key, service, clock, or operatorNot EstablishedAvailable evidence does not support the stronger conclusion
+
+Terms such as these remain mechanism descriptions:
+
+
+
+
+
+denied;
+
+
+
+restored;
+
+
+
+constrained;
+
+
+
+advisory;
+
+
+
+degraded;
+
+
+
+attested;
+
+
+
+compensated.
+
+They should not become competing terminal taxonomies.
+
+4.8 Expose signature trust rather than signature presence
+
+Selecting signature in the Evidence Lattice should show:
+
+
+
+
+
+signer identity;
+
+
+
+verification result;
+
+
+
+key source;
+
+
+
+key custody;
+
+
+
+algorithm;
+
+
+
+covered fields;
+
+
+
+whether the signature is a fixture/demo signature;
+
+
+
+whether the key is optional;
+
+
+
+whether a durable production trust anchor exists.
+
+The current registry explicitly says signatures may be optional, demo signatures are not production anchors, and production-grade signing identity remains Target Architecture. (GitHub)
+
+Prefer:
+
+Portable evidence record, optionally Ed25519-signed
+
+over language that implies every current capsule is signed.
+
+4.9 Define manual-versus-scroll arbitration
+
+The hero is both scroll-controlled and manually inspectable.
+
+Without an explicit rule, clicking Validate while the browser remains in the Constrain scroll range may cause the next scroll event to snap the visual back.
+
+Use one of two models:
+
+
+
+
+
+Clicking a phase programmatically moves to that phase’s scroll location.
+
+
+
+Clicking enters a visible Manual inspection mode until the visitor resumes scrolling.
+
+The active control mode should be programmatically announced.
+
+4.10 Complete the verification gate
+
+The supplied typecheck, console, interaction, and overflow results are a strong start. Before merge, also require:
+
+
+
+
+
+lint;
+
+
+
+safe production build;
+
+
+
+390, 430, 768, 1280, 1440, and 1920 widths;
+
+
+
+keyboard-only operation;
+
+
+
+visible focus;
+
+
+
+screen-reader summaries;
+
+
+
+textual table/list equivalents;
+
+
+
+reduced-motion states;
+
+
+
+data and fixture failure fallbacks;
+
+
+
+URL deep-link state;
+
+
+
+browser back/forward restoration;
+
+
+
+malformed relationship rejection;
+
+
+
+malformed benchmark-manifest rejection;
+
+
+
+screenshot regression for every interpretation-changing state;
+
+
+
+no continuous offscreen rendering;
+
+
+
+cross-route claim and maturity consistency.
+
+5. P1 instruments developed
+
+FIG-CLM-06 — Claim Dependency Graph
+
+Route: /evidence/claims, immediately above the existing claims dossier.
+
+Evaluator question
+
+What supports this claim, what blocks or bounds it, what evidence exists, and what stronger target remains?
+
+Design
+
+A deterministic left-to-right dependency topology:
+
+Implemented foundations
+        ↓
+Composed product claim
+        ↓
+Blockers / limitations / targets / evidence
+
+
+Interactions
+
+
+
+
+
+Select a claim.
+
+
+
+View all relationships.
+
+
+
+View support path.
+
+
+
+View blocker path.
+
+
+
+Toggle current-only.
+
+
+
+Search and status filters synchronize with the dossier.
+
+
+
+Selected claim and lens persist in the URL.
+
+
+
+Missing evidence appears explicitly.
+
+Mobile
+
+The desktop graph becomes an ordered dependency trace:
+
+Selected claim
+→ Supported by
+→ Blocked by
+→ Bounded by
+→ Evidenced by
+→ Does not establish
+
+
+The existing registry dossier remains the canonical detailed source beneath the graph. (GitHub)
+
+FIG-MAT-07 — Capability Maturity Topology
+
+Route: /maturity, above the existing table.
+
+Evaluator question
+
+Which foundations are usable, what is in integration, and what precise dependency blocks the stronger guarantee?
+
+Design regions
+
+Implemented Foundations
+→ In Integration
+→ Stage 0 Integrity Gate
+→ Destination Architecture
+
+
+A separate scope bar represents:
+
+Current enforcement perimeter:
+WASM guest ↔ host calls
+
+
+Interactions
+
+
+
+
+
+Current only / reveal destination.
+
+
+
+Critical path / all capabilities.
+
+
+
+Select a capability.
+
+
+
+“Why blocked?” dependency trace.
+
+
+
+Inspect prerequisites, evidence, limitations, and first unsatisfied dependency.
+
+Rules
+
+
+
+
+
+No global completion percentage.
+
+
+
+No speculative delivery date.
+
+
+
+Adjacency never upgrades maturity.
+
+
+
+Target nodes are absent from the initial focus order.
+
+
+
+The current exhaustive table remains below.
+
+The current public maturity route already derives its rows from the claims registry; that table should remain the canonical textual representation after adding the topology. (GitHub)
+
+FIG-BEN-08 — Benchmark Reproducibility Workbench
+
+Route: /evidence/benchmarks.
+
+Evaluator question
+
+What was measured, under what conditions, with what distribution and uncertainty, and can the underlying artifact be verified?
+
+Workbench surfaces
+
+
+
+
+
+validated run selector;
+
+
+
+benchmark group;
+
+
+
+measurement mode;
+
+
+
+payload class;
+
+
+
+baseline commit;
+
+
+
+distribution and interval;
+
+
+
+environment fingerprint;
+
+
+
+comparability checks;
+
+
+
+raw artifact links;
+
+
+
+hashes;
+
+
+
+optional signature bundle;
+
+
+
+reproduction command;
+
+
+
+limitations.
+
+Critical rules
+
+
+
+
+
+No hard-coded public numbers.
+
+
+
+No manifest means Unavailable, not zero.
+
+
+
+Incompatible environments mean Incomparable, not regression.
+
+
+
+Primitive sandbox initialization is never compared with integrated request latency.
+
+
+
+Distribution is shown instead of only a mean.
+
+
+
+Raw table equivalent remains available.
+
+The public benchmark page already establishes the correct doctrine—methodology before headline figures and no invented performance claims—but currently redirects evaluators to the external dashboard and repository. The workbench should preserve those links while making validated CI artifacts inspectable on-site. (GitHub)
+
+I removed exact millisecond values and specific runner/runtime labels from the design prototype. It now uses normalized, explicitly non-citable fixture data and manifest placeholders.
+
+FIG-DEV-09 — Developer Integration Simulator
+
+Route: /developers, above the current integration-path cards.
+
+Evaluator question
+
+What can I integrate today, where is authority checked, how may memory participate, what evidence returns, and which steps remain destination architecture?
+
+Lanes
+
+Agent / Host
+Capability Authority
+Nexus Runtime
+AEON-IQ Memory
+Evidence
+
+
+Validator and Effect lanes appear only where the selected scenario requires them.
+
+Scenarios
+
+
+
+
+
+Current pure-compute execution.
+
+
+
+Current capability-gated WASI execution.
+
+
+
+Valid authority.
+
+
+
+Expired authority.
+
+
+
+Revoked authority.
+
+
+
+Advisory memory.
+
+
+
+Attested memory.
+
+
+
+Absent memory.
+
+
+
+Proof Capsule inspection/verification.
+
+
+
+Explicitly non-current composed Change Gate.
+
+Rules
+
+
+
+
+
+Current API is the default.
+
+
+
+Every arrow has its own maturity.
+
+
+
+Every step has its own trust interpretation.
+
+
+
+Memory cannot cross into the authority lane.
+
+
+
+No invented endpoint or SDK method.
+
+
+
+No credentials or live network call.
+
+
+
+No real side effect.
+
+
+
+Destination steps remain visibly disabled until revealed.
+
+The prototype uses execute_tool_wasi because Nexus publicly documents it as the current capability-gated WASI execution path. The site’s existing developer copy also correctly limits present governance to the WASM guest↔host boundary and treats the complete Change Gate as the product-composition destination. (GitHub)
+
+Mobile
+
+The swimlane diagram becomes a vertical causal stepper:
+
+1. Agent declares request
+2. Authority validates token
+3. Nexus executes authorized host calls
+4. AEON supplies advisory context
+5. Evidence is emitted
+
+
+Each step retains maturity and trust classification.
+
+6. Completed deliverables
+
+Start here
+
+Read the P0 hardening and P1 production report
+
+Open the interactive P1 evaluator visual lab
+
+View the four primary desktop directions
+
+View the four mobile transformation studies
+
+Open the implementation handoff prompt
+
+Editable primary figures
+
+InstrumentReview renderEditable sourceClaim Dependency GraphPNGSVGCapability Maturity TopologyPNGSVGBenchmark Reproducibility WorkbenchPNGSVGDeveloper Integration SimulatorPNGSVG
+
+Complete implementation package
+
+Download the complete P1 evaluator visual kit
+
+The package includes:
+
+
+
+
+
+primary and alternate visual directions;
+
+
+
+desktop and mobile layouts;
+
+
+
+interactive concept labs;
+
+
+
+canonical TypeScript data contracts;
+
+
+
+React component API scaffolds;
+
+
+
+route integration guidance;
+
+
+
+P0 correction report;
+
+
+
+P1 implementation prompt;
+
+
+
+provenance manifest with file hashes.
+
+The artifacts passed JSON parsing, SVG XML parsing, HTML parsing, JavaScript syntax checks, manifest hash verification, and ZIP integrity verification. No repository files were modified, committed, pushed, merged, or deployed.
+
+7. Recommended implementation sequence
+
+P0.5 — Semantic hardening
+
+
+
+
+
+Split denial and rollback fixtures.
+
+
+
+Scope Abort wording.
+
+
+
+Canonicalize transaction phases.
+
+
+
+Add the relationship registry.
+
+
+
+Add figure provenance.
+
+
+
+Standardize trust interpretation.
+
+
+
+Make current-only the default.
+
+
+
+Lock Observatory projections to one event stream.
+
+
+
+Define hero scroll/manual arbitration.
+
+P1A — Evaluator topology
+
+
+
+
+
+Build Claim Dependency Graph.
+
+
+
+Build Maturity Topology from the same relationship data.
+
+
+
+Preserve the existing dossier and table beneath them.
+
+
+
+Add URL-deep-linked selected state.
+
+P1B — Reproducibility
+
+
+
+
+
+Define and validate benchmark-manifest.json.
+
+
+
+Add unavailable and incomparable states.
+
+
+
+Build the Benchmark Workbench.
+
+
+
+Connect verified artifacts and methodology.
+
+P1C — Developer understanding
+
+
+
+
+
+Define versioned integration scenarios.
+
+
+
+Verify all displayed API names.
+
+
+
+Build current API flows first.
+
+
+
+Add destination architecture only behind explicit disclosure.
+
+
+
+Build mobile stepper and textual equivalent.
+
+P1D — Final consistency gate
+
+Run one cross-route audit for:
+
+claim
+→ maturity
+→ evidence
+→ limitation
+→ trust interpretation
+→ source
+
+
+A visitor selecting the same capability on Claims, Maturity, Security, Benchmarks, or Developers must encounter the same status and guarantee boundary.
+
+Key Takeaway
+
+Keep all seven P0 instruments. Correct the denial/rollback semantics and establish one canonical relationship, event, maturity, and trust model before P1 integration.
+
+The four new P1 visuals are designed to make Nexus-IQ academically and technically evaluable—not merely visually impressive. They convert claims, maturity, measurements, and integration scope into inspectable product surfaces while preserving the governing rule:
+
+Memory may inform reasoning. It may never silently increase authority.
+
+Further Considerations
+
+The only major unresolved item is authenticated pixel-level review of the current preview. That should happen after the P0.5 corrections and before any commit or PR; it does not justify delaying the canonical data work or redesigning the visual direction.

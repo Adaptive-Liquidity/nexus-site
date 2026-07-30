@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+<defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#111820"/><stop offset="1" stop-color="#080b0e"/></linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5f93a8" stop-opacity=".22"/><stop offset=".52" stop-color="#e8f6fb" stop-opacity=".06"/><stop offset="1" stop-color="#2f5e73" stop-opacity=".14"/></linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#fff" stroke-opacity=".035"/></pattern>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#aaa79f"/></marker>
+      <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5f93a8"/></marker>
+      <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#b96464"/></marker>
+    </defs>
+<rect x="24" y="24" width="1552" height="852" rx="18" fill="url(#bg)" stroke="#34414a"/>
+    <rect x="24" y="24" width="1552" height="54" rx="18" fill="#0e1419"/>
+    <line x1="24" y1="78" x2="1576" y2="78" stroke="#34414a"/>
+    <text x="50" y="57" fill="#f2ede2" font-family="Georgia,serif" font-size="20">Benchmark workbench</text>
+    <text x="1550" y="56" text-anchor="end" fill="#747b7f" font-family="monospace" font-size="11" letter-spacing="1.5">BENCH-WB-01  ·  REPRESENTATIVE FIXTURE · NON-CITABLE</text>
+<rect x="44" y="94" width="1512" height="754" rx="14" fill="#0b1014" stroke="#34414a"/>
+<rect x="65" y="114" width="270" height="64" rx="9" fill="#111820" stroke="#34414a"/><text x="80" y="137" fill="#747b7f" font-family="monospace" font-size="9">SOURCE</text><text x="80" y="160" fill="#f2ede2" font-family="monospace" font-size="11">ci-artifact.json</text>
+<rect x="357" y="114" width="270" height="64" rx="9" fill="#111820" stroke="#34414a"/><text x="372" y="137" fill="#747b7f" font-family="monospace" font-size="9">COMMIT</text><text x="372" y="160" fill="#f2ede2" font-family="monospace" font-size="11">fixture-only</text>
+<rect x="649" y="114" width="270" height="64" rx="9" fill="#111820" stroke="#34414a"/><text x="664" y="137" fill="#747b7f" font-family="monospace" font-size="9">RUNNER</text><text x="664" y="160" fill="#f2ede2" font-family="monospace" font-size="11">loaded from manifest</text>
+<rect x="941" y="114" width="270" height="64" rx="9" fill="#111820" stroke="#34414a"/><text x="956" y="137" fill="#747b7f" font-family="monospace" font-size="9">TOOLCHAIN</text><text x="956" y="160" fill="#f2ede2" font-family="monospace" font-size="11">rustc · criterion</text>
+<rect x="1233" y="114" width="270" height="64" rx="9" fill="#111820" stroke="#34414a"/><text x="1248" y="137" fill="#747b7f" font-family="monospace" font-size="9">SAMPLES</text><text x="1248" y="160" fill="#f2ede2" font-family="monospace" font-size="11">12 + warmup</text>
+<rect x="65" y="202" width="164" height="34" rx="7" fill="#111820" fill-opacity="1" stroke="#34414a"/><text x="147" y="224" text-anchor="middle" fill="#aaa79f" font-family="monospace" font-size="9">Sandbox init</text>
+<rect x="245" y="202" width="164" height="34" rx="7" fill="#111820" fill-opacity="1" stroke="#34414a"/><text x="327" y="224" text-anchor="middle" fill="#aaa79f" font-family="monospace" font-size="9">Snapshot create</text>
+<rect x="425" y="202" width="164" height="34" rx="7" fill="#2f5e73" fill-opacity="0.5" stroke="#5f93a8"/><text x="507" y="224" text-anchor="middle" fill="#f2ede2" font-family="monospace" font-size="9">Rollback</text>
+<rect x="605" y="202" width="164" height="34" rx="7" fill="#111820" fill-opacity="1" stroke="#34414a"/><text x="687" y="224" text-anchor="middle" fill="#aaa79f" font-family="monospace" font-size="9">Throughput</text>
+<rect x="785" y="202" width="164" height="34" rx="7" fill="#111820" fill-opacity="1" stroke="#34414a"/><text x="867" y="224" text-anchor="middle" fill="#aaa79f" font-family="monospace" font-size="9">Integrated path</text>
+<rect x="65" y="260" width="980" height="390" rx="12" fill="#0e1419" stroke="#34414a"/>
+<line x1="115" y1="300" x2="115" y2="610" stroke="#fff" stroke-opacity=".06"/><text x="115" y="632" text-anchor="middle" fill="#747b7f" font-family="monospace" font-size="9">0.86</text>
+<line x1="255" y1="300" x2="255" y2="610" stroke="#fff" stroke-opacity=".06"/><text x="255" y="632" text-anchor="middle" fill="#747b7f" font-family="monospace" font-size="9">0.90</text>
+<line x1="395" y1="300" x2="395" y2="610" stroke="#fff" stroke-opacity=".06"/><text x="395" y="632" text-anchor="middle" fill="#747b7f" font-family="monospace" font-size="9">0.94</text>
+<line x1="535" y1="300" x2="535" y2="610" stroke="#fff" stroke-opacity=".06"/><text x="535" y="632" text-anchor="middle" fill="#747b7f" font-family="monospace" font-size="9">0.98</text>
+<line x1="675" y1="300" x2="675" y2="610" stroke="#fff" stroke-opacity=".06"/><text x="675" y="632" text-anchor="middle" fill="#747b7f" font-family="monospace" font-size="9">1.02</text>
+<line x1="815" y1="300" x2="815" y2="610" stroke="#fff" stroke-opacity=".06"/><text x="815" y="632" text-anchor="middle" fill="#747b7f" font-family="monospace" font-size="9">1.06</text>
+<line x1="955" y1="300" x2="955" y2="610" stroke="#fff" stroke-opacity=".06"/><text x="955" y="632" text-anchor="middle" fill="#747b7f" font-family="monospace" font-size="9">1.10</text>
+<text x="555" y="642" text-anchor="middle" fill="#747b7f" font-family="monospace" font-size="9">NORMALIZED LATENCY · LOWER IS BETTER</text>
+<text x="92" y="402" text-anchor="end" fill="#aaa79f" font-family="Arial" font-size="12">Baseline</text><text x="92" y="528" text-anchor="end" fill="#aaa79f" font-family="Arial" font-size="12">Candidate</text>
+<circle cx="675.0" cy="365.0" r="5" fill="#aaa79f" fill-opacity=".72"/>
+<circle cx="605.0" cy="375.0" r="5" fill="#aaa79f" fill-opacity=".72"/>
+<circle cx="570.0" cy="385.0" r="5" fill="#aaa79f" fill-opacity=".72"/>
+<circle cx="640.0" cy="395.0" r="5" fill="#aaa79f" fill-opacity=".72"/>
+<circle cx="535.0" cy="365.0" r="5" fill="#aaa79f" fill-opacity=".72"/>
+<circle cx="745.0" cy="375.0" r="5" fill="#aaa79f" fill-opacity=".72"/>
+<circle cx="500.0" cy="385.0" r="5" fill="#aaa79f" fill-opacity=".72"/>
+<circle cx="675.0" cy="395.0" r="5" fill="#aaa79f" fill-opacity=".72"/>
+<circle cx="605.0" cy="365.0" r="5" fill="#aaa79f" fill-opacity=".72"/>
+<circle cx="465.0" cy="375.0" r="5" fill="#aaa79f" fill-opacity=".72"/>
+<circle cx="710.0" cy="385.0" r="5" fill="#aaa79f" fill-opacity=".72"/>
+<circle cx="570.0" cy="395.0" r="5" fill="#aaa79f" fill-opacity=".72"/>
+<circle cx="360.0" cy="491.0" r="5" fill="#75a184" fill-opacity=".82"/>
+<circle cx="395.0" cy="501.0" r="5" fill="#75a184" fill-opacity=".82"/>
+<circle cx="325.0" cy="511.0" r="5" fill="#75a184" fill-opacity=".82"/>
+<circle cx="430.0" cy="521.0" r="5" fill="#75a184" fill-opacity=".82"/>
+<circle cx="290.0" cy="491.0" r="5" fill="#75a184" fill-opacity=".82"/>
+<circle cx="465.0" cy="501.0" r="5" fill="#75a184" fill-opacity=".82"/>
+<circle cx="360.0" cy="511.0" r="5" fill="#75a184" fill-opacity=".82"/>
+<circle cx="325.0" cy="521.0" r="5" fill="#75a184" fill-opacity=".82"/>
+<circle cx="395.0" cy="491.0" r="5" fill="#75a184" fill-opacity=".82"/>
+<circle cx="255.0" cy="501.0" r="5" fill="#75a184" fill-opacity=".82"/>
+<circle cx="430.0" cy="511.0" r="5" fill="#75a184" fill-opacity=".82"/>
+<circle cx="360.0" cy="521.0" r="5" fill="#75a184" fill-opacity=".82"/>
+<line x1="500.0" y1="380" x2="710.0" y2="380" stroke="#aaa79f" stroke-width="7" stroke-linecap="round" opacity=".38"/>
+<line x1="605.0" y1="352" x2="605.0" y2="408" stroke="#aaa79f" stroke-width="3"/>
+<line x1="290.0" y1="506" x2="430.0" y2="506" stroke="#75a184" stroke-width="7" stroke-linecap="round" opacity=".38"/>
+<line x1="360.0" y1="478" x2="360.0" y2="534" stroke="#75a184" stroke-width="3"/>
+<line x1="710.0000000000001" y1="292" x2="710.0000000000001" y2="610" stroke="#b96464" stroke-width="1.6" stroke-dasharray="6 6"/><text x="718.0000000000001" y="312" fill="#b96464" font-family="monospace" font-size="9">REGRESSION GATE</text>
+<rect x="1070" y="202" width="455" height="448" rx="12" fill="#111820" stroke="#34414a"/>
+<text x="1096" y="234" fill="#75a184" font-family="monospace" font-size="10" letter-spacing="1.2">ROLLBACK · CANDIDATE</text>
+<text x="1096" y="280" fill="#747b7f" font-family="monospace" font-size="9">P50</text><text x="1320" y="280" text-anchor="end" fill="#f2ede2" font-family="monospace" font-size="12">.935 index</text><line x1="1096" y1="298" x2="1498" y2="298" stroke="#34414a"/>
+<text x="1096" y="336" fill="#747b7f" font-family="monospace" font-size="9">P95</text><text x="1320" y="336" text-anchor="end" fill="#f2ede2" font-family="monospace" font-size="12">.955 index</text><line x1="1096" y1="354" x2="1498" y2="354" stroke="#34414a"/>
+<text x="1096" y="392" fill="#747b7f" font-family="monospace" font-size="9">DELTA</text><text x="1320" y="392" text-anchor="end" fill="#f2ede2" font-family="monospace" font-size="12">synthetic only</text><line x1="1096" y1="410" x2="1498" y2="410" stroke="#34414a"/>
+<text x="1096" y="448" fill="#747b7f" font-family="monospace" font-size="9">CONFIDENCE</text><text x="1320" y="448" text-anchor="end" fill="#f2ede2" font-family="monospace" font-size="12">illustrative only</text><line x1="1096" y1="466" x2="1498" y2="466" stroke="#34414a"/>
+<text x="1096" y="504" fill="#747b7f" font-family="monospace" font-size="9">VERDICT</text><text x="1320" y="504" text-anchor="end" fill="#f2ede2" font-family="monospace" font-size="12">not publishable</text><line x1="1096" y1="522" x2="1498" y2="522" stroke="#34414a"/>
+<rect x="1096" y="548" width="402" height="72" rx="9" fill="#221b12" stroke="#d4a55f"/><text x="1115" y="574" fill="#d4a55f" font-family="monospace" font-size="9">PUBLICATION GATE</text><text x="1115" y="596" fill="#aaa79f" font-family="Arial" font-size="10">No number is citable until source, runner, method,</text><text x="1115" y="611" fill="#aaa79f" font-family="Arial" font-size="10">artifact hash, and exclusions resolve to a verified record.</text>
+<rect x="65" y="674" width="1460" height="142" rx="12" fill="#0e1419" stroke="#34414a"/>
+<text x="90" y="704" fill="#5f93a8" font-family="monospace" font-size="10" letter-spacing="1.2">REPRODUCIBILITY LEDGER</text>
+<text x="90" y="744" fill="#75a184" font-family="monospace" font-size="13">✓</text><text x="115" y="744" fill="#aaa79f" font-family="Arial" font-size="11">environment fingerprint</text>
+<text x="545" y="744" fill="#75a184" font-family="monospace" font-size="13">✓</text><text x="570" y="744" fill="#aaa79f" font-family="Arial" font-size="11">warmup + sample count</text>
+<text x="1000" y="744" fill="#75a184" font-family="monospace" font-size="13">✓</text><text x="1025" y="744" fill="#aaa79f" font-family="Arial" font-size="11">distribution, not headline only</text>
+<text x="90" y="782" fill="#75a184" font-family="monospace" font-size="13">✓</text><text x="115" y="782" fill="#aaa79f" font-family="Arial" font-size="11">outlier policy + exclusions</text>
+<text x="545" y="782" fill="#75a184" font-family="monospace" font-size="13">✓</text><text x="570" y="782" fill="#aaa79f" font-family="Arial" font-size="11">artifact hash + provenance</text>
+<text x="1000" y="782" fill="#5f93a8" font-family="monospace" font-size="13">○</text><text x="1025" y="782" fill="#aaa79f" font-family="Arial" font-size="11">independent rerun</text>
+</svg>

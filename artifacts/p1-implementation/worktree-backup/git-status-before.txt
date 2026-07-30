@@ -1,0 +1,180 @@
+ D .vercel/output/functions/__server.func/_ssr/badge-Dm2aZ00T.mjs
+ D .vercel/output/functions/__server.func/_ssr/benchmarks-CiSsts7K.mjs
+ D .vercel/output/functions/__server.func/_ssr/change-gate-CGtCbgln.mjs
+ D .vercel/output/functions/__server.func/_ssr/claims-DTmhSxIK.mjs
+ D .vercel/output/functions/__server.func/_ssr/developers-CpVx8Eai.mjs
+ D .vercel/output/functions/__server.func/_ssr/maturity-DlIbBZbY.mjs
+ D .vercel/output/functions/__server.func/_ssr/maturity-badge-C3dmPz-F.mjs
+ D .vercel/output/functions/__server.func/_ssr/page-stub-CNaV2sjS.mjs
+ D .vercel/output/functions/__server.func/_ssr/proof-capsules-C0zw5JgS.mjs
+ D .vercel/output/functions/__server.func/_ssr/research-DT-D2qiZ.mjs
+ D .vercel/output/functions/__server.func/_ssr/reveal-Cv5cVh_W.mjs
+ D .vercel/output/functions/__server.func/_ssr/router-BKVYFg0c.mjs
+ D .vercel/output/functions/__server.func/_ssr/routes-q8mQBpJV.mjs
+ D .vercel/output/functions/__server.func/_ssr/security-Bk7M4ZHx.mjs
+ M .vercel/output/functions/__server.func/_ssr/ssr.mjs
+ D .vercel/output/functions/__server.func/_ssr/system-BvbJEvCf.mjs
+ D .vercel/output/functions/__server.func/_tanstack-start-manifest_v-DD3DPCa1.mjs
+ M .vercel/output/nitro.json
+ D .vercel/output/static/assets/badge-DLV-DFBC.js
+ D .vercel/output/static/assets/benchmarks-CvMxzeGC.js
+ D .vercel/output/static/assets/change-gate-DrLl9lwZ.js
+ D .vercel/output/static/assets/claims-5pynheZa.js
+ D .vercel/output/static/assets/developers-CJOcP_Ys.js
+ D .vercel/output/static/assets/evidence-1vqWSL0J.js
+ D .vercel/output/static/assets/evidence-PB3mL4Hw.js
+ D .vercel/output/static/assets/forensic-frame-hg9vmGMc.js
+ D .vercel/output/static/assets/index-D0V8DdrP.js
+ D .vercel/output/static/assets/maturity-D7Eg0CAM.js
+ D .vercel/output/static/assets/maturity-badge-BXD1Bmvg.js
+ D .vercel/output/static/assets/page-stub-CT0-l2kc.js
+ D .vercel/output/static/assets/proof-capsules-ClKHL8BJ.js
+ D .vercel/output/static/assets/research-BRBK-aar.js
+ D .vercel/output/static/assets/reveal-BTx0i3SA.js
+ D .vercel/output/static/assets/routes-CVc5RnW4.js
+ D .vercel/output/static/assets/security-BVbHn_-k.js
+ D .vercel/output/static/assets/styles-Cl5ccV2L.css
+ D .vercel/output/static/assets/system-CyUihk3R.js
+ D .vercel/output/static/assets/trust-boundary-diagram-4AS03PgE.js
+ M artifacts/cinematic-hero-stills/PREMISES.md
+ M artifacts/cinematic-hero-stills/STILL_ACCEPTANCE_MATRIX.md
+ M artifacts/wow-sprint/ACCEPTANCE_REPORT.md
+ M artifacts/wow-sprint/EVIDENCE_VESSEL_BRIEF.md
+ M artifacts/wow-sprint/REPO_STATE.md
+ M package-lock.json
+ M package.json
+ M src/components/home/change-gate-section.tsx
+ M src/components/home/composition-section.tsx
+ M src/components/home/demo-player.tsx
+ M src/components/home/pinned-cinematic.tsx
+ M src/components/home/problem-section.tsx
+ M src/components/site/site-header.tsx
+ M src/content/index.ts
+ M src/routes/developers.tsx
+ M src/routes/evidence/benchmarks.tsx
+ M src/routes/evidence/claims.tsx
+ M src/routes/evidence/proof-capsules.tsx
+ M src/routes/index.tsx
+ M src/routes/maturity.tsx
+ M src/routes/security.tsx
+ M src/routes/system.tsx
+ M src/styles.css
+?? .vercel/output/functions/__server.func/_ssr/architecture-atlas-BdVIBDxU.mjs
+?? .vercel/output/functions/__server.func/_ssr/benchmarks-BGYvd2_B.mjs
+?? .vercel/output/functions/__server.func/_ssr/benchmarks-BZKa-y1Y.mjs
+?? .vercel/output/functions/__server.func/_ssr/capsule-anatomy-BxRWEJV_.mjs
+?? .vercel/output/functions/__server.func/_ssr/change-gate-DmXon8cc.mjs
+?? .vercel/output/functions/__server.func/_ssr/claims-CtD6-Jy2.mjs
+?? .vercel/output/functions/__server.func/_ssr/claims-OJuWNeID.mjs
+?? .vercel/output/functions/__server.func/_ssr/developers-7RJlsiu3.mjs
+?? .vercel/output/functions/__server.func/_ssr/developers-r2OColFN.mjs
+?? .vercel/output/functions/__server.func/_ssr/evaluator-search-Buqd9Qff.mjs
+?? .vercel/output/functions/__server.func/_ssr/maturity-C4uyn4Ty.mjs
+?? .vercel/output/functions/__server.func/_ssr/maturity-DZrJPFUu.mjs
+?? .vercel/output/functions/__server.func/_ssr/maturity-badge-BLweOVLC.mjs
+?? .vercel/output/functions/__server.func/_ssr/proof-capsules-DyFXwgU7.mjs
+?? .vercel/output/functions/__server.func/_ssr/research-xoAkvOeF.mjs
+?? .vercel/output/functions/__server.func/_ssr/reveal-DF2H-Eyx.mjs
+?? .vercel/output/functions/__server.func/_ssr/router-8byExYf5.mjs
+?? .vercel/output/functions/__server.func/_ssr/routes-BApdtGW4.mjs
+?? .vercel/output/functions/__server.func/_ssr/routes-BRtluQtL.mjs
+?? .vercel/output/functions/__server.func/_ssr/security-WGGRe_eu.mjs
+?? .vercel/output/functions/__server.func/_ssr/system-D7akOmLb.mjs
+?? .vercel/output/functions/__server.func/_ssr/trust-taxonomy-WCI1T06w.mjs
+?? .vercel/output/functions/__server.func/_ssr/visual-provenance-C-bGV2PH.mjs
+?? .vercel/output/functions/__server.func/_tanstack-start-manifest_v-D_nDivWh.mjs
+?? .vercel/output/static/assets/architecture-atlas-Bu69jwJR.js
+?? .vercel/output/static/assets/benchmarks-Clkj6cGb.js
+?? .vercel/output/static/assets/button-CK6LLR1P.js
+?? .vercel/output/static/assets/capsule-anatomy-B_lLThU9.js
+?? .vercel/output/static/assets/change-gate-D0pFeI8y.js
+?? .vercel/output/static/assets/claims-CrumFhv5.js
+?? .vercel/output/static/assets/createLucideIcon-BMgVla4Z.js
+?? .vercel/output/static/assets/developers-BBBWGPBX.js
+?? .vercel/output/static/assets/evidence-Dvqcim4Q.js
+?? .vercel/output/static/assets/evidence-T0wAMYx0.js
+?? .vercel/output/static/assets/forensic-frame-CXzKrgRW.js
+?? .vercel/output/static/assets/index-CSrhH1mn.js
+?? .vercel/output/static/assets/link-r9kbiy_g.js
+?? .vercel/output/static/assets/maturity-CnqVMqrb.js
+?? .vercel/output/static/assets/maturity-badge-D2wXWxRt.js
+?? .vercel/output/static/assets/preload-helper-66uJKBIs.js
+?? .vercel/output/static/assets/proof-capsules-YmqKp0kF.js
+?? .vercel/output/static/assets/research-CmI5k1Tz.js
+?? .vercel/output/static/assets/reveal-bTohrRoJ.js
+?? .vercel/output/static/assets/routes-B1XQhT5V.js
+?? .vercel/output/static/assets/routes-CLy1ThSU.js
+?? .vercel/output/static/assets/security-DwtH8RnM.js
+?? .vercel/output/static/assets/site-copy-SGXx_a21.js
+?? .vercel/output/static/assets/styles-D0kluOcj.css
+?? .vercel/output/static/assets/system-BSG9pjdq.js
+?? .vercel/output/static/assets/trust-boundary-diagram-Co-OJWCx.js
+?? .vercel/output/static/assets/trust-taxonomy-D3O2MNCe.js
+?? .vercel/output/static/assets/useMatch-CBKUfBK6.js
+?? .vercel/output/static/assets/useRouterState-Be0A0Ep5.js
+?? .vercel/output/static/assets/utils-B6KiDbIe.js
+?? .vercel/output/static/assets/visual-provenance-BPPzBVh4.js
+?? .vercel/output/static/visual-system/
+?? artifacts/imagine_images/4eEb6.jpg
+?? artifacts/imagine_images/DiOjw.jpg
+?? artifacts/imagine_images/EuOmK.jpg
+?? artifacts/imagine_images/MANIFEST.md
+?? artifacts/imagine_images/PtoH1.jpg
+?? artifacts/imagine_images/T5ayB.jpg
+?? artifacts/imagine_images/UckAi.jpg
+?? artifacts/imagine_images/fvx51.jpg
+?? artifacts/nexus_iq_visual_system/
+?? artifacts/p1-implementation/
+?? artifacts/p1-package/
+?? artifacts/p1-package2/
+?? artifacts/wow-sprint/GATE_LOG.md
+?? artifacts/wow-sprint/object-language/
+?? attachments/NEXUS-IQ_P0.5_P1_MASTER_IMPLEMENTATION_PROMPT.md
+?? attachments/nexus-iq-p1-evaluator-visual-kit.zip
+?? attachments/nexus-iq-p1-visual-instruments.zip
+?? attachments/nexus-iq-visual-system-kit.zip
+?? attachments/p1-visuals-report.txt
+?? attachments/reportss.txt
+?? playwright.config.ts
+?? public/
+?? screenshots/causal-trace-abort.png
+?? screenshots/hypervisor-hero.png
+?? screenshots/hypervisor-mobile.png
+?? screenshots/hypervisor-validate.png
+?? screenshots/p0-change-gate-state-space.png
+?? screenshots/p0-evidence-lattice.png
+?? screenshots/p0-execution-observatory.png
+?? screenshots/p0-home-atlas.png
+?? screenshots/p0-observatory-mobile.png
+?? screenshots/p0-security-threat.png
+?? screenshots/p0-system-atlas.png
+?? screenshots/p0-system-mobile.png
+?? screenshots/p1-benchmark-workbench.png
+?? screenshots/p1-claims-debug.png
+?? screenshots/p1-claims-graph.png
+?? screenshots/p1-dev-simulator.png
+?? screenshots/p1-final/
+?? screenshots/p1-maturity-topology.png
+?? screenshots/p1-mobile-developers.png
+?? screenshots/p1-mobile-evidence-benchmarks.png
+?? screenshots/p1-mobile-evidence-claims.png
+?? screenshots/p1-mobile-maturity.png
+?? screenshots/p1-observatory-denial.png
+?? screenshots/wow-object-language/
+?? scripts/validate-claim-relations.mjs
+?? src/components/developers/
+?? src/components/evidence/
+?? src/components/maturity/
+?? src/components/visual-system/
+?? src/content/atlas-contracts.ts
+?? src/content/benchmark-fixture.ts
+?? src/content/claim-relations.json
+?? src/content/integration-scenarios.ts
+?? src/content/observatory-scenarios.ts
+?? src/content/transaction-model.ts
+?? src/content/trust-taxonomy.ts
+?? src/lib/claim-relations.ts
+?? src/lib/evaluator-search.ts
+?? src/lib/visual-provenance.ts
+?? test-results/
+?? tests/

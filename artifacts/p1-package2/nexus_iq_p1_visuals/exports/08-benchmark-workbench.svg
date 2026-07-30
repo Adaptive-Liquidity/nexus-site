@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+    <title id="title">Benchmark Reproducibility Workbench</title><desc id="desc">Make methodology, comparability, uncertainty, environment, and provenance visible before the headline number.</desc><defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#111820"/><stop offset="1" stop-color="#07090b"/></linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18303b" stop-opacity=".9"/><stop offset=".55" stop-color="#0b1116"/><stop offset="1" stop-color="#1a252d"/></linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#5f93a8"/></marker>
+      <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#75a184"/></marker>
+      <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#b96464"/></marker>
+      <pattern id="target-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#5f93a8" stroke-opacity=".25" stroke-width="2"/></pattern>
+      <pattern id="limit-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#b96464" stroke-opacity=".28" stroke-width="2"/></pattern>
+    </defs>
+    <rect width="1600" height="900" fill="url(#bg)"/>
+    <rect x="1" y="1" width="1598" height="898" rx="24" fill="none" stroke="#2a3137"/>
+    <text x="60" y="60" fill="#5f93a8" font-family="monospace" font-size="16" letter-spacing="3">FIG-BEN-08</text>
+    <text x="60" y="112" fill="#f6f1e7" font-family="Georgia,serif" font-size="42">Benchmark Reproducibility Workbench</text>
+    <text x="60" y="148" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="17">Make methodology, comparability, uncertainty, environment, and provenance visible before the headline number.</text>
+    
+<rect x="70" y="180" width="290" height="44" rx="8" fill="#10222b" stroke="#5f93a8"/><text x="88" y="207" fill="#f6f1e7" font-family="monospace" font-size="13">fixture_A / normalized primitive</text>
+<rect x="375" y="180" width="210" height="44" rx="8" fill="#14191d" stroke="#2a3137"/><text x="393" y="207" fill="#b8b3a8" font-family="monospace" font-size="13">normalized index</text>
+<rect x="600" y="180" width="250" height="44" rx="8" fill="#14191d" stroke="#2a3137"/><text x="618" y="207" fill="#b8b3a8" font-family="monospace" font-size="13">fixture comparison</text>
+<rect x="865" y="180" width="260" height="44" rx="8" fill="#251d11" stroke="#d4a55f"/><text x="883" y="207" fill="#d4a55f" font-family="monospace" font-size="13">ILLUSTRATIVE FIXTURE</text>
+<rect x="70" y="255" width="900" height="420" rx="16" fill="#0a0e12" stroke="#2a3137"/>
+<text x="100" y="333" fill="#7a7670" font-family="monospace" font-size="12">BASELINE COMMIT</text>
+<text x="100" y="448" fill="#75a184" font-family="monospace" font-size="12">CURRENT COMMIT</text>
+<line x1="170.0" y1="310" x2="170.0" y2="585" stroke="#2a3137"/><text x="170.0" y="615" text-anchor="middle" fill="#7a7670" font-family="monospace" font-size="11">92</text><line x1="314.0" y1="310" x2="314.0" y2="585" stroke="#2a3137"/><text x="314.0" y="615" text-anchor="middle" fill="#7a7670" font-family="monospace" font-size="11">95</text><line x1="458.0" y1="310" x2="458.0" y2="585" stroke="#2a3137"/><text x="458.0" y="615" text-anchor="middle" fill="#7a7670" font-family="monospace" font-size="11">98</text><line x1="602.0" y1="310" x2="602.0" y2="585" stroke="#2a3137"/><text x="602.0" y="615" text-anchor="middle" fill="#7a7670" font-family="monospace" font-size="11">101</text><line x1="746.0" y1="310" x2="746.0" y2="585" stroke="#2a3137"/><text x="746.0" y="615" text-anchor="middle" fill="#7a7670" font-family="monospace" font-size="11">104</text><line x1="890.0" y1="310" x2="890.0" y2="585" stroke="#2a3137"/><text x="890.0" y="615" text-anchor="middle" fill="#7a7670" font-family="monospace" font-size="11">107</text><circle cx="443.6" cy="385" r="5" fill="#7a7670" fill-opacity=".75"/><circle cx="486.8" cy="394" r="5" fill="#7a7670" fill-opacity=".75"/><circle cx="515.6" cy="403" r="5" fill="#7a7670" fill-opacity=".75"/><circle cx="544.4" cy="385" r="5" fill="#7a7670" fill-opacity=".75"/><circle cx="573.2" cy="394" r="5" fill="#7a7670" fill-opacity=".75"/><circle cx="602.0" cy="403" r="5" fill="#7a7670" fill-opacity=".75"/><circle cx="630.8" cy="385" r="5" fill="#7a7670" fill-opacity=".75"/><circle cx="666.8" cy="394" r="5" fill="#7a7670" fill-opacity=".75"/><circle cx="702.8" cy="403" r="5" fill="#7a7670" fill-opacity=".75"/><circle cx="753.2" cy="385" r="5" fill="#7a7670" fill-opacity=".75"/><circle cx="328.4" cy="500" r="5" fill="#75a184"/><circle cx="386.0" cy="509" r="5" fill="#75a184"/><circle cx="429.2" cy="518" r="5" fill="#75a184"/><circle cx="458.0" cy="500" r="5" fill="#75a184"/><circle cx="479.6" cy="509" r="5" fill="#75a184"/><circle cx="501.2" cy="518" r="5" fill="#75a184"/><circle cx="530.0" cy="500" r="5" fill="#75a184"/><circle cx="558.8" cy="509" r="5" fill="#75a184"/><circle cx="602.0" cy="518" r="5" fill="#75a184"/><circle cx="659.6" cy="500" r="5" fill="#75a184"/><line x1="486.79999999999995" y1="367" x2="666.8" y2="367" stroke="#7a7670" stroke-width="8" stroke-linecap="round"/><line x1="573.2" y1="350" x2="573.2" y2="400" stroke="#f6f1e7" stroke-width="3"/><line x1="385.9999999999999" y1="482" x2="558.8" y2="482" stroke="#75a184" stroke-width="8" stroke-linecap="round"/><line x1="479.60000000000014" y1="465" x2="479.60000000000014" y2="515" stroke="#f6f1e7" stroke-width="3"/>
+<text x="825" y="341" fill="#b8b3a8" font-family="monospace" font-size="11">median 100 index</text>
+<text x="825" y="456" fill="#75a184" font-family="monospace" font-size="11">median 97 index</text>
+<rect x="1030" y="180" width="500" height="495" rx="16" fill="#0b1014" stroke="#2a3137"/>
+<text x="1060" y="220" fill="#5f93a8" font-family="monospace" font-size="12" letter-spacing="2">METHOD + ENVIRONMENT FINGERPRINT</text>
+<text x="1060" y="260" fill="#f6f1e7" font-family="Georgia,serif" font-size="24">Is this number citable?</text>
+<text x="1060" y="300" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="15">Classification</text><text x="1280" y="300" fill="#d4a55f" font-family="monospace" font-size="13">design fixture</text>
+<text x="1060" y="334" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="15">Runner</text><text x="1280" y="334" fill="#f6f1e7" font-family="monospace" font-size="13">loaded from manifest</text>
+<text x="1060" y="368" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="15">Runtime</text><text x="1280" y="368" fill="#f6f1e7" font-family="monospace" font-size="13">loaded from manifest</text>
+<text x="1060" y="402" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="15">Payload</text><text x="1280" y="402" fill="#f6f1e7" font-family="monospace" font-size="13">synthetic payload class A</text>
+<text x="1060" y="436" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="15">Statistic</text><text x="1280" y="436" fill="#f6f1e7" font-family="monospace" font-size="13">distribution + interval</text>
+<line x1="1060" y1="466" x2="1500" y2="466" stroke="#2a3137"/>
+<text x="1060" y="500" fill="#d4a55f" font-family="monospace" font-size="12">COMPARABILITY CHECKS</text>
+<text x="1060" y="535" fill="#75a184" font-family="monospace" font-size="13">✓ same benchmark group</text>
+<text x="1060" y="566" fill="#75a184" font-family="monospace" font-size="13">✓ same payload class</text>
+<text x="1060" y="597" fill="#d4a55f" font-family="monospace" font-size="13">◐ hardware fingerprint required</text>
+<text x="1060" y="628" fill="#b96464" font-family="monospace" font-size="13">! never compare primitive init to request latency</text>
+<text x="70" y="720" fill="#5f93a8" font-family="monospace" font-size="12" letter-spacing="2">PROVENANCE CHAIN</text>
+<g><g>
+      <rect x="70" y="738" width="270" height="92" rx="14" fill="#0d1217" stroke="#5f93a8" stroke-opacity=".72"/>
+      <rect x="71" y="739" width="6" height="90" rx="3" fill="#5f93a8"/>
+      <text x="92" y="768" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">Commit SHA</text>
+      <rect x="92" y="800" width="90" height="24" rx="12" fill="#10222b" stroke="#5f93a8" stroke-opacity=".55"/>
+      <text x="104" y="817" fill="#5f93a8" font-family="monospace" font-size="11" letter-spacing="1.1">RECORDED</text>
+      <text x="92" y="793" fill="#7a7670" font-family="monospace" font-size="11">source revision</text>
+      
+    </g><g>
+      <rect x="385" y="738" width="270" height="92" rx="14" fill="#0d1217" stroke="#5f93a8" stroke-opacity=".72"/>
+      <rect x="386" y="739" width="6" height="90" rx="3" fill="#5f93a8"/>
+      <text x="407" y="768" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">runner.md</text>
+      <rect x="407" y="800" width="90" height="24" rx="12" fill="#10222b" stroke="#5f93a8" stroke-opacity=".55"/>
+      <text x="419" y="817" fill="#5f93a8" font-family="monospace" font-size="11" letter-spacing="1.1">RECORDED</text>
+      <text x="407" y="793" fill="#7a7670" font-family="monospace" font-size="11">hardware + date</text>
+      
+    </g><g>
+      <rect x="700" y="738" width="270" height="92" rx="14" fill="#0d1217" stroke="#5f93a8" stroke-opacity=".72"/>
+      <rect x="701" y="739" width="6" height="90" rx="3" fill="#5f93a8"/>
+      <text x="722" y="768" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">criterion_raw.log</text>
+      <rect x="722" y="800" width="90" height="24" rx="12" fill="#10222b" stroke="#5f93a8" stroke-opacity=".55"/>
+      <text x="734" y="817" fill="#5f93a8" font-family="monospace" font-size="11" letter-spacing="1.1">RECORDED</text>
+      <text x="722" y="793" fill="#7a7670" font-family="monospace" font-size="11">raw distribution</text>
+      
+    </g><g>
+      <rect x="1015" y="738" width="270" height="92" rx="14" fill="#0d1217" stroke="#d4a55f" stroke-opacity=".72"/>
+      <rect x="1016" y="739" width="6" height="90" rx="3" fill="#d4a55f"/>
+      <text x="1037" y="768" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">Sigstore bundle</text>
+      <rect x="1037" y="800" width="103" height="24" rx="12" fill="#251d11" stroke="#d4a55f" stroke-opacity=".55"/>
+      <text x="1049" y="817" fill="#d4a55f" font-family="monospace" font-size="11" letter-spacing="1.1">BEST EFFORT</text>
+      <text x="1037" y="793" fill="#7a7670" font-family="monospace" font-size="11">may be absent</text>
+      
+    </g><g>
+      <rect x="1330" y="738" width="200" height="92" rx="14" fill="#0d1217" stroke="#75a184" stroke-opacity=".72"/>
+      <rect x="1331" y="739" width="6" height="90" rx="3" fill="#75a184"/>
+      <text x="1352" y="768" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">Artifact hash</text>
+      <rect x="1352" y="800" width="90" height="24" rx="12" fill="#132019" stroke="#75a184" stroke-opacity=".55"/>
+      <text x="1364" y="817" fill="#75a184" font-family="monospace" font-size="11" letter-spacing="1.1">REQUIRED</text>
+      <text x="1352" y="793" fill="#7a7670" font-family="monospace" font-size="11">content identity</text>
+      
+    </g></g>
+<g><path d="M340,784 L385,784" fill="none" stroke="#5f93a8" stroke-width="2.2" stroke-opacity=".78"  marker-end="url(#arrow-blue)"/>
+      </g><g><path d="M655,784 L700,784" fill="none" stroke="#5f93a8" stroke-width="2.2" stroke-opacity=".78"  marker-end="url(#arrow-blue)"/>
+      </g><g><path d="M970,784 L1015,784" fill="none" stroke="#5f93a8" stroke-width="2.2" stroke-opacity=".78"  marker-end="url(#arrow-blue)"/>
+      </g><g><path d="M1285,784 L1330,784" fill="none" stroke="#75a184" stroke-width="2.2" stroke-opacity=".78"  marker-end="url(#arrow-green)"/>
+      </g>
+
+    <line x1="60" y1="842" x2="1540" y2="842" stroke="#2a3137"/>
+    <text x="60" y="870" fill="#7a7670" font-family="monospace" font-size="13">STATIC EXPORT USES NORMALIZED DESIGN-FIXTURE DATA · Production must ingest the CI benchmark manifest and raw artifact provenance.</text>
+    </svg>

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ProofCapsuleExplorer } from "@/components/explorer/proof-capsule-explorer";
 import { CapsuleAnatomy } from "@/components/home/capsule-anatomy";
+import { EvidenceLattice } from "@/components/visual-system/evidence-lattice";
 import { Reveal } from "@/components/home/reveal";
 import { Button } from "@/components/ui/button";
 
@@ -11,6 +12,24 @@ export const Route = createFileRoute("/evidence/proof-capsules")({
 function ProofCapsulesPage() {
   return (
     <main className="mx-auto min-w-0 max-w-[72rem] space-y-12 overflow-x-hidden px-4 py-10 sm:px-6">
+      <header className="max-w-2xl space-y-3">
+        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-porcelain-subtle">
+          Evidence · Proof Capsules
+        </p>
+        <h1 className="font-serif text-3xl text-porcelain sm:text-4xl">
+          Structured runtime evidence
+        </h1>
+        <p className="text-base leading-relaxed text-porcelain-muted">
+          A Proof Capsule is a binding lattice of observed fields—not a
+          three-dimensional pill. Inspect the lattice, then open fixtures in the
+          Explorer for structural checks.
+        </p>
+      </header>
+
+      <Reveal>
+        <EvidenceLattice />
+      </Reveal>
+
       <ProofCapsuleExplorer />
 
       <section aria-labelledby="anatomy-heading" className="space-y-4">

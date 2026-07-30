@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+    <title id="title">Developer Integration Simulator</title><desc id="desc">Simulate representative integration paths while separating current APIs, in-integration composition, and target architecture.</desc><defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#111820"/><stop offset="1" stop-color="#07090b"/></linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18303b" stop-opacity=".9"/><stop offset=".55" stop-color="#0b1116"/><stop offset="1" stop-color="#1a252d"/></linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#5f93a8"/></marker>
+      <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#75a184"/></marker>
+      <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#b96464"/></marker>
+      <pattern id="target-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#5f93a8" stroke-opacity=".25" stroke-width="2"/></pattern>
+      <pattern id="limit-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#b96464" stroke-opacity=".28" stroke-width="2"/></pattern>
+    </defs>
+    <rect width="1600" height="900" fill="url(#bg)"/>
+    <rect x="1" y="1" width="1598" height="898" rx="24" fill="none" stroke="#2a3137"/>
+    <text x="60" y="60" fill="#5f93a8" font-family="monospace" font-size="16" letter-spacing="3">FIG-DEV-09</text>
+    <text x="60" y="112" fill="#f6f1e7" font-family="Georgia,serif" font-size="42">Developer Integration Simulator</text>
+    <text x="60" y="148" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="17">Simulate representative integration paths while separating current APIs, in-integration composition, and target architecture.</text>
+    
+<rect x="70" y="180" width="230" height="44" rx="8" fill="#10222b" stroke="#5f93a8"/><text x="90" y="207" fill="#f6f1e7" font-family="monospace" font-size="13">NEXUS RUNTIME</text>
+<rect x="315" y="180" width="260" height="44" rx="8" fill="#14191d" stroke="#2a3137"/><text x="335" y="207" fill="#b8b3a8" font-family="monospace" font-size="13">capability-gated WASI</text>
+<rect x="590" y="180" width="180" height="44" rx="8" fill="#132019" stroke="#75a184"/><text x="610" y="207" fill="#75a184" font-family="monospace" font-size="13">CURRENT MODE</text>
+<rect x="70" y="250" width="1090" height="510" rx="16" fill="#0a0e12" stroke="#2a3137"/>
+<text x="145" y="285" text-anchor="middle" fill="#7a7670" font-family="monospace" font-size="12">AGENT / HOST</text>
+<text x="360" y="285" text-anchor="middle" fill="#7a7670" font-family="monospace" font-size="12">CAPABILITY AUTHORITY</text>
+<text x="590" y="285" text-anchor="middle" fill="#7a7670" font-family="monospace" font-size="12">NEXUS RUNTIME</text>
+<text x="820" y="285" text-anchor="middle" fill="#7a7670" font-family="monospace" font-size="12">AEON-IQ MEMORY</text>
+<text x="1040" y="285" text-anchor="middle" fill="#7a7670" font-family="monospace" font-size="12">EVIDENCE</text>
+<line x1="145" y1="305" x2="145" y2="720" stroke="#2a3137" stroke-dasharray="5 7"/><line x1="360" y1="305" x2="360" y2="720" stroke="#2a3137" stroke-dasharray="5 7"/><line x1="590" y1="305" x2="590" y2="720" stroke="#2a3137" stroke-dasharray="5 7"/><line x1="820" y1="305" x2="820" y2="720" stroke="#2a3137" stroke-dasharray="5 7"/><line x1="1040" y1="305" x2="1040" y2="720" stroke="#2a3137" stroke-dasharray="5 7"/>
+<g><path d="M145,350 L590,350" fill="none" stroke="#5f93a8" stroke-width="2.2" stroke-opacity=".78"  marker-end="url(#arrow-blue)"/>
+      <rect x="313.5" y="327.0" width="108" height="22" rx="11" fill="#07090b" stroke="#2a3137"/><text x="367.5" y="342.0" text-anchor="middle" fill="#5f93a8" font-family="monospace" font-size="10">execute_tool_wasi</text></g>
+<g><path d="M590,405 L360,405" fill="none" stroke="#5f93a8" stroke-width="2.2" stroke-opacity=".78"  marker-end="url(#arrow-blue)"/>
+      <rect x="421.0" y="382.0" width="108" height="22" rx="11" fill="#07090b" stroke="#2a3137"/><text x="475.0" y="397.0" text-anchor="middle" fill="#5f93a8" font-family="monospace" font-size="10">authorize token</text></g>
+<g><path d="M360,460 L590,460" fill="none" stroke="#75a184" stroke-width="2.2" stroke-opacity=".78"  marker-end="url(#arrow-green)"/>
+      <rect x="421.0" y="437.0" width="108" height="22" rx="11" fill="#07090b" stroke="#2a3137"/><text x="475.0" y="452.0" text-anchor="middle" fill="#75a184" font-family="monospace" font-size="10">granted · narrowed</text></g>
+<g><path d="M590,520 L820,520" fill="none" stroke="#d4a55f" stroke-width="2.2" stroke-opacity=".78" stroke-dasharray="7 6" marker-end="url(#arrow-blue)"/>
+      <rect x="651.0" y="497.0" width="108" height="22" rx="11" fill="#07090b" stroke="#2a3137"/><text x="705.0" y="512.0" text-anchor="middle" fill="#d4a55f" font-family="monospace" font-size="10">optional recall</text></g>
+<g><path d="M820,575 L590,575" fill="none" stroke="#d4a55f" stroke-width="2.2" stroke-opacity=".78" stroke-dasharray="7 6" marker-end="url(#arrow-blue)"/>
+      <rect x="651.0" y="552.0" width="108" height="22" rx="11" fill="#07090b" stroke="#2a3137"/><text x="705.0" y="567.0" text-anchor="middle" fill="#d4a55f" font-family="monospace" font-size="10">advisory context</text></g>
+<g><path d="M590,635 L1040,635" fill="none" stroke="#75a184" stroke-width="2.2" stroke-opacity=".78"  marker-end="url(#arrow-green)"/>
+      <rect x="761.0" y="612.0" width="108" height="22" rx="11" fill="#07090b" stroke="#2a3137"/><text x="815.0" y="627.0" text-anchor="middle" fill="#75a184" font-family="monospace" font-size="10">Proof Capsule</text></g>
+<rect x="500" y="482" width="180" height="56" rx="12" fill="#132019" stroke="#75a184"/><text x="590" y="507" text-anchor="middle" fill="#f6f1e7" font-family="Georgia,serif" font-size="18">WASM execution</text><text x="590" y="526" text-anchor="middle" fill="#75a184" font-family="monospace" font-size="10">AUTHORIZED HOST CALLS ONLY</text>
+<rect x="1185" y="180" width="345" height="580" rx="16" fill="#0b1014" stroke="#2a3137"/>
+<text x="1215" y="220" fill="#5f93a8" font-family="monospace" font-size="12" letter-spacing="2">INTEGRATION INSPECTOR</text>
+<text x="1215" y="260" fill="#f6f1e7" font-family="Georgia,serif" font-size="25">What works today</text>
+<text x="1215" y="306" fill="#75a184" font-family="monospace" font-size="13">● WASM isolation</text>
+<text x="1215" y="338" fill="#75a184" font-family="monospace" font-size="13">● capability-gated WASI</text>
+<text x="1215" y="370" fill="#75a184" font-family="monospace" font-size="13">● snapshot / rollback</text>
+<text x="1215" y="402" fill="#75a184" font-family="monospace" font-size="13">● Proof Capsule emission</text>
+<line x1="1215" y1="430" x2="1500" y2="430" stroke="#2a3137"/>
+<text x="1215" y="468" fill="#b96464" font-family="monospace" font-size="12">NOT ESTABLISHED</text>
+<text x="1215" y="504" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="14">The current runtime does not intercept</text>
+<text x="1215" y="528" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="14">the model's tool choice or provide the</text>
+<text x="1215" y="552" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="14">finished Change Gate workflow.</text>
+<line x1="1215" y1="584" x2="1500" y2="584" stroke="#2a3137"/>
+<text x="1215" y="620" fill="#d4a55f" font-family="monospace" font-size="12">RETURNED ARTIFACT</text>
+<text x="1215" y="652" fill="#f6f1e7" font-family="monospace" font-size="12">ProofCapsule &#123;</text>
+<text x="1235" y="676" fill="#b8b3a8" font-family="monospace" font-size="11">capabilities · snapshot</text>
+<text x="1235" y="698" fill="#b8b3a8" font-family="monospace" font-size="11">failure · rollback · limits</text>
+<text x="1215" y="722" fill="#f6f1e7" font-family="monospace" font-size="12">&#125;</text>
+
+    <line x1="60" y1="842" x2="1540" y2="842" stroke="#2a3137"/>
+    <text x="60" y="870" fill="#7a7670" font-family="monospace" font-size="13">REPRESENTATIVE FIXTURE · This instrument explains API and evidence flow; it does not execute a live request.</text>
+    </svg>

@@ -19,8 +19,14 @@ import {
   buildMaturityCounts,
 } from "@/components/home/pinned-cinematic";
 import { SceneHandoff } from "@/components/home/scene-handoff";
+import {
+  homeSearchFromRaw,
+  resolveHomeSearch,
+} from "@/lib/evaluator-search";
 
 export const Route = createFileRoute("/")({
+  validateSearch: (raw: Record<string, unknown>) =>
+    homeSearchFromRaw(raw),
   component: HomePage,
 });
 
@@ -29,6 +35,8 @@ export const Route = createFileRoute("/")({
  * Intent → Gap (pinned cinematic) → Execute → Model → Evidence → …
  */
 function HomePage() {
+  const search = resolveHomeSearch(Route.useSearch());
+  const navigate = Route.useNavigate();
   const counts = buildMaturityCounts();
 
   return (
@@ -73,7 +81,16 @@ function HomePage() {
                 </div>
               </Reveal>
               <Reveal delay={80}>
-                <DemoPlayer />
+                <DemoPlayer
+          scenarioId={search.obs}
+          stepIndex={search.stage}
+          onScenarioChange={(obs) =>
+            navigate({ search: (prev) => ({ ...prev, obs, stage: 0 }), replace: true })
+          }
+          onStepChange={(stage) =>
+            navigate({ search: (prev) => ({ ...prev, stage }), replace: true })
+          }
+ />
               </Reveal>
             </div>
           </TransactionBeatChrome>

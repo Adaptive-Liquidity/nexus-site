@@ -1,0 +1,491 @@
+**The site has reached a strong, evaluator-grade institutional direction; its main remaining weakness is that maturity, claims, benchmarks, and developer integration are still presented primarily as records and cards rather than inspectable systems of dependency, evidence, and causality—so I developed four interactive P1 instruments to close that gap.**
+
+# Review of the site changes so far
+
+## Important review limitation
+
+The supplied Grok sandbox preview redirects to an authenticated preview gateway, so I could not directly inspect every final rendered pixel of that deployment. I instead audited the current public route source, claims registry, design components, package stack, and checked-in browser screenshots. That is sufficient for a high-confidence structural and visual review, but exact spacing or rendering differences unique to the private preview still require direct preview access. 
+
+## Overall verdict
+
+The website has made substantial progress away from “AI startup” presentation and toward a credible **technical institution / execution observatory / evidence archive**.
+
+### What is now working particularly well
+
+| Area                     | Assessment                                                                              |
+| ------------------------ | --------------------------------------------------------------------------------------- |
+| Visual identity          | Strong, distinctive, restrained, and increasingly ownable                               |
+| Product truthfulness     | Excellent separation of current foundations, integration work, targets, and limitations |
+| Typography and hierarchy | Professional serif/monospace combination with credible research/institutional character |
+| Evidence presentation    | Significantly stronger than ordinary marketing sites                                    |
+| Maturity honesty         | Stage 0 and incomplete guarantees remain visible rather than being hidden by polish     |
+| Product coherence        | Homepage, system, evidence, security, and maturity increasingly feel like one system    |
+
+The maturity route already has the right basic components: explicit status vocabulary, a Stage 0 warning, maturity badges that do not rely only on color, and a complete capability table. Its weakness is not styling—it is that the table remains **flat**. It says what each capability’s status is but does not show what that capability depends on, what blocks it, what evidence would advance it, or what completing it would unlock. ([GitHub][1])
+
+The current claims registry confirms that this relational distinction matters. Isolation and rollback, capability authority, Proof Capsules, and the public Explorer are represented as current foundations, while memory-state binding and the Transactional Change Gate remain in development. Stage 0 evidence integrity is explicitly blocking stronger end-to-end transactional guarantees, and broader governance and production trust anchors remain bounded or targeted. ([GitHub][2])
+
+## My current assessment
+
+| Dimension                        |      Score | Reason                                                                               |
+| -------------------------------- | ---------: | ------------------------------------------------------------------------------------ |
+| Institutional visual quality     | **8.8/10** | Consistent, restrained, sophisticated, and substantially beyond a template           |
+| Technical credibility            | **9.2/10** | Limitations and maturity are not being concealed                                     |
+| Information architecture         | **8.4/10** | Routes and evaluator paths are coherent                                              |
+| Visual explanation quality       | **7.3/10** | Strong existing instruments, but several routes remain text/table/card dominant      |
+| Evaluator interaction depth      | **6.9/10** | Evidence can be inspected, but dependency and causality are not yet fully explorable |
+| Product-specific visual identity | **8.5/10** | The forensic instrument language is becoming clearly associated with Nexus-IQ        |
+
+## What should remain unchanged
+
+Keep:
+
+* the restrained carbon, porcelain, institutional-blue, oxide, signal, and controlled-red palette;
+* the archive-paper versus runtime-surface distinction;
+* the serif/monospace typographic hierarchy;
+* explicit maturity symbols and labels;
+* Stage 0 as a visible blocker;
+* the existing searchable tables as canonical accessible fallbacks;
+* negative guarantees and limitations beside the claims they constrain;
+* Commit and Abort as equally legitimate terminal outcomes.
+
+## What still needs to be added
+
+The next visual layer should expose:
+
+* dependency paths;
+* critical-path topology;
+* named blockers;
+* evidence provenance;
+* last-verified state;
+* acceptance criteria;
+* residual trust;
+* reproducibility requirements;
+* interactive execution perturbations.
+
+This is the difference between a polished technical website and a genuine **evaluator-grade product interface**.
+
+---
+
+# Developed P1 technical visual system
+
+## Visual overview
+
+[View the four-instrument overview](sandbox:/mnt/data/nexus_iq_p1_visuals/exports/00-p1-visual-overview.png)
+
+## Interactive concept lab
+
+The lab contains all four working instruments, filters, inspectors, benchmark controls, scenario switching, and execution stepping:
+
+[Open the interactive Nexus-IQ P1 Visual Lab](sandbox:/mnt/data/nexus_iq_p1_visuals/nexus-iq-p1-visual-lab.html)
+
+The lab is entirely self-contained and makes no external network requests.
+
+---
+
+# P1.1 — Claim Dependency and Provenance Graph
+
+[View full-resolution claim graph](sandbox:/mnt/data/nexus_iq_p1_visuals/exports/01-claim-dependency-graph.png)
+
+## What it solves
+
+The existing claims route already provides search, filtering, maturity status, limitations, evidence, targets, and expandable records. What it does not yet show is how those records depend on one another. ([GitHub][3])
+
+The new graph connects four fixed semantic layers:
+
+1. **Evidence sources**
+2. **Capability foundations**
+3. **Public claim families**
+4. **Boundaries, blockers, and negative guarantees**
+
+It visualizes relationships such as:
+
+```text
+Snapshot and rollback
+        ↓ supports
+Isolation foundation
+        ↓ contributes to
+Recoverable failure
+        ↓ constrained by
+External effects not proven absent
+```
+
+## Interactive modes
+
+The prototype includes:
+
+* Controlled change
+* Inspectable execution
+* Recoverable failure
+* All claim families
+* Current-only filtering
+* Selectable evidence, capability, claim, blocker, target, and limitation nodes
+* A synchronized evaluator inspector
+
+Selecting a claim exposes:
+
+* required foundations;
+* blocking condition;
+* negative guarantee;
+* evaluator action;
+* exact maturity state.
+
+## Why this is academically stronger
+
+It uses a **fixed layered directed acyclic graph**, not a force-directed cloud.
+
+That matters because a force layout can accidentally imply that:
+
+* nearby nodes are causally related;
+* central nodes are more important;
+* visually large clusters are more mature.
+
+Every edge in this system has a declared meaning:
+
+* supports;
+* blocks;
+* constrains;
+* targets.
+
+In production, the existing searchable registry should remain directly below this graph as the complete textual and screen-reader-friendly source of truth.
+
+---
+
+# P1.2 — Capability Maturity Topology
+
+[View full-resolution maturity topology](sandbox:/mnt/data/nexus_iq_p1_visuals/exports/02-maturity-topology.png)
+
+## What it solves
+
+This is the direct upgrade for the current `/maturity` route.
+
+Instead of showing maturity as a list or an artificial percentage, the topology separates the architecture into four planes:
+
+```text
+ASSURANCE DESTINATION
+Proof-carrying transactional execution
+Production trust anchors
+Broader governance
+
+STAGE 0 INTEGRATION PLANE
+Memory-state binding
+Transactional Change Gate
+Receipt binding
+Stage 0 blocker
+
+IMPLEMENTED SUBSTRATES
+Isolation and rollback
+Capability authority
+Proof Capsules
+Public Explorer
+
+DISCLOSED TRUST SURFACE
+Host OS
+Operators
+Key custody
+Runtime integrity
+Current WASM boundary
+```
+
+## Interactive modes
+
+* **Critical path**
+* **Current foundations**
+* **Full architecture**
+* **Trust surface**
+
+Every selectable capability exposes:
+
+* current inputs;
+* required convergence;
+* what it unlocks;
+* acceptance criteria;
+* evidence needed for a status upgrade;
+* residual trust.
+
+## Why this is better than a roadmap percentage
+
+A percentage such as “75% complete” would be misleading because four completed foundations do not necessarily mean the end-to-end guarantee is 75% complete.
+
+A single unresolved binding or trust dependency can block the complete guarantee.
+
+The topology therefore answers a more useful question:
+
+> Which dependencies must converge before the stronger claim becomes defensible?
+
+The existing table should remain beneath the topology. The topology explains relationships; the table remains the canonical searchable registry.
+
+---
+
+# P1.3 — Benchmark Reproducibility Workbench
+
+[View full-resolution benchmark workbench](sandbox:/mnt/data/nexus_iq_p1_visuals/exports/03-benchmark-workbench.png)
+
+## What it solves
+
+The current benchmark route correctly emphasizes methodology and avoids presenting naked performance numbers, but it primarily directs users toward external source and dashboard surfaces rather than providing a complete on-site measurement instrument. ([GitHub][4])
+
+The new workbench adds:
+
+* selectable benchmark families;
+* scaling curves;
+* confidence bands;
+* baseline comparison;
+* optional raw samples;
+* environment fingerprint;
+* workload definition;
+* statistical record;
+* provenance requirements;
+* a derived `Citable: yes/no` gate.
+
+## Included benchmark modes
+
+* Snapshot scaling
+* Rollback scaling
+* Sandbox initialization
+* Memory throughput
+
+The current prototype uses **explicitly representative fixture data** and permanently displays:
+
+> Representative fixture data — not a public performance claim.
+
+No value in the prototype should be copied into public marketing.
+
+## Publication gate
+
+A benchmark becomes publicly citable only when all required evidence exists:
+
+1. Repository and commit
+2. Workflow run
+3. Immutable raw artifact
+4. Artifact SHA-256
+5. CPU and runner
+6. Operating system and kernel
+7. Compiler and build profile
+8. Feature flags
+9. Workload command
+10. Input shape
+11. Warm-up and sample count
+12. Raw samples
+13. Estimator
+14. Confidence method
+15. Outlier policy
+16. Interpretation guardrail
+
+The `Citable` state should be computed from schema validation. It must not be manually editable by a content author.
+
+## Important interpretation behavior
+
+The workbench prevents:
+
+* a snapshot result at one state size from becoming a universal headline;
+* a microbenchmark from being described as complete agent latency;
+* results from different runners being compared without warning;
+* a baseline comparison from producing a verdict without environment parity;
+* fixture data from looking like production evidence.
+
+---
+
+# P1.4 — Developer Integration Simulator
+
+[View full-resolution developer simulator](sandbox:/mnt/data/nexus_iq_p1_visuals/exports/04-developer-integration-simulator.png)
+
+## What it solves
+
+The existing developer route provides useful integration-path cards and correctly states that current governance operates at the WASM guest-to-host boundary rather than representing full model tool-choice interception. However, it does not yet let an engineer manipulate a request and observe what the system contract produces. ([GitHub][5])
+
+The simulator turns the developer page into an interactive contract walkthrough.
+
+## Available scenarios
+
+| Scenario              | What it teaches                                                                     |
+| --------------------- | ----------------------------------------------------------------------------------- |
+| **Valid Commit**      | A staged result passes authority and validation before crossing the commit boundary |
+| **Capability Denied** | Expired or invalid authority fails closed before consequential execution            |
+| **Validator Abort**   | Failed validation produces Abort, restoration, and evidence                         |
+| **Degraded Memory**   | Memory degradation is disclosed without allowing memory to expand authority         |
+
+## Six-stage trace
+
+```text
+Propose
+   ↓
+Stage
+   ↓
+Constrain
+   ↓
+Validate
+   ↓
+Decide
+   ↓
+Emit
+```
+
+The simulator synchronizes:
+
+* request JSON;
+* execution stage;
+* capability state;
+* terminal decision;
+* failure classification;
+* rollback state;
+* memory-attestation state;
+* signature mode;
+* duration;
+* mandatory limitations.
+
+## Truthfulness boundary
+
+The prototype displays:
+
+> Local fixture — no live runtime claim.
+
+It does not imply that:
+
+* a real Nexus runtime is connected;
+* a production transaction occurred;
+* a model’s tool choice was intercepted;
+* the returned receipt is cryptographic production evidence.
+
+In production, representative fixtures should link directly to their corresponding source fixture, schema, and test.
+
+---
+
+# Production blueprint and implementation contracts
+
+## Complete implementation blueprint
+
+The blueprint contains:
+
+* the full current-site audit;
+* route placement for each instrument;
+* interaction specifications;
+* canonical data requirements;
+* mobile behavior;
+* accessibility behavior;
+* performance limits;
+* implementation file structure;
+* QA requirements;
+* recommended sequencing.
+
+[Read the P1 implementation blueprint](sandbox:/mnt/data/nexus_iq_p1_visuals/nexus-iq-p1-implementation-blueprint.md)
+
+## TypeScript data contracts
+
+I also created implementation-ready contracts for:
+
+* registry status;
+* evidence references;
+* claim graph nodes and typed edges;
+* maturity topology nodes;
+* benchmark environments and workloads;
+* confidence and sample records;
+* benchmark provenance;
+* automatically derived publication eligibility;
+* integration simulator scenarios;
+* six-stage execution validation;
+* mandatory receipt limitations.
+
+[Open the P1 TypeScript data contracts](sandbox:/mnt/data/nexus_iq_p1_visuals/spec/p1-visual-data-contracts.ts)
+
+The TypeScript contracts pass strict type checking.
+
+---
+
+# Technical implementation recommendation
+
+The current site already has the necessary underlying stack—React, TypeScript, Vite, TanStack tooling, Recharts, Zustand, Zod, and Playwright—so these P1 instruments do not require another heavy graphics framework. ([GitHub][6])
+
+Use:
+
+| Requirement                  | Implementation                                |
+| ---------------------------- | --------------------------------------------- |
+| Claim graph                  | React + semantic SVG                          |
+| Maturity topology            | React + semantic SVG                          |
+| Benchmark workbench          | Existing Recharts or bespoke SVG              |
+| Developer simulator          | React DOM + local deterministic fixture state |
+| Data validation              | Zod                                           |
+| Shared cross-route selection | Zustand only where necessary                  |
+| Canonical tables             | Existing TanStack Table                       |
+| Browser verification         | Playwright                                    |
+
+Do **not** add:
+
+* Three.js;
+* React Three Fiber;
+* WebGPU;
+* physics engines;
+* continuous particle systems;
+* force-directed graph libraries.
+
+Those tools would add weight without improving these four information problems.
+
+---
+
+# Recommended integration order
+
+## 1. Maturity topology
+
+Implement this first because it directly upgrades the presently flat maturity route and establishes the shared status, node, edge, inspector, and critical-path primitives.
+
+## 2. Claim dependency graph
+
+Reuse the topology primitives, connect them to the canonical claims registry, and make graph selections deep-link to existing claim rows.
+
+## 3. Benchmark workbench
+
+Implement the immutable benchmark artifact schema and publication gate before wiring in real data. Do not begin by manually copying current benchmark values into chart components.
+
+## 4. Developer integration simulator
+
+Connect only validated canonical fixtures. Keep fixture and live-runtime modes as explicitly different data types and visual states.
+
+---
+
+# Verification completed
+
+The standalone prototype passed **23 of 23 automated checks**, including:
+
+* no JavaScript errors;
+* no external network requests;
+* no body-level horizontal overflow;
+* 1600-pixel desktop verification;
+* 390- and 430-pixel mobile verification;
+* keyboard-operable graph nodes;
+* keyboard-operable topology nodes;
+* working claim filters;
+* working topology modes;
+* working benchmark switching;
+* working raw-sample display;
+* working simulator scenarios;
+* deterministic execution stepping;
+* mandatory limitations;
+* reduced-motion behavior.
+
+[Read the QA report](sandbox:/mnt/data/nexus_iq_p1_visuals/qa-report.md)
+
+[Inspect the artifact provenance manifest](sandbox:/mnt/data/nexus_iq_p1_visuals/artifact-manifest.json)
+
+## Complete package
+
+[Download the complete Nexus-IQ P1 visual-instruments package](sandbox:/mnt/data/nexus-iq-p1-visual-instruments.zip)
+
+# Key Takeaway
+
+**The website’s next leap should not come from adding more visual effects; it should come from making the architecture visibly reason about itself—tracing claims to evidence, maturity to prerequisites, performance to reproducible artifacts, and developer requests to authority-bound outcomes.**
+
+These four instruments preserve the site’s professional and academically defensible direction while making Nexus-IQ appear more advanced for the right reason: visitors can directly inspect how its claims, controls, evidence, and limitations relate.
+
+# Further Considerations
+
+* **Source and structural review confidence:** approximately 94%.
+* **Exact private-preview pixel confidence:** approximately 75%, because the supplied preview remained authentication-gated.
+* The first unresolved implementation question is how the current claims registry should be extended with stable dependency and blocker IDs without duplicating prose.
+* The second is the canonical benchmark artifact format. That schema should be locked before any current result is promoted into the public workbench.
+
+[1]: https://raw.githubusercontent.com/Adaptive-Liquidity/nexus-site/main/src/routes/maturity.tsx "https://raw.githubusercontent.com/Adaptive-Liquidity/nexus-site/main/src/routes/maturity.tsx"
+[2]: https://raw.githubusercontent.com/Adaptive-Liquidity/nexus-site/main/src/content/claims-registry.json "https://raw.githubusercontent.com/Adaptive-Liquidity/nexus-site/main/src/content/claims-registry.json"
+[3]: https://raw.githubusercontent.com/Adaptive-Liquidity/nexus-site/main/src/routes/evidence/claims.tsx "https://raw.githubusercontent.com/Adaptive-Liquidity/nexus-site/main/src/routes/evidence/claims.tsx"
+[4]: https://raw.githubusercontent.com/Adaptive-Liquidity/nexus-site/main/src/routes/evidence/benchmarks.tsx "https://raw.githubusercontent.com/Adaptive-Liquidity/nexus-site/main/src/routes/evidence/benchmarks.tsx"
+[5]: https://raw.githubusercontent.com/Adaptive-Liquidity/nexus-site/main/src/routes/developers.tsx "https://raw.githubusercontent.com/Adaptive-Liquidity/nexus-site/main/src/routes/developers.tsx"
+[6]: https://raw.githubusercontent.com/Adaptive-Liquidity/nexus-site/main/package.json "https://raw.githubusercontent.com/Adaptive-Liquidity/nexus-site/main/package.json"

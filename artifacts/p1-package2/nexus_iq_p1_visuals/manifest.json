@@ -1,0 +1,215 @@
+{
+  "package": "nexus-iq-p1-evaluator-visual-kit",
+  "generated": "2026-07-29",
+  "classification": "design_study",
+  "truthControls": {
+    "benchmarkFixture": "normalized_non_citable",
+    "previewAudit": "authentication_gated",
+    "repositoryModified": false,
+    "publicClaimsUpgraded": false
+  },
+  "validation": {
+    "jsonParsed": true,
+    "svgXmlParsed": true,
+    "htmlParsed": true,
+    "javascriptSyntaxChecked": true,
+    "authenticatedLivePixelReview": false
+  },
+  "files": [
+    {
+      "path": "P0-audit-and-P1-evaluator-blueprint.md",
+      "bytes": 17186,
+      "sha256": "4bfd86b08c4f01a0bb1bbc4448e48acb6ba055f12646b268161617c61482578f"
+    },
+    {
+      "path": "P0-hardening-and-P1-production-report.md",
+      "bytes": 10800,
+      "sha256": "80ce3c00c2ffddbbfde185ffa4bf8508245a7fa4f7a1962f81bdc8442a0e0cca"
+    },
+    {
+      "path": "P1-implementation-handoff-prompt.md",
+      "bytes": 5597,
+      "sha256": "5ff9852ef6f8e58272bd51555dad9890ba12a63acc5dc78dd3bbace244441129"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2406,
+      "sha256": "0204c7bfe083d86d57560de0f9efb6b39858396f5e92467a4852e17544e0c2e7"
+    },
+    {
+      "path": "exports/01-claim-dependency-graph.png",
+      "bytes": 165344,
+      "sha256": "defc9ac6b5db79f9462e57708de00533ba1cc87fc2f7d3e9a48b9b69c7aa9e3d"
+    },
+    {
+      "path": "exports/01-claim-dependency-graph.svg",
+      "bytes": 13916,
+      "sha256": "9afff78518a8c6d0ba35b3096e490371e64c8bbd2f4e777a6bd0b67430aa6a6d"
+    },
+    {
+      "path": "exports/02-maturity-topology.png",
+      "bytes": 254062,
+      "sha256": "3fb80fdacb71cff1d766f1ecf8b497a68c0fdcdd2db081f86d66aea6dc913dbd"
+    },
+    {
+      "path": "exports/02-maturity-topology.svg",
+      "bytes": 10549,
+      "sha256": "393034af150296fa9ed28a2d9329d6d3af1f7631b1887dbcf2690cf69c2a278d"
+    },
+    {
+      "path": "exports/03-benchmark-workbench.png",
+      "bytes": 74216,
+      "sha256": "365fc7bd096327e2489e6f55a4955ea954b879ae55f913f1a1736dc436e606a0"
+    },
+    {
+      "path": "exports/03-benchmark-workbench.svg",
+      "bytes": 11869,
+      "sha256": "07b24d82e47e87b9ec7ba3bdd5b5b6978e7273a3d251f0dcc4d982b252ba76e1"
+    },
+    {
+      "path": "exports/04-developer-integration-simulator.png",
+      "bytes": 95668,
+      "sha256": "d551d406cecac4b44f06b9d41f59e7cb9cbd6f4b6f7e746c465cc0ca25287060"
+    },
+    {
+      "path": "exports/04-developer-integration-simulator.svg",
+      "bytes": 10606,
+      "sha256": "6b3108a39a162a535460d2566b92e51ecc904b4553d05dc927433850c778474a"
+    },
+    {
+      "path": "exports/06-claim-dependency-graph.png",
+      "bytes": 198964,
+      "sha256": "e444dcf7a83e6b616c2542eed84a13435833fa47ded0712157b32f1ef1531502"
+    },
+    {
+      "path": "exports/06-claim-dependency-graph.svg",
+      "bytes": 13834,
+      "sha256": "b8a5e9235360241ebe1f93bcd1a603db731f88177d4b69e9e5c2bf4e23831abe"
+    },
+    {
+      "path": "exports/07-maturity-topology.png",
+      "bytes": 864043,
+      "sha256": "df18aadc3b6992600c86f1cc83e0a2b0cd3479e2c6af886d78a9984dbeb7631d"
+    },
+    {
+      "path": "exports/07-maturity-topology.svg",
+      "bytes": 11034,
+      "sha256": "83e9804373d75b8e289326bf1d73e470796f971f1d5ce99e58a21d407685cffd"
+    },
+    {
+      "path": "exports/08-benchmark-workbench.png",
+      "bytes": 139105,
+      "sha256": "6b462505f55f9aec8f52167a658e05fe558e3f664fcc30dfae1fdef9fc32c027"
+    },
+    {
+      "path": "exports/08-benchmark-workbench.svg",
+      "bytes": 12619,
+      "sha256": "c7b69beda6f5dc124546840ee3d206449cf48d32c84b2eab2b6147200a830c65"
+    },
+    {
+      "path": "exports/09-developer-integration-simulator.png",
+      "bytes": 589138,
+      "sha256": "267ee8ecdd09629e52ff2b373959b037a20d63c38cb7541c9e15c5eb445c990e"
+    },
+    {
+      "path": "exports/09-developer-integration-simulator.svg",
+      "bytes": 8816,
+      "sha256": "c770d4872dc3feb64157b2f84276e06e5923ec614b840453240a367b35e55077"
+    },
+    {
+      "path": "implementation/p1-evaluator-data-contract.ts",
+      "bytes": 3351,
+      "sha256": "eafcd90a0173d7d3f071a45d871d9d95efddf7afba327b7b5823a23644b30f1a"
+    },
+    {
+      "path": "integration/README.md",
+      "bytes": 1666,
+      "sha256": "86358609ac44581e6308e4518668c8afdb7d57658bb305b4042f393fff5f2a8a"
+    },
+    {
+      "path": "integration/p1-visual-components.tsx",
+      "bytes": 9810,
+      "sha256": "784a062a53f6c2103db01a944aea91a0acf86c5fef1326d804e0db45dc0000aa"
+    },
+    {
+      "path": "integration/p1-visual-model.ts",
+      "bytes": 2023,
+      "sha256": "0aee7f0379cf1ff8588d068df1c2d6f74a170ce601bbd1687fd693ca6a183d45"
+    },
+    {
+      "path": "mobile/06-claim-dependency-trace-mobile.png",
+      "bytes": 125027,
+      "sha256": "66f250456919efd403aa11849c06769dc5d29d245e40a7f79eee814f608dae06"
+    },
+    {
+      "path": "mobile/06-claim-dependency-trace-mobile.svg",
+      "bytes": 5244,
+      "sha256": "9f87f1fe53d704d43a1b1e3624e23339b2a09737d02b62043368c28246fef431"
+    },
+    {
+      "path": "mobile/07-maturity-topology-mobile.png",
+      "bytes": 134636,
+      "sha256": "917575617a369503616b3d63582cfd9946abba47467eff78293ad41cac116837"
+    },
+    {
+      "path": "mobile/07-maturity-topology-mobile.svg",
+      "bytes": 5074,
+      "sha256": "4cc27d6a88339ebd1087adffeb2730067ed0b91f129b28f8ff2d3b7280465a55"
+    },
+    {
+      "path": "mobile/08-benchmark-workbench-mobile.png",
+      "bytes": 100719,
+      "sha256": "7f54204301129075829e23b48200f2175180ea9d10f619fcaafdced988bc839f"
+    },
+    {
+      "path": "mobile/08-benchmark-workbench-mobile.svg",
+      "bytes": 8153,
+      "sha256": "1cbacf42c4ad29e615d890fffcc3cdac6eceec145d43c7e1c28d5fe25f09be4d"
+    },
+    {
+      "path": "mobile/09-developer-integration-stepper-mobile.png",
+      "bytes": 131821,
+      "sha256": "57a6518c5c6b10c3eb5231e9c85175e86af708928b1f674f7e20c797ef97ac7f"
+    },
+    {
+      "path": "mobile/09-developer-integration-stepper-mobile.svg",
+      "bytes": 6954,
+      "sha256": "cc135d63574bc91e3d93f33dd09f3f321bbd2db508a73f92c793ef6c4336014d"
+    },
+    {
+      "path": "nexus-iq-p1-evaluator-lab.html",
+      "bytes": 59997,
+      "sha256": "c6620710500254115f9e20ec50acfc8cee2d6a216f08585d1c1f239cf3344175"
+    },
+    {
+      "path": "nexus-iq-p1-visual-lab.html",
+      "bytes": 53278,
+      "sha256": "1c7e9e1a87fce7ffe45e8d078b6c317a86bc2f99e94c21907054a5aea988960e"
+    },
+    {
+      "path": "nexus-iq-p1-visual-systems-blueprint.md",
+      "bytes": 14358,
+      "sha256": "51ced0f4c4c5ca7826fe77f6931d3421a4e9b2f32bebf4b5444007a07b2c1769"
+    },
+    {
+      "path": "p1-contact-sheet-01-04.png",
+      "bytes": 520995,
+      "sha256": "8c6c3241b741c8e6864099bb116848baa147efd87c4c303b65b69f2bea41055b"
+    },
+    {
+      "path": "p1-contact-sheet-06-09.png",
+      "bytes": 997239,
+      "sha256": "a1e6f23aa7e2dfed61140fc59a1621d9bdefbcdcc2023e239282ac0c63fbe4f2"
+    },
+    {
+      "path": "p1-mobile-contact-sheet.png",
+      "bytes": 507841,
+      "sha256": "64b73d22a19a8b02f1aa8bcde281781d563b988ec72434ab3c43dcad65b7e385"
+    },
+    {
+      "path": "p1-visual-data.json",
+      "bytes": 14373,
+      "sha256": "602aa27ee4ba9323c8d46a9bcb4f6cd8f47258881e453614aa41b8ae27627b66"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+<defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#111820"/><stop offset="1" stop-color="#080b0e"/></linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5f93a8" stop-opacity=".22"/><stop offset=".52" stop-color="#e8f6fb" stop-opacity=".06"/><stop offset="1" stop-color="#2f5e73" stop-opacity=".14"/></linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#fff" stroke-opacity=".035"/></pattern>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#aaa79f"/></marker>
+      <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5f93a8"/></marker>
+      <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#b96464"/></marker>
+    </defs>
+<rect x="24" y="24" width="1552" height="852" rx="18" fill="url(#bg)" stroke="#34414a"/>
+    <rect x="24" y="24" width="1552" height="54" rx="18" fill="#0e1419"/>
+    <line x1="24" y1="78" x2="1576" y2="78" stroke="#34414a"/>
+    <text x="50" y="57" fill="#f2ede2" font-family="Georgia,serif" font-size="20">Claim dependency graph</text>
+    <text x="1550" y="56" text-anchor="end" fill="#747b7f" font-family="monospace" font-size="11" letter-spacing="1.5">CLAIM-GRAPH-01  ·  PROPOSED RELATIONSHIP MODEL</text>
+<rect x="44" y="94" width="1060" height="754" rx="14" fill="url(#grid)" stroke="#34414a"/>
+<text x="68" y="123" fill="#747b7f" font-family="monospace" font-size="10" letter-spacing="1.5">SELECTED LENS  ·  TRANSACTIONAL CHANGE GATE</text>
+<text x="70" y="184" fill="#747b7f" font-family="monospace" font-size="10">FOUNDATIONS</text>
+<text x="535" y="240" fill="#747b7f" font-family="monospace" font-size="10">INTEGRATION</text>
+<text x="800" y="100" fill="#747b7f" font-family="monospace" font-size="10">TARGET TRUST</text>
+<path d="M190,145 C370.0,135 370.0,295 550,285" fill="none" stroke="#5f93a8" stroke-width="1.8" opacity=".78" marker-end="url(#arrowBlue)"/>
+<path d="M190,310 C370.0,322 370.0,273 550,285" fill="none" stroke="#5f93a8" stroke-width="1.8" opacity=".78" marker-end="url(#arrowBlue)"/>
+<path d="M430,145 C490.0,127 490.0,303 550,285" fill="none" stroke="#5f93a8" stroke-width="1.8" opacity=".78" marker-end="url(#arrowBlue)"/>
+<path d="M440,360 C495.0,368 495.0,277 550,285" fill="none" stroke="#5f93a8" stroke-width="1.8" opacity=".78" marker-end="url(#arrowBlue)"/>
+<path d="M430,145 C467.5,145 467.5,78 505,78" fill="none" stroke="#75a184" stroke-width="1.8" opacity=".42" marker-end="url(#arrowBlue)"/>
+<path d="M190,310 C237.5,310 237.5,360 285,360" fill="none" stroke="#5f93a8" stroke-width="1.8" opacity=".42" marker-end="url(#arrowBlue)"/>
+<path d="M430,145 C347.5,145 347.5,360 285,360" fill="none" stroke="#75a184" stroke-width="1.8" opacity=".42" marker-end="url(#arrowBlue)"/>
+<path d="M920,145 C597.5,129 597.5,161 275,145" fill="none" stroke="#5f93a8" stroke-width="1.8" opacity=".42" marker-end="url(#arrowBlue)" stroke-dasharray="8 7"/>
+<path d="M920,145 C735.0,145 735.0,285 550,285" fill="none" stroke="#5f93a8" stroke-width="1.8" opacity=".78" marker-end="url(#arrowBlue)" stroke-dasharray="8 7"/>
+<path d="M695,520 C622.5,520 622.5,285 550,285" fill="none" stroke="#b96464" stroke-width="1.8" opacity=".78" marker-end="url(#arrowBlue)"/>
+<g><rect x="780" y="365" width="260" height="82" rx="14" fill="#241817" stroke="#b96464" stroke-width="2"/><text x="800" y="392" fill="#b96464" font-family="monospace" font-size="10" letter-spacing="1">BLOCKING GATE</text><text x="800" y="418" fill="#f2ede2" font-family="Arial" font-size="15" font-weight="600">Stage 0 evidence integrity</text><text x="800" y="436" fill="#aaa79f" font-family="Arial" font-size="10">blocks durable binding + end-to-end guarantees</text></g>
+<path d="M780,406 C730,406 730,330 735,305" fill="none" stroke="#b96464" stroke-width="2.2" marker-end="url(#arrowRed)"/>
+<path d="M780,422 C650,455 520,420 450,382" fill="none" stroke="#b96464" stroke-width="1.6" stroke-dasharray="6 6" marker-end="url(#arrowRed)"/>
+<g id="node-isolation-snap-rollback" data-claim="isolation-snap-rollback" tabindex="0" role="button" aria-label="Execution isolation &amp; snap-rollback">
+      <rect x="10.0" y="110.0" width="220" height="70" rx="12" fill="#111820" stroke="#75a184" stroke-width="1.2"/>
+      <circle cx="28.0" cy="132.0" r="5" fill="#75a184"/>
+      <text x="40.0" y="136.0" fill="#75a184" font-family="monospace" font-size="9" letter-spacing="1">IMPLEMENTED</text>
+      <text x="120.0" y="159.0" text-anchor="middle" fill="#f2ede2" font-family="Arial,sans-serif" font-size="13" font-weight="600">Isolation + snap-rollback</text>
+      <text x="23.0" y="174.0" fill="#747b7f" font-family="monospace" font-size="8">isolation-snap-rollback</text>
+    </g>
+<g id="node-capability-authority" data-claim="capability-authority" tabindex="0" role="button" aria-label="Capability authority">
+      <rect x="25.0" y="275.0" width="190" height="70" rx="12" fill="#111820" stroke="#75a184" stroke-width="1.2"/>
+      <circle cx="43.0" cy="297.0" r="5" fill="#75a184"/>
+      <text x="55.0" y="301.0" fill="#75a184" font-family="monospace" font-size="9" letter-spacing="1">IMPLEMENTED</text>
+      <text x="120.0" y="324.0" text-anchor="middle" fill="#f2ede2" font-family="Arial,sans-serif" font-size="13" font-weight="600">Capability authority</text>
+      <text x="38.0" y="339.0" fill="#747b7f" font-family="monospace" font-size="8">capability-authority</text>
+    </g>
+<g id="node-proof-capsules" data-claim="proof-capsules" tabindex="0" role="button" aria-label="Proof Capsules / ExecutionReceipt">
+      <rect x="265.0" y="110.0" width="190" height="70" rx="12" fill="#111820" stroke="#75a184" stroke-width="1.2"/>
+      <circle cx="283.0" cy="132.0" r="5" fill="#75a184"/>
+      <text x="295.0" y="136.0" fill="#75a184" font-family="monospace" font-size="9" letter-spacing="1">IMPLEMENTED</text>
+      <text x="360.0" y="159.0" text-anchor="middle" fill="#f2ede2" font-family="Arial,sans-serif" font-size="13" font-weight="600">Proof Capsules</text>
+      <text x="278.0" y="174.0" fill="#747b7f" font-family="monospace" font-size="8">proof-capsules</text>
+    </g>
+<g id="node-proof-capsule-explorer-ui" data-claim="proof-capsule-explorer-ui" tabindex="0" role="button" aria-label="Public Proof Capsule Explorer">
+      <rect x="495.0" y="43.0" width="190" height="70" rx="12" fill="#111820" stroke="#75a184" stroke-width="1.2"/>
+      <circle cx="513.0" cy="65.0" r="5" fill="#75a184"/>
+      <text x="525.0" y="69.0" fill="#75a184" font-family="monospace" font-size="9" letter-spacing="1">IMPLEMENTED</text>
+      <text x="590.0" y="92.0" text-anchor="middle" fill="#f2ede2" font-family="Arial,sans-serif" font-size="13" font-weight="600">Capsule Explorer</text>
+      <text x="508.0" y="107.0" fill="#747b7f" font-family="monospace" font-size="8">proof-capsule-explorer-ui</text>
+    </g>
+<g id="node-aeon-memory-binding" data-claim="aeon-memory-binding" tabindex="0" role="button" aria-label="AEON-IQ memory plane &amp; evidence binding">
+      <rect x="275.0" y="325.0" width="190" height="70" rx="12" fill="#111820" stroke="#d4a55f" stroke-width="1.2"/>
+      <circle cx="293.0" cy="347.0" r="5" fill="#d4a55f"/>
+      <text x="305.0" y="351.0" fill="#d4a55f" font-family="monospace" font-size="9" letter-spacing="1">IN INTEGRATION</text>
+      <text x="370.0" y="374.0" text-anchor="middle" fill="#f2ede2" font-family="Arial,sans-serif" font-size="13" font-weight="600">Memory evidence binding</text>
+      <text x="288.0" y="389.0" fill="#747b7f" font-family="monospace" font-size="8">aeon-memory-binding</text>
+    </g>
+<g id="node-transactional-change-gate" data-claim="transactional-change-gate" tabindex="0" role="button" aria-label="Transactional Change Gate" filter="url(#glow)">
+      <rect x="525.0" y="250.0" width="220" height="70" rx="12" fill="#111820" stroke="#d4a55f" stroke-width="2.4"/>
+      <circle cx="543.0" cy="272.0" r="5" fill="#d4a55f"/>
+      <text x="555.0" y="276.0" fill="#d4a55f" font-family="monospace" font-size="9" letter-spacing="1">IN INTEGRATION</text>
+      <text x="635.0" y="299.0" text-anchor="middle" fill="#f2ede2" font-family="Arial,sans-serif" font-size="13" font-weight="600">Transactional Change Gate</text>
+      <text x="538.0" y="314.0" fill="#747b7f" font-family="monospace" font-size="8">transactional-change-gate</text>
+    </g>
+<g id="node-production-signing-anchors" data-claim="production-signing-anchors" tabindex="0" role="button" aria-label="Production-grade signing identity &amp; external anchors">
+      <rect x="755.0" y="110.0" width="190" height="70" rx="12" fill="#111820" stroke="#5f93a8" stroke-width="1.2"/>
+      <circle cx="773.0" cy="132.0" r="5" fill="#5f93a8"/>
+      <text x="785.0" y="136.0" fill="#5f93a8" font-family="monospace" font-size="9" letter-spacing="1">TARGET</text>
+      <text x="850.0" y="159.0" text-anchor="middle" fill="#f2ede2" font-family="Arial,sans-serif" font-size="13" font-weight="600">Signing + anchors</text>
+      <text x="768.0" y="174.0" fill="#747b7f" font-family="monospace" font-size="8">production-signing-anchors</text>
+    </g>
+<g id="node-wasm-boundary-scope" data-claim="wasm-boundary-scope" tabindex="0" role="button" aria-label="Execution governance scope">
+      <rect x="530.0" y="485.0" width="190" height="70" rx="12" fill="#111820" stroke="#b96464" stroke-width="1.2"/>
+      <circle cx="548.0" cy="507.0" r="5" fill="#b96464"/>
+      <text x="560.0" y="511.0" fill="#b96464" font-family="monospace" font-size="9" letter-spacing="1">LIMITATION</text>
+      <text x="625.0" y="534.0" text-anchor="middle" fill="#f2ede2" font-family="Arial,sans-serif" font-size="13" font-weight="600">WASM governance scope</text>
+      <text x="543.0" y="549.0" fill="#747b7f" font-family="monospace" font-size="8">wasm-boundary-scope</text>
+    </g>
+<g transform="translate(70 792)"><text fill="#747b7f" font-family="monospace" font-size="9">EDGE SEMANTICS</text>
+<line x1="120" y1="-4" x2="172" y2="-4" stroke="#5f93a8" stroke-width="2"/><text x="180" y="0" fill="#aaa79f" font-family="monospace" font-size="9">requires / binds</text>
+<line x1="320" y1="-4" x2="372" y2="-4" stroke="#5f93a8" stroke-width="2" stroke-dasharray="7 6"/><text x="380" y="0" fill="#aaa79f" font-family="monospace" font-size="9">target extension</text>
+<line x1="535" y1="-4" x2="587" y2="-4" stroke="#b96464" stroke-width="2"/><text x="595" y="0" fill="#aaa79f" font-family="monospace" font-size="9">blocks / bounds</text></g>
+<rect x="1124" y="94" width="432" height="754" rx="14" fill="#0d1216" stroke="#34414a"/>
+<text x="1152" y="125" fill="#d4a55f" font-family="monospace" font-size="10" letter-spacing="1.4">SELECTED CLAIM · IN INTEGRATION</text>
+<text x="1152" y="164" fill="#f2ede2" font-family="Georgia,serif" font-size="25">Transactional Change Gate</text>
+<text x="1152" y="195" fill="#aaa79f" font-family="Arial" font-size="12">Stage → validate → approve → commit/abort → evidence.</text>
+<text x="1152" y="245" fill="#747b7f" font-family="monospace" font-size="9" letter-spacing="1.2">SUPPORTED BY</text>
+<circle cx="1158" cy="265" r="3.5" fill="#75a184"/><text x="1170" y="269" fill="#aaa79f" font-family="Arial" font-size="11">Isolation + snap-rollback</text>
+<circle cx="1158" cy="289" r="3.5" fill="#75a184"/><text x="1170" y="293" fill="#aaa79f" font-family="Arial" font-size="11">Capability authority</text>
+<circle cx="1158" cy="313" r="3.5" fill="#75a184"/><text x="1170" y="317" fill="#aaa79f" font-family="Arial" font-size="11">Proof Capsules</text>
+<circle cx="1158" cy="337" r="3.5" fill="#75a184"/><text x="1170" y="341" fill="#aaa79f" font-family="Arial" font-size="11">Memory evidence binding</text>
+<text x="1152" y="379" fill="#747b7f" font-family="monospace" font-size="9" letter-spacing="1.2">BLOCKED BY</text>
+<circle cx="1158" cy="399" r="3.5" fill="#b96464"/><text x="1170" y="403" fill="#aaa79f" font-family="Arial" font-size="11">Stage 0 evidence integrity</text>
+<text x="1152" y="441" fill="#747b7f" font-family="monospace" font-size="9" letter-spacing="1.2">BOUNDED BY</text>
+<circle cx="1158" cy="461" r="3.5" fill="#b96464"/><text x="1170" y="465" fill="#aaa79f" font-family="Arial" font-size="11">WASM guest↔host governance scope</text>
+<circle cx="1158" cy="485" r="3.5" fill="#b96464"/><text x="1170" y="489" fill="#aaa79f" font-family="Arial" font-size="11">Not a complete deployable surface</text>
+<text x="1152" y="527" fill="#747b7f" font-family="monospace" font-size="9" letter-spacing="1.2">TARGET EXTENSIONS</text>
+<circle cx="1158" cy="547" r="3.5" fill="#5f93a8"/><text x="1170" y="551" fill="#aaa79f" font-family="Arial" font-size="11">Production signing + external anchors</text>
+<circle cx="1158" cy="571" r="3.5" fill="#5f93a8"/><text x="1170" y="575" fill="#aaa79f" font-family="Arial" font-size="11">Durable full-transaction evidence binding</text>
+<rect x="1152" y="730" width="376" height="88" rx="10" fill="#151c21" stroke="#34414a"/><text x="1172" y="756" fill="#d4a55f" font-family="monospace" font-size="9">CANONICALIZATION REQUIRED</text><text x="1172" y="778" fill="#aaa79f" font-family="Arial" font-size="10">Dependency edges shown here are a proposed model.</text><text x="1172" y="795" fill="#aaa79f" font-family="Arial" font-size="10">Add explicit typed relationships to the registry before publication.</text>
+</svg>

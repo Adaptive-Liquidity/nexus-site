@@ -1,7 +1,8 @@
 import { COMPOSITION } from "@/content/site-copy";
 import { SectionHeading } from "@/components/home/section-heading";
 import { Reveal } from "@/components/home/reveal";
-import { SystemArchitectureDiagram } from "@/components/home/system-architecture-diagram";
+import { ArchitectureAtlas } from "@/components/visual-system/architecture-atlas";
+import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 
 export function CompositionSection() {
@@ -25,8 +26,21 @@ export function CompositionSection() {
 
         <Reveal delay={60}>
           <div className="mt-10">
-            <SystemArchitectureDiagram />
+            <ArchitectureAtlas compact />
           </div>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <p className="mt-4 text-sm text-porcelain-subtle">
+            Full atlas, plane contracts, and evaluator links on{" "}
+            <Link
+              to="/system"
+              className="text-porcelain-muted underline-offset-4 hover:text-porcelain hover:underline"
+            >
+              /system
+            </Link>
+            .
+          </p>
         </Reveal>
 
         <Reveal delay={100}>
@@ -40,7 +54,7 @@ export function CompositionSection() {
               {COMPOSITION.map((layer, i) => (
                 <div
                   key={layer.id}
-                  className="relative p-5 sm:p-6 transition-colors hover:bg-slate/30"
+                  className="relative p-5 transition-colors hover:bg-slate/30 sm:p-6"
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-mono text-[10px] tabular-nums text-porcelain-subtle">

@@ -7,14 +7,23 @@ import {
   type InternalStatus,
 } from "@/content/maturity";
 import { Button } from "@/components/ui/button";
+import { CapabilityMaturityTopology } from "@/components/maturity/capability-maturity-topology";
+import {
+  maturitySearchFromRaw,
+  resolveMaturitySearch,
+} from "@/lib/evaluator-search";
 
 export const Route = createFileRoute("/maturity")({
+  validateSearch: (raw: Record<string, unknown>) =>
+    maturitySearchFromRaw(raw),
   component: MaturityPage,
 });
 
 function MaturityPage() {
+  const search = resolveMaturitySearch(Route.useSearch());
+  const navigate = Route.useNavigate();
   return (
-    <main className="mx-auto max-w-[72rem] px-4 py-10 sm:px-6 sm:py-14">
+    <main className="mx-auto w-full min-w-0 max-w-[72rem] overflow-x-hidden px-4 py-10 sm:px-6 sm:py-14">
       <div className="mb-8 max-w-2xl space-y-4">
         <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-porcelain-subtle">
           Implementation maturity
@@ -42,7 +51,45 @@ function MaturityPage() {
         {claimsRegistry.stage0.summary}
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-border">
+      <div className="mb-8 min-w-0 max-w-full">
+        <CapabilityMaturityTopology
+          mode={
+            search.view === "all"
+              ? "full"
+              : search.view === "critical"
+                ? "critical"
+                : search.view === "trust"
+                  ? "trust"
+                  : "current"
+          }
+          selectedId={search.capability}
+          onModeChange={(mode) =>
+            navigate({
+              search: (prev) => ({
+                ...prev,
+                view:
+                  mode === "full"
+                    ? "all"
+                    : mode === "critical"
+                      ? "critical"
+                      : mode === "trust"
+                        ? "trust"
+                        : "current",
+                targets: mode === "full",
+              }),
+              replace: true,
+            })
+          }
+          onSelectRegistryId={(id) =>
+            navigate({
+              search: (prev) => ({ ...prev, capability: id }),
+              replace: true,
+            })
+          }
+        />
+      </div>
+
+      <div className="min-w-0 max-w-full overflow-x-auto rounded-xl border border-border">
         <table className="w-full min-w-[36rem] text-left text-sm">
           <thead className="border-b border-border bg-carbon">
             <tr>

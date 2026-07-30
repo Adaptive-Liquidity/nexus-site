@@ -3,12 +3,21 @@ import { ForensicFrame } from "@/components/home/forensic-frame";
 import { BRAND } from "@/content/site-copy";
 import { Button } from "@/components/ui/button";
 import { MaturityBadge } from "@/components/site/maturity-badge";
+import { BenchmarkWorkbench } from "@/components/evidence/benchmark-workbench";
+import {
+  benchmarksSearchFromRaw,
+  resolveBenchmarksSearch,
+} from "@/lib/evaluator-search";
 
 export const Route = createFileRoute("/evidence/benchmarks")({
+  validateSearch: (raw: Record<string, unknown>) =>
+    benchmarksSearchFromRaw(raw),
   component: BenchmarksPage,
 });
 
 function BenchmarksPage() {
+  const search = resolveBenchmarksSearch(Route.useSearch());
+  const navigate = Route.useNavigate();
   return (
     <main className="mx-auto min-w-0 max-w-[72rem] space-y-8 overflow-x-hidden px-4 py-10 sm:px-6">
       <header className="max-w-2xl space-y-3">
@@ -24,6 +33,27 @@ function BenchmarksPage() {
           invents performance claims.
         </p>
       </header>
+
+      <BenchmarkWorkbench
+          metricId={search.benchmark}
+          showRaw={search.samples}
+          onMetricChange={(id) =>
+            navigate({
+              search: (prev) => ({ ...prev, benchmark: id }),
+              replace: true,
+            })
+          }
+          onShowRawChange={(samples) =>
+            navigate({
+              search: (prev) => ({
+                ...prev,
+                samples,
+                view: samples ? "samples" : "distribution",
+              }),
+              replace: true,
+            })
+          }
+        />
 
       <ForensicFrame
         title="Live measurement surface"

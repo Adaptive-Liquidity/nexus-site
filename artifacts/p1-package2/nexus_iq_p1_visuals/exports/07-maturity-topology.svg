@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+    <title id="title">Capability Maturity Topology</title><desc id="desc">Maturity is a dependency topology—not a percentage, roadmap bar, or implication from adjacent foundations.</desc><defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#111820"/><stop offset="1" stop-color="#07090b"/></linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#18303b" stop-opacity=".9"/><stop offset=".55" stop-color="#0b1116"/><stop offset="1" stop-color="#1a252d"/></linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#5f93a8"/></marker>
+      <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#75a184"/></marker>
+      <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#b96464"/></marker>
+      <pattern id="target-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#5f93a8" stroke-opacity=".25" stroke-width="2"/></pattern>
+      <pattern id="limit-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#b96464" stroke-opacity=".28" stroke-width="2"/></pattern>
+    </defs>
+    <rect width="1600" height="900" fill="url(#bg)"/>
+    <rect x="1" y="1" width="1598" height="898" rx="24" fill="none" stroke="#2a3137"/>
+    <text x="60" y="60" fill="#5f93a8" font-family="monospace" font-size="16" letter-spacing="3">FIG-MAT-07</text>
+    <text x="60" y="112" fill="#f6f1e7" font-family="Georgia,serif" font-size="42">Capability Maturity Topology</text>
+    <text x="60" y="148" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="17">Maturity is a dependency topology—not a percentage, roadmap bar, or implication from adjacent foundations.</text>
+    
+<rect x="55" y="188" width="420" height="590" rx="18" fill="#0b1014" stroke="#75a184" stroke-opacity=".32"/>
+<rect x="495" y="188" width="390" height="590" rx="18" fill="#0b1014" stroke="#d4a55f" stroke-opacity=".35"/>
+<rect x="905" y="188" width="130" height="590" rx="18" fill="#241b10" stroke="#d4a55f" stroke-opacity=".7"/>
+<rect x="1055" y="188" width="490" height="590" rx="18" fill="url(#target-hatch)" stroke="#5f93a8" stroke-opacity=".38"/>
+<text x="80" y="220" fill="#75a184" font-family="monospace" font-size="12" letter-spacing="2">IMPLEMENTED FOUNDATIONS</text>
+<text x="520" y="220" fill="#d4a55f" font-family="monospace" font-size="12" letter-spacing="2">IN INTEGRATION</text>
+<text x="970" y="245" transform="rotate(90 970 245)" fill="#d4a55f" font-family="monospace" font-size="12" letter-spacing="2">STAGE 0 INTEGRITY GATE</text>
+<text x="1080" y="220" fill="#5f93a8" font-family="monospace" font-size="12" letter-spacing="2">DESTINATION ARCHITECTURE</text>
+<g>
+      <rect x="80" y="255" width="350" height="94" rx="14" fill="#0d1217" stroke="#75a184" stroke-opacity=".72"/>
+      <rect x="81" y="256" width="6" height="92" rx="3" fill="#75a184"/>
+      <text x="102" y="285" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">Isolation &amp; snap-rollback</text>
+      <rect x="102" y="298" width="96" height="24" rx="12" fill="#132019" stroke="#75a184" stroke-opacity=".55"/>
+      <text x="114" y="315" fill="#75a184" font-family="monospace" font-size="11" letter-spacing="1.1">FOUNDATION</text>
+      <text x="102" y="331" fill="#7a7670" font-family="monospace" font-size="11">isolation-snap-rollback</text>
+      
+    </g>
+<g>
+      <rect x="80" y="375" width="350" height="94" rx="14" fill="#0d1217" stroke="#75a184" stroke-opacity=".72"/>
+      <rect x="81" y="376" width="6" height="92" rx="3" fill="#75a184"/>
+      <text x="102" y="405" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">Capability authority</text>
+      <rect x="102" y="418" width="96" height="24" rx="12" fill="#132019" stroke="#75a184" stroke-opacity=".55"/>
+      <text x="114" y="435" fill="#75a184" font-family="monospace" font-size="11" letter-spacing="1.1">FOUNDATION</text>
+      <text x="102" y="451" fill="#7a7670" font-family="monospace" font-size="11">capability-authority</text>
+      
+    </g>
+<g>
+      <rect x="80" y="495" width="350" height="94" rx="14" fill="#0d1217" stroke="#75a184" stroke-opacity=".72"/>
+      <rect x="81" y="496" width="6" height="92" rx="3" fill="#75a184"/>
+      <text x="102" y="525" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">Proof Capsules</text>
+      <rect x="102" y="538" width="96" height="24" rx="12" fill="#132019" stroke="#75a184" stroke-opacity=".55"/>
+      <text x="114" y="555" fill="#75a184" font-family="monospace" font-size="11" letter-spacing="1.1">FOUNDATION</text>
+      <text x="102" y="571" fill="#7a7670" font-family="monospace" font-size="11">proof-capsules</text>
+      
+    </g>
+<g>
+      <rect x="80" y="615" width="350" height="94" rx="14" fill="#0d1217" stroke="#75a184" stroke-opacity=".72"/>
+      <rect x="81" y="616" width="6" height="92" rx="3" fill="#75a184"/>
+      <text x="102" y="645" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">Public Explorer</text>
+      <rect x="102" y="658" width="96" height="24" rx="12" fill="#132019" stroke="#75a184" stroke-opacity=".55"/>
+      <text x="114" y="675" fill="#75a184" font-family="monospace" font-size="11" letter-spacing="1.1">FOUNDATION</text>
+      <text x="102" y="691" fill="#7a7670" font-family="monospace" font-size="11">proof-capsule-explorer-ui</text>
+      
+    </g>
+<g>
+      <rect x="520" y="300" width="340" height="110" rx="14" fill="#0d1217" stroke="#d4a55f" stroke-opacity=".72"/>
+      <rect x="521" y="301" width="6" height="108" rx="3" fill="#d4a55f"/>
+      <text x="542" y="330" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">AEON memory binding</text>
+      <rect x="542" y="343" width="124" height="24" rx="12" fill="#251d11" stroke="#d4a55f" stroke-opacity=".55"/>
+      <text x="554" y="360" fill="#d4a55f" font-family="monospace" font-size="11" letter-spacing="1.1">IN INTEGRATION</text>
+      <text x="542" y="392" fill="#7a7670" font-family="monospace" font-size="11">aeon-memory-binding</text>
+      
+    </g>
+<g>
+      <rect x="520" y="505" width="340" height="130" rx="14" fill="#0d1217" stroke="#d4a55f" stroke-opacity=".72"/>
+      <rect x="521" y="506" width="6" height="128" rx="3" fill="#d4a55f"/>
+      <text x="542" y="535" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">Transactional Change Gate</text>
+      <rect x="542" y="548" width="124" height="24" rx="12" fill="#251d11" stroke="#d4a55f" stroke-opacity=".55"/>
+      <text x="554" y="565" fill="#d4a55f" font-family="monospace" font-size="11" letter-spacing="1.1">IN INTEGRATION</text>
+      <text x="542" y="617" fill="#7a7670" font-family="monospace" font-size="11">transactional-change-gate</text>
+      <text x="542" y="593" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="13">Foundations exist; workflow incomplete</text>
+    </g>
+<g>
+      <rect x="1090" y="285" width="400" height="112" rx="14" fill="#0d1217" stroke="#5f93a8" stroke-opacity=".72"/>
+      <rect x="1091" y="286" width="6" height="110" rx="3" fill="#5f93a8"/>
+      <text x="1112" y="315" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">Production signing identity</text>
+      <rect x="1112" y="328" width="159" height="24" rx="12" fill="#10222b" stroke="#5f93a8" stroke-opacity=".55"/>
+      <text x="1124" y="345" fill="#5f93a8" font-family="monospace" font-size="11" letter-spacing="1.1">TARGET ARCHITECTURE</text>
+      <text x="1112" y="390" fill="#7a7670" font-family="monospace" font-size="10">production-signing-anchors</text>
+      <text x="1112" y="372" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="12">External trust anchors</text>
+    </g>
+<g>
+      <rect x="1090" y="495" width="400" height="130" rx="14" fill="#0d1217" stroke="#b96464" stroke-opacity=".72"/>
+      <rect x="1091" y="496" width="6" height="128" rx="3" fill="#b96464"/>
+      <text x="1112" y="525" fill="#f6f1e7" font-family="Georgia,serif" font-size="21">End-to-end transactional guarantee</text>
+      <rect x="1112" y="538" width="145" height="24" rx="12" fill="#231111" stroke="#b96464" stroke-opacity=".55"/>
+      <text x="1124" y="555" fill="#b96464" font-family="monospace" font-size="11" letter-spacing="1.1">NOT CLAIMABLE YET</text>
+      <text x="1112" y="607" fill="#7a7670" font-family="monospace" font-size="11">claim boundary</text>
+      <text x="1112" y="583" fill="#b8b3a8" font-family="system-ui,sans-serif" font-size="13">Blocked until Stage 0 closes</text>
+    </g>
+<g><path d="M430,302 L520,345" fill="none" stroke="#5f93a8" stroke-width="2.2" stroke-opacity=".78"  marker-end="url(#arrow-blue)"/>
+      </g><g><path d="M430,422 C475.0,467 475.0,510 520,555" fill="none" stroke="#5f93a8" stroke-width="2.2" stroke-opacity=".78"  marker-end="url(#arrow-blue)"/>
+      </g><g><path d="M430,542 L520,575" fill="none" stroke="#5f93a8" stroke-width="2.2" stroke-opacity=".78"  marker-end="url(#arrow-blue)"/>
+      </g><g><path d="M430,662 C475.0,627 475.0,630 520,595" fill="none" stroke="#75a184" stroke-width="2.2" stroke-opacity=".78"  marker-end="url(#arrow-green)"/>
+      </g>
+<g><path d="M860,355 L905,355" fill="none" stroke="#d4a55f" stroke-width="2.2" stroke-opacity=".78" stroke-dasharray="6 5" marker-end="url(#arrow-blue)"/>
+      </g><g><path d="M1035,355 L1090,340" fill="none" stroke="#5f93a8" stroke-width="2.2" stroke-opacity=".78" stroke-dasharray="8 7" marker-end="url(#arrow-blue)"/>
+      </g>
+<g><path d="M860,570 L905,570" fill="none" stroke="#d4a55f" stroke-width="2.2" stroke-opacity=".78" stroke-dasharray="6 5" marker-end="url(#arrow-blue)"/>
+      </g><g><path d="M1035,570 L1090,560" fill="none" stroke="#b96464" stroke-width="2.2" stroke-opacity=".78" stroke-dasharray="6 5" marker-end="url(#arrow-red)"/>
+      </g>
+<rect x="80" y="730" width="780" height="30" rx="15" fill="#231111" stroke="#b96464" stroke-opacity=".55"/>
+<text x="470" y="750" text-anchor="middle" fill="#b96464" font-family="monospace" font-size="12">KNOWN SCOPE LIMITATION · Nexus governs WASM guest↔host calls, not model tool choice today</text>
+
+    <line x1="60" y1="842" x2="1540" y2="842" stroke="#2a3137"/>
+    <text x="60" y="870" fill="#7a7670" font-family="monospace" font-size="13">CURRENT-ONLY MUST BE THE DEFAULT VIEW · Destination edges remain dashed, patterned, and explicitly labeled.</text>
+    </svg>
